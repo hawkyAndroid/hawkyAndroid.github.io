@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]SQLite应用详解 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45788793 SQLite是D.Richard Hipp用C语言编写的开源嵌入式引擎，它可以在所有主要的操作系统上运行。&amp;#20540;得一提的是，袖珍型的SQLite竟然可以支持高达2TB大小的数据库，每个数据库都是以单个文件的形式存在，这些数据都是以B-Tree的数据结构形式存储在磁盘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]SQLite应用详解">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2015/05/18/原-SQLite应用详解/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45788793 SQLite是D.Richard Hipp用C语言编写的开源嵌入式引擎，它可以在所有主要的操作系统上运行。&amp;#20540;得一提的是，袖珍型的SQLite竟然可以支持高达2TB大小的数据库，每个数据库都是以单个文件的形式存在，这些数据都是以B-Tree的数据结构形式存储在磁盘">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20150518135021735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150518135103680?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150518144546908?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150518144734490?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150518145752715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150518151833311?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150518184835091?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://download.csdn.net/images/minetype/rar.gif">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.958Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]SQLite应用详解">
+<meta name="twitter:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45788793 SQLite是D.Richard Hipp用C语言编写的开源嵌入式引擎，它可以在所有主要的操作系统上运行。&amp;#20540;得一提的是，袖珍型的SQLite竟然可以支持高达2TB大小的数据库，每个数据库都是以单个文件的形式存在，这些数据都是以B-Tree的数据结构形式存储在磁盘">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150518135021735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-SQLite应用详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/18/原-SQLite应用详解/" class="article-date">
+  <time datetime="2015-05-18T10:56:04.000Z" itemprop="datePublished">2015-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]SQLite应用详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-family:Arial; font-size:18px; line-height:26px; text-align:left">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40028509" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45788793" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45788793</a></p>
+<p>SQLite是D.Richard Hipp用C语言编写的开源嵌入式引擎，它可以在所有主要的操作系统上运行。&#20540;得一提的是，袖珍型的SQLite竟然可以支持高达2TB大小的数据库，每个数据库都是以单个文件的形式存在，这些数据都是以B-Tree的数据结构形式存储在磁盘上。在事务处理方面，SQLite通过数据库级上的独立性和共享锁来实现独立事务处理。这意味着多个进程可以在同一时间从同一数据库中读取数据，但只有一个可以写入数据，而在某个进程或线程想数据库执行写操作之前，必须获得独占锁; 在数据类型方面，SQLite采用动态数据类型，当某个&#20540;插入到数据库时，SQLite将会检查它的类型，如果该类型与关联的列不匹配，SQLite则会尝试将该&#20540;类型转换成该列的类型，如果不能转换，则该&#20540;将作为本身的类型存储，SQLite称之为“弱类型”。但有个特例：如果是Integer<br> primary key,则其他类型不会被转换，会报&quot;datatype missmatch&quot;错误。概括来说，SQLite支持NULL、INTEGER、REAL、TEXT及BOLB数据类型，分别代表空&#20540;、整型、浮点型、字符串文本、二进制对象。下面将从SQLite命令行操作、在Java中使用SQLite、在Android中使用SQLite等这几个方面带大家来掌握和深入理解SQLite数据库。</p>
+<h1 id="SQLite命令行操作"><a href="#SQLite命令行操作" class="headerlink" title="SQLite命令行操作"></a>SQLite命令行操作</h1><p>在操作之前，大家要先下载SQLite数据库，官方的下载页面是<a href="http://sqlite.org/download.html" target="_blank" rel="external">http://sqlite.org/download.html</a>，如果你是windows系统，那个大家可以下载这两个文件</p>
+<p><img src="http://img.blog.csdn.net/20150518135021735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>下载完成后分别解压，得到两个可执行文件，如下：</p>
+<p><img src="http://img.blog.csdn.net/20150518135103680?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>这两个文件可以根据自己的喜欢放置在指定位置，我把它放在了F盘根目录下，下面我们来一步步熟悉一下SQlite的命令行操作：</p>
+<h2 id="1）建库"><a href="#1）建库" class="headerlink" title="1）建库"></a>1）建库</h2><p>C:\Users\Administrator&gt;f:</p>
+<p>F:\&gt;sqlite3 test.db</p>
+<p>SQLite version 3.8.10.1 2015-05-09 12:14:55</p>
+<p>Enter &quot;.help&quot; for usage hints.</p>
+<p>sqlite&gt; .databases</p>
+<p>seq &nbsp;name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file</p>
+<p>— &nbsp;————— &nbsp;———————————————————-</p>
+<p>0 &nbsp; &nbsp;main &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F:\test.db</p>
+<p>这里我们执行了sqlite3命令，参数就是数据库的名字，如果该数据库已存在则使用，反之创建一个。当然你也可以在别的目录(可写)下创建数据库，如：F:\&gt;sqlite3 e:\test.db。如果大家想了解一下SQLite的其他命令，可以执行&quot;.help&quot;命令列出所有命令清单进行查看。</p>
+<h2 id="2）建表"><a href="#2）建表" class="headerlink" title="2）建表"></a>2）建表</h2><p>sqlite&gt; create table student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<p>sqlite&gt; .tables</p>
+<p>student</p>
+<h2 id="3）查看建表语句"><a href="#3）查看建表语句" class="headerlink" title="3）查看建表语句"></a>3）查看建表语句</h2><p>sqlite&gt; .schema student</p>
+<p>CREATE TABLE student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<h2 id="4）插入数据"><a href="#4）插入数据" class="headerlink" title="4）插入数据"></a>4）插入数据</h2><p>sqlite&gt; insert into student values(NULL,’zhangsan’,24);</p>
+<p>sqlite&gt; select * from student;</p>
+<p>1|zhangsan|24</p>
+<h2 id="5）分析数据库使用状态（使用刚下载的sqlite3-analyzer-exe工具）"><a href="#5）分析数据库使用状态（使用刚下载的sqlite3-analyzer-exe工具）" class="headerlink" title="5）分析数据库使用状态（使用刚下载的sqlite3_analyzer.exe工具）"></a>5）分析数据库使用状态（使用刚下载的sqlite3_analyzer.exe工具）</h2><p>–先退出sqlite3，可使用.quit或.exit</p>
+<p>sqlite&gt; .quit</p>
+<p>F:\&gt;sqlite3_analyzer test.db</p>
+<p>/** Disk-Space Utilization Report For test.db</p>
+<p>Page size in bytes………………………….. 1024</p>
+<p>Pages in the whole file (measured)……………. 3</p>
+<p>Pages in the whole file (calculated)………….. 3</p>
+<p>Pages that store data……………………….. 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;100.0%</p>
+<p>Pages on the freelist (per header)……………. 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0%</p>
+<p>Pages on the freelist (calculated)……………. 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0%</p>
+<p>Pages of auto-vacuum overhead………………… 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0%</p>
+<p>Number of tables in the database……………… 3</p>
+<p>Number of indices…………………………… 0</p>
+<p>Number of defined indices……………………. 0</p>
+<p>Number of implied indices……………………. 0</p>
+<p>Size of the file in bytes……………………. 3072</p>
+<p>Bytes of user payload stored…………………. 23 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.75%</p>
+<p>….</p>
+<p>INSERT INTO space_used VALUES(‘sqlite_master’,’sqlite_master’,0,2,2,197,0,0,117,0,1,0,0,711,0,0,1024</p>
+<p>);</p>
+<p>INSERT INTO space_used VALUES(‘student’,’student’,0,1,1,13,0,0,13,0,1,0,0,999,0,0,1024);</p>
+<p>INSERT INTO space_used VALUES(‘sqlite_sequence’,’sqlite_sequence’,0,1,1,10,0,0,10,0,1,0,0,1002,0,0,1</p>
+<p>024);</p>
+<p>COMMIT;</p>
+<h2 id="6）备份数据——导出"><a href="#6）备份数据——导出" class="headerlink" title="6）备份数据——导出"></a>6）备份数据——导出</h2><p>我们可以指定输出的目标为一个sql文件，然后再使用.dump命令时，输出信息就会写入指定的文件：</p>
+<p>F:\&gt;sqlite3 test.db</p>
+<p>SQLite version 3.8.10.1 2015-05-09 12:14:55</p>
+<p>Enter &quot;.help&quot; for usage hints.</p>
+<p>sqlite&gt; .output stu_bk.sql</p>
+<p>sqlite&gt; .dump</p>
+<p>可以看到，F盘中已经创建了一个名为stu_bk的sql文件：</p>
+<p><img src="http://img.blog.csdn.net/20150518144546908?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>stu_bk.sql文件的内容为：</p>
+<p><img src="http://img.blog.csdn.net/20150518144734490?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>如果想恢复标准输出，可以这样设定：</p>
+<p>sqlite&gt; .output stdout</p>
+<p>sqlite&gt; .dump</p>
+<p>PRAGMA foreign_keys=OFF;</p>
+<p>BEGIN TRANSACTION;</p>
+<p>CREATE TABLE student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<p>INSERT INTO &quot;student&quot; VALUES(1,’zhangsan’,24);</p>
+<p>DELETE FROM sqlite_sequence;</p>
+<p>INSERT INTO &quot;sqlite_sequence&quot; VALUES(‘student’,1);</p>
+<p>COMMIT;</p>
+<h2 id="7）从sql文件中导入表数据——导入"><a href="#7）从sql文件中导入表数据——导入" class="headerlink" title="7）从sql文件中导入表数据——导入"></a>7）从sql文件中导入表数据——导入</h2><p>为了演示效果，我们先把student表删除再导入：</p>
+<p>sqlite&gt; drop table if exists student;</p>
+<p>sqlite&gt; .tables</p>
+<p>sqlite&gt;</p>
+<p>sqlite&gt; .read stu_bk.sql</p>
+<p>sqlite&gt; .tables</p>
+<p>student</p>
+<p>sqlite&gt; .schema student</p>
+<p>CREATE TABLE student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<p>sqlite&gt; select * from student;</p>
+<p>1|zhangsan|24</p>
+<p>sqlite&gt;</p>
+<p>可以看到，数据导入成功。我们可以通过一个SQLite的客户端管理工具SQLite Expert来查看一下：</p>
+<p><img src="http://img.blog.csdn.net/20150518145752715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>最后我们可以使用“.exit”或“.quit”退出SQLite命令行操作。</p>
+<h1 id="在Java中使用SQLite"><a href="#在Java中使用SQLite" class="headerlink" title="在Java中使用SQLite"></a>在Java中使用SQLite</h1><p>要在Java中使用SQLite，需要下载SQLite相关驱动包，下载地址：<a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" target="_blank" rel="external">https://bitbucket.org/xerial/sqlite-jdbc/downloads</a>，这里我下载的还是以前的sqlite-jdbc-3.7.2.jar，当然你也可以下载最新的jar包。下面开始实例演示：</p>
+<p>①新建一个名为sqlite的Java项目</p>
+<p><img src="http://img.blog.csdn.net/20150518151833311?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>我们引入了刚下载好的sqlite驱动包到类路径下，然后新建一个db的文件夹用于放置数据库文件。</p>
+<p>②新建SQLiteTest.java文件，代码如下：</p>
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_1_1494729" name="code" class="java">package com.leo.sqlite;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+/**
+ * SQLite在Java中的使用实例
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年5月18日 上午2:06:48
+ */
+
+public class SQLiteTest {
+    public static void main(String[] args) throws Exception {
+        Class.forName(&quot;org.sqlite.JDBC&quot;);
+        Connection conn = DriverManager.getConnection(&quot;jdbc:sqlite:db/test.db&quot;);
+        Statement st = conn.createStatement();
+
+        st.executeUpdate(&quot;drop table if exists person&quot;);
+        st.executeUpdate(&quot;create table person(id integer,name varchar(15))&quot;);
+        st.executeUpdate(&quot;insert into person values(1,&#39;zhangsan&#39;)&quot;);
+        st.executeUpdate(&quot;insert into person values(2,&#39;lisi&#39;)&quot;);
+        st.executeUpdate(&quot;insert into person values(3,&#39;wangwu&#39;)&quot;);
+
+        ResultSet rs = st.executeQuery(&quot;select * from person&quot;);
+        while (rs.next()) {
+            System.out.println(&quot;id = &quot; + rs.getInt(&quot;id&quot;) + &quot; ,name = &quot;
+                    + rs.getString(&quot;name&quot;));
+        }
+        st.close();
+        conn.close();
+    }
+}</pre>执行SQLiteTest.java文件，运行结果如下：
+
+![](http://img.blog.csdn.net/20150518152339149?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+这时候，我们刷新一下sqlite项目，可以看到db文件夹下生成了一个test.db文件：
+
+![](http://img.blog.csdn.net/20150518152652461?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+**<span style="color:#ff0000">【注意】SQLite只提供数据库级的锁定，并且SQLite没有用户账户的概念，而是根据文件系统来确定所有数据库的权限。</span>**
+
+**<span style="color:#ff0000">
+
+</span>**
+
+# 在Android中使用SQLite
+
+现在主流移动设备像Android、iPhone等都使用SQLite作为复杂数据的存储引擎，在我们为移动设备开发应用程序时，也许就要使用到SQLite来存储大量的数据，所以我们有要掌握移动设备上SQLite开发技巧。对于Android平台来说，系统内置了大量丰富的API来供我们操作SQLite。下面开始演示一下SQLite的常用操作，为了方便，这里就将代码写在了Activity的onCreate方法中：
+
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_2_594585" name="code" class="java">/**
+ * 在Android中使用SQLite：建库、建表、CRUD等简单操作
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015-5-18 下午3:55:53
+ */
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // 打开或创建test.db数据库
+        SQLiteDatabase db = openOrCreateDatabase(&quot;test.db&quot;,
+                Context.MODE_PRIVATE, null);
+        db.execSQL(&quot;drop table if exists person&quot;);
+        // 创建person表
+        db.execSQL(&quot;create table person(_id integer primary key autoincrement,name varchar,age smallint)&quot;);
+        Person person = new Person();
+        person.setName(&quot;zhangsan&quot;);
+        person.setAge(34);
+        // 插入数据
+        db.execSQL(&quot;insert into person values(NULL,?,?)&quot;,
+                new Object[] { person.getName(), person.getAge() });
+
+        person.setName(&quot;lisi&quot;);
+        person.setAge(32);
+        // ContentValues以键值对的形式存放数据
+        ContentValues values = new ContentValues();
+        values.put(&quot;name&quot;, person.getName());
+        values.put(&quot;age&quot;, person.getAge());
+        // 插入ContentValues中的数据
+        db.insert(&quot;person&quot;, null, values);
+
+        values = new ContentValues();
+        values.put(&quot;age&quot;, &quot;40&quot;);
+        // 更新数据
+        db.update(&quot;person&quot;, values, &quot;name = ? &quot;, new String[] { &quot;zhangsan&quot; });
+
+        Cursor c = db.rawQuery(&quot;select * from person where age&gt;= ?&quot;,
+                new String[] { &quot;32&quot; });
+        while (c.moveToNext()) {
+            int _id = c.getInt(c.getColumnIndex(&quot;_id&quot;));
+            String name = c.getString(c.getColumnIndex(&quot;name&quot;));
+            int age = c.getInt(c.getColumnIndex(&quot;age&quot;));
+            Log.i(&quot;leo&quot;, &quot;_id = &quot; + _id + &quot; ,name = &quot; + name + &quot; ,age = &quot; + age);
+        }
+        c.close();
+
+        // 删除数据
+        // db.delete(&quot;person&quot;, &quot;age &lt; ?&quot;, new String[] { &quot;36&quot; });
+
+        // 关闭当前数据库
+        db.close();
+
+        // 删除test.db数据库
+        // deleteDatabase(&quot;test.db&quot;);
+    }
+
+}</pre>在Android手机或模拟器上运行后，系统就会在/data/data/[项目包名]databases目录下生成一个&quot;test.db&quot;的数据库文件，我们可以用手机下载一个名为Root Explorer的软件进行查看，如图：
+
+![](http://img.blog.csdn.net/20150518162842635?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+同时可以看到，控制台打印了log信息：
+
+![](http://img.blog.csdn.net/20150518162933351?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+上面的示例代码基本上囊括了数据库大部分操作，对于添加、更新和删除，我们都可以使用
+
+1.db.executeSQL(String sql); &nbsp;
+
+2.db.executeSQL(String sql, Object[] bindArgs);//sql语句中使用占位符，然后第二个参数是实际的参数数组
+
+除了统一的形式之外，它们还有各自的操作方法：
+
+1.db.insert(String table, String nullColumnHack, ContentValues values); &nbsp;
+
+2.db.update(String table, Contentvalues values, String whereClause, String whereArgs); &nbsp;
+
+3.db.delete(String table, String whereClause, String whereArgs); &nbsp;
+
+**参数说明：**以上3个方法的第一个参数都是要操作的表名；**<span style="color:#ff0000">①insert</span>**中的第二个参数表示要插入的数据每一列都为空的话，需要指定此行中某一列的名称，系统将此列设置为null，不至于出现错误；insert的第三个参数为ContentValues类型的变量，是键&#20540;对组成的Map，key代表列名，value代表要插入的&#20540;。**<span style="color:#ff0000">②update</span>**的第二个参数也很类&#20284;，只不过它是更新该字段key为最新的value&#20540;，第三个参数表示where的表达式，比如：&quot;age
+ &gt; ? and age &lt; ? &quot;等，最后一个参数是占位符的实际参数&#20540;。**<span style="color:#ff0000">③delete</span>**方法同上。
+
+下面说说查询操作，查询操作相对于上面的几种操作要复杂一些，因为我们要经常面对各种各样的查询条件，所以系统也考虑到这种复杂性，为我们提供了较为丰富的查询形式：
+
+1.db.rawQuery(String sql, String[] selectionArgs); &nbsp;
+
+2.db.query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy); &nbsp;
+
+3.db.query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit); &nbsp;
+
+4.db.query(String distinct, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit); &nbsp;
+
+**参数说明：**上面几种都是常用的查询方法，第一种最为简单，将所有的SQL语句都组织到一个字符串中，使用占位符代替实际参数，selectionArgs就是占位符实际参数集；下面的几种参数都很类&#20284;，columns表示要查询的列所有名称集，selection表示WHERE之后的条件语句，可以使用占位符，groupBy指定分组的列名，having指定分组条件，配合groupBy使用，orderBy指定排序的列名，limit指定分页参数，distinct可以指定“true”或“false”表示要不要过滤重复&#20540;。
+
+最后，他们同时返回一个Cursor对象，代表数据集的游标，有点类&#20284;于JDBC里面的的ResultSet结果集。对于Cursor对象，常用的方法有很多（大家也可以通过查考官方API文档进行查阅），常用方法如下：
+
+1.c.move(int offset); //以当前位置为参考,移动到指定行 &nbsp;
+
+2.c.moveToFirst(); &nbsp; &nbsp;//移动到第一行 &nbsp;
+
+3.c.moveToLast(); &nbsp; &nbsp; //移动到最后一行 &nbsp;
+
+4.c.moveToPosition(int position); //移动到指定行 &nbsp;
+
+5.c.moveToPrevious(); //移动到前一行 &nbsp;
+
+6.c.moveToNext(); &nbsp; &nbsp; //移动到下一行 &nbsp;
+
+7.c.isFirst(); &nbsp; &nbsp; &nbsp; &nbsp;//是否指向第一条 &nbsp;
+
+8.c.isLast(); &nbsp; &nbsp; //是否指向最后一条 &nbsp;
+
+9.c.isBeforeFirst(); &nbsp;//是否指向第一条之前 &nbsp;
+
+10.c.isAfterLast(); &nbsp; &nbsp;//是否指向最后一条之后 &nbsp;
+
+11.c.isNull(int columnIndex); &nbsp;//指定列是否为空(列基数为0) &nbsp;
+
+12.c.isClosed(); &nbsp; &nbsp; &nbsp; //游标是否已关闭 &nbsp;
+
+13.c.getCount(); &nbsp; &nbsp; &nbsp; //总数据项数 &nbsp;
+
+14.c.getPosition(); &nbsp; &nbsp;//返回当前游标所指向的行数 &nbsp;
+
+15.c.getColumnIndex(String columnName);//返回某列名对应的列索引&#20540; &nbsp;
+
+16.c.getString(int columnIndex); &nbsp; //返回当前行指定列的&#20540;
+
+最后当我们完成了对数据库的操作后，记得调用SQLiteDatabase的close()方法释放数据库连接，否则容易出现SQLiteException。
+
+上面就是SQLite的基本应用，但在实际开发中，为了能够更好的管理和维护数据库，我们会封装一个继承自SQLiteOpenHelper类的数据库操作类，然后以这个类为基础，再封装我们的业务逻辑方法。下面，我们就以一个实例来讲解具体的用法，我们新建一个名为db的项目：
+
+![](http://img.blog.csdn.net/20150518173917871?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+其中DBHelper继承了SQLiteOpenHelper，作为维护和管理数据库的基类，DBManager是建立在DBHelper之上，封装了常用的业务方法，Person是我们的person表对应的JavaBean，MainActivity就是我们显示的界面。
+
+下面我们先来看一下DBHelper：
+
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_3_9420658" name="code" class="java">import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * 维护和管理数据库
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ */
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    private static final String DATABASE_NAME = &quot;test.db&quot;;
+    private static final int DATABASE_VERSION = 1;
+
+    public DBHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    // 数据库第一次被创建时onCreate会被调用&#160;&#160;
+    /**
+     * @param db
+     * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite.SQLiteDatabase)
+     */
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // TODO Auto-generated method stub
+        db.execSQL(&quot;create table student(_id integer primary key autoincrement, name text, age integer, info text);&quot;);
+    }
+
+    // 如果DATABASE_VERSION值改变了,系统发现现有数据库版本不同,即会调用onUpgrade&#160;&#160;
+    /**
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     * @see android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite.SQLiteDatabase,
+     *      int, int)
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // TODO Auto-generated method stub
+        db.execSQL(&quot;alter&#160;table&#160;student&#160;ADD&#160;COLUMN&#160;other&#160;text&quot;);
+    }
+}
+</pre>
+
+<p>正如上面所述，数据库第一次创建时onCreate方法会被调用，我们可以执行创建表的语句，当系统发现版本变化之后，会调用onUpgrade方法，我们可以执行修改表结构等语句。</p>
+<p>为了方便我们面向对象的使用数据，我们建一个Student类，对应student表中的字段，如下：</p>
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_4_3994373" name="code" class="java">public class Student {
+    private int id;
+    private String name;
+    private int age;
+    private String info;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Student [id=&quot; + id + &quot;, name=&quot; + name + &quot;, age=&quot; + age
+                + &quot;, info=&quot; + info + &quot;]&quot;;
+    }
+}</pre>
+
+<p>然后，我们需要一个DBManager，来封装我们所有的业务方法，代码如下：</p>
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_5_6375476" name="code" class="java">import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+/**
+ * DBManager是建立在DBHelper之上，封装了常用的业务方法
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ */
+
+public class DBManager {
+    private DBHelper helper;
+    private SQLiteDatabase db;
+
+    public DBManager(Context context) {
+        helper = new DBHelper(context);
+        // 因为getWritableDatabase内部调用了mContext.openOrCreateDatabase(mName,&#160;0,&#160;mFactory);&#160;&#160;
+        // 所以要确保context已初始化,我们可以把实例化DBManager的步骤放在Activity的onCreate里
+        db = helper.getWritableDatabase();
+    }
+
+    /**
+     * 添加学生
+     * 
+     * @param student
+     */
+    public void add(Student student) {
+        db.beginTransaction();// 开启事务
+        try {
+            db.execSQL(&quot;insert into student values(null, ?, ?,?)&quot;, new Object[] {
+                    student.getName(), student.getAge(), student.getInfo() });
+            db.setTransactionSuccessful();// 设置事务成功完成
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();// 结束事务
+        }
+    }
+
+    /**
+     * 更新年龄和基本信息
+     * 
+     * @param student
+     */
+    public void update(Student student) {
+        ContentValues values = new ContentValues();
+        values.put(&quot;age&quot;, student.getAge());
+        values.put(&quot;info&quot;, student.getInfo());
+        db.update(&quot;student&quot;, values, &quot;name = ?&quot;,
+                new String[] { student.getName() });
+        values.clear();
+    }
+
+    /**
+     * 删除年龄大的
+     * 
+     * @param student
+     */
+    public void delete(Student student) {
+        db.delete(&quot;student&quot;, &quot;age &gt;= ?&quot;, new String[] { student.getAge() + &quot;&quot; });
+    }
+
+    /**
+     * 查询所有学生
+     * 
+     * @return
+     */
+    public List&lt;Student&gt; query() {
+        List&lt;Student&gt; list = new ArrayList&lt;Student&gt;();
+        Cursor c = db.rawQuery(&quot;select * from student&quot;, null);
+        while (c.moveToNext()) {
+            Student student = new Student();
+            student.setId(c.getInt(c.getColumnIndex(&quot;_id&quot;)));
+            student.setName(c.getString(c.getColumnIndex(&quot;name&quot;)));
+            student.setAge(c.getInt(c.getColumnIndex(&quot;age&quot;)));
+            student.setInfo(c.getString(c.getColumnIndex(&quot;info&quot;)));
+            list.add(student);
+        }
+        c.close();
+        return list;
+    }
+
+    /**
+     * 关闭数据库
+     */
+    public void closeDB() {
+        db.close();
+    }
+}</pre>
+
+<p>我们在DBManager构造方法中实例化DBHelper并获取一个SQLiteDatabase对象，作为整个应用的数据库实例；在添加Student信息时，我们采用了事务处理，确保数据完整性；最后我们提供了一个closeDB方法，释放数据库资源，这一个步骤在我们整个应用关闭时执行，这个环节容易被忘记，所以大家要注意。下面开始编写我们的布局文件和MainActivity界面：</p>
+<p><pre code_snippet_id="669523" snippet_file_name="blog_20150518_6_2136887" name="code" class="html">&lt;LinearLayout xmlns:android=&quot;<a href="http://schemas.android.com/apk/res/android&amp;quot" target="_blank" rel="external">http://schemas.android.com/apk/res/android&amp;quot</a>;<br>    xmlns:tools=&quot;<a href="http://schemas.android.com/tools&amp;quot" target="_blank" rel="external">http://schemas.android.com/tools&amp;quot</a>;<br>    android:layout_width=&quot;match_parent&quot;<br>    android:layout_height=&quot;match_parent&quot;<br>    android:orientation=&quot;vertical&quot; &gt;</pre></p>
+<pre><code>&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;add&amp;quot;
+    android:text=&amp;quot;add&amp;quot; /&amp;gt;
+
+&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;update&amp;quot;
+    android:text=&amp;quot;update&amp;quot; /&amp;gt;
+
+&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;delete&amp;quot;
+    android:text=&amp;quot;delete&amp;quot; /&amp;gt;
+
+&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;query&amp;quot;
+    android:text=&amp;quot;query&amp;quot; /&amp;gt;
+
+&amp;lt;ListView
+    android:id=&amp;quot;@+id/listview&amp;quot;
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot; &amp;gt;
+&amp;lt;/ListView&amp;gt;
+</code></pre><p>&lt;/LinearLayout&gt;MainActivity文件：</p>
+<p><pre code_snippet_id="669523" snippet_file_name="blog_20150518_7_9185836" name="code" class="java">public class MainActivity extends Activity {<br>    private DBManager mgr;<br>    private ListView listView;</pre></p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    listView = (ListView) findViewById(R.id.listview);
+    mgr = new DBManager(this);// 初始化DBManager
+}
+
+public void add(View view) {
+    Student student = new Student();
+    student.setName(&amp;quot;张三&amp;quot;);
+    student.setAge(22);
+    student.setInfo(&amp;quot;good boy&amp;quot;);
+    mgr.add(student);
+}
+
+public void update(View view) {
+    Student student = new Student();
+    student.setAge(21);
+    student.setName(&amp;quot;张三&amp;quot;);
+    student.setInfo(&amp;quot;bad boy&amp;quot;);
+    mgr.update(student);
+}
+
+public void delete(View view) {
+    Student student = new Student();
+    student.setAge(18);
+    mgr.delete(student);
+}
+
+public void query(View view) {
+    List&amp;lt;Student&amp;gt; students = mgr.query();
+    List&amp;lt;Map&amp;lt;String, String&amp;gt;&amp;gt; list = new ArrayList&amp;lt;Map&amp;lt;String, String&amp;gt;&amp;gt;();
+    for (Student student : students) {
+        HashMap&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;String, String&amp;gt;();
+        map.put(&amp;quot;name&amp;quot;, student.getName());
+        map.put(&amp;quot;info&amp;quot;,
+                student.getAge() + &amp;quot; years old, &amp;quot; + student.getInfo());
+        list.add(map);
+    }
+
+    SimpleAdapter adapter = new SimpleAdapter(this, list,
+            android.R.layout.simple_list_item_2, new String[] { &amp;quot;name&amp;quot;,
+                    &amp;quot;info&amp;quot; }, new int[] { android.R.id.text1,
+                    android.R.id.text2 });
+    listView.setAdapter(adapter);
+}
+
+@Override
+protected void onDestroy() {
+    // TODO Auto-generated method stub
+    super.onDestroy();
+    // 应用的最后一个Activity关闭时释放DB&amp;#160;&amp;#160;
+    mgr.closeDB();
+}
+</code></pre><p>}最后我们来看下运行结果：</p>
+<p><img src="http://img.blog.csdn.net/20150518184835091?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>如果是在手机上运行，我们可以使用Root Explorer查看test.db数据库详情；如果在运行在模拟器上，可以使用SQLite Expert查看；当然你也可以用开始讲的SQLite命令行操作，这里就不再演示了。</p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>以上就是SQLite应用详解的所有内容。相信通过这篇博客，大家对SQLite已经有了一个更深刻的认识。</p>
+<p><strong><span style="font-size:14px; color:#ff0000"><img src="http://download.csdn.net/images/minetype/rar.gif" alt="" title="rar文件"><span style="font-family:'Microsoft YaHei'; text-align:center"><a href="http://download.csdn.net/detail/jave_lover/8712403" target="_blank" rel="external">sqlite3可执行工具、驱动、分析器、客户端工具下载</a></span></span></strong></p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/18 18:56:04 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45788793)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1684 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45788793#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/18/原-SQLite应用详解/" data-id="cj8yn9vhl000no49zjvay8lu0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/26/原-Git学习系列博客全目录/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [原]Git学习系列博客全目录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]全面掌握Mysql知识点及select支持的运算操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

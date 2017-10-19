@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]Android学习系列(三)四大组件之Service详解 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Service概述Service作为Android四大组件中的一员，有着非常重要的地位。它没有交互界面，一般用于长期运行在后台来处理一些比较耗时的操作和为其他应用提供服务接口，如消息推送、音乐播放、定位服务、后台数据同步、长连接（如：蓝牙、IM）的数据收发及连接状态变化等。Service分为本地服务和远程服务，本地服务运行在主进程的主线程中，而远程服务则运行在独立进程的主线程中。当然如果在服务里面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]Android学习系列(三)四大组件之Service详解">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2016/04/04/原-Android学习系列-三-四大组件之Service详解/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="Service概述Service作为Android四大组件中的一员，有着非常重要的地位。它没有交互界面，一般用于长期运行在后台来处理一些比较耗时的操作和为其他应用提供服务接口，如消息推送、音乐播放、定位服务、后台数据同步、长连接（如：蓝牙、IM）的数据收发及连接状态变化等。Service分为本地服务和远程服务，本地服务运行在主进程的主线程中，而远程服务则运行在独立进程的主线程中。当然如果在服务里面">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.960Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]Android学习系列(三)四大组件之Service详解">
+<meta name="twitter:description" content="Service概述Service作为Android四大组件中的一员，有着非常重要的地位。它没有交互界面，一般用于长期运行在后台来处理一些比较耗时的操作和为其他应用提供服务接口，如消息推送、音乐播放、定位服务、后台数据同步、长连接（如：蓝牙、IM）的数据收发及连接状态变化等。Service分为本地服务和远程服务，本地服务运行在主进程的主线程中，而远程服务则运行在独立进程的主线程中。当然如果在服务里面">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-Android学习系列-三-四大组件之Service详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/" class="article-date">
+  <time datetime="2016-04-04T12:08:52.000Z" itemprop="datePublished">2016-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]Android学习系列(三)四大组件之Service详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Service概述"><a href="#Service概述" class="headerlink" title="Service概述"></a>Service概述</h2><p>Service作为Android四大组件中的一员，有着非常重要的地位。它没有交互界面，一般用于长期运行在后台来处理一些比较耗时的操作和为其他应用提供服务接口，如消息推送、音乐播放、定位服务、后台数据同步、长连接（如：蓝牙、IM）的数据收发及连接状态变化等。Service分为本地服务和远程服务，本地服务运行在主进程的主线程中，而远程服务则运行在独立进程的主线程中。当然如果在服务里面写了非常耗时的代码时可能会出现ANR的情况，这时你可以在Service在创建一个子线程来处理耗时逻辑。</p>
+<h2 id="Service的几个属性"><a href="#Service的几个属性" class="headerlink" title="Service的几个属性"></a>Service的几个属性</h2><p>android:enabled 表示该服务是否能后被系统实例化(激活)，默认为true;</p>
+<p>android:name 表示该服务的名字(完整类名或.xxx.XXService)，不可缺少;</p>
+<p>android:icon 表示该服务的图标，默认与&lt;application&gt;元素的icon属性&#20540;一致;</p>
+<p>android:label 表示该服务的名字(可以在手机里面的应用管理里面看到);</p>
+<p>android:permission 表示启动或绑定该服务所需的权限，如：android:permission=&quot;com.permission.xxx.service&quot;，则其他应用要想访问该服务，必须声明权限&lt;uses-permission android:name=&quot;com.permission.xxx.service&quot; /&gt;;</p>
+<p>android:exported 表示能够被外包应用访问，它的默认&#20540;依赖与该服务所包含的过滤器，若至少包含了一个过滤器，则意味着该服务可以给外部的其他应用提供服务，因此默认&#20540;是true; 否则默认&#20540;为false，此时只能在应用程序的内部使用该服务或者具有相同用户ID 的应用程序的组件才能使用该服务;</p>
+<p>android:process=&quot;:remote&quot;，代表在应用程序里需要该service时会自动创建新的进程。而如果是android:process=&quot;remote&quot;，没有“:”分号的则创建全局进程，不同的应用程序共享该进程。</p>
+<h2 id="Service的启动两种启动方式"><a href="#Service的启动两种启动方式" class="headerlink" title="Service的启动两种启动方式"></a>Service的启动两种启动方式</h2><div><br><br></div>
+
+<h3 id="第一种：startService-intent-nbsp"><a href="#第一种：startService-intent-nbsp" class="headerlink" title="第一种：startService(intent)&nbsp;"></a>第一种：startService(intent)&nbsp;</h3><div>第一次启动服务时，系统会执行onCreate、onStartCommand(onStart已过时)方法，再次调用startService则只会执行onStartCommand方法。</div><br><div>服务的onCreate方法用于进行一些初始化操作;&nbsp;onStartCommand(Intent intent, int flags, int startId) 方法能够被多次执行,其中intent就是startService(intent) 里面的intent，而startId为服务请求者的唯一编号(若服务没有被进程杀死过，则可以看做是服务的启动次数，也可作为IntentService消息队列里面的消息参数)。</div><br><div>这里重点讲下方法的onStartCommand的常用几个返回&#20540;<strong>：</strong></div><br><div><strong>START_STICKY</strong>：服务被杀死系统会尝试重新创建，intent丢失。</div><br><div>E/FirstService.java(10403): [onCreate:23]服务被激活<br><br>E/FirstService.java(10403): [onStartCommand:30]intent = Intent { cmp=com.leo.myservice/.FirstService (has extras) } ,flags = 0 ,startId = 1<br><br>E/FirstService.java(10492): [onCreate:23]服务被激活<br><br>E/FirstService.java(10492): [onStartCommand:30]intent = null ,flags = 0 ,startId = 2</div><br><div><strong>START_NOT_STICKY</strong>：服务被杀死系统不会自动重启该服务。<br><br></div><br><div><strong>START_REDELIVER_INTENT</strong>：服务被杀死系统会尝试重新创建，intent不会丢失。<br><br></div><br><div>E/FirstService.java(12336): [onCreate:23]服务被激活<br><br>E/FirstService.java(12336): [onStartCommand:30]intent = Intent { cmp=com.leo.myservice/.FirstService (has extras) } ,flags = 0 ,startId = 1<br><br>E/FirstService.java(12405): [onCreate:23]服务被激活<br><br>E/FirstService.java(12405): [onStartCommand:30]intent = Intent { cmp=com.leo.myservice/.FirstService (has extras) } ,flags = 1 ,startId = 1<br><br></div><br><div><strong>销毁服务</strong>：stopService(intent)只要指定相应的服务即可：</div><br><div>E/FirstService.java(14390): [onDestroy:39]服务被销毁</div><br><div><br><br></div>
+
+<h3 id="第二种：bindService-Intent-service-ServiceConnection-conn-int-flags-nbsp"><a href="#第二种：bindService-Intent-service-ServiceConnection-conn-int-flags-nbsp" class="headerlink" title="第二种：bindService(Intent service, ServiceConnection conn, int flags)&nbsp;"></a><strong>第二种</strong>：<strong>bindService</strong>(Intent service, ServiceConnection conn, int flags)&nbsp;</h3><div>&nbsp;其中：conn作为与服务连接的一个回调接口<strong>ServiceConnection</strong>(<strong>可通过该接口的onServiceConnected(ComponentName name, IBinder service)方法被传递的service来拿到绑定的服务对象或者Binder子类进而调用服务里的方法</strong>)，flags一般为Context.BIND_AUTO_CREATE</div><br><div>E/FirstService.java(17091): [onCreate:23]服务被激活<br><br>E/FirstService.java(17091): [onBind:17]绑定服务被执行<br><br>E/MainActivity.java(17091): [onServiceConnected:68]连接成功<br><br></div><br><div><strong>解绑服务</strong>：unbindService(ServiceConnection conn)</div><br><div>E/FirstService.java(19794): [onUnbind:45]解绑服务被执行<br><br>E/FirstService.java(19794): [onDestroy:39]服务被销毁<br><br></div><br><div><strong>【注意】</strong></div><br><div><strong>1. 如果你既调用了bindService又调用了startService，那么调用unbindService方法解绑的时候系统只会执行onUnbind，不会执行onDestroy; 所以如果服务不需要了还要记得stopService关闭服务。</strong></div><br><div><strong>2. 服务还可以调用stopSelf()、stopSelf(int startId)进行内部<span style="font-weight:bold">关闭</span>服务，区别就是：前者直接<span style="font-weight:bold">关闭</span>服务，后者若有多个服务请求可指定startId(可从onStartCommand参数拿到)进行关闭。</strong></div><br><div><strong>
+
+</strong></div><br><div><br><br></div>
+
+<h2 id="Activity与Service交互"><a href="#Activity与Service交互" class="headerlink" title="Activity与Service交互"></a>Activity与Service交互</h2><div>通过上文可以知道，咱们只要通过绑定服务的方式，实现<span style="font-weight:bold">ServiceConnection接口的<span style="font-weight:bold">onServiceConnected方法拿到被传递过来的IBinder对象，就可以调用Service(或Binder)里面的方法了。</span></span></div><br><div>实例说明：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_1_9834912" name="code" class="java">public class FirstService extends Service {<br>    private FirstBinder mBinder = new FirstBinder();<br><br>    @Override<br>    public IBinder onBind(Intent intent) {<br>        DebugLog.e(&quot;绑定服务被执行&quot;);<br>        return mBinder;<br>    }<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>        DebugLog.e(&quot;服务被激活&quot;);<br>    }<br><br>    @Override<br>    public int onStartCommand(Intent intent, int flags, int startId) {<br>        DebugLog.e(&quot;intent = &quot; + intent + &quot; ,flags = &quot; + flags + &quot; ,startId = &quot;<br>                + startId);<br>        return super.onStartCommand(intent, flags, startId);<br>    }<br><br>    @Override<br>    public void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;服务被销毁&quot;);<br>    }<br><br>    @Override<br>    public boolean onUnbind(Intent intent) {<br>        DebugLog.e(&quot;解绑服务被执行&quot;);<br>        return super.onUnbind(intent);<br>    }<br><br>    @Override<br>    public void onRebind(Intent intent) {<br>        super.onRebind(intent);<br>        DebugLog.e(&quot;重新绑定被执行&quot;);<br>    }<br><br>    public void info() {<br>        DebugLog.e(&quot;FirstService中的info方法被调用&quot;);<br>    }<br><br>    class FirstBinder extends Binder {<br>        @Override<br>        public String getInterfaceDescriptor() {<br>            return &quot;接口描述&quot;;<br>        }<br><br>        FirstService getService() {<br>            return FirstService.this;<br>        }<br><br>        public void info() {<br>            DebugLog.e(&quot;FirstBinder中的info方法被调用&quot;);<br>        }<br>    }<br>}</pre><br><br></div><br><div>Activity绑定FirstService</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_2_9551504" name="code" class="java">public class MainActivity extends Activity {<br>    private FirstService mService;<br><br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        // 绑定FirstService<br>        Intent intent = new Intent(MainActivity.this, FirstService.class);<br>        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);<br>    }<br><br>    public void test01(View view) {<br>        mService.info();<br>    }<br><br>    private ServiceConnection mServiceConnection = new ServiceConnection() {<br><br>        @Override<br>        public void onServiceDisconnected(ComponentName name) {<br>            DebugLog.e(&quot;断开连接&quot;);<br>            mService = null;<br>        }<br><br>        @Override<br>        public void onServiceConnected(ComponentName name, IBinder service) {<br>            DebugLog.e(&quot;连接成功&quot;);<br>            mService = ((FirstService.FirstBinder) service).getService();<br>        }<br>    };<br><br>    @Override<br>    protected void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;MainActivity被销毁&quot;);<br>        unbindService(mServiceConnection);<br>    }</pre>打印日志：</div><br><div>E/FirstService.java(5032): [onCreate:22]服务被激活<br><br>E/FirstService.java(5032): [onBind:15]绑定服务被执行<br><br>E/MainActivity.java(5032): [onServiceConnected:40]连接成功</div><br><div>可以看到连接服务成功了，拿到服务后咱们就可以调用FirstService里面的方法了。</div><br><div>打印日志：E/FirstService.java(5032): [info:51]FirstService中的info方法被调用</div><br><div>当然，这里也可以直接调用FirstBinder里面的方法，拿到binder对象即可(mBinder = (FirstService.FirstBinder) service;)</div><br><div>打印日志：E/FirstService.java(6342): [info:65]FirstBinder中的info方法被调用</div><br><div>当不需要该服务的时候，记得要接触绑定。</div><br><div>打印日志：</div><br><div>E/MainActivity.java(6342): [onDestroy:49]MainActivity被销毁<br><br>E/FirstService.java(6342): [onUnbind:40]解绑服务被执行<br><br>E/FirstService.java(6342): [onDestroy:35]服务被销毁</div><br><div><br><br></div><br><div><br><br></div>
+
+<h2 id="A应用访问B应用的Service"><a href="#A应用访问B应用的Service" class="headerlink" title="A应用访问B应用的Service"></a>A应用访问B应用的Service</h2><h3 id="第一种：通过指定Action启动服务"><a href="#第一种：通过指定Action启动服务" class="headerlink" title="第一种：通过指定Action启动服务"></a>第一种：通过指定Action启动服务</h3><div>比如B应用有些数据是需要一段时间后才能检测的到某个(稳定)&#20540;或者平均&#20540;，A应用需要启动该服务后过段时间才能拿到，若没有其他操作可将其关闭或者服务自行关闭(如：stopSelf()、stopSelf(int startId)等)，当然还可以处理其他逻辑简单、数据单一或者定时任务能够形成闭环的情形。</div><br><div>举例说明：咱们可以在B应用manifest文件中的&lt;Service&gt;元素中添加一个过滤器：<pre code_snippet_id="1634341" snippet_file_name="blog_20160404_3_7773598" name="code" class="html">&lt;service<br>    android:name=&quot;com.leo.myservice.FirstService&quot;<br>    android:permission=&quot;com.permission.xxx.service&quot; &gt;<br>    &lt;intent-filter&gt;<br>        &lt;action android:name=&quot;com.intent.action.XxxService&quot; /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/service&gt;</pre>然后咱们就可以在A应用中声明权限后访问B应用的服务了：context.startService(new Intent(&quot;com.intent.action.XxxService&quot;));</div><br><div><br><br></div>
+
+<h3 id="第二种：通过AIDL绑定服务"><a href="#第二种：通过AIDL绑定服务" class="headerlink" title="第二种：通过AIDL绑定服务"></a>第二种：通过AIDL绑定服务</h3><div>AIDL：Android接口定义语言(Android Interface definition language)，它是一种面向接口的描述语言，作用就是为其他应用提供一些服务接口。一般客户端(A应用)通过绑定该远程服务(B应用)的方式拿到Binder对象来进行进程间通信IPC(interprocess communication)的。为了建立与远程服务的连接(至于连接建立的内部机制，不在本篇的讨论范围内)，与之前一样，咱们需要实现<span style="font-weight:bold">ServiceConnection</span>接口的onServiceConnected(ComponentName<br> name, IBinder service)方法，只不过这里的参数service不是直接强制转换，而是通过mService = IAIDLService.Stub.asInterface(service);来拿到远程服务(其中IAIDLService.Stub实际就是Binder的子类，咱们只要实现这个IAIDLService.Stub抽象类中声明的所有方法，然后在onBind方法里返回它的对象即可;&nbsp;asInterface的作用就是将Binder对象转化成IAIDLService接口实例)。</div><br><div>举例说明：</div><br><div>B应用(服务端)：</div><br><div>创建一个IAIDLService.aidl文件</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_4_9583741" name="code" class="java">package com.leo.aidl;<br><br>interface IAIDLService{<br>    // 获取步数<br>    int getSteps();<br>}</pre>新建一个服务AidlService，并实现.aidl文件中声明的所有抽象方法，然后onBind方法返回一个Binder实例。</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_5_5330600" name="code" class="java">public class AidlService extends Service {<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>        DebugLog.e(&quot;远程服务被激活&quot;);<br>    }<br><br>    @Override<br>    public void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;远程服务被销毁&quot;);<br>    }<br><br>    @Override<br>    public boolean onUnbind(Intent intent) {<br>        DebugLog.e(&quot;解绑远程服务&quot;);<br>        return super.onUnbind(intent);<br>    }<br><br>    @Override<br>    public IBinder onBind(Intent intent) {<br>        DebugLog.e(&quot;绑定远程服务&quot;);<br>        return mBinder;<br>    }<br><br>    private final IAIDLService.Stub mBinder = new IAIDLService.Stub() {<br><br>        @Override<br>        public int getSteps() throws RemoteException {<br>            return 10000;<br>        }<br>    };<br><br>}</pre>接着在manifest文件中注册该远程服务：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_6_7140743" name="code" class="java">&lt;service<br>    android:name=&quot;com.leo.myservice.AidlService&quot;<br>    android:exported=&quot;true&quot; &gt;<br>    &lt;intent-filter&gt;<br>        &lt;action android:name=&quot;com.intent.action.remoteService&quot; /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/service&gt;</pre>A应用(客户端)&nbsp;<span style="white-space:pre"> </span>：<strong>导入B应用中的.aidl文件，且aidl接口文件所在的包与服务端的必须相同</strong></div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_7_5362837" name="code" class="java">public class MainActivity extends Activity {<br>    private IAIDLService mService;<br><br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        // 绑定远程服务XxxService<br>        Intent intent = new Intent(&quot;com.intent.action.remoteService&quot;);<br>        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);<br>    }<br><br>    // Button监听<br>    public void test01(View view) {<br>        try {<br>            int steps = mService.getSteps();<br>            DebugLog.e(&quot;steps = &quot; + steps);<br>        } catch (RemoteException e) {<br>            e.printStackTrace();<br>        }<br>    }<br><br>    private ServiceConnection mServiceConnection = new ServiceConnection() {<br><br>        @Override<br>        public void onServiceDisconnected(ComponentName name) {<br>            DebugLog.e(&quot;断开连接&quot;);<br>            mService = null;<br>        }<br><br>        @Override<br>        public void onServiceConnected(ComponentName name, IBinder service) {<br>            DebugLog.e(&quot;连接成功&quot;);<br>            mService = IAIDLService.Stub.asInterface(service);<br>        }<br>    };<br><br>    @Override<br>    protected void onDestroy() {<br>        super.onDestroy();<br>        unbindService(mServiceConnection);<br>    }<br><br>}</pre>服务端打印日志：<br><br>E/AidlService.java(27821): [onCreate:16]远程服务被激活<br><br>E/AidlService.java(27821): [onBind:33]绑定远程服务<br><br>客户端打印日志：<br><br>E/MainActivity.java(26711): [onServiceConnected:47]连接成功<br><br>接着点击Button，可以看到步数也被打印了：</div><br><div>E/MainActivity.java(26711): [test01:31]steps = 10000</div><br><div>说明客户端调用服务端的方法成功了。</div><br><div>当咱们不需要该服务时，记得调用unbindService(mServiceConnection)解绑</div><br><div>E/AidlService.java(27821): [onUnbind:27]解绑远程服务<br><br>E/AidlService.java(27821): [onDestroy:22]远程服务被销毁<br><br></div><br><div>【使用情景】当有多个应用程序要与服务端进行通讯时，即服务端需要接收来自不同应用的多线程请求时需要使用AIDL。</div><br><div><br><br>## IntentService<br><br>&nbsp;在讲IntentService之前，先来了解一下Handler和HandlerThread。</div><br><div>Handler的作用是把消息加入特定的（Looper）消息队列中，并分发和处理该消息队列中的消息。</div><br><div>&nbsp;一般会使用Handler handler = new Handler()创建Handler, 这样创建的handler是在主线程即UI线程下的Handler，默认与UI线程绑定，在UI线程处理，所以它不能做太耗时的操作，否则会出现ANR。</div><br><div>HandlerThread本质就是个Thread。与普通Thread的差别就在于，它有自己的looper(包含消息队列)，可以让Handler在自己的线程中分发和处理消息，从而避免在出现anr的情况。它的创建步骤如下：</div><br><div>HandlerThread thread = new HandlerThread(&quot;IntentService[&quot; &#43; mName &#43; &quot;]&quot;);// 创建HandlerThread(指定线程名：IntentService[xxService])<br><br>thread.start();//&nbsp;启动HandlerThread&nbsp;</div><br><div>mServiceLooper = thread.getLooper();//获取HandlerThread中的mLooper成员<br><br>mServiceHandler = new ServiceHandler(mServiceLooper);//绑定HandlerThread</div><br><div><br><br></div><br><div>IntentService就是通过绑定HandlerThread在自己的线程中分发和处理消息的。</div><br><div>具体流程：启动服务startService(intent)，onStart(intent, startId)被调用，intent被传入、startId由系统生成(这个里可以看做是请求服务的次数)，而后mServiceHandler将消息(携带这两个参数)发出，由咱们自己的服务(继承了IntentService)的onHandleIntent方法来处理，非常方便，等消息队列中的挨个(阻塞式地)处理完所有消息后会执行stopSelf(startId)方法。</div><br><div>&#20540;得注意的是：消息处理完后，在服务销毁时先执行mServiceLooper.quit()，这个方法会清空所有消息(无论是延时消息还是非延时消息)。</div><br><div>总的来说：IntentService这与Service的最大区别就是IntentService它可以在自己的线程里处理非常耗时的操作，而且还可以挨个的处理(即一个之后再处理第二个)多个请求，处理完后将自毁服务。<br><br></div><br><div><br><br></div><br><div>下面举例说明：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_8_6300928" name="code" class="java">public class FirstIntentService extends IntentService {<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>        DebugLog.e(&quot;服务被激活&quot;);<br>    }<br><br>    public FirstIntentService() {<br>        super(&quot;MyIntentService&quot;);<br>    }<br><br>    int i = 0;<br><br>    @Override<br>    protected void onHandleIntent(Intent intent) {<br>        DebugLog.e(&quot;pid = &quot; + Thread.currentThread().getId());<br>        DebugLog.e(&quot;任务执行开始…&quot;);<br>        i = 0;<br>        try {<br>            while (i &lt; 3) {<br>                Thread.sleep(1000);<br>                i++;<br>                DebugLog.e(&quot;i = &quot; + i + &quot;s&quot;);<br>            }<br>        } catch (InterruptedException e) {<br>            e.printStackTrace();<br>        }<br>        DebugLog.e(&quot;任务执行完成…&quot;);<br>    }<br><br>    @Override<br>    public void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;服务被销毁&quot;);<br>    }<br><br>}</pre>MainActivity添加两个Button进行测试：一个启动服务、一个测试服务是否存在</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_9_6507888" name="code" class="java">public class MainActivity extends Activity {<br><br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        DebugLog.e(&quot;pid = &quot; + Thread.currentThread().getId());<br>    }<br><br>    public void button1(View view) {<br>        startService(new Intent(this, FirstIntentService.class));<br>    }<br><br>    public void button2(View view) {<br>        boolean isServiceRunning = ServiceUtils.isServiceRunning(this,<br>                FirstIntentService.class.getName());<br>        DebugLog.e(&quot;isServiceRunning = &quot; + isServiceRunning);<br>    }<br>}<br></pre>点两次按钮，打印日志如下：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_10_6366185" name="code" class="html">E/MainActivity.java(19249): [onCreate:18]pid = 1<br>E/FirstIntentService.java(19249): [onCreate:13]服务被激活<br>E/FirstIntentService.java(19249): [onHandleIntent:24]pid = 2236<br>E/FirstIntentService.java(19249): [onHandleIntent:25]任务执行开始…<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 1s<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 2s<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 3s<br>E/FirstIntentService.java(19249): [onHandleIntent:36]任务执行完成…<br>E/FirstIntentService.java(19249): [onHandleIntent:24]pid = 2236<br>E/FirstIntentService.java(19249): [onHandleIntent:25]任务执行开始…<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 1s<br>E/MainActivity.java(19249): [button2:28]isServiceRunning = true<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 2s<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 3s<br>E/FirstIntentService.java(19249): [onHandleIntent:36]任务执行完成…<br>E/FirstIntentService.java(19249): [onDestroy:42]服务被销毁<br>E/MainActivity.java(19249): [button2:28]isServiceRunning = false<br></pre>从日志中可以看到：onHandleIntent中的线程ID与主线程中的是不一样的，这样验证了IntentService消息处理是在非UI线程中进行的，而且是在同一线程中执行; 同时消息一旦处理完服务也随之被销毁了。<br><br>总结：</div><br><div><br><br></div><br><div>以上是笔者从项目中总结出来的一些心得，花了两天时间整理了一下思路，若有不对的地方还请指正。</div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div>
+
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2016/4/4 20:08:52 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/51043584)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：852 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/51043584#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2016/04/04/原-Android学习系列-三-四大组件之Service详解/" data-id="cj8yn9vej0005o49z04ciphpq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/01/HelloHexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hello
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/26/原-Git学习系列博客全目录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]Git学习系列博客全目录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

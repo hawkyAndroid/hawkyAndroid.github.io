@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]Java学习系列(二十)Java面向对象之反射详解 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45289391 前言今天讲讲Java中的反射。我们常见的反射多用于JDBC中的加载驱动程序Class.forName(&amp;quot;com.mysql.jdbc.Driver&amp;quot;);、Struts的MVC、Hibernate中的ORM、Spring中的IOC还有一些其他框架等等。那它有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]Java学习系列(二十)Java面向对象之反射详解">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45289391 前言今天讲讲Java中的反射。我们常见的反射多用于JDBC中的加载驱动程序Class.forName(&amp;quot;com.mysql.jdbc.Driver&amp;quot;);、Struts的MVC、Hibernate中的ORM、Spring中的IOC还有一些其他框架等等。那它有">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20150426184514636?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.962Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]Java学习系列(二十)Java面向对象之反射详解">
+<meta name="twitter:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45289391 前言今天讲讲Java中的反射。我们常见的反射多用于JDBC中的加载驱动程序Class.forName(&amp;quot;com.mysql.jdbc.Driver&amp;quot;);、Struts的MVC、Hibernate中的ORM、Spring中的IOC还有一些其他框架等等。那它有">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150426184514636?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-Java学习系列-二十-Java面向对象之反射详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/" class="article-date">
+  <time datetime="2015-04-26T10:46:31.000Z" itemprop="datePublished">2015-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]Java学习系列(二十)Java面向对象之反射详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-family:Arial; font-size:18px; line-height:26px; text-align:left">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45289391" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45289391</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天讲讲Java中的反射。我们常见的反射多用于JDBC中的加载驱动程序Class.forName(&quot;com.mysql.jdbc.Driver&quot;);、Struts的MVC、Hibernate中的ORM、Spring中的IOC还有一些其他框架等等。那它有什么好处呢？它的好处就是能够动态的创建对象和编译且能够访问某个类中的所有(包括私有)属性方法及对象的属性方法并进行调用，比较灵活，这样也有利于降低类间的耦合度；但反射也有缺点，就是破坏了类的封装性和对象的完整性。</p>
+<h1 id="实例说明"><a href="#实例说明" class="headerlink" title="实例说明"></a>实例说明</h1><div><pre code_snippet_id="653473" snippet_file_name="blog_20150426_1_9374736" name="code" class="java">/<strong><br> <em> 目标类
+ </em><br> <em> @author [</em>昨日重现<em>] lhy_ycu@163.com
+ </em> @since version 1.0<br> <em> @datetime 2015年4月26日 下午4:50:28
+ </em>/<br><br>public class Student {<br>    private String name;<br>    private Integer age;<br><br>    /</strong><br>     <em> 无参构造并赋默认值
+     </em>/<br>    public Student() {<br>        this.name = &quot;张三&quot;;<br>        this.age = 22;<br>    }<br><br>    public Student(String name, Integer age) {<br>        this.name = name;<br>        this.age = age;<br>    }<br><br>    public String getName() {<br>        return name;<br>    }<br><br>    public void setName(String name) {<br>        this.name = name;<br>    }<br><br>    public Integer getAge() {<br>        return age;<br>    }<br><br>    public void setAge(Integer age) {<br>        this.age = age;<br>    }<br><br>    public void info() {<br>        System.out.println(&quot;做一个快乐的程序员~&quot; + this);<br>    }<br><br>    private void joke() {<br>        System.out.println(&quot;开个玩笑啦。。。&quot;);<br>    }<br><br>    // 无参<br>    public void play() {<br>        System.out.println(this.name + &quot; is playing…&quot;);<br>    }<br><br>    // 重载play<br>    public void play(String name) {<br>        System.out.println(this.name + &quot; is playing xx with &quot; + name);<br>    }<br><br>    /<strong><br>     <em> getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());
+     </em> 推荐实体类都覆写toString方法，方便查看日志信息<br>     <em> 
+     </em> @return<br>     <em> @see java.lang.Object#toString()
+     </em>/<br>    @Override<br>    public String toString() {<br>        return &quot;Student [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;<br>    }<br><br>}<br></strong></pre><br><br>目标测试类</div><br><div><pre code_snippet_id="653473" snippet_file_name="blog_20150426_2_1453736" name="code" class="java">/<br> <em> 利用反射对目标类进行测试
+ </em><br> <em> @author [</em>昨日重现<em>] lhy_ycu@163.com
+ </em> @since version 1.0<br> <em> @datetime 2015年4月26日 下午5:14:52
+ </em>/<br><br>public class StudentTest {<br><br>    @BeforeClass<br>    public static void beforeClass() {<br>        System.out.println(&quot;=========在所有测试方法执行前执行–beforeClass=====\n&quot;);<br>    }<br><br>    /<strong><br>     <em> 1、Class.forName(&quot;类的完整路径&quot;)；2、Student.class；3、obj.getClass()
+     </em><br>     <em> @throws Exception
+     </em>/<br>    @Test<br>    public void testInfo() throws Exception {<br>        Class&lt;?&gt; c1 = Class.forName(&quot;com.leo.reflection.Student&quot;);<br>        // Class&lt;?&gt; c1 = Student.class;<br>        // 获取其实例,newInstance()会默认调用无参构造器，因此需要目标类保留无参的构造器<br>        Student s1 = (Student) c1.newInstance();<br>        // System.out.println(&quot;s1 = &quot; + s1.getClass().getCanonicalName());<br>        s1.info();<br>        int age = s1.getAge();<br>        String name = s1.getName();<br>        Assert.assertThat(age, Matchers.is(22));// normal<br>        Assert.assertThat(name, Matchers.is(&quot;李四&quot;));// failure<br>    }<br><br>    /</strong><br>     <em> 通过类的加载器来获取某个类
+     </em><br>     <em> @throws Exception
+     </em>/<br>    @Test<br>    public void testInfo2() throws Exception {<br>        // 获取一个类加载器<br>        ClassLoader cl = ClassLoader.getSystemClassLoader();<br>        // 加载指定的类<br>        Class&lt;?&gt; clazz = cl.loadClass(&quot;com.leo.reflection.Student&quot;);<br>        // System.out.println(clazz.getName());<br>        Student s1 = (Student) clazz.newInstance();<br>        s1.info();<br>    }<br><br>    /<strong><br>     <em> 访问构造器
+     </em><br>     <em> @throws Exception
+     </em>/<br>    @Test<br>    public void testConstruction() throws Exception {<br>        Class&lt;?&gt; c1 = Class.forName(&quot;com.leo.reflection.Student&quot;);<br>        // 获取带有指定参数列表的构造方法的Constructor对象<br>        Constructor&lt;?&gt; cs = c1.getDeclaredConstructor(String.class,<br>                Integer.class);<br>        Student s1 = (Student) cs.newInstance(&quot;小四&quot;, 24);<br>        s1.info();<br><br>        // 获取指定类的所有构造器<br>        // Constructor&lt;?&gt;[] constructors = c1.getDeclaredConstructors();<br>        // for (Constructor&lt;?&gt; constructor : constructors) {<br>        // System.out.println(&quot;constructor = &quot; + constructor);<br>        // }<br>    }<br><br>    /</strong><br>     <em> 访问属性(包括私有属性)
+     </em><br>     <em> @throws Exception
+     </em>/<br>    @Test<br>    public void testField() throws Exception {<br>        Class&lt;?&gt; c1 = Class.forName(&quot;com.leo.reflection.Student&quot;);<br>        Student s1 = (Student) c1.newInstance();<br><br>        // 获取某个属性<br>        Field field = c1.getDeclaredField(&quot;name&quot;);<br>        // 该属性设置为可访问<br>        field.setAccessible(true);<br>        System.out.println(&quot;field = &quot; + field + &quot; , &quot; + field.get(s1));<br><br>        // 获取指定类的所有属性<br>        // Field[] fields = c1.getDeclaredFields();<br>        // for (Field f : fields) {<br>        // f.setAccessible(true);<br>        // System.out.println(f.getName() + &quot; = &quot; + f.get(s1));<br>        // }<br><br>    }<br><br>    /<em>*
+     </em> 访问方法(包括私有方法)<br>     <em> 
+     </em> @throws Exception<br>     */<br>    @Test<br>    public void testMethod() throws Exception {<br>        Class&lt;?&gt; c1 = Class.forName(&quot;com.leo.reflection.Student&quot;);<br>        Student s1 = (Student) c1.newInstance();<br><br>        // 获取某个类的指定无参方法<br>        Method m1 = c1.getDeclaredMethod(&quot;play&quot;);<br>        m1.invoke(s1);<br><br>        // 获取某个类的指定含参方法<br>        Method m2 = c1.getDeclaredMethod(&quot;play&quot;, String.class);<br>        m2.invoke(s1, &quot;钱七&quot;);<br><br>        System.out.println(&quot;=======================&quot;);<br>        // 获取指定类的所有方法<br>        // Method[] methods = c1.getDeclaredMethods();<br>        // for (Method method : methods) {<br>        // method.setAccessible(true);<br>        // System.out.println(method.getName());<br>        // }<br>        // System.out.println(&quot;=======================\n&quot;);<br><br>    }<br><br>    @AfterClass<br>    public static void afterClass() {<br>        System.out.println(&quot;==========在所有测试方法执行后执行–afterClass=====\n&quot;);<br>    }<br><br>}</pre></div><br><div><img src="http://img.blog.csdn.net/20150426184514636?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br><br></div><br><div><br><br></div><br><div><br><br></div>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><div>1、所有类的对象其实都是Class的实例。</div><br><div>2、Class实例化其他类的对象的时候，一定要保留默认的无参构造函数。 &nbsp;&nbsp;</div><br><div>3、加载某个类的3种常用方式：a) Class.forName(&quot;类的完整路径&quot;)、b) 类名.class、c) obj.getClass()</div><br><div>4、反射的常用的两步：Class&lt;?&gt; c1 = Class.forName(&quot;类的完整路径&quot;);&nbsp;T1 &nbsp;t = (T1) c1.newInstance();</div>
+
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/4/26 18:46:31 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45289391)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：965 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45289391#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/" data-id="cj8yn9vez0006o49z6q8bak59" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [原]Java学习系列(二十一)Java面向对象之注解详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]基于Junit3.8和Junit4.x的单元测试详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]全面掌握Mysql知识点及select支持的运算操作 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45725317 花了2天时间整理了一下程序员应掌握的Mysql中的操作(包括select支持的运算操作)及相关概念和知识点，希望这篇博客对大家有所帮助。 内容提纲1、登录mysql 2、查看mysql信息 3、查看所有数据库 4、打开指定数据库 5、李处指定数据库中的所有表 6、查看指定表的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]全面掌握Mysql知识点及select支持的运算操作">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45725317 花了2天时间整理了一下程序员应掌握的Mysql中的操作(包括select支持的运算操作)及相关概念和知识点，希望这篇博客对大家有所帮助。 内容提纲1、登录mysql 2、查看mysql信息 3、查看所有数据库 4、打开指定数据库 5、李处指定数据库中的所有表 6、查看指定表的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]全面掌握Mysql知识点及select支持的运算操作">
+<meta name="twitter:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45725317 花了2天时间整理了一下程序员应掌握的Mysql中的操作(包括select支持的运算操作)及相关概念和知识点，希望这篇博客对大家有所帮助。 内容提纲1、登录mysql 2、查看mysql信息 3、查看所有数据库 4、打开指定数据库 5、李处指定数据库中的所有表 6、查看指定表的">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-全面掌握Mysql知识点及select支持的运算操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/" class="article-date">
+  <time datetime="2015-05-16T09:54:19.000Z" itemprop="datePublished">2015-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]全面掌握Mysql知识点及select支持的运算操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-family:Arial; font-size:18px; line-height:26px; text-align:left">转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40028509" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45725317" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45725317</a></span></p>
+<p>花了2天时间整理了一下程序员应掌握的Mysql中的操作(包括select支持的运算操作)及相关概念和知识点，希望这篇博客对大家有所帮助。</p>
+<h2 id="内容提纲"><a href="#内容提纲" class="headerlink" title="内容提纲"></a>内容提纲</h2><p><span style="font-size:12px">1、登录mysql</span></p>
+<p>2、查看mysql信息</p>
+<p>3、查看所有数据库</p>
+<p>4、打开指定数据库</p>
+<p>5、李处指定数据库中的所有表</p>
+<p>6、查看指定表的结构</p>
+<p>7、查看建表语句</p>
+<p>8、建库建表</p>
+<p>9、修改指定表结构</p>
+<p>10、查看数据库的编码方式</p>
+<p>11、DML语句(CRUD)操作</p>
+<p>12、注释方式</p>
+<p>13、表数据的导入导出</p>
+<p>14、数据库的导入导出</p>
+<p>15、视图View</p>
+<p>16、索引index</p>
+<p>17、存储过程Procedure</p>
+<p>18、事务Transaction</p>
+<p>19、Mysql用户创建、授权及删除</p>
+<p>20、select支持的运算操作</p>
+<p>21、select支持的逻辑运算操作</p>
+<p>附：忘记密码及修改密码</p>
+<h2 id="1）登录Mysql-本地、远程-服务器"><a href="#1）登录Mysql-本地、远程-服务器" class="headerlink" title="1）登录Mysql(本地、远程)服务器"></a>1）登录Mysql(本地、远程)服务器</h2><p>登录本地(假设用户名：root; 密码：123456)：mysql -u root -p 123456</p>
+<p>登录远程(假设服务器ip：192.168.0.111; 用户名：admin; 密码：admin)：mysql -h 192.168.0.111 -u admin -p admin</p>
+<h2 id="2）查看mysql信息：status"><a href="#2）查看mysql信息：status" class="headerlink" title="2）查看mysql信息：status"></a>2）查看mysql信息：status</h2><p>mysql&gt; status</p>
+<hr>
+<p>mysql &nbsp;Ver 14.14 Distrib 5.6.10, for Win32 (x86)</p>
+<p>Connection id: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8</p>
+<p>Current database:</p>
+<p>Current user: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; root@localhost</p>
+<p>SSL: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Not in use</p>
+<p>Using delimiter: &nbsp; &nbsp; &nbsp; &nbsp;;</p>
+<p>Server version: &nbsp; &nbsp; &nbsp; &nbsp; 5.6.10 MySQL Community Server (GPL)</p>
+<p>Protocol version: &nbsp; &nbsp; &nbsp; 10</p>
+<p>Connection: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; localhost via TCP/IP</p>
+<p>Server characterset: &nbsp; &nbsp;latin1</p>
+<p>Db &nbsp; &nbsp; characterset: &nbsp; &nbsp;latin1</p>
+<p>Client characterset: &nbsp; &nbsp;gbk</p>
+<p>Conn. &nbsp;characterset: &nbsp; &nbsp;gbk</p>
+<p>TCP port: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3306</p>
+<p>Uptime: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 17 min 5 sec</p>
+<h2 id="3）列出所有数据库（这里是以root身份查看的）"><a href="#3）列出所有数据库（这里是以root身份查看的）" class="headerlink" title="3）列出所有数据库（这里是以root身份查看的）"></a>3）列出所有数据库（这里是以root身份查看的）</h2><p>mysql&gt; show databases;</p>
+<p>&#43;——————–&#43;</p>
+<p>| Database &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;——————–&#43;</p>
+<p>| information_schema |</p>
+<p>| incubator &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| movie &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| mysql &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| mytest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| performance_schema |</p>
+<p>| product &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——————–&#43;</p>
+<h2 id="4）打开指定数据库：use-db-name"><a href="#4）打开指定数据库：use-db-name" class="headerlink" title="4）打开指定数据库：use db_name;"></a>4）打开指定数据库：use db_name;</h2><p>mysql&gt; use product;</p>
+<p>Database changed</p>
+<h2 id="5）列出product数据库中的所有表：show-tables"><a href="#5）列出product数据库中的所有表：show-tables" class="headerlink" title="5）列出product数据库中的所有表：show tables;"></a>5）列出product数据库中的所有表：show tables;</h2><p>mysql&gt; show tables;</p>
+<p>&#43;——————-&#43;</p>
+<p>| Tables_in_product |</p>
+<p>&#43;——————-&#43;</p>
+<p>| test &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——————-&#43;</p>
+<h2 id="6）查看指定表的结构：desc-table-name"><a href="#6）查看指定表的结构：desc-table-name" class="headerlink" title="6）查看指定表的结构：desc table_name;"></a>6）查看指定表的结构：desc table_name;</h2><p>mysql&gt; desc test;</p>
+<p>&#43;———–&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;———–&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| color_id &nbsp;| varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;———–&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<h2 id="7）查看建表语句DDL：-nbsp-show-create-table-table-name"><a href="#7）查看建表语句DDL：-nbsp-show-create-table-table-name" class="headerlink" title="7）查看建表语句DDL：&nbsp;show create table table_name;"></a>7）查看建表语句DDL：&nbsp;show create table table_name;</h2><p>| test | CREATE TABLE <code>test</code> (</p>
+<p>&nbsp; <code>Id</code> int(11) NOT NULL AUTO_INCREMENT,</p>
+<p>&nbsp; <code>type_name</code> varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; <code>color_id</code> varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; PRIMARY KEY (<code>Id</code>)</p>
+<p>) ENGINE=InnoDB DEFAULT CHARSET=utf8 |</p>
+<h2 id="8）实战：建库、建表"><a href="#8）实战：建库、建表" class="headerlink" title="8）实战：建库、建表"></a>8）实战：建库、建表</h2><p>#若存在mydb数据库则删除</p>
+<p>drop database if exists mydb;</p>
+<p>#建库mydb</p>
+<p>create database mydb default charset=utf8;</p>
+<p>#打开数据库</p>
+<p>use mydb;</p>
+<p>#若存在mytest表则删除</p>
+<p>drop table if exists mytest;</p>
+<p>#建表</p>
+<p>create table mytest (</p>
+<p>&nbsp; Id int(11) NOT NULL AUTO_INCREMENT,</p>
+<p>&nbsp; type_name varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; color_name varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; PRIMARY KEY (Id)</p>
+<p>) ENGINE=InnoDB DEFAULT CHARSET=utf8;&nbsp;</p>
+<p>#外键约束(级联删除)：constraint 约束名 foreign key 该表的字段 references dept(Id) on delete cascade on update cascade;</p>
+<p>#查看mydb里面有哪些表</p>
+<p>show tables;</p>
+<p>#查看mytest的表结构</p>
+<p>desc mytest;</p>
+<p>#查看mytest的建表语句</p>
+<p>show create table mytest;</p>
+<p>#删除表：drop table mytest;</p>
+<p>#删除指定数据库下的所有表</p>
+<p>mysql&gt; use information_schema;</p>
+<p>mysql&gt; select concat(‘drop table if exists ‘,table_name, ‘;’ ) from tables where table_schema=’db_name’;</p>
+<p>#删除库：drop database mydb;</p>
+<h2 id="9）修改mytest表结构"><a href="#9）修改mytest表结构" class="headerlink" title="9）修改mytest表结构"></a>9）修改mytest表结构</h2><p>#查看当前表结构</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp;| varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| color_name | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#修改列</p>
+<p>mysql&gt; alter table mytest change color_name description varchar(50);</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#增加列</p>
+<p>mysql&gt; alter table mytest add extra_name varchar(20) not null default ‘豆豆’;</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| extra_name &nbsp;| varchar(20) | NO &nbsp; | &nbsp; &nbsp; | 豆豆 &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#删除列</p>
+<p>mysql&gt; alter table mytest drop extra_name;</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#修改表名</p>
+<p>mysql&gt; alter table mytest rename to test01;</p>
+<p>mysql&gt; show tables;</p>
+<p>&#43;—————-&#43;</p>
+<p>| Tables_in_mydb |</p>
+<p>&#43;—————-&#43;</p>
+<p>| test01 &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;—————-&#43;</p>
+<p>mysql&gt; desc test01;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#修改指定列名</p>
+<p>mysql&gt; alter table test01 modify column type_name char(10);</p>
+<p>mysql&gt; desc test01;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | char(10) &nbsp; &nbsp;| YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#查看test01表中以t开头的字段信息。</p>
+<p>mysql&gt; desc test01 ‘t%’;</p>
+<p>&#43;———–&#43;———-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp; | Type &nbsp; &nbsp; | Null | Key | Default | Extra |</p>
+<p>&#43;———–&#43;———-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| type_name | char(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———–&#43;———-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>#创建临时表：临时表是指创建后只在当前数据库内有效，断开与数据库的连接后表就自动删除</p>
+<p>create temporary table tb_temp(</p>
+<p>&nbsp; &nbsp; id integer,</p>
+<p>&nbsp; &nbsp; name varchar(100),</p>
+<p>&nbsp; &nbsp; primary key(id)</p>
+<p>);</p>
+<h2 id="10）查看数据库的编码方式"><a href="#10）查看数据库的编码方式" class="headerlink" title="10）查看数据库的编码方式"></a>10）查看数据库的编码方式</h2><p>#查看当前数据库的编码方式</p>
+<p>mysql&gt; show variables like ‘character%’;</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| Variable_name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| character_set_client &nbsp; &nbsp; | gbk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| character_set_connection | gbk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| character_set_database &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_filesystem | binary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_results &nbsp; &nbsp;| gbk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| character_set_server &nbsp; &nbsp; | latin1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_system &nbsp; &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_sets_dir &nbsp; &nbsp; &nbsp; | D:\MySQL\MySQLServer5.6\share\charsets\ |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>#修改编码方式</p>
+<p>mysql&gt; set names ‘utf8’;</p>
+<p>mysql&gt; show variables like ‘character%’;</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| Variable_name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| character_set_client &nbsp; &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_connection | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_database &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_filesystem | binary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_results &nbsp; &nbsp;| utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_server &nbsp; &nbsp; | latin1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_system &nbsp; &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_sets_dir &nbsp; &nbsp; &nbsp; | D:\MySQL\MySQLServer5.6\share\charsets\ |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<h2 id="11）DML语句（select、insert、update、delete），简称CRUD"><a href="#11）DML语句（select、insert、update、delete），简称CRUD" class="headerlink" title="11）DML语句（select、insert、update、delete），简称CRUD"></a>11）DML语句（select、insert、update、delete），简称CRUD</h2><p>#插入</p>
+<p>mysql&gt; insert into test01(type_name,description) values(‘综艺’,’最近更新’);</p>
+<p>#更新</p>
+<p>mysql&gt; update test01 set type_name=’电影’ where type_name=’综艺’;</p>
+<p>#查询<strong>(由于select支持的查询语句非常广，所以后面会单独拿出一篇来写)</strong></p>
+<p>mysql&gt; select * from test01 where Id=1;</p>
+<p>#查询test01表中有几行记录</p>
+<p>mysql&gt; select count(*) from test01;</p>
+<p>#注意：count(*)和count(1)时统计包括null的, 而count(列名)不包含null&#20540;，且经试验得出count(1)的速度最快(Oracle中也是如此)。</p>
+<p>#删除(单删、全删)</p>
+<p>mysql&gt; delete from test01 where Id=1 and type_name=’电影’;</p>
+<p>mysql&gt; delete from test01;</p>
+<p>#清空数据：Id从1开始</p>
+<p>mysql&gt; truncate table user;/<em>清除user表中所有数据</em>/</p>
+<h2 id="12）注释方式：-、–、"><a href="#12）注释方式：-、–、" class="headerlink" title="12）注释方式：#、–、/**/"></a>12）注释方式：#、–、/**/</h2><div><br><br></div>
+
+<h2 id="13）表中数据的导入、导出"><a href="#13）表中数据的导入、导出" class="headerlink" title="13）表中数据的导入、导出"></a>13）表中数据的导入、导出</h2><p>#查看表test01的数据</p>
+<p>mysql&gt; select * from test01;</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| Id | type_name | description |</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| &nbsp;1 | 综艺 &nbsp; &nbsp; &nbsp;| 最近更新 &nbsp; &nbsp;|</p>
+<p>| &nbsp;2 | 电影 &nbsp; &nbsp; &nbsp;| 精彩预告 &nbsp; &nbsp;|</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p><strong>#导出：将表test01中的记录导出到f盘的test.txt文件中</strong></p>
+<p>mysql&gt; select * from test01 into outfile ‘f:\test.txt’;</p>
+<p>#导出数据后，清空表test01中的数据</p>
+<p>mysql&gt; truncate table test01;</p>
+<p>#可以看到，test01表中当前无数据</p>
+<p>mysql&gt; select * from test01;</p>
+<p>Empty set (0.00 sec)</p>
+<p><strong>#导入：将f盘的test.txt文件中备份的数据导入到表test01中</strong></p>
+<p>mysql&gt; load data infile ‘f:\test.txt’ into table test01;</p>
+<p>#可以看到，数据已被导入到表test01中</p>
+<p>mysql&gt; select * from test01;</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| Id | type_name | description |</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| &nbsp;1 | 综艺 &nbsp; &nbsp; &nbsp;| 最近更新 &nbsp; &nbsp;|</p>
+<p>| &nbsp;2 | 电影 &nbsp; &nbsp; &nbsp;| 精彩预告 &nbsp; &nbsp;|</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<h2 id="14）数据库的导入、导出"><a href="#14）数据库的导入、导出" class="headerlink" title="14）数据库的导入、导出"></a>14）数据库的导入、导出</h2><p>#导出数据库：-d导出表结构，-t导出数据，不加是导出整个数据库</p>
+<p>mysql&gt; mysqldump -uroot -p [-d|-t] dbname [tab_name]&gt;e:\mybk.sql</p>
+<p>#导入数据库：</p>
+<p>mysql&gt; mysql -uroot -p new_dbname &lt;e:\mybk.sql</p>
+<h2 id="15）视图View"><a href="#15）视图View" class="headerlink" title="15）视图View"></a>15）视图View</h2><p>视图的工作机制: 当调用视图的时候，才会执行视图中的sql，进行取数据操作。视图的内容并没有存储，而是在视图被引用的时候才派生出数据。这样不会占用空间，由于是即时引用，视图的内容总是与真实表的内容是一致的。从视图的工作机制可以看出：视图是一种虚拟的表，它并没有保存内容，只是引用数据。一般在要经常需要某个查询结果做子查询的时候会使用到视图，<span style="color:#ff0000">注意</span>运行创建/删除视图的语句需要用户具有创建/删除视图的权限。<strong>创建视图</strong>的语法：create<br> view 视图名 as select 查询语句;&nbsp;实例说明如下：</p>
+<p>mysql&gt; select * from goods;</p>
+<p>&#43;———-&#43;————&#43;————&#43;——–&#43;</p>
+<p>| goods_id | goods_name | shop_price | cat_id |</p>
+<p>&#43;———-&#43;————&#43;————&#43;——–&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;1 | 苹果 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 8.80 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;2 | 西瓜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 2.98 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;3 | 香蕉 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 6.80 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;4 | 白菜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 1.80 | &nbsp; &nbsp; &nbsp;1 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;5 | 韭菜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 2.80 | &nbsp; &nbsp; &nbsp;1 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;6 | 茄子 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 1.80 | &nbsp; &nbsp; &nbsp;1 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;7 | 哈密瓜 &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 3.80 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>&#43;———-&#43;————&#43;————&#43;——–&#43;</p>
+<p>如果要频繁查询某个种类下面的商品平均价&#26684;：mysql&gt; select cat_id, avg(shop_price) from goods group by cat_id;</p>
+<p>那么我们可以创建针对这种平均价&#26684;的视图：mysql&gt; create view avgPrice as &nbsp;select cat_id, avg(shop_price) from goods group by cat_id;</p>
+<p>然后我们就可以通过普通的查询语句来<span style="color:#ff0000"><strong>简化查询</strong></span>了：</p>
+<p>mysql&gt; select * from avgPrice;</p>
+<p>&#43;——–&#43;—————–&#43;</p>
+<p>| cat_id | avg(shop_price) |</p>
+<p>&#43;——–&#43;—————–&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp;1 | &nbsp; &nbsp; &nbsp; &nbsp;2.133333 |</p>
+<p>| &nbsp; &nbsp; &nbsp;2 | &nbsp; &nbsp; &nbsp; &nbsp;5.595000 |</p>
+<p>&#43;——–&#43;—————–&#43;</p>
+<p>可以看到，通过视图我们可以简化查询操作，视图还有一个好处就是可以进行<span style="color:#ff0000"><strong>权限控制</strong></span>。比如：对于goods表，我们不想让别人看到我们的销售价&#26684;，这时候我们就可以把查看goods表的权限封闭，创建一张视图：mysql&gt; create view baseGoods as select goods_id,goods_name from goods;&nbsp;</p>
+<p>mysql&gt; select * from baseGoods;</p>
+<p>&#43;———-&#43;————&#43;</p>
+<p>| goods_id | goods_name |</p>
+<p>&#43;———-&#43;————&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;1 | 苹果 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;2 | 西瓜 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;3 | 香蕉 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;4 | 白菜 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;5 | 韭菜 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;6 | 茄子 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;7 | 哈密瓜 &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————&#43;</p>
+<p>这样就可以不出现销售价&#26684;列了。当然我们也可以修改视图，<strong>修改视图</strong>也比较简单：alter view 视图名 as select语句，比如对于avgPrice视图，我们还想看到商品名称：</p>
+<p>mysql&gt; alter view avgPrice as select cat_id,goods_name, avg(shop_price) from goods group by cat_id;</p>
+<p>mysql&gt; select * from avgPrice;</p>
+<p>&#43;——–&#43;————&#43;—————–&#43;</p>
+<p>| cat_id | goods_name | avg(shop_price) |</p>
+<p>&#43;——–&#43;————&#43;—————–&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp;1 | 白菜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp;2.133333 |</p>
+<p>| &nbsp; &nbsp; &nbsp;2 | 苹果 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp;5.595000 |</p>
+<p>&#43;——–&#43;————&#43;—————–&#43;</p>
+<p><strong>删除视图</strong>：mysql&gt; drop view avgPrice;</p>
+<h2 id="16）索引index"><a href="#16）索引index" class="headerlink" title="16）索引index"></a>16）索引index</h2><p>索引分<strong>单列索引</strong>和<strong>组合索引</strong>。单列索引，即一个索引只包含单个列，一个表可以有多个单列索引，但这不是组合索引。组合索引是一个索引包含多个列。</p>
+<p>对字段建立索引可以大大提高查询速度。假如我们创建了一个mytable表：</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>MySQL索引类型包括：</p>
+<p>（1）<strong><span style="color:#ff0000">普通索引</span></strong>，这是最基本的索引，它没有任何限制。它有以下几种创建方式：</p>
+<p>– 创建索引</p>
+<p>CREATE INDEX indexName ON mytable(username(10)); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; – 单列索引</p>
+<p>– CREATE INDEX indexName ON mytable(username(10),Id(11)); &nbsp; &nbsp; – 组合索引</p>
+<p>– indexName为索引名，mytable表名，username和Id为列名, 如果是CHAR，VARCHAR类型，前缀长度可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定前缀长度。</p>
+<p>#实例演示：创建普通索引</p>
+<p>mysql&gt; create index indexName on mytable(username(10));</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | MUL | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>#修改索引</p>
+<p>mysql&gt; alter table mytable add index indexName (username(10));</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | MUL | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>#删除索引</p>
+<p>mysql&gt; drop index indexName on mytable;</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>（2）<strong><span style="color:#ff0000">唯一索引</span></strong>：它与前面的普通索引类&#20284;，不同的就是：索引列的&#20540;必须唯一，但允许有空&#20540;。如果是组合索引，则列&#20540;的组合必须唯一。它有以下几种创建方式（仅仅在创建普通索引时关键字 INDEX 前加 UNIQUE</p>
+<p>#创建唯一索引</p>
+<p>mysql&gt; create unique index indexName on mytable(username(10));</p>
+<p>#修改唯一索引</p>
+<p>mysql&gt; alter table mytable add unique index indexName (username(10));</p>
+<p>#删除唯一索引</p>
+<p>mysql&gt; drop index indexName on mytable;</p>
+<p>（3）<strong><span style="color:#ff0000">主键索引</span></strong>：它是一种特殊的唯一索引，不允许有空&#20540;。在建表的时候同时创建的主键即为主键索引。主键索引无需命名，一个表只能有一个主键。主键索引同时可是唯一索引或者全文索引，但唯一索引或全文索引不能共存在同一索引。</p>
+<p>#通过修改表结构来创建主键索引</p>
+<p>mysql&gt; alter table mytable add primary key(ID);</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>（4）<strong><span style="color:#ff0000">全文索引</span></strong>：InnoDB存储引擎不支持全文索引</p>
+<p>#创建全文索引</p>
+<p>mysql&gt; create fulltext index indexName on mytable(username(10));</p>
+<p>#修改表结构来创建索引</p>
+<p>mysql&gt; alter table mytable add fulltext index indexName (username(10));</p>
+<p>#删除全文索引</p>
+<p>mysql&gt; drop index indexName on mytable;</p>
+<h2 id="17）存储过程Procedure"><a href="#17）存储过程Procedure" class="headerlink" title="17）存储过程Procedure"></a>17）存储过程Procedure</h2><p>存储过程：是一组为了<span style="color:#ff0000">完成特定功能的SQL语句集，经编译后存储在数据库中</span>，用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。MySQL存储过程创建的&#26684;式：create procedure 过程名 ([过程参数[,…]]) [特性 …] 过程体。比如要往表test1中插入10000条数据，此时用普通的插入语句显然不太现实，这时可以考虑存储过程，实例如下：</p>
+<p>mysql&gt; desc test1;</p>
+<p>&#43;——-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| name &nbsp;| varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| value | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#删除存储过程</p>
+<p>mysql&gt; drop procedure if exists pro_test1;</p>
+<p>#创建存储过程</p>
+<p>mysql&gt; delimiter //</p>
+<p>mysql&gt; create procedure pro_test1()</p>
+<p>&nbsp; &nbsp; -&gt; begin</p>
+<p>&nbsp; &nbsp; -&gt; &nbsp; declare i int default 1;</p>
+<p>&nbsp; &nbsp; -&gt; while i &lt; 10000 DO</p>
+<p>&nbsp; &nbsp; -&gt; insert into test1(name,value) value(‘name’&#43;i,’value’&#43;i);</p>
+<p>&nbsp; &nbsp; -&gt; set i = i &#43; 1;</p>
+<p>&nbsp; &nbsp; -&gt; end while;</p>
+<p>&nbsp; &nbsp; -&gt; end;</p>
+<p>&nbsp; &nbsp; -&gt; //</p>
+<p>mysql&gt; call pro_test1;–执行存储过程</p>
+<p>还可以在存储过程中使用<span style="color:#ff0000">自定义(用户)变量</span>，简单实例演示：</p>
+<p>mysql&gt; create procedure pro_bigworld() select concat(@greeting,’ world’);</p>
+<p>mysql&gt; set @greeting=’Hi’;</p>
+<p>mysql&gt; call pro_bigworld;</p>
+<p>&#43;—————————-&#43;</p>
+<p>| concat(@greeting,’ world’) |</p>
+<p>&#43;—————————-&#43;</p>
+<p>| Hi world &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;—————————-&#43;</p>
+<p>再看一个if-then-else语句：</p>
+<p>delimiter ;</p>
+<p>drop procedure if exists pro_test2;</p>
+<p>delimiter //</p>
+<p>create procedure pro_test2(IN para int)</p>
+<p>begin</p>
+<p>&nbsp;declare var1 int;</p>
+<p>&nbsp; &nbsp;set var1=para&#43;1;</p>
+<p>&nbsp; &nbsp;if var1=0 then</p>
+<p>&nbsp; &nbsp; &nbsp; insert into test1(name,value) values(‘var1name’,’var1value’&#43;0);</p>
+<p>&nbsp; &nbsp;end if;</p>
+<p>&nbsp; &nbsp;if para=0 then</p>
+<p>&nbsp; &nbsp; &nbsp; update test1 set value=value&#43;’0’;</p>
+<p>&nbsp; &nbsp;else</p>
+<p>&nbsp; &nbsp; &nbsp; update test1 set value=value&#43;’1’;</p>
+<p>&nbsp; &nbsp;end if;</p>
+<p>&nbsp; &nbsp;end;</p>
+<p>&nbsp; &nbsp;//</p>
+<p>mysql&gt; call pro_test2(1);</p>
+<p>mysql&gt; //</p>
+<p>mysql&gt; select * from test1;</p>
+<p>关于Mysql存储过程中的控制语句比较多，这里限于篇幅就不一一列举了。</p>
+<h2 id="18）事务Transaction"><a href="#18）事务Transaction" class="headerlink" title="18）事务Transaction"></a>18）事务Transaction</h2><p><strong><span style="color:#ff0000">事务几个基本特性:&nbsp;</span></strong>ACID</p>
+<p>原子性(atomicity)：事务在执行时，要做到“要么不做，要么全做”，也就是说不允许事务部分得执行。即使因为故障而使事务不能完成，在rollback时也要消除对数据库得影响！</p>
+<p>一致性(consistency)：在事务处理执行前后，数据库是一致的(两个账户要么都变，或者都不变)。</p>
+<p>隔离性(isolcation)：一个事务处理对另一个事务处理没有影响。</p>
+<p>持续性(durability)：事务处理的效果能够被永久保存下来 。</p>
+<p><span style="color:#ff0000"><strong>MYSQL的事务处理主要有两种方法:</strong></span></p>
+<p>1、用begin,rollback,commit来实现</p>
+<p>&nbsp; &nbsp; &nbsp;begin 开始一个事务</p>
+<p>&nbsp; &nbsp; &nbsp;rollback 事务回滚</p>
+<p>&nbsp; &nbsp; &nbsp;commit &nbsp;事务确认</p>
+<p>2、直接用set来改变mysql的自动提交模式</p>
+<p>&nbsp; &nbsp;MYSQL默认是自动提交的，也就是你提交一个QUERY，它就直接执行！我们可以通过</p>
+<p>&nbsp; &nbsp; &nbsp;select @@autocommit;//查看当前事务是否为自动提交(1为自动提交)</p>
+<p>&nbsp; &nbsp; &nbsp;set autocommit=0 &nbsp; 禁止自动提交</p>
+<p>&nbsp; &nbsp; &nbsp;set autocommit=1 开启自动提交</p>
+<p>&nbsp; &nbsp;来实现事务的处理。</p>
+<p>【<strong><span style="color:#ff0000">注意</span></strong>】当你用 set autocommit=0 的时候，你以后所有的SQL都将做为事务处理，直到你用commit确认或rollback结束，注意当你结束这个事务的同时也开启了个新的事务！按第一种方法只将当前的作为一个事务！</p>
+<h2 id="19）MySQL用户创建，授权以及删除"><a href="#19）MySQL用户创建，授权以及删除" class="headerlink" title="19）MySQL用户创建，授权以及删除"></a>19）MySQL用户创建，授权以及删除</h2><p>创建用户yy,密码123： create user yy identified by ‘123’;</p>
+<p>授权：grant all privileges on dbname.* to yy@localhost identified by ‘123’;</p>
+<p>授予用户yy查询数据库dbname中所有表的权限：grant select on dbname.* to yy;</p>
+<p>撤销用户yy查询数据库dbname中所有表的权限：revoke select on dbname.* from yy;</p>
+<p>删除用户：drop user yy;</p>
+<h2 id="20）select支持的运算操作"><a href="#20）select支持的运算操作" class="headerlink" title="20）select支持的运算操作"></a>20）select支持的运算操作</h2><p>select case 1 when 1 then ‘one’ when 2 then ‘two’ end;/<em>选择事件1：推荐使用单引号表示字符串</em>/</p>
+<p>select if(1&lt;2,’yes’,’no’);/<em>判断语句</em>/</p>
+<p>select char_length(‘qwert’);/<em>求字符长度</em>/</p>
+<p>select concat(‘my’,’sql’);/<em>连接字符串</em>/</p>
+<p>select locate(‘bar’,’foobarhat’);/<em>查找母串’bar’所在位置,若未找到则为0</em>/</p>
+<p>select substring(‘yichun university’,5,6);/<em>提取字串</em>/</p>
+<p>select trim(‘ bar ‘);;/<em>去掉前后空&#26684;</em>/</p>
+<p>select repeat(‘mysql’,3);/<em>mysql字符串重复3次</em>/</p>
+<p>select reverse(‘abcd’);/<em>反转</em>/</p>
+<p>select round(2.5);/<em>四舍五入到3</em>/</p>
+<p>select rand()<em>10;/</em>返回0~10之间的数*/</p>
+<p>select hex(‘cat’);/<em>查看ASCII码</em>/</p>
+<p>select true,false;/<em>输出1,0</em>/</p>
+<p>select now();/<em>显示当前日期时间</em>/</p>
+<p>select curtime();/<em>显示当前时间</em>/</p>
+<p>select current_time();/<em>显示当前时间</em>/</p>
+<p>select curdate();/<em>显示当前日期</em>/</p>
+<p>select current_date();/<em>显示当前日期</em>/</p>
+<p>select current_timestamp();/<em>显示当前时间戳</em>/</p>
+<p>select database();/<em>显示当前数据库</em>/</p>
+<p>select user();/<em>显示当前用户</em>/</p>
+<p>select version();/<em>显示当前mysql版本</em>/</p>
+<p>select database();/<em>显示当前打开的数据库</em>/</p>
+<p>select left(type_name,2) from test;/<em>查看test表中名为type_name列的所有&#20540;的前两个字母</em>/</p>
+<p>select right(type_name,2) from test;/<em>查看test表中名为type_name列的所有&#20540;的后两个字母</em>/</p>
+<h2 id="21）select支持的逻辑运算操作"><a href="#21）select支持的逻辑运算操作" class="headerlink" title="21）select支持的逻辑运算操作"></a>21）select支持的逻辑运算操作</h2><p>select 2&gt;1&amp;&amp;3&gt;2;/<em>逻辑与1</em>/</p>
+<p>select 2&gt;1 and 3&gt;2;/<em>逻辑与1</em>/</p>
+<p>select 1&gt;2 || 3&gt;2;/<em>逻辑或1</em>/</p>
+<p>select 1&gt;2 or 3&gt;2;/<em>逻辑或1</em>/</p>
+<p>select !(1&gt;2);/<em>逻辑非1</em>/</p>
+<p>select not(1&gt;2);/<em>逻辑非1</em>/</p>
+<p>select 15 ^ 2;/<em>逻辑异或：15的二进制1111，2的二进制0010，根据&quot;同0异1&quot;原则，结果为1101十进制13</em>/</p>
+<p>select 15 xor 2;/<em>逻辑异或：13</em>/</p>
+<p><strong><span style="color:#ff0000">附1：忘记密码</span></strong></p>
+<p>1.关闭正在运行的MySQL。</p>
+<p>2.打开DOS窗口，转到mysql\bin目录。</p>
+<p>3.输入mysqld –skip-grant-tables回车。如果没有出现提示信息，那就对了。</p>
+<p>4.再开一个DOS窗口(因为刚才那个DOS窗口已经不能动了)，转到mysql\bin目录。</p>
+<p>5.输入mysql回车，如果成功，将出现MySQL提示符 &gt;,接下来就可以修改密码了。</p>
+<p><strong><span style="color:#ff0000">附2：修改密码</span></strong></p>
+<p>方法一:</p>
+<p>(适用于管理员或者有全局权限的用户重设其它用户的密码)</p>
+<p>进入命令行模式</p>
+<p>mysql&gt; use mysql;</p>
+<p>mysql&gt; UPDATE user SET password=&quot;newPassword&quot; WHERE user=’name’;</p>
+<p>mysql&gt; FLUSH PRIVILEGES; //刷新权限</p>
+<p>mysql&gt; QUIT</p>
+<p>方法二:&nbsp;</p>
+<p>(应用同上,只是方法不同)</p>
+<p>mysql&gt; SET PASSWORD FOR name=PASSWORD(‘new password’);</p>
+<p>mysql&gt; QUIT</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/16 17:54:19 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45725317)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1507 评论：1 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45725317#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/" data-id="cj8yn9vi0000po49zp3iwc2ws" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/18/原-SQLite应用详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [原]SQLite应用详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/08/原-Java学习系列博客全目录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]Java学习系列博客全目录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

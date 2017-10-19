@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]Java设计模式菜鸟系列(十八)责任链模式建模与实现 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/40018231    责任链模式(ChainOfResponsibility)： 有多个对象，每个对象持有下一个对象的引用，形成一条链，请求在这条链上传递，直到某一对象决定处理该请求，但是发出者并不清楚最终哪个对象会处理该请求。 一、uml建模： 二、代码实现/**  * 责任链模式：有多个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]Java设计模式菜鸟系列(十八)责任链模式建模与实现">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/40018231    责任链模式(ChainOfResponsibility)： 有多个对象，每个对象持有下一个对象的引用，形成一条链，请求在这条链上传递，直到某一对象决定处理该请求，但是发出者并不清楚最终哪个对象会处理该请求。 一、uml建模： 二、代码实现/**  * 责任链模式：有多个">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20141012151702191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]Java设计模式菜鸟系列(十八)责任链模式建模与实现">
+<meta name="twitter:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/40018231    责任链模式(ChainOfResponsibility)： 有多个对象，每个对象持有下一个对象的引用，形成一条链，请求在这条链上传递，直到某一对象决定处理该请求，但是发出者并不清楚最终哪个对象会处理该请求。 一、uml建模： 二、代码实现/**  * 责任链模式：有多个">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20141012151702191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-Java设计模式菜鸟系列-十八-责任链模式建模与实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" class="article-date">
+  <time datetime="2014-10-12T07:16:47.000Z" itemprop="datePublished">2014-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]Java设计模式菜鸟系列(十八)责任链模式建模与实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-size:18px"><strong>转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/40018231</a></strong></span></p>
+<p><span style="font-size:18px; color:rgb(255,0,0)"></span></p>
+<p></p>
+<p><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span></p>
+<p>责任链模式(ChainOfResponsibility)： 有多个对象，每个对象持有下一个对象的引用，形成一条链，请求在这条链上传递，直到某一对象决定处理该请求，但是发出者并不清楚最终哪个对象会处理该请求。</p>
+<h2 id="一、uml建模："><a href="#一、uml建模：" class="headerlink" title="一、uml建模："></a>一、uml建模：</h2><p><img src="http://img.blog.csdn.net/20141012151702191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h2 id="二、代码实现"><a href="#二、代码实现" class="headerlink" title="二、代码实现"></a>二、代码实现</h2><pre code_snippet_id="482888" snippet_file_name="blog_20141012_1_8894193" name="code" class="java">/**
+ * 责任链模式：有多个对象，每个对象持有下一个对象的引用，形成一条链，
+ * 
+ * 请求在这条链上传递，直到某一对象决定处理该请求，
+ * 
+ * 但是发出者并不清楚最终哪个对象会处理该请求。
+ */
+interface Handler {
+    public void operator();
+}
+
+/**
+ * 这里单独对Handler进行封装，方便修改引用对象
+ */
+abstract class AbstractHandler implements Handler {
+    private Handler handler;
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+}
+
+class MyHandler extends AbstractHandler implements Handler {
+    private String name;
+
+    public MyHandler(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void operator() {
+        if (getHandler() != null) {
+            System.out.print(name + &quot;，将BUG交给——&gt;&quot;);
+            /**
+             * 这里是关键。【注意1】这里不是递归哦~
+             * 
+             * 递归：A(operator)——&gt;A(operator)——&gt;A(operator)
+             * 
+             * 责任链：A(operator)——&gt;B(operator)——&gt;C(operator)
+             */
+            getHandler().operator();
+        } else {
+            System.out.println(name + &quot;处理BUG...\n&quot;);
+        }
+    }
+}
+
+/**
+ * 客户端测试类
+ * 
+ * @author Leo
+ */
+public class Test {
+    public static void main(String[] args) {
+        MyHandler handler1 = new MyHandler(&quot;技术总监&quot;);
+        MyHandler handler2 = new MyHandler(&quot;项目经理&quot;);
+        MyHandler handler3 = new MyHandler(&quot;程序员&quot;);
+        /**
+         * 如果没有下家，将会自行处理
+         * 
+         * 打印结果：技术总监处理BUG...
+         */
+        handler1.operator();
+        /**
+         * 只要有下家，就传给下家处理
+         * 
+         * 下面的打印结果：技术总监，将BUG交给——&gt;项目经理，将BUG交给——&gt;程序员处理BUG...
+         * 
+         * 就这样，原本是技术总监自行处理的BUG，现在一层一层的把责任推给了程序员去处理
+         */
+        handler1.setHandler(handler2);
+        handler2.setHandler(handler3);
+        /**
+         * 透过打印结果可以知道：MyHandler实例化后将生成一系列相互持有的对象(handler)，构成一条链。
+         */
+        handler1.operator();
+        /**
+         * 【注意2】责任链不是链表：链表有个头结点，咱每次必须通过头结点才能访问后面的节点
+         * 
+         * 而责任链它可以从头访问，也可以从中间开始访问，如：handler2.operator();
+         */
+
+    }
+}</pre>
+
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>1、责任链模式可以实现，在隐瞒客户端(不知道具体处理的人是谁)的情况下，对系统进行动态的调整。</p>
+<p>2、链接上的请求可以是一条链，可以是一个树，还可以是一个环，模式本身不约束这个，需要自己去实现，同时，在一个时刻，命令只允许由一个对象传给另一个对象，而不允许传给多个对象。</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2014/10/12 15:16:47 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/40018231)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1718 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/40018231#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" data-id="cj8yn9vh5000lo49z8v8759j4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/10/12/原-Java设计模式菜鸟系列-十九-备忘录模式建模与实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [原]Java设计模式菜鸟系列(十九)备忘录模式建模与实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]Java设计模式菜鸟系列(十七)桥接模式建模与实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

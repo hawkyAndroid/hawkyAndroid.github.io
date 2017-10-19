@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]Java代码优化系列(一)开篇立碑 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45506549 在开篇之前，先补充一下《Java学习系列》里面的instanceof关键字的使用及其陷阱。简要说明：instanceof是一个简单的二元操作符，它是用来判断一个对象是否为一个类的实例。只要instanceof左右操作数有继承或实现的关系，程序都是可以编译通过的。下面通过一个简">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]Java代码优化系列(一)开篇立碑">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2015/05/06/原-Java代码优化系列-一-开篇立碑/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45506549 在开篇之前，先补充一下《Java学习系列》里面的instanceof关键字的使用及其陷阱。简要说明：instanceof是一个简单的二元操作符，它是用来判断一个对象是否为一个类的实例。只要instanceof左右操作数有继承或实现的关系，程序都是可以编译通过的。下面通过一个简">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]Java代码优化系列(一)开篇立碑">
+<meta name="twitter:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45506549 在开篇之前，先补充一下《Java学习系列》里面的instanceof关键字的使用及其陷阱。简要说明：instanceof是一个简单的二元操作符，它是用来判断一个对象是否为一个类的实例。只要instanceof左右操作数有继承或实现的关系，程序都是可以编译通过的。下面通过一个简">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-Java代码优化系列-一-开篇立碑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/06/原-Java代码优化系列-一-开篇立碑/" class="article-date">
+  <time datetime="2015-05-05T18:04:42.000Z" itemprop="datePublished">2015-05-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]Java代码优化系列(一)开篇立碑
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="font-family:Arial; font-size:18px; line-height:26px; text-align:left; color:rgb(255,0,0)">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45332565" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45506549" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45506549</a></p>
+<p>在开篇之前，先补充一下《<a href="http://blog.csdn.net/lhy_ycu/article/details/11935087" target="_blank" rel="external">Java学习系列</a>》里面的instanceof关键字的使用及其陷阱。简要说明：instanceof是一个简单的二元操作符，它是用来判断一个对象是否为一个类的实例。只要instanceof左右操作数有继承或实现的关系，程序都是可以编译通过的。下面通过一个简单实例来说明一下instanceof关键字的使用及其陷阱：</p>
+<pre code_snippet_id="659776" snippet_file_name="blog_20150507_1_3672713" name="code" class="java">class A&lt;T&gt; {
+    public boolean isDateInstance(T t) {
+        return t instanceof Date;
+    }
+}
+
+public class InstanceofTest {
+
+    public static void main(String[] args) {
+        // true。一个String对象是Object实例(java中Object是所有类的父类)
+        System.out.println(&quot;zhangsan&quot; instanceof Object);
+        // false。Object是父类，它的对象明显不是String类的实例
+        System.out.println(new Object() instanceof String);
+        // true。一个String对象是String的实例
+        System.out.println(new String() instanceof String);
+        // 编译不能通过。&#39;a&#39; 为一个char类型，即基本类型
+        System.out.println(&#39;a&#39; instanceof Character);
+        // false。只要左操作数为null(本质是无类型)，那么结果就直接返回false
+        System.out.println(null instanceof String);
+        // false。即使将null强转也还是个null
+        System.out.println((String) null instanceof String);
+        // 编译不能通过。因为Date和String并没有继承或实现关系
+        System.out.println(new Date() instanceof String);
+        // false。在编译成字节码时，T已经是Object类型了，由于传递了一个&quot;lisi&quot;实参字符串，所以T实际是String类型了。
+        System.out.println(new A().isDateInstance(&quot;lisi&quot;));
+        List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+        // 编译不能通过。instanceof不允许存在泛型参数。
+        System.out.println(list instanceof List&lt;String&gt;);
+    }
+}</pre>
+
+<p><strong><span style="color:#ff0000">【注意】instanceof只能用于对象的判断，不能用于基本类型的判断。</span></strong></p>
+<p>下面开始正式进入主题，先从一个自增的陷阱开始吧。</p>
+<h3 id="1）自增的陷阱"><a href="#1）自增的陷阱" class="headerlink" title="1）自增的陷阱"></a>1）自增的陷阱</h3><pre code_snippet_id="659776" snippet_file_name="blog_20150506_2_8462968" name="code" class="java">int num = 0;
+for (int i = 0; i &lt; 100; i++) {
+    num = num++;
+}
+System.out.println(&quot;num = &quot; + num);</pre>打印结果是什么呢？答案是0，为什么呢？先看看执行步骤吧，程序第一次循环时的详细步骤如下：JVM把num&#20540;（0）拷贝到临时变量区，然后num&#20540;加1，这是num的&#20540;为1，接着返回临时变量区的&#20540;，注意这个&#20540;是1没修改过，最后将返回&#20540;赋给num，此时num的&#20540;被重置为了0。简单说来就是int temp = num; num &nbsp;&#43;= 1; return temp;这3步。所以打印结果还是0，num始终保持着原来的状态。
+
+**<span style="color:#ff0000">优化：将num=num&#43;&#43;; 修改为num&#43;&#43;即可。</span>**
+
+### 2）常量竟成变量？
+
+大家想想，常量有可能成为变量吗？答案是有可能，只不过这种做法是不被认同的。
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_3_1098375" name="code" class="java">public static final int RAND_CONST = new Random().nextInt();
+
+public static void main(String[] args) {
+    // 通过打印几次，可以看到结果变了，也就是说常量在定义的时候就没有保证它的值运行期保持不变
+    System.out.println(&quot;常量变了吗？&quot; + RAND_CONST);
+}</pre><span style="color:#ff0000">**优化建议：务必常量的&#20540;在运行期保持不变**</span>，所以可以让RAND_CONST在定义时直接赋&#20540;写死。
+
+### 3）“l” 你能看出这个字母是i的大写、数字1还是字母l的小写？
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_4_3939690" name="code" class="java">public static  long l = 11;</pre>
+
+<p><span style="color:#ff0000"><strong>优化：字母后缀l尽量大写L</strong></span></p>
+<h3 id="4）三目运算符的类型不一致？"><a href="#4）三目运算符的类型不一致？" class="headerlink" title="4）三目运算符的类型不一致？"></a>4）三目运算符的类型不一致？</h3><pre code_snippet_id="659776" snippet_file_name="blog_20150506_5_2331579" name="code" class="java">int i = 70;
+System.out.println(i &lt; 100 ? 80 : 90.0);</pre>打印结果出人意料，结果竟然为80.0，这是为什么呢？i&lt;100确实为true，但由于最后一个操作数为90.0，是一个浮点数，这时编译器会将第二个操作数80转为80.0浮点数，统一结果类型，所以打印结果为80.0。
+
+<span style="color:#ff0000">**优化：90.0改为90**</span>
+
+### **5)不要重载含有变长参数的方法**
+
+简要说明：变长参数必须是方法的最后一个参数，且一个方法不能定义多个变长参数。
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_6_1378935" name="code" class="java">public class Test01 {
+    public static void fruitPrice(int price, int discount) {
+        float realPrice = price * discount / 100.0F;
+        System.out.println(&quot;非变长参数得出的结果：realPrice = &quot; + realPrice);
+    }
+
+    public static void fruitPrice(int price, int... discounts) {
+        float realPrice = price;
+        for (int discount : discounts) {
+            realPrice = price * discount / 100.0F;
+        }
+        System.out.println(&quot;变长参数得出的结果：realPrice = &quot; + realPrice);
+    }
+
+    public static void main(String[] args) {
+        fruitPrice(48888, 85);
+    }
+}</pre>
+
+<p>打印结果是什么呢？答案是：非变长参数得出的结果：realPrice = 41554.8，也就是程序执行的是第一个方法，而没有执行变长参数方法，这是为什么呢？因为Java在编译时，首先会根据实参的数量和类型（这里是2个都是int类型的实参，注意没有转成int数组）来进行处理，也就是找到fruitPrice(int price, int discount)方法，而且确认它符合方法签名条件，由于编译器也爱“偷懒”，所以程序会执行第一个方法。再看一个：</p>
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_7_5020306" name="code" class="java">public class Test02 {
+    public void method1(String str, Integer... integers) {
+        System.out.println(&quot;变长参数类型为Integer的方法被调用...&quot;);
+    }
+
+    public void method1(String str, String... strs) {
+        System.out.println(&quot;变长参数类型为String的方法被调用...&quot;);
+    }
+
+    public static void main(String[] args) {
+        Test02 t = new Test02();
+        // 编译不通过。虽然两个方法都符合要求，但编译器并不知道调用哪一个，于是就报错了。
+        t.method1(&quot;test02&quot;);
+        // 编译不通过。因为[直接量null是没有类型的]，理由同上。
+        t.method1(&quot;test02&quot;, null);
+    }
+
+}</pre>
+
+<p>对于t.method(&quot;test02&quot;,null);如果我们提前声明String[] strs = null或者Integer[] ints = null;也就是让编译器知道这个null是String或者Integer类型的，那么就可以通过编译了。</p>
+<h3 id="6）慎用静态导入"><a href="#6）慎用静态导入" class="headerlink" title="6）慎用静态导入"></a>6）慎用静态导入</h3><p>这点比较容易理解，因为静态导入的作用是将某个类的类成员(静态变量、静态方法)引入到本类中，而如果此时刚好本类中也有同名的类成员，那么这样便可能产生混淆，后面维护起来也比较麻烦。</p>
+<p><span style="color:#ff0000"><strong>优化：类型.类成员</strong></span></p>
+<h3 id="7）-不要让类型默默转换"><a href="#7）-不要让类型默默转换" class="headerlink" title="7） 不要让类型默默转换"></a>7） 不要让类型默默转换</h3><pre code_snippet_id="659776" snippet_file_name="blog_20150506_8_6511518" name="code" class="java">public class Test03 {
+    // 光速为30万公公里
+    public static final int LIGHT_SPEED = 30 * 10000 * 1000;
+
+    public static void main(String[] args) {
+        long distance = 8 * 60 * LIGHT_SPEED;
+        // 打印结果(为负数)：地球与太阳的距离为：-2028888064
+        System.out.println(&quot;地球与太阳的距离为：&quot; + distance);
+    }
+}</pre>为什么是负数呢？这是因为**<span style="color:#ff0000">Java是先运算再进行类型转换的</span>**。distance的3个运算参数都是int类型，三者结果相等虽然也是int类型，但已经超过了int取&#20540;的最大范围，所以为负数，这样再转为long型，结果仍是负数。解决方案：long distance = 1L * 8 * 60 * LIGHT_SPEED;1L是个长整型，右边等式类型自动升级，计算出来的结果也是长整型。
+
+**<span style="color:#ff0000">优化：基本类型转换时，最好使用主动声明的方式参与运算。</span>**
+
+### 8）包装类性&#20540;为null?
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_9_5591893" name="code" class="java">public static void main(String[] args) {
+    List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+    // 自动装箱(基本类型转为包装类型)。装箱过程是调用valueOf方法实现的。
+    list.add(1);
+    list.add(2);
+    list.add(null);
+    // 自动拆箱(包装类型转为基本类型)。拆箱过程默认调用包装对象的intValue方法实现的。
+    int count = 0;
+    for (int item : list) {
+        count += item;
+    }
+    System.out.println(&quot;count = &quot; + count);
+}</pre>运行结果报异常java.lang.NullPointerException。原因很简单：拆箱过程默认调用包装对象的intValue方法实现的，由于包装类是null&#20540;，所以就报空指针异常了。解决方案：
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_10_2130994" name="code" class="java">for (Integer item : list) {
+    count += (item == null) ? 0 : item;
+}</pre>
+
+<p><strong><span style="color:#ff0000">优化：包装类型参与运算时，要做null校验。</span></strong></p>
+<h3 id="9）让工具类不可实例化"><a href="#9）让工具类不可实例化" class="headerlink" title="9）让工具类不可实例化"></a>9）让工具类不可实例化</h3><p>工具类的方法和属性都是静态的，不需要生成实例即可访问，而且其类成员在内存中只有一份拷贝，jdk也做了很好的处理。由于不希望被初始化，于是就设置其构造函数为私有（private）访问权限。</p>
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_11_749752" name="code" class="java">public class UtilClass {
+    // 构造器私有化
+    private UtilClass() {
+
+    }
+}</pre>但这样有个问题，就是在工具类里面可能方法很多，无意间new了一个新的对象，一时间也没有发现。这样就没有达到真正不需要生成实例的目的。
+
+**<span style="color:#ff0000">优化：使用工具类时，要保证所有的访问都是通过类名进行的。</span>**
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_12_2338382" name="code" class="java">public class UtilClass {
+    // 构造器私有化
+    private UtilClass() {
+        throw new Error(&quot;please don&#39;t instantial this util class...&quot;);
+    }
+}</pre>
+
+<p>### </p>
+<p></p><h3><span style="font-size:14px">10）不要在循环条件中带有计算</span><p></p>
+<p><span style="font-weight:normal"><span style="font-size:12px">如果在循环(for、while等)条件中计算，则每次循环都得计算一遍，这样就会降低，例如：</span></span></p>
+<p><span style="font-weight:normal"></span><pre code_snippet_id="659776" snippet_file_name="blog_20150507_13_1693939" name="code" class="java">while (n &lt; count * 2) {<br>    //…<br>}</pre></p>
+<p><span style="color:#ff0000">优化：将while里面的运算提取即可</span></p></h3><p></p>
+<div><pre code_snippet_id="659776" snippet_file_name="blog_20150507_14_4885752" name="code" class="java">int total = count * 2;<br>while (n &lt; total) {<br>    //…<br>}</pre></div>
+
+<h3 id="11）不要主动进行垃圾回收"><a href="#11）不要主动进行垃圾回收" class="headerlink" title="11）不要主动进行垃圾回收"></a>11）不要主动进行垃圾回收</h3><p>尽量不要调用System.gc();来主动对垃圾进行回收。<strong><span style="color:#ff0000">因为System.gc它会停止所有响应，才能检查内存中是否有可回收的对象。把所有对象都检查一遍，然后处理掉那些垃圾对象</span></strong>。这对一个应用系统来说风险极大，如果是一个web项目，调用System.gc它会让所有的请求都暂停，等待垃圾回收器执行完毕(可能会严重影响正常业务运行)，如果web项目里面对象很多，那么System.gc执行的时间会非常耗时，所以最好不要主动进行垃圾回收。</p>
+<h3 id="12）静态变量一定要先声明后赋-20540-（或使用）"><a href="#12）静态变量一定要先声明后赋-20540-（或使用）" class="headerlink" title="12）静态变量一定要先声明后赋&#20540;（或使用）"></a>12）静态变量一定要先声明后赋&#20540;（或使用）</h3><p><pre code_snippet_id="659776" snippet_file_name="blog_20150506_13_6720943" name="code" class="java">public class Test01 {<br>    static {<br>        num = 20;<br>    }<br>    public static int num = 2;</pre></p>
+<pre><code>public static void main(String[] args) {
+    System.out.println(num);
+}
+</code></pre><p>}大家想想，结果是多少呢？打印结果是：2。为什么呢？这是因为静态变量(类变量)是类加载时被分配到数据区，<strong><span style="color:rgb(255,0,0)">它在内存中只有一份拷贝，</span></strong>详细说来就是：<span style="color:#ff0000">静态变量是在类初始化时首先被加载的，而JVM会去查找类中所有的静态声明，然后分配地址空间(此时还没有赋&#20540;)，之后JVM会根据类中静态赋&#20540;（包括静态类赋&#20540;和静态代码块赋&#20540;）的先后顺序来执行</span>。</p>
+<p><strong><span style="color:#ff0000">优化：静态变量先声明后使用。</span></strong></p>
+<h2 id="补充1——字符串常量池"><a href="#补充1——字符串常量池" class="headerlink" title="补充1——字符串常量池"></a>补充1——字符串常量池</h2><p>大家都知道，Java中的对象是保存在堆内存中的，但是字符串(常量)池非常特殊，<strong><span style="color:rgb(255,0,0)">它在编译期就已经决定了其存在JVM的常量池中，垃圾回收器是不会对它进行回收的</span></strong>。它的创建机制是这样的：创建一个字符串时，首先检查池中是否有字符序列相等的字符串，如果有则不再创建，直接返回池中该对象的引用；若没有则创建之，然后放入池中并返回创建对象的引用。下面看一个实例：</p>
+<p><pre code_snippet_id="659776" snippet_file_name="blog_20150507_16_5979086" name="code" class="java">public class Test {<br>    public static void main(String[] args) {<br>        String str1 = &quot;java代码优化&quot;;<br>        String str2 = &quot;java代码优化&quot;;<br>        String str3 = new String(&quot;java代码优化&quot;);<br>        String str4 = str3.intern();</pre></p>
+<pre><code>    System.out.println(str1 == str2);
+    System.out.println(str1 == str3);
+    System.out.println(str1 == str4);
+}
+</code></pre><p>}结果是什么呢？答案是true、false、true。解析：创建第一个字符串&quot;java代码优化&quot;时，首先检查字符串池中是否有该对象，发现没有，于是就创建第一个&quot;java代码优化&quot;这个字符串并放入池中，待再创建str2字符串时，由于池中已经有了该字符串，于是就直接返回了该对象的引用，此时str1与str2指向的是同一个地址，所有str1==str2返回true。而new String(&quot;java代码优化&quot;)声明的是一个String对象，是不检查字符串池，也不会把对象放入池中，那当然返回false了。而使用intern方法为什么会返回true呢？因为intern会检查当前对象在池中是否有字符序列相等的引用对象，如果有则返回true，如果没有则返回false。</p>
+<p><strong><span style="color:rgb(255,0,0)">优化建议：若没有特殊要求，推荐使用String直接量赋&#20540;</span></strong></p>
+<h3 id="补充2——String、StringBuffer（线程安全）、StringBuilder-线程不安全-的使用场景"><a href="#补充2——String、StringBuffer（线程安全）、StringBuilder-线程不安全-的使用场景" class="headerlink" title="补充2——String、StringBuffer（线程安全）、StringBuilder(线程不安全)的使用场景"></a>补充2——String、StringBuffer（线程安全）、StringBuilder(线程不安全)的使用场景</h3><p>①String的使用场景：在字符串不经常变化的场景中使用String类，例如常量的声明、少量的变量运算等。</p>
+<p>②StringBuffer的使用场景：在频繁进行字符串运算（如：字符串拼接、替换、删除等），并且运行在多线程环境中，则可以考虑使用StringBuffer，例如：XML解析、HTTP参数解析和封装等。</p>
+<p>③StringBuilder的使用场景：在频繁进行字符串运算（如：字符串拼接、替换、删除等），并且运行在单线程环境中，则可以考虑使用StringBuilder，例如：SQL语句的封装、JSON封装等。</p>
+<p>参考文献：《编写高质量代码》</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/6 2:04:42 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45506549)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1555 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45506549#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/06/原-Java代码优化系列-一-开篇立碑/" data-id="cj8yn9vdo0002o49z7gvkan1n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/08/原-Java学习系列博客全目录/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [原]Java学习系列博客全目录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/05/原-Java学习系列-二十四-Java正则表达式详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]Java学习系列(二十四)Java正则表达式详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

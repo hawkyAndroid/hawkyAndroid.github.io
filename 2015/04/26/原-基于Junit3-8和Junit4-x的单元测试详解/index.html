@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]基于Junit3.8和Junit4.x的单元测试详解 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45281449 前言  好久没有写来CSDN写博客了，前段时间一直在加班赶项目，所以博客一直没有更新；现在空闲时间比较多，所以后面会长期更新博客。 今天来复习一下单元测试基于Junit工具的使用。Junit3.8与Junit4.x的使用还是有些区别的，所以分开来讲，但不管怎样，单元测试的目的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]基于Junit3.8和Junit4.x的单元测试详解">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45281449 前言  好久没有写来CSDN写博客了，前段时间一直在加班赶项目，所以博客一直没有更新；现在空闲时间比较多，所以后面会长期更新博客。 今天来复习一下单元测试基于Junit工具的使用。Junit3.8与Junit4.x的使用还是有些区别的，所以分开来讲，但不管怎样，单元测试的目的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20150426015838677?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.962Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]基于Junit3.8和Junit4.x的单元测试详解">
+<meta name="twitter:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45281449 前言  好久没有写来CSDN写博客了，前段时间一直在加班赶项目，所以博客一直没有更新；现在空闲时间比较多，所以后面会长期更新博客。 今天来复习一下单元测试基于Junit工具的使用。Junit3.8与Junit4.x的使用还是有些区别的，所以分开来讲，但不管怎样，单元测试的目的">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150426015838677?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-基于Junit3-8和Junit4-x的单元测试详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/" class="article-date">
+  <time datetime="2015-04-25T18:14:10.000Z" itemprop="datePublished">2015-04-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]基于Junit3.8和Junit4.x的单元测试详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-family:Arial; font-size:18px; line-height:26px; text-align:left">转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45281449" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45281449</a></span></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><div><br><br></div>
+
+<p>好久没有写来CSDN写博客了，前段时间一直在加班赶项目，所以博客一直没有更新；现在空闲时间比较多，所以后面会长期更新博客。</p>
+<p>今天来复习一下单元测试基于Junit工具的使用。Junit3.8与Junit4.x的使用还是有些区别的，所以分开来讲，但不管怎样，单元测试的目的并不是证明你是对的，而是为了证明你没有错误，同时也为提高程序健壮性、可重用测试、降低代码后期维护等提供了很好的支持和帮助。</p>
+<h3 id="一-基于Junit3-8的实例说明"><a href="#一-基于Junit3-8的实例说明" class="headerlink" title="(一) 基于Junit3.8的实例说明"></a>(一) 基于Junit3.8的实例说明</h3><pre code_snippet_id="653176" snippet_file_name="blog_20150426_1_7396532" name="code" class="java">/**
+ * 基本四则运算 -- 目标类
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月24日 上午10:35:13
+ */
+public class Calculator {
+
+    private int add(int num1, int num2) {
+        return num1 + num2;
+    }
+
+    public int subtract(int num1, int num2) {
+        return num1 - num2;
+    }
+
+    public int multiply(int num1, int num2) {
+        return num1 * num2;
+    }
+
+    public int divide(int num1, int num2) {
+        if (num2 == 0) {
+            throw new ArithmeticException(&quot;除数不能为0&quot;);
+        }
+        return num1 / num2;
+    }
+
+}</pre>
+
+<p>基于Junit3.8的测试类</p>
+<pre code_snippet_id="653176" snippet_file_name="blog_20150426_2_3412246" name="code" class="java">/**
+ * 基于Junit3.8
+ * 
+ * 测试源代码中的目标类，测试类必须继承TestCase
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月24日 上午10:43:22
+ */
+public class CalculatorTest extends TestCase {
+    private Calculator cal = null;
+
+    @Override
+    protected void setUp() throws Exception {
+        // TODO Auto-generated method stub
+        super.setUp();
+        // 每个测试方法执行前，重新new一个对象，避免测试用例之间的依赖
+        cal = new Calculator();
+        System.out.println(&quot;在每个测试方法执行前执行--setUp...&quot;);
+    }
+
+    /**
+     * 测试源代码的私有方法
+     */
+    public void testAdd() {
+        System.out.println(&quot;测试方法testAdd...&quot;);
+        // Assert.assertEquals(3, cal.add(1, 2));// blue bar
+        try {
+            // 1、getClass；2、Class.forName(); 3、.class
+            Class&lt;Calculator&gt; calzz = Calculator.class;
+            // Class&lt;?&gt; calzz = Class.forName(&quot;com.leo.junit.Calculator&quot;);
+            // Calculator cal = calzz.newInstance();
+            Method method = calzz.getDeclaredMethod(&quot;add&quot;, new Class[] {
+                    Integer.TYPE, Integer.TYPE });// 后两个参数为：方法名、参数类型
+            method.setAccessible(true);// 设置为可访问私有的add方法
+            // 后两个参数为：目标类对象、实参对象；返回目标方法的结果
+            Object obj = method.invoke(cal, new Object[] { 1, 2 });
+            Assert.assertEquals(3, obj);
+        } catch (Exception e) {
+            // e.printStackTrace();
+            Assert.fail();
+        }
+
+    }
+
+    public void testSubstrub() {
+        System.out.println(&quot;测试方法testSubstrub...&quot;);
+        Assert.assertEquals(3, cal.subtract(1, 2));// red bar,failure 说明测试没有通过(失败)
+    }
+
+    public void testMultiply() {
+        System.out.println(&quot;测试方法testMultiply...&quot;);
+        Assert.assertEquals(2, cal.multiply(1, 2));// blue bar
+    }
+
+    public void testDivide() {
+        System.out.println(&quot;测试方法testDivide...&quot;);
+        Assert.assertEquals(2, cal.divide(1, 0));// red bar, error 说明测试程序本身出错
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        // TODO Auto-generated method stub
+        super.tearDown();
+        // cal = null;// 在每个测试方法执行后主动销毁对象
+        System.out.println(&quot;在每个测试方法执行后执行--tearDown...\n&quot;);
+    }
+
+    // public static void main(String[] args) {
+    // junit.textui.TestRunner.run(CalculatorTest.class);// 控制台打印错误日志
+    // }
+}
+</pre>
+
+<p><img src="http://img.blog.csdn.net/20150426015838677?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>注意事项：</p>
+<p>1）Junit的原则：keep the bar green to keep the code clean。2）测试类与(源代码)目标类的包名尽量要一致，最终它们都会被编译到同一个目录下面，这样就不用导入源代码所在的包。</p>
+<p>3) 测试类的命名规则：测试类类名 = 目标类类名前或后加Test; 注意要统一。</p>
+<p>4) 测试类必须继承TestCase; 测试用例(方法/类)与测试用例之间一定是完全独立的，不允许出现任何的依赖关系。同时也不能依赖测试方法的执行顺序，也就是删除或注释掉某个测试方法后，其他的测试方法依然能够执行。</p>
+<p>5) 测试源代码的私有方法可以采取两种方式：1、修改目标方法的访问修饰符(将private修改为public，一般不推荐);2、使用反射在测试类中调用目标类的私有方法。</p>
+<h3 id="二-基于Junit4-x的实例说明"><a href="#二-基于Junit4-x的实例说明" class="headerlink" title="(二)基于Junit4.x的实例说明"></a>(二)基于Junit4.x的实例说明</h3><pre code_snippet_id="653176" snippet_file_name="blog_20150426_3_933609" name="code" class="java">/**
+ * 基于Junit4.X --主要基于注解Annotation
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月25日 上午12:06:52
+ */
+
+// @Ignore 将忽略掉该类的所有测试方法
+public class CalculatorTest2 {
+    private Calculator cal = null;
+
+    @BeforeClass
+    public static void beforeClass() {
+        System.out.println(&quot;=========在所有测试方法执行前执行--beforeClass=====\n&quot;);
+    }
+
+    /**
+     * 在测试方法执行完前执行
+     */
+    @Before
+    public void beforeMethod() {
+        System.out.println(&quot;在每个测试方法执行前执行--beforeMethod...&quot;);
+        cal = new Calculator();
+    }
+
+    // 若超时1s，将报error错误
+    @Test(timeout = 1000)
+    // 若期待有异常抛出：expected = Exception.class
+    public void testSubstrub() // throws Exception
+    {
+        System.out.println(&quot;测试方法testSubstrub被执行...&quot;);
+        Assert.assertEquals(-1, cal.subtract(1, 2));
+        // Assert.assertEquals(-1, cal.divide(1, 0));
+    }
+
+    @Test
+    @Ignore(&quot;该testMultiply测试方法由于XX原因需要被忽略掉&quot;)
+    public void testMultiply() {
+        System.out.println(&quot;测试方法testMultiply被执行...&quot;);
+        Assert.assertEquals(2, cal.multiply(1, 2));
+    }
+
+    /**
+     * assertThat及Hamcrest的基本使用
+     */
+    @Test
+    public void testOther() {
+        int result = cal.subtract(1, 2);
+        // 关于字符串
+        String s1 = &quot;leo&quot;;
+        org.junit.Assert.assertThat(result, Matchers.is(-1));
+        org.junit.Assert.assertThat(s1, Matchers.not(&quot;llleo&quot;));
+        // org.junit.Assert.assertThat(s1, Matchers.equalToIgnoringCase(&quot;LeO&quot;));
+        // org.junit.Assert.assertThat(s1,
+        // Matchers.equalToIgnoringWhiteSpace(&quot;  Leo &quot;));
+        // org.junit.Assert.assertThat(s1, Matchers.containsString(&quot;leo&quot;));
+        // org.junit.Assert.assertThat(s1, Matchers.startsWith(&quot;le&quot;));
+        // org.junit.Assert.assertThat(s1, Matchers.endsWith(&quot;o&quot;));
+        // org.junit.Assert.assertThat(s1, Matchers.equalTo(&quot;leo&quot;));
+
+        // 关于基本类型
+        double d1 = 3.1;
+        // 在3.0&#177;0.2之间
+        org.junit.Assert.assertThat(d1, Matchers.closeTo(3.0, 0.2));
+        // 大于3.0
+        org.junit.Assert.assertThat(d1, Matchers.greaterThan(3.0));
+        // 小于4.0
+        org.junit.Assert.assertThat(d1, Matchers.lessThan(4.0));
+        // 大于或等于3.0
+        org.junit.Assert.assertThat(d1, Matchers.greaterThanOrEqualTo(3.0));
+        // 小于或等于4.0
+        org.junit.Assert.assertThat(d1, Matchers.lessThanOrEqualTo(4.0));
+
+        // 关于集合
+        Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+        map.put(&quot;k1&quot;, &quot;zhangsan&quot;);
+        map.put(&quot;k2&quot;, &quot;lisi&quot;);
+        // 是否含有该k1=zhangsan的键值对
+        org.junit.Assert.assertThat(map, Matchers.hasEntry(&quot;k1&quot;, &quot;zhangsan&quot;));
+        // 是否含有键为k2的Item
+        org.junit.Assert.assertThat(map, Matchers.hasKey(&quot;k2&quot;));
+        // 是否含有值为lisi的Item
+        org.junit.Assert.assertThat(map, Matchers.hasValue(&quot;lisi&quot;));
+    }
+
+    /**
+     * 在测试方法执行完后执行
+     */
+    @After
+    public void afterMethod() {
+        // cal = null;// 在每个测试方法执行后主动销毁对象
+        System.out.println(&quot;在每个测试方法执行后执行--afterMethod...\n&quot;);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        System.out.println(&quot;=========在所有测试方法执行后执行--afterClass=====&quot;);
+    }
+}
+</pre>
+
+<p>注意事项：</p>
+<p>1）在一个测试类中，所有被@Test注解所修饰的public void方法都是测试用例，可以被JUnit所执行。</p>
+<p>2) failure是指测试失败，而error是指测试程序本身出错。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a><strong>结束语</strong></h2><p>明天开始续《<a href="http://blog.csdn.net/lhy_ycu/article/details/11935087" target="_blank" rel="external">Java学习系列</a>》，包括反射、注解、内部类等等。</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/4/26 2:14:10 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45281449)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：2631 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45281449#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/" data-id="cj8yn9vi0000qo49zaybnriot" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [原]Java学习系列(二十)Java面向对象之反射详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/13/原-Java设计模式博客全目录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]Java设计模式博客全目录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

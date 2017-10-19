@@ -5,16 +5,16 @@
   
   <title>Hawky的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录生活点滴">
+  <meta name="description" content="爱好爬山、旅游、分享">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hawky的博客">
 <meta property="og:url" content="http://hawkyAndroid.github.io/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="记录生活点滴">
+<meta property="og:description" content="爱好爬山、旅游、分享">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hawky的博客">
-<meta name="twitter:description" content="记录生活点滴">
+<meta name="twitter:description" content="爱好爬山、旅游、分享">
   
     <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
   
@@ -41,7 +41,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">一天进步一点</a>
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
         </h2>
       
     </div>
@@ -104,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2017/10/18/hello-world/" data-id="cj8x9uuk800078w9zrtrlym6u" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2017/10/18/hello-world/" data-id="cj8yn9vk6000ro49z3kh9fag0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -116,8 +116,8 @@
   
     <article id="post-HelloHexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/07/01/HelloHexo/" class="article-date">
-  <time datetime="2015-07-01T14:37:23.000Z" itemprop="datePublished">2015-07-01</time>
+    <a href="/2017/07/01/HelloHexo/" class="article-date">
+  <time datetime="2017-07-01T14:37:23.000Z" itemprop="datePublished">2017-07-01</time>
 </a>
     
   <div class="article-category">
@@ -132,7 +132,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/01/HelloHexo/">hello</a>
+      <a class="article-title" href="/2017/07/01/HelloHexo/">hello</a>
     </h1>
   
 
@@ -140,16 +140,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ժҪ:<br>
+        <p>comments��true</p>
+<p>ժҪ:<br>
         
           <p class="article-more-link">
-            <a href="/2015/07/01/HelloHexo/#more">Read More</a>
+            <a href="/2017/07/01/HelloHexo/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2015/07/01/HelloHexo/" data-id="cj8x9uuhi00008w9z1jzh1srz" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2017/07/01/HelloHexo/" data-id="cj8yn9vd80001o49zuzlwwutf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hello/">hello</a></li></ul>
@@ -161,7 +162,2117 @@
 
 
   
+    <article id="post-原-Android学习系列-三-四大组件之Service详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/" class="article-date">
+  <time datetime="2016-04-04T12:08:52.000Z" itemprop="datePublished">2016-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+    </h1>
+  
 
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Service概述"><a href="#Service概述" class="headerlink" title="Service概述"></a>Service概述</h2><p>Service作为Android四大组件中的一员，有着非常重要的地位。它没有交互界面，一般用于长期运行在后台来处理一些比较耗时的操作和为其他应用提供服务接口，如消息推送、音乐播放、定位服务、后台数据同步、长连接（如：蓝牙、IM）的数据收发及连接状态变化等。Service分为本地服务和远程服务，本地服务运行在主进程的主线程中，而远程服务则运行在独立进程的主线程中。当然如果在服务里面写了非常耗时的代码时可能会出现ANR的情况，这时你可以在Service在创建一个子线程来处理耗时逻辑。</p>
+<h2 id="Service的几个属性"><a href="#Service的几个属性" class="headerlink" title="Service的几个属性"></a>Service的几个属性</h2><p>android:enabled 表示该服务是否能后被系统实例化(激活)，默认为true;</p>
+<p>android:name 表示该服务的名字(完整类名或.xxx.XXService)，不可缺少;</p>
+<p>android:icon 表示该服务的图标，默认与&lt;application&gt;元素的icon属性&#20540;一致;</p>
+<p>android:label 表示该服务的名字(可以在手机里面的应用管理里面看到);</p>
+<p>android:permission 表示启动或绑定该服务所需的权限，如：android:permission=&quot;com.permission.xxx.service&quot;，则其他应用要想访问该服务，必须声明权限&lt;uses-permission android:name=&quot;com.permission.xxx.service&quot; /&gt;;</p>
+<p>android:exported 表示能够被外包应用访问，它的默认&#20540;依赖与该服务所包含的过滤器，若至少包含了一个过滤器，则意味着该服务可以给外部的其他应用提供服务，因此默认&#20540;是true; 否则默认&#20540;为false，此时只能在应用程序的内部使用该服务或者具有相同用户ID 的应用程序的组件才能使用该服务;</p>
+<p>android:process=&quot;:remote&quot;，代表在应用程序里需要该service时会自动创建新的进程。而如果是android:process=&quot;remote&quot;，没有“:”分号的则创建全局进程，不同的应用程序共享该进程。</p>
+<h2 id="Service的启动两种启动方式"><a href="#Service的启动两种启动方式" class="headerlink" title="Service的启动两种启动方式"></a>Service的启动两种启动方式</h2><div><br><br></div>
+
+<h3 id="第一种：startService-intent-nbsp"><a href="#第一种：startService-intent-nbsp" class="headerlink" title="第一种：startService(intent)&nbsp;"></a>第一种：startService(intent)&nbsp;</h3><div>第一次启动服务时，系统会执行onCreate、onStartCommand(onStart已过时)方法，再次调用startService则只会执行onStartCommand方法。</div><br><div>服务的onCreate方法用于进行一些初始化操作;&nbsp;onStartCommand(Intent intent, int flags, int startId) 方法能够被多次执行,其中intent就是startService(intent) 里面的intent，而startId为服务请求者的唯一编号(若服务没有被进程杀死过，则可以看做是服务的启动次数，也可作为IntentService消息队列里面的消息参数)。</div><br><div>这里重点讲下方法的onStartCommand的常用几个返回&#20540;<strong>：</strong></div><br><div><strong>START_STICKY</strong>：服务被杀死系统会尝试重新创建，intent丢失。</div><br><div>E/FirstService.java(10403): [onCreate:23]服务被激活<br><br>E/FirstService.java(10403): [onStartCommand:30]intent = Intent { cmp=com.leo.myservice/.FirstService (has extras) } ,flags = 0 ,startId = 1<br><br>E/FirstService.java(10492): [onCreate:23]服务被激活<br><br>E/FirstService.java(10492): [onStartCommand:30]intent = null ,flags = 0 ,startId = 2</div><br><div><strong>START_NOT_STICKY</strong>：服务被杀死系统不会自动重启该服务。<br><br></div><br><div><strong>START_REDELIVER_INTENT</strong>：服务被杀死系统会尝试重新创建，intent不会丢失。<br><br></div><br><div>E/FirstService.java(12336): [onCreate:23]服务被激活<br><br>E/FirstService.java(12336): [onStartCommand:30]intent = Intent { cmp=com.leo.myservice/.FirstService (has extras) } ,flags = 0 ,startId = 1<br><br>E/FirstService.java(12405): [onCreate:23]服务被激活<br><br>E/FirstService.java(12405): [onStartCommand:30]intent = Intent { cmp=com.leo.myservice/.FirstService (has extras) } ,flags = 1 ,startId = 1<br><br></div><br><div><strong>销毁服务</strong>：stopService(intent)只要指定相应的服务即可：</div><br><div>E/FirstService.java(14390): [onDestroy:39]服务被销毁</div><br><div><br><br></div>
+
+<h3 id="第二种：bindService-Intent-service-ServiceConnection-conn-int-flags-nbsp"><a href="#第二种：bindService-Intent-service-ServiceConnection-conn-int-flags-nbsp" class="headerlink" title="第二种：bindService(Intent service, ServiceConnection conn, int flags)&nbsp;"></a><strong>第二种</strong>：<strong>bindService</strong>(Intent service, ServiceConnection conn, int flags)&nbsp;</h3><div>&nbsp;其中：conn作为与服务连接的一个回调接口<strong>ServiceConnection</strong>(<strong>可通过该接口的onServiceConnected(ComponentName name, IBinder service)方法被传递的service来拿到绑定的服务对象或者Binder子类进而调用服务里的方法</strong>)，flags一般为Context.BIND_AUTO_CREATE</div><br><div>E/FirstService.java(17091): [onCreate:23]服务被激活<br><br>E/FirstService.java(17091): [onBind:17]绑定服务被执行<br><br>E/MainActivity.java(17091): [onServiceConnected:68]连接成功<br><br></div><br><div><strong>解绑服务</strong>：unbindService(ServiceConnection conn)</div><br><div>E/FirstService.java(19794): [onUnbind:45]解绑服务被执行<br><br>E/FirstService.java(19794): [onDestroy:39]服务被销毁<br><br></div><br><div><strong>【注意】</strong></div><br><div><strong>1. 如果你既调用了bindService又调用了startService，那么调用unbindService方法解绑的时候系统只会执行onUnbind，不会执行onDestroy; 所以如果服务不需要了还要记得stopService关闭服务。</strong></div><br><div><strong>2. 服务还可以调用stopSelf()、stopSelf(int startId)进行内部<span style="font-weight:bold">关闭</span>服务，区别就是：前者直接<span style="font-weight:bold">关闭</span>服务，后者若有多个服务请求可指定startId(可从onStartCommand参数拿到)进行关闭。</strong></div><br><div><strong>
+
+</strong></div><br><div><br><br></div>
+
+<h2 id="Activity与Service交互"><a href="#Activity与Service交互" class="headerlink" title="Activity与Service交互"></a>Activity与Service交互</h2><div>通过上文可以知道，咱们只要通过绑定服务的方式，实现<span style="font-weight:bold">ServiceConnection接口的<span style="font-weight:bold">onServiceConnected方法拿到被传递过来的IBinder对象，就可以调用Service(或Binder)里面的方法了。</span></span></div><br><div>实例说明：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_1_9834912" name="code" class="java">public class FirstService extends Service {<br>    private FirstBinder mBinder = new FirstBinder();<br><br>    @Override<br>    public IBinder onBind(Intent intent) {<br>        DebugLog.e(&quot;绑定服务被执行&quot;);<br>        return mBinder;<br>    }<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>        DebugLog.e(&quot;服务被激活&quot;);<br>    }<br><br>    @Override<br>    public int onStartCommand(Intent intent, int flags, int startId) {<br>        DebugLog.e(&quot;intent = &quot; + intent + &quot; ,flags = &quot; + flags + &quot; ,startId = &quot;<br>                + startId);<br>        return super.onStartCommand(intent, flags, startId);<br>    }<br><br>    @Override<br>    public void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;服务被销毁&quot;);<br>    }<br><br>    @Override<br>    public boolean onUnbind(Intent intent) {<br>        DebugLog.e(&quot;解绑服务被执行&quot;);<br>        return super.onUnbind(intent);<br>    }<br><br>    @Override<br>    public void onRebind(Intent intent) {<br>        super.onRebind(intent);<br>        DebugLog.e(&quot;重新绑定被执行&quot;);<br>    }<br><br>    public void info() {<br>        DebugLog.e(&quot;FirstService中的info方法被调用&quot;);<br>    }<br><br>    class FirstBinder extends Binder {<br>        @Override<br>        public String getInterfaceDescriptor() {<br>            return &quot;接口描述&quot;;<br>        }<br><br>        FirstService getService() {<br>            return FirstService.this;<br>        }<br><br>        public void info() {<br>            DebugLog.e(&quot;FirstBinder中的info方法被调用&quot;);<br>        }<br>    }<br>}</pre><br><br></div><br><div>Activity绑定FirstService</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_2_9551504" name="code" class="java">public class MainActivity extends Activity {<br>    private FirstService mService;<br><br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        // 绑定FirstService<br>        Intent intent = new Intent(MainActivity.this, FirstService.class);<br>        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);<br>    }<br><br>    public void test01(View view) {<br>        mService.info();<br>    }<br><br>    private ServiceConnection mServiceConnection = new ServiceConnection() {<br><br>        @Override<br>        public void onServiceDisconnected(ComponentName name) {<br>            DebugLog.e(&quot;断开连接&quot;);<br>            mService = null;<br>        }<br><br>        @Override<br>        public void onServiceConnected(ComponentName name, IBinder service) {<br>            DebugLog.e(&quot;连接成功&quot;);<br>            mService = ((FirstService.FirstBinder) service).getService();<br>        }<br>    };<br><br>    @Override<br>    protected void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;MainActivity被销毁&quot;);<br>        unbindService(mServiceConnection);<br>    }</pre>打印日志：</div><br><div>E/FirstService.java(5032): [onCreate:22]服务被激活<br><br>E/FirstService.java(5032): [onBind:15]绑定服务被执行<br><br>E/MainActivity.java(5032): [onServiceConnected:40]连接成功</div><br><div>可以看到连接服务成功了，拿到服务后咱们就可以调用FirstService里面的方法了。</div><br><div>打印日志：E/FirstService.java(5032): [info:51]FirstService中的info方法被调用</div><br><div>当然，这里也可以直接调用FirstBinder里面的方法，拿到binder对象即可(mBinder = (FirstService.FirstBinder) service;)</div><br><div>打印日志：E/FirstService.java(6342): [info:65]FirstBinder中的info方法被调用</div><br><div>当不需要该服务的时候，记得要接触绑定。</div><br><div>打印日志：</div><br><div>E/MainActivity.java(6342): [onDestroy:49]MainActivity被销毁<br><br>E/FirstService.java(6342): [onUnbind:40]解绑服务被执行<br><br>E/FirstService.java(6342): [onDestroy:35]服务被销毁</div><br><div><br><br></div><br><div><br><br></div>
+
+<h2 id="A应用访问B应用的Service"><a href="#A应用访问B应用的Service" class="headerlink" title="A应用访问B应用的Service"></a>A应用访问B应用的Service</h2><h3 id="第一种：通过指定Action启动服务"><a href="#第一种：通过指定Action启动服务" class="headerlink" title="第一种：通过指定Action启动服务"></a>第一种：通过指定Action启动服务</h3><div>比如B应用有些数据是需要一段时间后才能检测的到某个(稳定)&#20540;或者平均&#20540;，A应用需要启动该服务后过段时间才能拿到，若没有其他操作可将其关闭或者服务自行关闭(如：stopSelf()、stopSelf(int startId)等)，当然还可以处理其他逻辑简单、数据单一或者定时任务能够形成闭环的情形。</div><br><div>举例说明：咱们可以在B应用manifest文件中的&lt;Service&gt;元素中添加一个过滤器：<pre code_snippet_id="1634341" snippet_file_name="blog_20160404_3_7773598" name="code" class="html">&lt;service<br>    android:name=&quot;com.leo.myservice.FirstService&quot;<br>    android:permission=&quot;com.permission.xxx.service&quot; &gt;<br>    &lt;intent-filter&gt;<br>        &lt;action android:name=&quot;com.intent.action.XxxService&quot; /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/service&gt;</pre>然后咱们就可以在A应用中声明权限后访问B应用的服务了：context.startService(new Intent(&quot;com.intent.action.XxxService&quot;));</div><br><div><br><br></div>
+
+<h3 id="第二种：通过AIDL绑定服务"><a href="#第二种：通过AIDL绑定服务" class="headerlink" title="第二种：通过AIDL绑定服务"></a>第二种：通过AIDL绑定服务</h3><div>AIDL：Android接口定义语言(Android Interface definition language)，它是一种面向接口的描述语言，作用就是为其他应用提供一些服务接口。一般客户端(A应用)通过绑定该远程服务(B应用)的方式拿到Binder对象来进行进程间通信IPC(interprocess communication)的。为了建立与远程服务的连接(至于连接建立的内部机制，不在本篇的讨论范围内)，与之前一样，咱们需要实现<span style="font-weight:bold">ServiceConnection</span>接口的onServiceConnected(ComponentName<br> name, IBinder service)方法，只不过这里的参数service不是直接强制转换，而是通过mService = IAIDLService.Stub.asInterface(service);来拿到远程服务(其中IAIDLService.Stub实际就是Binder的子类，咱们只要实现这个IAIDLService.Stub抽象类中声明的所有方法，然后在onBind方法里返回它的对象即可;&nbsp;asInterface的作用就是将Binder对象转化成IAIDLService接口实例)。</div><br><div>举例说明：</div><br><div>B应用(服务端)：</div><br><div>创建一个IAIDLService.aidl文件</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_4_9583741" name="code" class="java">package com.leo.aidl;<br><br>interface IAIDLService{<br>    // 获取步数<br>    int getSteps();<br>}</pre>新建一个服务AidlService，并实现.aidl文件中声明的所有抽象方法，然后onBind方法返回一个Binder实例。</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_5_5330600" name="code" class="java">public class AidlService extends Service {<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>        DebugLog.e(&quot;远程服务被激活&quot;);<br>    }<br><br>    @Override<br>    public void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;远程服务被销毁&quot;);<br>    }<br><br>    @Override<br>    public boolean onUnbind(Intent intent) {<br>        DebugLog.e(&quot;解绑远程服务&quot;);<br>        return super.onUnbind(intent);<br>    }<br><br>    @Override<br>    public IBinder onBind(Intent intent) {<br>        DebugLog.e(&quot;绑定远程服务&quot;);<br>        return mBinder;<br>    }<br><br>    private final IAIDLService.Stub mBinder = new IAIDLService.Stub() {<br><br>        @Override<br>        public int getSteps() throws RemoteException {<br>            return 10000;<br>        }<br>    };<br><br>}</pre>接着在manifest文件中注册该远程服务：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_6_7140743" name="code" class="java">&lt;service<br>    android:name=&quot;com.leo.myservice.AidlService&quot;<br>    android:exported=&quot;true&quot; &gt;<br>    &lt;intent-filter&gt;<br>        &lt;action android:name=&quot;com.intent.action.remoteService&quot; /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/service&gt;</pre>A应用(客户端)&nbsp;<span style="white-space:pre"> </span>：<strong>导入B应用中的.aidl文件，且aidl接口文件所在的包与服务端的必须相同</strong></div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_7_5362837" name="code" class="java">public class MainActivity extends Activity {<br>    private IAIDLService mService;<br><br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        // 绑定远程服务XxxService<br>        Intent intent = new Intent(&quot;com.intent.action.remoteService&quot;);<br>        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);<br>    }<br><br>    // Button监听<br>    public void test01(View view) {<br>        try {<br>            int steps = mService.getSteps();<br>            DebugLog.e(&quot;steps = &quot; + steps);<br>        } catch (RemoteException e) {<br>            e.printStackTrace();<br>        }<br>    }<br><br>    private ServiceConnection mServiceConnection = new ServiceConnection() {<br><br>        @Override<br>        public void onServiceDisconnected(ComponentName name) {<br>            DebugLog.e(&quot;断开连接&quot;);<br>            mService = null;<br>        }<br><br>        @Override<br>        public void onServiceConnected(ComponentName name, IBinder service) {<br>            DebugLog.e(&quot;连接成功&quot;);<br>            mService = IAIDLService.Stub.asInterface(service);<br>        }<br>    };<br><br>    @Override<br>    protected void onDestroy() {<br>        super.onDestroy();<br>        unbindService(mServiceConnection);<br>    }<br><br>}</pre>服务端打印日志：<br><br>E/AidlService.java(27821): [onCreate:16]远程服务被激活<br><br>E/AidlService.java(27821): [onBind:33]绑定远程服务<br><br>客户端打印日志：<br><br>E/MainActivity.java(26711): [onServiceConnected:47]连接成功<br><br>接着点击Button，可以看到步数也被打印了：</div><br><div>E/MainActivity.java(26711): [test01:31]steps = 10000</div><br><div>说明客户端调用服务端的方法成功了。</div><br><div>当咱们不需要该服务时，记得调用unbindService(mServiceConnection)解绑</div><br><div>E/AidlService.java(27821): [onUnbind:27]解绑远程服务<br><br>E/AidlService.java(27821): [onDestroy:22]远程服务被销毁<br><br></div><br><div>【使用情景】当有多个应用程序要与服务端进行通讯时，即服务端需要接收来自不同应用的多线程请求时需要使用AIDL。</div><br><div><br><br>## IntentService<br><br>&nbsp;在讲IntentService之前，先来了解一下Handler和HandlerThread。</div><br><div>Handler的作用是把消息加入特定的（Looper）消息队列中，并分发和处理该消息队列中的消息。</div><br><div>&nbsp;一般会使用Handler handler = new Handler()创建Handler, 这样创建的handler是在主线程即UI线程下的Handler，默认与UI线程绑定，在UI线程处理，所以它不能做太耗时的操作，否则会出现ANR。</div><br><div>HandlerThread本质就是个Thread。与普通Thread的差别就在于，它有自己的looper(包含消息队列)，可以让Handler在自己的线程中分发和处理消息，从而避免在出现anr的情况。它的创建步骤如下：</div><br><div>HandlerThread thread = new HandlerThread(&quot;IntentService[&quot; &#43; mName &#43; &quot;]&quot;);// 创建HandlerThread(指定线程名：IntentService[xxService])<br><br>thread.start();//&nbsp;启动HandlerThread&nbsp;</div><br><div>mServiceLooper = thread.getLooper();//获取HandlerThread中的mLooper成员<br><br>mServiceHandler = new ServiceHandler(mServiceLooper);//绑定HandlerThread</div><br><div><br><br></div><br><div>IntentService就是通过绑定HandlerThread在自己的线程中分发和处理消息的。</div><br><div>具体流程：启动服务startService(intent)，onStart(intent, startId)被调用，intent被传入、startId由系统生成(这个里可以看做是请求服务的次数)，而后mServiceHandler将消息(携带这两个参数)发出，由咱们自己的服务(继承了IntentService)的onHandleIntent方法来处理，非常方便，等消息队列中的挨个(阻塞式地)处理完所有消息后会执行stopSelf(startId)方法。</div><br><div>&#20540;得注意的是：消息处理完后，在服务销毁时先执行mServiceLooper.quit()，这个方法会清空所有消息(无论是延时消息还是非延时消息)。</div><br><div>总的来说：IntentService这与Service的最大区别就是IntentService它可以在自己的线程里处理非常耗时的操作，而且还可以挨个的处理(即一个之后再处理第二个)多个请求，处理完后将自毁服务。<br><br></div><br><div><br><br></div><br><div>下面举例说明：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_8_6300928" name="code" class="java">public class FirstIntentService extends IntentService {<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>        DebugLog.e(&quot;服务被激活&quot;);<br>    }<br><br>    public FirstIntentService() {<br>        super(&quot;MyIntentService&quot;);<br>    }<br><br>    int i = 0;<br><br>    @Override<br>    protected void onHandleIntent(Intent intent) {<br>        DebugLog.e(&quot;pid = &quot; + Thread.currentThread().getId());<br>        DebugLog.e(&quot;任务执行开始…&quot;);<br>        i = 0;<br>        try {<br>            while (i &lt; 3) {<br>                Thread.sleep(1000);<br>                i++;<br>                DebugLog.e(&quot;i = &quot; + i + &quot;s&quot;);<br>            }<br>        } catch (InterruptedException e) {<br>            e.printStackTrace();<br>        }<br>        DebugLog.e(&quot;任务执行完成…&quot;);<br>    }<br><br>    @Override<br>    public void onDestroy() {<br>        super.onDestroy();<br>        DebugLog.e(&quot;服务被销毁&quot;);<br>    }<br><br>}</pre>MainActivity添加两个Button进行测试：一个启动服务、一个测试服务是否存在</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_9_6507888" name="code" class="java">public class MainActivity extends Activity {<br><br>    @Override<br>    protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>        DebugLog.e(&quot;pid = &quot; + Thread.currentThread().getId());<br>    }<br><br>    public void button1(View view) {<br>        startService(new Intent(this, FirstIntentService.class));<br>    }<br><br>    public void button2(View view) {<br>        boolean isServiceRunning = ServiceUtils.isServiceRunning(this,<br>                FirstIntentService.class.getName());<br>        DebugLog.e(&quot;isServiceRunning = &quot; + isServiceRunning);<br>    }<br>}<br></pre>点两次按钮，打印日志如下：</div><br><div><pre code_snippet_id="1634341" snippet_file_name="blog_20160404_10_6366185" name="code" class="html">E/MainActivity.java(19249): [onCreate:18]pid = 1<br>E/FirstIntentService.java(19249): [onCreate:13]服务被激活<br>E/FirstIntentService.java(19249): [onHandleIntent:24]pid = 2236<br>E/FirstIntentService.java(19249): [onHandleIntent:25]任务执行开始…<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 1s<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 2s<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 3s<br>E/FirstIntentService.java(19249): [onHandleIntent:36]任务执行完成…<br>E/FirstIntentService.java(19249): [onHandleIntent:24]pid = 2236<br>E/FirstIntentService.java(19249): [onHandleIntent:25]任务执行开始…<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 1s<br>E/MainActivity.java(19249): [button2:28]isServiceRunning = true<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 2s<br>E/FirstIntentService.java(19249): [onHandleIntent:31]i = 3s<br>E/FirstIntentService.java(19249): [onHandleIntent:36]任务执行完成…<br>E/FirstIntentService.java(19249): [onDestroy:42]服务被销毁<br>E/MainActivity.java(19249): [button2:28]isServiceRunning = false<br></pre>从日志中可以看到：onHandleIntent中的线程ID与主线程中的是不一样的，这样验证了IntentService消息处理是在非UI线程中进行的，而且是在同一线程中执行; 同时消息一旦处理完服务也随之被销毁了。<br><br>总结：</div><br><div><br><br></div><br><div>以上是笔者从项目中总结出来的一些心得，花了两天时间整理了一下思路，若有不对的地方还请指正。</div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div>
+
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2016/4/4 20:08:52 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/51043584)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：852 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/51043584#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2016/04/04/原-Android学习系列-三-四大组件之Service详解/" data-id="cj8yn9vej0005o49z04ciphpq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-Git学习系列博客全目录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/26/原-Git学习系列博客全目录/" class="article-date">
+  <time datetime="2015-05-26T08:29:56.000Z" itemprop="datePublished">2015-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-family:Arial; font-size:18px; line-height:26px; text-align:left">转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40028509" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45849615" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45849615</a></span></p>
+<p>Git是一个分布式版本控制软件，它是由Linux的作者Linus用C写的一个分布式版本控制系统。</p>
+<h2 id="Git主要特点"><a href="#Git主要特点" class="headerlink" title="Git主要特点"></a>Git主要特点</h2><p>1、速度：Git在本地上保存着所有当前项目的版本和更新，并且Git中的绝大多数操作都在本地，无需连网，所以处理起来速度。</p>
+<p>2、简单的设计：Git的实现与项目复杂度无关，它永远可以在几毫秒的时间内完成分支的创建和切换。</p>
+<p>3、完全分布式模式：每个人电脑上都有一个完整的版本库，而且它支持离线工作（大部分操作都是本地执行），本地提交可以稍后提交到服务器上。</p>
+<p>4、对非线性开发模式的强力支持：允许上千个并行开发的分支。</p>
+<h2 id="几个名词：工作区-lt-–-gt-暂存区-lt-–-gt-版本库。"><a href="#几个名词：工作区-lt-–-gt-暂存区-lt-–-gt-版本库。" class="headerlink" title="几个名词：工作区&lt;–&gt;暂存区&lt;–&gt;版本库。"></a>几个名词：工作区&lt;–&gt;暂存区&lt;–&gt;版本库。</h2><p>工作区(Working area)：就是.git所在的目录或其子目录。</p>
+<p>暂存区(Staging area)：对文件操作(也就是需要提交的文件修改)的地方就叫暂存区。–注意：这里的修改包括对文件的增删改。</p>
+<p>版本库(Repository)：就是你所看到的的那个隐藏的“.git”目录，它就是咱们的版本(仓)库。</p>
+<h2 id="Git相关命令操作"><a href="#Git相关命令操作" class="headerlink" title="Git相关命令操作"></a>Git相关命令操作</h2><div><img src="http://img.blog.csdn.net/20150526162804294?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br><br></div>
+
+<p>备注：该图总结于2014年初，由公司外派外派至sony从事手机研发及升级维护工作。</p>
+<p><img src="http://img.blog.csdn.net/20150526160348828?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h2 id="Git学习系列目录"><a href="#Git学习系列目录" class="headerlink" title="Git学习系列目录"></a>Git学习系列目录</h2><p><span style="color:#ff0000"><a href="http://blog.csdn.net/lhy_ycu/article/details/20574453" target="_blank" rel="external">Git学习系列(一)初识Git</a></span></p>
+<p></p>
+<p><span style="color:#ff0000"><a href="http://blog.csdn.net/lhy_ycu/article/details/20651051" target="_blank" rel="external">Git学习系列(二)创建本地仓库及文件操作</a></span></p>
+<p></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/20660965" target="_blank" rel="external"><span style="color:#ff0000">Git学习系列(三)版本回退和管理文件的修改及删除操作</span></a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/20839891" target="_blank" rel="external"><span style="color:#ff0000">Git学习系列(四)远程仓库及其与本地仓库交互</span></a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/20849807" target="_blank" rel="external"><span style="color:#ff0000">Git学习系列(五)分支管理详解</span></a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/20912459" target="_blank" rel="external"><span style="color:#ff0000">Git学习系列(六)解决分支冲突及分支管理策略</span></a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/20966177" target="_blank" rel="external"><span style="color:#ff0000">Git学习系列(七)Bug和Feature分支管理详解</span></a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/21292519" target="_blank" rel="external"><span style="color:#ff0000">Git学习系列(八)标签的管理及配置别名详解</span></a></p>
+<h2 id="我的作品–电子书（免费下载）"><a href="#我的作品–电子书（免费下载）" class="headerlink" title="我的作品–电子书（免费下载）"></a>我的作品–电子书（免费下载）</h2><pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/26 16:29:56 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45849615)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：854 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45849615#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/26/原-Git学习系列博客全目录/" data-id="cj8yn9vbi0000o49zmybgwbjr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-SQLite应用详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/18/原-SQLite应用详解/" class="article-date">
+  <time datetime="2015-05-18T10:56:04.000Z" itemprop="datePublished">2015-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-family:Arial; font-size:18px; line-height:26px; text-align:left">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40028509" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45788793" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45788793</a></p>
+<p>SQLite是D.Richard Hipp用C语言编写的开源嵌入式引擎，它可以在所有主要的操作系统上运行。&#20540;得一提的是，袖珍型的SQLite竟然可以支持高达2TB大小的数据库，每个数据库都是以单个文件的形式存在，这些数据都是以B-Tree的数据结构形式存储在磁盘上。在事务处理方面，SQLite通过数据库级上的独立性和共享锁来实现独立事务处理。这意味着多个进程可以在同一时间从同一数据库中读取数据，但只有一个可以写入数据，而在某个进程或线程想数据库执行写操作之前，必须获得独占锁; 在数据类型方面，SQLite采用动态数据类型，当某个&#20540;插入到数据库时，SQLite将会检查它的类型，如果该类型与关联的列不匹配，SQLite则会尝试将该&#20540;类型转换成该列的类型，如果不能转换，则该&#20540;将作为本身的类型存储，SQLite称之为“弱类型”。但有个特例：如果是Integer<br> primary key,则其他类型不会被转换，会报&quot;datatype missmatch&quot;错误。概括来说，SQLite支持NULL、INTEGER、REAL、TEXT及BOLB数据类型，分别代表空&#20540;、整型、浮点型、字符串文本、二进制对象。下面将从SQLite命令行操作、在Java中使用SQLite、在Android中使用SQLite等这几个方面带大家来掌握和深入理解SQLite数据库。</p>
+<h1 id="SQLite命令行操作"><a href="#SQLite命令行操作" class="headerlink" title="SQLite命令行操作"></a>SQLite命令行操作</h1><p>在操作之前，大家要先下载SQLite数据库，官方的下载页面是<a href="http://sqlite.org/download.html" target="_blank" rel="external">http://sqlite.org/download.html</a>，如果你是windows系统，那个大家可以下载这两个文件</p>
+<p><img src="http://img.blog.csdn.net/20150518135021735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>下载完成后分别解压，得到两个可执行文件，如下：</p>
+<p><img src="http://img.blog.csdn.net/20150518135103680?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>这两个文件可以根据自己的喜欢放置在指定位置，我把它放在了F盘根目录下，下面我们来一步步熟悉一下SQlite的命令行操作：</p>
+<h2 id="1）建库"><a href="#1）建库" class="headerlink" title="1）建库"></a>1）建库</h2><p>C:\Users\Administrator&gt;f:</p>
+<p>F:\&gt;sqlite3 test.db</p>
+<p>SQLite version 3.8.10.1 2015-05-09 12:14:55</p>
+<p>Enter &quot;.help&quot; for usage hints.</p>
+<p>sqlite&gt; .databases</p>
+<p>seq &nbsp;name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file</p>
+<p>— &nbsp;————— &nbsp;———————————————————-</p>
+<p>0 &nbsp; &nbsp;main &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F:\test.db</p>
+<p>这里我们执行了sqlite3命令，参数就是数据库的名字，如果该数据库已存在则使用，反之创建一个。当然你也可以在别的目录(可写)下创建数据库，如：F:\&gt;sqlite3 e:\test.db。如果大家想了解一下SQLite的其他命令，可以执行&quot;.help&quot;命令列出所有命令清单进行查看。</p>
+<h2 id="2）建表"><a href="#2）建表" class="headerlink" title="2）建表"></a>2）建表</h2><p>sqlite&gt; create table student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<p>sqlite&gt; .tables</p>
+<p>student</p>
+<h2 id="3）查看建表语句"><a href="#3）查看建表语句" class="headerlink" title="3）查看建表语句"></a>3）查看建表语句</h2><p>sqlite&gt; .schema student</p>
+<p>CREATE TABLE student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<h2 id="4）插入数据"><a href="#4）插入数据" class="headerlink" title="4）插入数据"></a>4）插入数据</h2><p>sqlite&gt; insert into student values(NULL,’zhangsan’,24);</p>
+<p>sqlite&gt; select * from student;</p>
+<p>1|zhangsan|24</p>
+<h2 id="5）分析数据库使用状态（使用刚下载的sqlite3-analyzer-exe工具）"><a href="#5）分析数据库使用状态（使用刚下载的sqlite3-analyzer-exe工具）" class="headerlink" title="5）分析数据库使用状态（使用刚下载的sqlite3_analyzer.exe工具）"></a>5）分析数据库使用状态（使用刚下载的sqlite3_analyzer.exe工具）</h2><p>–先退出sqlite3，可使用.quit或.exit</p>
+<p>sqlite&gt; .quit</p>
+<p>F:\&gt;sqlite3_analyzer test.db</p>
+<p>/** Disk-Space Utilization Report For test.db</p>
+<p>Page size in bytes………………………….. 1024</p>
+<p>Pages in the whole file (measured)……………. 3</p>
+<p>Pages in the whole file (calculated)………….. 3</p>
+<p>Pages that store data……………………….. 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;100.0%</p>
+<p>Pages on the freelist (per header)……………. 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0%</p>
+<p>Pages on the freelist (calculated)……………. 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0%</p>
+<p>Pages of auto-vacuum overhead………………… 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.0%</p>
+<p>Number of tables in the database……………… 3</p>
+<p>Number of indices…………………………… 0</p>
+<p>Number of defined indices……………………. 0</p>
+<p>Number of implied indices……………………. 0</p>
+<p>Size of the file in bytes……………………. 3072</p>
+<p>Bytes of user payload stored…………………. 23 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.75%</p>
+<p>….</p>
+<p>INSERT INTO space_used VALUES(‘sqlite_master’,’sqlite_master’,0,2,2,197,0,0,117,0,1,0,0,711,0,0,1024</p>
+<p>);</p>
+<p>INSERT INTO space_used VALUES(‘student’,’student’,0,1,1,13,0,0,13,0,1,0,0,999,0,0,1024);</p>
+<p>INSERT INTO space_used VALUES(‘sqlite_sequence’,’sqlite_sequence’,0,1,1,10,0,0,10,0,1,0,0,1002,0,0,1</p>
+<p>024);</p>
+<p>COMMIT;</p>
+<h2 id="6）备份数据——导出"><a href="#6）备份数据——导出" class="headerlink" title="6）备份数据——导出"></a>6）备份数据——导出</h2><p>我们可以指定输出的目标为一个sql文件，然后再使用.dump命令时，输出信息就会写入指定的文件：</p>
+<p>F:\&gt;sqlite3 test.db</p>
+<p>SQLite version 3.8.10.1 2015-05-09 12:14:55</p>
+<p>Enter &quot;.help&quot; for usage hints.</p>
+<p>sqlite&gt; .output stu_bk.sql</p>
+<p>sqlite&gt; .dump</p>
+<p>可以看到，F盘中已经创建了一个名为stu_bk的sql文件：</p>
+<p><img src="http://img.blog.csdn.net/20150518144546908?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>stu_bk.sql文件的内容为：</p>
+<p><img src="http://img.blog.csdn.net/20150518144734490?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>如果想恢复标准输出，可以这样设定：</p>
+<p>sqlite&gt; .output stdout</p>
+<p>sqlite&gt; .dump</p>
+<p>PRAGMA foreign_keys=OFF;</p>
+<p>BEGIN TRANSACTION;</p>
+<p>CREATE TABLE student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<p>INSERT INTO &quot;student&quot; VALUES(1,’zhangsan’,24);</p>
+<p>DELETE FROM sqlite_sequence;</p>
+<p>INSERT INTO &quot;sqlite_sequence&quot; VALUES(‘student’,1);</p>
+<p>COMMIT;</p>
+<h2 id="7）从sql文件中导入表数据——导入"><a href="#7）从sql文件中导入表数据——导入" class="headerlink" title="7）从sql文件中导入表数据——导入"></a>7）从sql文件中导入表数据——导入</h2><p>为了演示效果，我们先把student表删除再导入：</p>
+<p>sqlite&gt; drop table if exists student;</p>
+<p>sqlite&gt; .tables</p>
+<p>sqlite&gt;</p>
+<p>sqlite&gt; .read stu_bk.sql</p>
+<p>sqlite&gt; .tables</p>
+<p>student</p>
+<p>sqlite&gt; .schema student</p>
+<p>CREATE TABLE student(id integer primary key autoincrement, name varchar(15), age smallint);</p>
+<p>sqlite&gt; select * from student;</p>
+<p>1|zhangsan|24</p>
+<p>sqlite&gt;</p>
+<p>可以看到，数据导入成功。我们可以通过一个SQLite的客户端管理工具SQLite Expert来查看一下：</p>
+<p><img src="http://img.blog.csdn.net/20150518145752715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>最后我们可以使用“.exit”或“.quit”退出SQLite命令行操作。</p>
+<h1 id="在Java中使用SQLite"><a href="#在Java中使用SQLite" class="headerlink" title="在Java中使用SQLite"></a>在Java中使用SQLite</h1><p>要在Java中使用SQLite，需要下载SQLite相关驱动包，下载地址：<a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads" target="_blank" rel="external">https://bitbucket.org/xerial/sqlite-jdbc/downloads</a>，这里我下载的还是以前的sqlite-jdbc-3.7.2.jar，当然你也可以下载最新的jar包。下面开始实例演示：</p>
+<p>①新建一个名为sqlite的Java项目</p>
+<p><img src="http://img.blog.csdn.net/20150518151833311?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>我们引入了刚下载好的sqlite驱动包到类路径下，然后新建一个db的文件夹用于放置数据库文件。</p>
+<p>②新建SQLiteTest.java文件，代码如下：</p>
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_1_1494729" name="code" class="java">package com.leo.sqlite;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+/**
+ * SQLite在Java中的使用实例
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年5月18日 上午2:06:48
+ */
+
+public class SQLiteTest {
+    public static void main(String[] args) throws Exception {
+        Class.forName(&quot;org.sqlite.JDBC&quot;);
+        Connection conn = DriverManager.getConnection(&quot;jdbc:sqlite:db/test.db&quot;);
+        Statement st = conn.createStatement();
+
+        st.executeUpdate(&quot;drop table if exists person&quot;);
+        st.executeUpdate(&quot;create table person(id integer,name varchar(15))&quot;);
+        st.executeUpdate(&quot;insert into person values(1,&#39;zhangsan&#39;)&quot;);
+        st.executeUpdate(&quot;insert into person values(2,&#39;lisi&#39;)&quot;);
+        st.executeUpdate(&quot;insert into person values(3,&#39;wangwu&#39;)&quot;);
+
+        ResultSet rs = st.executeQuery(&quot;select * from person&quot;);
+        while (rs.next()) {
+            System.out.println(&quot;id = &quot; + rs.getInt(&quot;id&quot;) + &quot; ,name = &quot;
+                    + rs.getString(&quot;name&quot;));
+        }
+        st.close();
+        conn.close();
+    }
+}</pre>执行SQLiteTest.java文件，运行结果如下：
+
+![](http://img.blog.csdn.net/20150518152339149?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+这时候，我们刷新一下sqlite项目，可以看到db文件夹下生成了一个test.db文件：
+
+![](http://img.blog.csdn.net/20150518152652461?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+**<span style="color:#ff0000">【注意】SQLite只提供数据库级的锁定，并且SQLite没有用户账户的概念，而是根据文件系统来确定所有数据库的权限。</span>**
+
+**<span style="color:#ff0000">
+
+</span>**
+
+# 在Android中使用SQLite
+
+现在主流移动设备像Android、iPhone等都使用SQLite作为复杂数据的存储引擎，在我们为移动设备开发应用程序时，也许就要使用到SQLite来存储大量的数据，所以我们有要掌握移动设备上SQLite开发技巧。对于Android平台来说，系统内置了大量丰富的API来供我们操作SQLite。下面开始演示一下SQLite的常用操作，为了方便，这里就将代码写在了Activity的onCreate方法中：
+
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_2_594585" name="code" class="java">/**
+ * 在Android中使用SQLite：建库、建表、CRUD等简单操作
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015-5-18 下午3:55:53
+ */
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // 打开或创建test.db数据库
+        SQLiteDatabase db = openOrCreateDatabase(&quot;test.db&quot;,
+                Context.MODE_PRIVATE, null);
+        db.execSQL(&quot;drop table if exists person&quot;);
+        // 创建person表
+        db.execSQL(&quot;create table person(_id integer primary key autoincrement,name varchar,age smallint)&quot;);
+        Person person = new Person();
+        person.setName(&quot;zhangsan&quot;);
+        person.setAge(34);
+        // 插入数据
+        db.execSQL(&quot;insert into person values(NULL,?,?)&quot;,
+                new Object[] { person.getName(), person.getAge() });
+
+        person.setName(&quot;lisi&quot;);
+        person.setAge(32);
+        // ContentValues以键值对的形式存放数据
+        ContentValues values = new ContentValues();
+        values.put(&quot;name&quot;, person.getName());
+        values.put(&quot;age&quot;, person.getAge());
+        // 插入ContentValues中的数据
+        db.insert(&quot;person&quot;, null, values);
+
+        values = new ContentValues();
+        values.put(&quot;age&quot;, &quot;40&quot;);
+        // 更新数据
+        db.update(&quot;person&quot;, values, &quot;name = ? &quot;, new String[] { &quot;zhangsan&quot; });
+
+        Cursor c = db.rawQuery(&quot;select * from person where age&gt;= ?&quot;,
+                new String[] { &quot;32&quot; });
+        while (c.moveToNext()) {
+            int _id = c.getInt(c.getColumnIndex(&quot;_id&quot;));
+            String name = c.getString(c.getColumnIndex(&quot;name&quot;));
+            int age = c.getInt(c.getColumnIndex(&quot;age&quot;));
+            Log.i(&quot;leo&quot;, &quot;_id = &quot; + _id + &quot; ,name = &quot; + name + &quot; ,age = &quot; + age);
+        }
+        c.close();
+
+        // 删除数据
+        // db.delete(&quot;person&quot;, &quot;age &lt; ?&quot;, new String[] { &quot;36&quot; });
+
+        // 关闭当前数据库
+        db.close();
+
+        // 删除test.db数据库
+        // deleteDatabase(&quot;test.db&quot;);
+    }
+
+}</pre>在Android手机或模拟器上运行后，系统就会在/data/data/[项目包名]databases目录下生成一个&quot;test.db&quot;的数据库文件，我们可以用手机下载一个名为Root Explorer的软件进行查看，如图：
+
+![](http://img.blog.csdn.net/20150518162842635?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+同时可以看到，控制台打印了log信息：
+
+![](http://img.blog.csdn.net/20150518162933351?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+上面的示例代码基本上囊括了数据库大部分操作，对于添加、更新和删除，我们都可以使用
+
+1.db.executeSQL(String sql); &nbsp;
+
+2.db.executeSQL(String sql, Object[] bindArgs);//sql语句中使用占位符，然后第二个参数是实际的参数数组
+
+除了统一的形式之外，它们还有各自的操作方法：
+
+1.db.insert(String table, String nullColumnHack, ContentValues values); &nbsp;
+
+2.db.update(String table, Contentvalues values, String whereClause, String whereArgs); &nbsp;
+
+3.db.delete(String table, String whereClause, String whereArgs); &nbsp;
+
+**参数说明：**以上3个方法的第一个参数都是要操作的表名；**<span style="color:#ff0000">①insert</span>**中的第二个参数表示要插入的数据每一列都为空的话，需要指定此行中某一列的名称，系统将此列设置为null，不至于出现错误；insert的第三个参数为ContentValues类型的变量，是键&#20540;对组成的Map，key代表列名，value代表要插入的&#20540;。**<span style="color:#ff0000">②update</span>**的第二个参数也很类&#20284;，只不过它是更新该字段key为最新的value&#20540;，第三个参数表示where的表达式，比如：&quot;age
+ &gt; ? and age &lt; ? &quot;等，最后一个参数是占位符的实际参数&#20540;。**<span style="color:#ff0000">③delete</span>**方法同上。
+
+下面说说查询操作，查询操作相对于上面的几种操作要复杂一些，因为我们要经常面对各种各样的查询条件，所以系统也考虑到这种复杂性，为我们提供了较为丰富的查询形式：
+
+1.db.rawQuery(String sql, String[] selectionArgs); &nbsp;
+
+2.db.query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy); &nbsp;
+
+3.db.query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit); &nbsp;
+
+4.db.query(String distinct, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit); &nbsp;
+
+**参数说明：**上面几种都是常用的查询方法，第一种最为简单，将所有的SQL语句都组织到一个字符串中，使用占位符代替实际参数，selectionArgs就是占位符实际参数集；下面的几种参数都很类&#20284;，columns表示要查询的列所有名称集，selection表示WHERE之后的条件语句，可以使用占位符，groupBy指定分组的列名，having指定分组条件，配合groupBy使用，orderBy指定排序的列名，limit指定分页参数，distinct可以指定“true”或“false”表示要不要过滤重复&#20540;。
+
+最后，他们同时返回一个Cursor对象，代表数据集的游标，有点类&#20284;于JDBC里面的的ResultSet结果集。对于Cursor对象，常用的方法有很多（大家也可以通过查考官方API文档进行查阅），常用方法如下：
+
+1.c.move(int offset); //以当前位置为参考,移动到指定行 &nbsp;
+
+2.c.moveToFirst(); &nbsp; &nbsp;//移动到第一行 &nbsp;
+
+3.c.moveToLast(); &nbsp; &nbsp; //移动到最后一行 &nbsp;
+
+4.c.moveToPosition(int position); //移动到指定行 &nbsp;
+
+5.c.moveToPrevious(); //移动到前一行 &nbsp;
+
+6.c.moveToNext(); &nbsp; &nbsp; //移动到下一行 &nbsp;
+
+7.c.isFirst(); &nbsp; &nbsp; &nbsp; &nbsp;//是否指向第一条 &nbsp;
+
+8.c.isLast(); &nbsp; &nbsp; //是否指向最后一条 &nbsp;
+
+9.c.isBeforeFirst(); &nbsp;//是否指向第一条之前 &nbsp;
+
+10.c.isAfterLast(); &nbsp; &nbsp;//是否指向最后一条之后 &nbsp;
+
+11.c.isNull(int columnIndex); &nbsp;//指定列是否为空(列基数为0) &nbsp;
+
+12.c.isClosed(); &nbsp; &nbsp; &nbsp; //游标是否已关闭 &nbsp;
+
+13.c.getCount(); &nbsp; &nbsp; &nbsp; //总数据项数 &nbsp;
+
+14.c.getPosition(); &nbsp; &nbsp;//返回当前游标所指向的行数 &nbsp;
+
+15.c.getColumnIndex(String columnName);//返回某列名对应的列索引&#20540; &nbsp;
+
+16.c.getString(int columnIndex); &nbsp; //返回当前行指定列的&#20540;
+
+最后当我们完成了对数据库的操作后，记得调用SQLiteDatabase的close()方法释放数据库连接，否则容易出现SQLiteException。
+
+上面就是SQLite的基本应用，但在实际开发中，为了能够更好的管理和维护数据库，我们会封装一个继承自SQLiteOpenHelper类的数据库操作类，然后以这个类为基础，再封装我们的业务逻辑方法。下面，我们就以一个实例来讲解具体的用法，我们新建一个名为db的项目：
+
+![](http://img.blog.csdn.net/20150518173917871?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+其中DBHelper继承了SQLiteOpenHelper，作为维护和管理数据库的基类，DBManager是建立在DBHelper之上，封装了常用的业务方法，Person是我们的person表对应的JavaBean，MainActivity就是我们显示的界面。
+
+下面我们先来看一下DBHelper：
+
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_3_9420658" name="code" class="java">import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * 维护和管理数据库
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ */
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    private static final String DATABASE_NAME = &quot;test.db&quot;;
+    private static final int DATABASE_VERSION = 1;
+
+    public DBHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    // 数据库第一次被创建时onCreate会被调用&#160;&#160;
+    /**
+     * @param db
+     * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite.SQLiteDatabase)
+     */
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // TODO Auto-generated method stub
+        db.execSQL(&quot;create table student(_id integer primary key autoincrement, name text, age integer, info text);&quot;);
+    }
+
+    // 如果DATABASE_VERSION值改变了,系统发现现有数据库版本不同,即会调用onUpgrade&#160;&#160;
+    /**
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     * @see android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite.SQLiteDatabase,
+     *      int, int)
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // TODO Auto-generated method stub
+        db.execSQL(&quot;alter&#160;table&#160;student&#160;ADD&#160;COLUMN&#160;other&#160;text&quot;);
+    }
+}
+</pre>
+
+<p>正如上面所述，数据库第一次创建时onCreate方法会被调用，我们可以执行创建表的语句，当系统发现版本变化之后，会调用onUpgrade方法，我们可以执行修改表结构等语句。</p>
+<p>为了方便我们面向对象的使用数据，我们建一个Student类，对应student表中的字段，如下：</p>
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_4_3994373" name="code" class="java">public class Student {
+    private int id;
+    private String name;
+    private int age;
+    private String info;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Student [id=&quot; + id + &quot;, name=&quot; + name + &quot;, age=&quot; + age
+                + &quot;, info=&quot; + info + &quot;]&quot;;
+    }
+}</pre>
+
+<p>然后，我们需要一个DBManager，来封装我们所有的业务方法，代码如下：</p>
+<pre code_snippet_id="669523" snippet_file_name="blog_20150518_5_6375476" name="code" class="java">import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+/**
+ * DBManager是建立在DBHelper之上，封装了常用的业务方法
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ */
+
+public class DBManager {
+    private DBHelper helper;
+    private SQLiteDatabase db;
+
+    public DBManager(Context context) {
+        helper = new DBHelper(context);
+        // 因为getWritableDatabase内部调用了mContext.openOrCreateDatabase(mName,&#160;0,&#160;mFactory);&#160;&#160;
+        // 所以要确保context已初始化,我们可以把实例化DBManager的步骤放在Activity的onCreate里
+        db = helper.getWritableDatabase();
+    }
+
+    /**
+     * 添加学生
+     * 
+     * @param student
+     */
+    public void add(Student student) {
+        db.beginTransaction();// 开启事务
+        try {
+            db.execSQL(&quot;insert into student values(null, ?, ?,?)&quot;, new Object[] {
+                    student.getName(), student.getAge(), student.getInfo() });
+            db.setTransactionSuccessful();// 设置事务成功完成
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();// 结束事务
+        }
+    }
+
+    /**
+     * 更新年龄和基本信息
+     * 
+     * @param student
+     */
+    public void update(Student student) {
+        ContentValues values = new ContentValues();
+        values.put(&quot;age&quot;, student.getAge());
+        values.put(&quot;info&quot;, student.getInfo());
+        db.update(&quot;student&quot;, values, &quot;name = ?&quot;,
+                new String[] { student.getName() });
+        values.clear();
+    }
+
+    /**
+     * 删除年龄大的
+     * 
+     * @param student
+     */
+    public void delete(Student student) {
+        db.delete(&quot;student&quot;, &quot;age &gt;= ?&quot;, new String[] { student.getAge() + &quot;&quot; });
+    }
+
+    /**
+     * 查询所有学生
+     * 
+     * @return
+     */
+    public List&lt;Student&gt; query() {
+        List&lt;Student&gt; list = new ArrayList&lt;Student&gt;();
+        Cursor c = db.rawQuery(&quot;select * from student&quot;, null);
+        while (c.moveToNext()) {
+            Student student = new Student();
+            student.setId(c.getInt(c.getColumnIndex(&quot;_id&quot;)));
+            student.setName(c.getString(c.getColumnIndex(&quot;name&quot;)));
+            student.setAge(c.getInt(c.getColumnIndex(&quot;age&quot;)));
+            student.setInfo(c.getString(c.getColumnIndex(&quot;info&quot;)));
+            list.add(student);
+        }
+        c.close();
+        return list;
+    }
+
+    /**
+     * 关闭数据库
+     */
+    public void closeDB() {
+        db.close();
+    }
+}</pre>
+
+<p>我们在DBManager构造方法中实例化DBHelper并获取一个SQLiteDatabase对象，作为整个应用的数据库实例；在添加Student信息时，我们采用了事务处理，确保数据完整性；最后我们提供了一个closeDB方法，释放数据库资源，这一个步骤在我们整个应用关闭时执行，这个环节容易被忘记，所以大家要注意。下面开始编写我们的布局文件和MainActivity界面：</p>
+<p><pre code_snippet_id="669523" snippet_file_name="blog_20150518_6_2136887" name="code" class="html">&lt;LinearLayout xmlns:android=&quot;<a href="http://schemas.android.com/apk/res/android&amp;quot" target="_blank" rel="external">http://schemas.android.com/apk/res/android&amp;quot</a>;<br>    xmlns:tools=&quot;<a href="http://schemas.android.com/tools&amp;quot" target="_blank" rel="external">http://schemas.android.com/tools&amp;quot</a>;<br>    android:layout_width=&quot;match_parent&quot;<br>    android:layout_height=&quot;match_parent&quot;<br>    android:orientation=&quot;vertical&quot; &gt;</pre></p>
+<pre><code>&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;add&amp;quot;
+    android:text=&amp;quot;add&amp;quot; /&amp;gt;
+
+&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;update&amp;quot;
+    android:text=&amp;quot;update&amp;quot; /&amp;gt;
+
+&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;delete&amp;quot;
+    android:text=&amp;quot;delete&amp;quot; /&amp;gt;
+
+&amp;lt;Button
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot;
+    android:onClick=&amp;quot;query&amp;quot;
+    android:text=&amp;quot;query&amp;quot; /&amp;gt;
+
+&amp;lt;ListView
+    android:id=&amp;quot;@+id/listview&amp;quot;
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;wrap_content&amp;quot; &amp;gt;
+&amp;lt;/ListView&amp;gt;
+</code></pre><p>&lt;/LinearLayout&gt;MainActivity文件：</p>
+<p><pre code_snippet_id="669523" snippet_file_name="blog_20150518_7_9185836" name="code" class="java">public class MainActivity extends Activity {<br>    private DBManager mgr;<br>    private ListView listView;</pre></p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    listView = (ListView) findViewById(R.id.listview);
+    mgr = new DBManager(this);// 初始化DBManager
+}
+
+public void add(View view) {
+    Student student = new Student();
+    student.setName(&amp;quot;张三&amp;quot;);
+    student.setAge(22);
+    student.setInfo(&amp;quot;good boy&amp;quot;);
+    mgr.add(student);
+}
+
+public void update(View view) {
+    Student student = new Student();
+    student.setAge(21);
+    student.setName(&amp;quot;张三&amp;quot;);
+    student.setInfo(&amp;quot;bad boy&amp;quot;);
+    mgr.update(student);
+}
+
+public void delete(View view) {
+    Student student = new Student();
+    student.setAge(18);
+    mgr.delete(student);
+}
+
+public void query(View view) {
+    List&amp;lt;Student&amp;gt; students = mgr.query();
+    List&amp;lt;Map&amp;lt;String, String&amp;gt;&amp;gt; list = new ArrayList&amp;lt;Map&amp;lt;String, String&amp;gt;&amp;gt;();
+    for (Student student : students) {
+        HashMap&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;String, String&amp;gt;();
+        map.put(&amp;quot;name&amp;quot;, student.getName());
+        map.put(&amp;quot;info&amp;quot;,
+                student.getAge() + &amp;quot; years old, &amp;quot; + student.getInfo());
+        list.add(map);
+    }
+
+    SimpleAdapter adapter = new SimpleAdapter(this, list,
+            android.R.layout.simple_list_item_2, new String[] { &amp;quot;name&amp;quot;,
+                    &amp;quot;info&amp;quot; }, new int[] { android.R.id.text1,
+                    android.R.id.text2 });
+    listView.setAdapter(adapter);
+}
+
+@Override
+protected void onDestroy() {
+    // TODO Auto-generated method stub
+    super.onDestroy();
+    // 应用的最后一个Activity关闭时释放DB&amp;#160;&amp;#160;
+    mgr.closeDB();
+}
+</code></pre><p>}最后我们来看下运行结果：</p>
+<p><img src="http://img.blog.csdn.net/20150518184835091?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>如果是在手机上运行，我们可以使用Root Explorer查看test.db数据库详情；如果在运行在模拟器上，可以使用SQLite Expert查看；当然你也可以用开始讲的SQLite命令行操作，这里就不再演示了。</p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>以上就是SQLite应用详解的所有内容。相信通过这篇博客，大家对SQLite已经有了一个更深刻的认识。</p>
+<p><strong><span style="font-size:14px; color:#ff0000"><img src="http://download.csdn.net/images/minetype/rar.gif" alt="" title="rar文件"><span style="font-family:'Microsoft YaHei'; text-align:center"><a href="http://download.csdn.net/detail/jave_lover/8712403" target="_blank" rel="external">sqlite3可执行工具、驱动、分析器、客户端工具下载</a></span></span></strong></p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/18 18:56:04 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45788793)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1684 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45788793#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/18/原-SQLite应用详解/" data-id="cj8yn9vhl000no49zjvay8lu0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-全面掌握Mysql知识点及select支持的运算操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/" class="article-date">
+  <time datetime="2015-05-16T09:54:19.000Z" itemprop="datePublished">2015-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/">[原]全面掌握Mysql知识点及select支持的运算操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-family:Arial; font-size:18px; line-height:26px; text-align:left">转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40028509" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45725317" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45725317</a></span></p>
+<p>花了2天时间整理了一下程序员应掌握的Mysql中的操作(包括select支持的运算操作)及相关概念和知识点，希望这篇博客对大家有所帮助。</p>
+<h2 id="内容提纲"><a href="#内容提纲" class="headerlink" title="内容提纲"></a>内容提纲</h2><p><span style="font-size:12px">1、登录mysql</span></p>
+<p>2、查看mysql信息</p>
+<p>3、查看所有数据库</p>
+<p>4、打开指定数据库</p>
+<p>5、李处指定数据库中的所有表</p>
+<p>6、查看指定表的结构</p>
+<p>7、查看建表语句</p>
+<p>8、建库建表</p>
+<p>9、修改指定表结构</p>
+<p>10、查看数据库的编码方式</p>
+<p>11、DML语句(CRUD)操作</p>
+<p>12、注释方式</p>
+<p>13、表数据的导入导出</p>
+<p>14、数据库的导入导出</p>
+<p>15、视图View</p>
+<p>16、索引index</p>
+<p>17、存储过程Procedure</p>
+<p>18、事务Transaction</p>
+<p>19、Mysql用户创建、授权及删除</p>
+<p>20、select支持的运算操作</p>
+<p>21、select支持的逻辑运算操作</p>
+<p>附：忘记密码及修改密码</p>
+<h2 id="1）登录Mysql-本地、远程-服务器"><a href="#1）登录Mysql-本地、远程-服务器" class="headerlink" title="1）登录Mysql(本地、远程)服务器"></a>1）登录Mysql(本地、远程)服务器</h2><p>登录本地(假设用户名：root; 密码：123456)：mysql -u root -p 123456</p>
+<p>登录远程(假设服务器ip：192.168.0.111; 用户名：admin; 密码：admin)：mysql -h 192.168.0.111 -u admin -p admin</p>
+<h2 id="2）查看mysql信息：status"><a href="#2）查看mysql信息：status" class="headerlink" title="2）查看mysql信息：status"></a>2）查看mysql信息：status</h2><p>mysql&gt; status</p>
+<hr>
+<p>mysql &nbsp;Ver 14.14 Distrib 5.6.10, for Win32 (x86)</p>
+<p>Connection id: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;8</p>
+<p>Current database:</p>
+<p>Current user: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; root@localhost</p>
+<p>SSL: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Not in use</p>
+<p>Using delimiter: &nbsp; &nbsp; &nbsp; &nbsp;;</p>
+<p>Server version: &nbsp; &nbsp; &nbsp; &nbsp; 5.6.10 MySQL Community Server (GPL)</p>
+<p>Protocol version: &nbsp; &nbsp; &nbsp; 10</p>
+<p>Connection: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; localhost via TCP/IP</p>
+<p>Server characterset: &nbsp; &nbsp;latin1</p>
+<p>Db &nbsp; &nbsp; characterset: &nbsp; &nbsp;latin1</p>
+<p>Client characterset: &nbsp; &nbsp;gbk</p>
+<p>Conn. &nbsp;characterset: &nbsp; &nbsp;gbk</p>
+<p>TCP port: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3306</p>
+<p>Uptime: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 17 min 5 sec</p>
+<h2 id="3）列出所有数据库（这里是以root身份查看的）"><a href="#3）列出所有数据库（这里是以root身份查看的）" class="headerlink" title="3）列出所有数据库（这里是以root身份查看的）"></a>3）列出所有数据库（这里是以root身份查看的）</h2><p>mysql&gt; show databases;</p>
+<p>&#43;——————–&#43;</p>
+<p>| Database &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;——————–&#43;</p>
+<p>| information_schema |</p>
+<p>| incubator &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| movie &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| mysql &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| mytest &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| performance_schema |</p>
+<p>| product &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——————–&#43;</p>
+<h2 id="4）打开指定数据库：use-db-name"><a href="#4）打开指定数据库：use-db-name" class="headerlink" title="4）打开指定数据库：use db_name;"></a>4）打开指定数据库：use db_name;</h2><p>mysql&gt; use product;</p>
+<p>Database changed</p>
+<h2 id="5）列出product数据库中的所有表：show-tables"><a href="#5）列出product数据库中的所有表：show-tables" class="headerlink" title="5）列出product数据库中的所有表：show tables;"></a>5）列出product数据库中的所有表：show tables;</h2><p>mysql&gt; show tables;</p>
+<p>&#43;——————-&#43;</p>
+<p>| Tables_in_product |</p>
+<p>&#43;——————-&#43;</p>
+<p>| test &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——————-&#43;</p>
+<h2 id="6）查看指定表的结构：desc-table-name"><a href="#6）查看指定表的结构：desc-table-name" class="headerlink" title="6）查看指定表的结构：desc table_name;"></a>6）查看指定表的结构：desc table_name;</h2><p>mysql&gt; desc test;</p>
+<p>&#43;———–&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;———–&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| color_id &nbsp;| varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;———–&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<h2 id="7）查看建表语句DDL：-nbsp-show-create-table-table-name"><a href="#7）查看建表语句DDL：-nbsp-show-create-table-table-name" class="headerlink" title="7）查看建表语句DDL：&nbsp;show create table table_name;"></a>7）查看建表语句DDL：&nbsp;show create table table_name;</h2><p>| test | CREATE TABLE <code>test</code> (</p>
+<p>&nbsp; <code>Id</code> int(11) NOT NULL AUTO_INCREMENT,</p>
+<p>&nbsp; <code>type_name</code> varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; <code>color_id</code> varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; PRIMARY KEY (<code>Id</code>)</p>
+<p>) ENGINE=InnoDB DEFAULT CHARSET=utf8 |</p>
+<h2 id="8）实战：建库、建表"><a href="#8）实战：建库、建表" class="headerlink" title="8）实战：建库、建表"></a>8）实战：建库、建表</h2><p>#若存在mydb数据库则删除</p>
+<p>drop database if exists mydb;</p>
+<p>#建库mydb</p>
+<p>create database mydb default charset=utf8;</p>
+<p>#打开数据库</p>
+<p>use mydb;</p>
+<p>#若存在mytest表则删除</p>
+<p>drop table if exists mytest;</p>
+<p>#建表</p>
+<p>create table mytest (</p>
+<p>&nbsp; Id int(11) NOT NULL AUTO_INCREMENT,</p>
+<p>&nbsp; type_name varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; color_name varchar(10) DEFAULT NULL,</p>
+<p>&nbsp; PRIMARY KEY (Id)</p>
+<p>) ENGINE=InnoDB DEFAULT CHARSET=utf8;&nbsp;</p>
+<p>#外键约束(级联删除)：constraint 约束名 foreign key 该表的字段 references dept(Id) on delete cascade on update cascade;</p>
+<p>#查看mydb里面有哪些表</p>
+<p>show tables;</p>
+<p>#查看mytest的表结构</p>
+<p>desc mytest;</p>
+<p>#查看mytest的建表语句</p>
+<p>show create table mytest;</p>
+<p>#删除表：drop table mytest;</p>
+<p>#删除指定数据库下的所有表</p>
+<p>mysql&gt; use information_schema;</p>
+<p>mysql&gt; select concat(‘drop table if exists ‘,table_name, ‘;’ ) from tables where table_schema=’db_name’;</p>
+<p>#删除库：drop database mydb;</p>
+<h2 id="9）修改mytest表结构"><a href="#9）修改mytest表结构" class="headerlink" title="9）修改mytest表结构"></a>9）修改mytest表结构</h2><p>#查看当前表结构</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp;| varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| color_name | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#修改列</p>
+<p>mysql&gt; alter table mytest change color_name description varchar(50);</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#增加列</p>
+<p>mysql&gt; alter table mytest add extra_name varchar(20) not null default ‘豆豆’;</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| extra_name &nbsp;| varchar(20) | NO &nbsp; | &nbsp; &nbsp; | 豆豆 &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#删除列</p>
+<p>mysql&gt; alter table mytest drop extra_name;</p>
+<p>mysql&gt; desc mytest;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#修改表名</p>
+<p>mysql&gt; alter table mytest rename to test01;</p>
+<p>mysql&gt; show tables;</p>
+<p>&#43;—————-&#43;</p>
+<p>| Tables_in_mydb |</p>
+<p>&#43;—————-&#43;</p>
+<p>| test01 &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;—————-&#43;</p>
+<p>mysql&gt; desc test01;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#修改指定列名</p>
+<p>mysql&gt; alter table test01 modify column type_name char(10);</p>
+<p>mysql&gt; desc test01;</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field &nbsp; &nbsp; &nbsp; | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| type_name &nbsp; | char(10) &nbsp; &nbsp;| YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| description | varchar(50) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;————-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#查看test01表中以t开头的字段信息。</p>
+<p>mysql&gt; desc test01 ‘t%’;</p>
+<p>&#43;———–&#43;———-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp; | Type &nbsp; &nbsp; | Null | Key | Default | Extra |</p>
+<p>&#43;———–&#43;———-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| type_name | char(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———–&#43;———-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>#创建临时表：临时表是指创建后只在当前数据库内有效，断开与数据库的连接后表就自动删除</p>
+<p>create temporary table tb_temp(</p>
+<p>&nbsp; &nbsp; id integer,</p>
+<p>&nbsp; &nbsp; name varchar(100),</p>
+<p>&nbsp; &nbsp; primary key(id)</p>
+<p>);</p>
+<h2 id="10）查看数据库的编码方式"><a href="#10）查看数据库的编码方式" class="headerlink" title="10）查看数据库的编码方式"></a>10）查看数据库的编码方式</h2><p>#查看当前数据库的编码方式</p>
+<p>mysql&gt; show variables like ‘character%’;</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| Variable_name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| character_set_client &nbsp; &nbsp; | gbk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| character_set_connection | gbk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| character_set_database &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_filesystem | binary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_results &nbsp; &nbsp;| gbk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>| character_set_server &nbsp; &nbsp; | latin1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_system &nbsp; &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_sets_dir &nbsp; &nbsp; &nbsp; | D:\MySQL\MySQLServer5.6\share\charsets\ |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>#修改编码方式</p>
+<p>mysql&gt; set names ‘utf8’;</p>
+<p>mysql&gt; show variables like ‘character%’;</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| Variable_name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<p>| character_set_client &nbsp; &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_connection | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_database &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_filesystem | binary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_results &nbsp; &nbsp;| utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_server &nbsp; &nbsp; | latin1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_set_system &nbsp; &nbsp; | utf8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| character_sets_dir &nbsp; &nbsp; &nbsp; | D:\MySQL\MySQLServer5.6\share\charsets\ |</p>
+<p>&#43;————————–&#43;—————————————–&#43;</p>
+<h2 id="11）DML语句（select、insert、update、delete），简称CRUD"><a href="#11）DML语句（select、insert、update、delete），简称CRUD" class="headerlink" title="11）DML语句（select、insert、update、delete），简称CRUD"></a>11）DML语句（select、insert、update、delete），简称CRUD</h2><p>#插入</p>
+<p>mysql&gt; insert into test01(type_name,description) values(‘综艺’,’最近更新’);</p>
+<p>#更新</p>
+<p>mysql&gt; update test01 set type_name=’电影’ where type_name=’综艺’;</p>
+<p>#查询<strong>(由于select支持的查询语句非常广，所以后面会单独拿出一篇来写)</strong></p>
+<p>mysql&gt; select * from test01 where Id=1;</p>
+<p>#查询test01表中有几行记录</p>
+<p>mysql&gt; select count(*) from test01;</p>
+<p>#注意：count(*)和count(1)时统计包括null的, 而count(列名)不包含null&#20540;，且经试验得出count(1)的速度最快(Oracle中也是如此)。</p>
+<p>#删除(单删、全删)</p>
+<p>mysql&gt; delete from test01 where Id=1 and type_name=’电影’;</p>
+<p>mysql&gt; delete from test01;</p>
+<p>#清空数据：Id从1开始</p>
+<p>mysql&gt; truncate table user;/<em>清除user表中所有数据</em>/</p>
+<h2 id="12）注释方式：-、–、"><a href="#12）注释方式：-、–、" class="headerlink" title="12）注释方式：#、–、/**/"></a>12）注释方式：#、–、/**/</h2><div><br><br></div>
+
+<h2 id="13）表中数据的导入、导出"><a href="#13）表中数据的导入、导出" class="headerlink" title="13）表中数据的导入、导出"></a>13）表中数据的导入、导出</h2><p>#查看表test01的数据</p>
+<p>mysql&gt; select * from test01;</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| Id | type_name | description |</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| &nbsp;1 | 综艺 &nbsp; &nbsp; &nbsp;| 最近更新 &nbsp; &nbsp;|</p>
+<p>| &nbsp;2 | 电影 &nbsp; &nbsp; &nbsp;| 精彩预告 &nbsp; &nbsp;|</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p><strong>#导出：将表test01中的记录导出到f盘的test.txt文件中</strong></p>
+<p>mysql&gt; select * from test01 into outfile ‘f:\test.txt’;</p>
+<p>#导出数据后，清空表test01中的数据</p>
+<p>mysql&gt; truncate table test01;</p>
+<p>#可以看到，test01表中当前无数据</p>
+<p>mysql&gt; select * from test01;</p>
+<p>Empty set (0.00 sec)</p>
+<p><strong>#导入：将f盘的test.txt文件中备份的数据导入到表test01中</strong></p>
+<p>mysql&gt; load data infile ‘f:\test.txt’ into table test01;</p>
+<p>#可以看到，数据已被导入到表test01中</p>
+<p>mysql&gt; select * from test01;</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| Id | type_name | description |</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<p>| &nbsp;1 | 综艺 &nbsp; &nbsp; &nbsp;| 最近更新 &nbsp; &nbsp;|</p>
+<p>| &nbsp;2 | 电影 &nbsp; &nbsp; &nbsp;| 精彩预告 &nbsp; &nbsp;|</p>
+<p>&#43;—-&#43;———–&#43;————-&#43;</p>
+<h2 id="14）数据库的导入、导出"><a href="#14）数据库的导入、导出" class="headerlink" title="14）数据库的导入、导出"></a>14）数据库的导入、导出</h2><p>#导出数据库：-d导出表结构，-t导出数据，不加是导出整个数据库</p>
+<p>mysql&gt; mysqldump -uroot -p [-d|-t] dbname [tab_name]&gt;e:\mybk.sql</p>
+<p>#导入数据库：</p>
+<p>mysql&gt; mysql -uroot -p new_dbname &lt;e:\mybk.sql</p>
+<h2 id="15）视图View"><a href="#15）视图View" class="headerlink" title="15）视图View"></a>15）视图View</h2><p>视图的工作机制: 当调用视图的时候，才会执行视图中的sql，进行取数据操作。视图的内容并没有存储，而是在视图被引用的时候才派生出数据。这样不会占用空间，由于是即时引用，视图的内容总是与真实表的内容是一致的。从视图的工作机制可以看出：视图是一种虚拟的表，它并没有保存内容，只是引用数据。一般在要经常需要某个查询结果做子查询的时候会使用到视图，<span style="color:#ff0000">注意</span>运行创建/删除视图的语句需要用户具有创建/删除视图的权限。<strong>创建视图</strong>的语法：create<br> view 视图名 as select 查询语句;&nbsp;实例说明如下：</p>
+<p>mysql&gt; select * from goods;</p>
+<p>&#43;———-&#43;————&#43;————&#43;——–&#43;</p>
+<p>| goods_id | goods_name | shop_price | cat_id |</p>
+<p>&#43;———-&#43;————&#43;————&#43;——–&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;1 | 苹果 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 8.80 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;2 | 西瓜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 2.98 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;3 | 香蕉 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 6.80 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;4 | 白菜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 1.80 | &nbsp; &nbsp; &nbsp;1 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;5 | 韭菜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 2.80 | &nbsp; &nbsp; &nbsp;1 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;6 | 茄子 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 1.80 | &nbsp; &nbsp; &nbsp;1 |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;7 | 哈密瓜 &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; 3.80 | &nbsp; &nbsp; &nbsp;2 |</p>
+<p>&#43;———-&#43;————&#43;————&#43;——–&#43;</p>
+<p>如果要频繁查询某个种类下面的商品平均价&#26684;：mysql&gt; select cat_id, avg(shop_price) from goods group by cat_id;</p>
+<p>那么我们可以创建针对这种平均价&#26684;的视图：mysql&gt; create view avgPrice as &nbsp;select cat_id, avg(shop_price) from goods group by cat_id;</p>
+<p>然后我们就可以通过普通的查询语句来<span style="color:#ff0000"><strong>简化查询</strong></span>了：</p>
+<p>mysql&gt; select * from avgPrice;</p>
+<p>&#43;——–&#43;—————–&#43;</p>
+<p>| cat_id | avg(shop_price) |</p>
+<p>&#43;——–&#43;—————–&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp;1 | &nbsp; &nbsp; &nbsp; &nbsp;2.133333 |</p>
+<p>| &nbsp; &nbsp; &nbsp;2 | &nbsp; &nbsp; &nbsp; &nbsp;5.595000 |</p>
+<p>&#43;——–&#43;—————–&#43;</p>
+<p>可以看到，通过视图我们可以简化查询操作，视图还有一个好处就是可以进行<span style="color:#ff0000"><strong>权限控制</strong></span>。比如：对于goods表，我们不想让别人看到我们的销售价&#26684;，这时候我们就可以把查看goods表的权限封闭，创建一张视图：mysql&gt; create view baseGoods as select goods_id,goods_name from goods;&nbsp;</p>
+<p>mysql&gt; select * from baseGoods;</p>
+<p>&#43;———-&#43;————&#43;</p>
+<p>| goods_id | goods_name |</p>
+<p>&#43;———-&#43;————&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;1 | 苹果 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;2 | 西瓜 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;3 | 香蕉 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;4 | 白菜 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;5 | 韭菜 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;6 | 茄子 &nbsp; &nbsp; &nbsp; |</p>
+<p>| &nbsp; &nbsp; &nbsp; &nbsp;7 | 哈密瓜 &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————&#43;</p>
+<p>这样就可以不出现销售价&#26684;列了。当然我们也可以修改视图，<strong>修改视图</strong>也比较简单：alter view 视图名 as select语句，比如对于avgPrice视图，我们还想看到商品名称：</p>
+<p>mysql&gt; alter view avgPrice as select cat_id,goods_name, avg(shop_price) from goods group by cat_id;</p>
+<p>mysql&gt; select * from avgPrice;</p>
+<p>&#43;——–&#43;————&#43;—————–&#43;</p>
+<p>| cat_id | goods_name | avg(shop_price) |</p>
+<p>&#43;——–&#43;————&#43;—————–&#43;</p>
+<p>| &nbsp; &nbsp; &nbsp;1 | 白菜 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp;2.133333 |</p>
+<p>| &nbsp; &nbsp; &nbsp;2 | 苹果 &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; &nbsp;5.595000 |</p>
+<p>&#43;——–&#43;————&#43;—————–&#43;</p>
+<p><strong>删除视图</strong>：mysql&gt; drop view avgPrice;</p>
+<h2 id="16）索引index"><a href="#16）索引index" class="headerlink" title="16）索引index"></a>16）索引index</h2><p>索引分<strong>单列索引</strong>和<strong>组合索引</strong>。单列索引，即一个索引只包含单个列，一个表可以有多个单列索引，但这不是组合索引。组合索引是一个索引包含多个列。</p>
+<p>对字段建立索引可以大大提高查询速度。假如我们创建了一个mytable表：</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>MySQL索引类型包括：</p>
+<p>（1）<strong><span style="color:#ff0000">普通索引</span></strong>，这是最基本的索引，它没有任何限制。它有以下几种创建方式：</p>
+<p>– 创建索引</p>
+<p>CREATE INDEX indexName ON mytable(username(10)); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; – 单列索引</p>
+<p>– CREATE INDEX indexName ON mytable(username(10),Id(11)); &nbsp; &nbsp; – 组合索引</p>
+<p>– indexName为索引名，mytable表名，username和Id为列名, 如果是CHAR，VARCHAR类型，前缀长度可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定前缀长度。</p>
+<p>#实例演示：创建普通索引</p>
+<p>mysql&gt; create index indexName on mytable(username(10));</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | MUL | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>#修改索引</p>
+<p>mysql&gt; alter table mytable add index indexName (username(10));</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | MUL | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>#删除索引</p>
+<p>mysql&gt; drop index indexName on mytable;</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>（2）<strong><span style="color:#ff0000">唯一索引</span></strong>：它与前面的普通索引类&#20284;，不同的就是：索引列的&#20540;必须唯一，但允许有空&#20540;。如果是组合索引，则列&#20540;的组合必须唯一。它有以下几种创建方式（仅仅在创建普通索引时关键字 INDEX 前加 UNIQUE</p>
+<p>#创建唯一索引</p>
+<p>mysql&gt; create unique index indexName on mytable(username(10));</p>
+<p>#修改唯一索引</p>
+<p>mysql&gt; alter table mytable add unique index indexName (username(10));</p>
+<p>#删除唯一索引</p>
+<p>mysql&gt; drop index indexName on mytable;</p>
+<p>（3）<strong><span style="color:#ff0000">主键索引</span></strong>：它是一种特殊的唯一索引，不允许有空&#20540;。在建表的时候同时创建的主键即为主键索引。主键索引无需命名，一个表只能有一个主键。主键索引同时可是唯一索引或者全文索引，但唯一索引或全文索引不能共存在同一索引。</p>
+<p>#通过修改表结构来创建主键索引</p>
+<p>mysql&gt; alter table mytable add primary key(ID);</p>
+<p>mysql&gt; desc mytable;</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| Field &nbsp; &nbsp;| Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>| ID &nbsp; &nbsp; &nbsp; | int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>| username | varchar(16) | NO &nbsp; | &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;———-&#43;————-&#43;——&#43;—–&#43;———&#43;——-&#43;</p>
+<p>（4）<strong><span style="color:#ff0000">全文索引</span></strong>：InnoDB存储引擎不支持全文索引</p>
+<p>#创建全文索引</p>
+<p>mysql&gt; create fulltext index indexName on mytable(username(10));</p>
+<p>#修改表结构来创建索引</p>
+<p>mysql&gt; alter table mytable add fulltext index indexName (username(10));</p>
+<p>#删除全文索引</p>
+<p>mysql&gt; drop index indexName on mytable;</p>
+<h2 id="17）存储过程Procedure"><a href="#17）存储过程Procedure" class="headerlink" title="17）存储过程Procedure"></a>17）存储过程Procedure</h2><p>存储过程：是一组为了<span style="color:#ff0000">完成特定功能的SQL语句集，经编译后存储在数据库中</span>，用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。MySQL存储过程创建的&#26684;式：create procedure 过程名 ([过程参数[,…]]) [特性 …] 过程体。比如要往表test1中插入10000条数据，此时用普通的插入语句显然不太现实，这时可以考虑存储过程，实例如下：</p>
+<p>mysql&gt; desc test1;</p>
+<p>&#43;——-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Field | Type &nbsp; &nbsp; &nbsp; &nbsp;| Null | Key | Default | Extra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>| Id &nbsp; &nbsp;| int(11) &nbsp; &nbsp; | NO &nbsp; | PRI | NULL &nbsp; &nbsp;| auto_increment |</p>
+<p>| name &nbsp;| varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>| value | varchar(10) | YES &nbsp;| &nbsp; &nbsp; | NULL &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|</p>
+<p>&#43;——-&#43;————-&#43;——&#43;—–&#43;———&#43;—————-&#43;</p>
+<p>#删除存储过程</p>
+<p>mysql&gt; drop procedure if exists pro_test1;</p>
+<p>#创建存储过程</p>
+<p>mysql&gt; delimiter //</p>
+<p>mysql&gt; create procedure pro_test1()</p>
+<p>&nbsp; &nbsp; -&gt; begin</p>
+<p>&nbsp; &nbsp; -&gt; &nbsp; declare i int default 1;</p>
+<p>&nbsp; &nbsp; -&gt; while i &lt; 10000 DO</p>
+<p>&nbsp; &nbsp; -&gt; insert into test1(name,value) value(‘name’&#43;i,’value’&#43;i);</p>
+<p>&nbsp; &nbsp; -&gt; set i = i &#43; 1;</p>
+<p>&nbsp; &nbsp; -&gt; end while;</p>
+<p>&nbsp; &nbsp; -&gt; end;</p>
+<p>&nbsp; &nbsp; -&gt; //</p>
+<p>mysql&gt; call pro_test1;–执行存储过程</p>
+<p>还可以在存储过程中使用<span style="color:#ff0000">自定义(用户)变量</span>，简单实例演示：</p>
+<p>mysql&gt; create procedure pro_bigworld() select concat(@greeting,’ world’);</p>
+<p>mysql&gt; set @greeting=’Hi’;</p>
+<p>mysql&gt; call pro_bigworld;</p>
+<p>&#43;—————————-&#43;</p>
+<p>| concat(@greeting,’ world’) |</p>
+<p>&#43;—————————-&#43;</p>
+<p>| Hi world &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |</p>
+<p>&#43;—————————-&#43;</p>
+<p>再看一个if-then-else语句：</p>
+<p>delimiter ;</p>
+<p>drop procedure if exists pro_test2;</p>
+<p>delimiter //</p>
+<p>create procedure pro_test2(IN para int)</p>
+<p>begin</p>
+<p>&nbsp;declare var1 int;</p>
+<p>&nbsp; &nbsp;set var1=para&#43;1;</p>
+<p>&nbsp; &nbsp;if var1=0 then</p>
+<p>&nbsp; &nbsp; &nbsp; insert into test1(name,value) values(‘var1name’,’var1value’&#43;0);</p>
+<p>&nbsp; &nbsp;end if;</p>
+<p>&nbsp; &nbsp;if para=0 then</p>
+<p>&nbsp; &nbsp; &nbsp; update test1 set value=value&#43;’0’;</p>
+<p>&nbsp; &nbsp;else</p>
+<p>&nbsp; &nbsp; &nbsp; update test1 set value=value&#43;’1’;</p>
+<p>&nbsp; &nbsp;end if;</p>
+<p>&nbsp; &nbsp;end;</p>
+<p>&nbsp; &nbsp;//</p>
+<p>mysql&gt; call pro_test2(1);</p>
+<p>mysql&gt; //</p>
+<p>mysql&gt; select * from test1;</p>
+<p>关于Mysql存储过程中的控制语句比较多，这里限于篇幅就不一一列举了。</p>
+<h2 id="18）事务Transaction"><a href="#18）事务Transaction" class="headerlink" title="18）事务Transaction"></a>18）事务Transaction</h2><p><strong><span style="color:#ff0000">事务几个基本特性:&nbsp;</span></strong>ACID</p>
+<p>原子性(atomicity)：事务在执行时，要做到“要么不做，要么全做”，也就是说不允许事务部分得执行。即使因为故障而使事务不能完成，在rollback时也要消除对数据库得影响！</p>
+<p>一致性(consistency)：在事务处理执行前后，数据库是一致的(两个账户要么都变，或者都不变)。</p>
+<p>隔离性(isolcation)：一个事务处理对另一个事务处理没有影响。</p>
+<p>持续性(durability)：事务处理的效果能够被永久保存下来 。</p>
+<p><span style="color:#ff0000"><strong>MYSQL的事务处理主要有两种方法:</strong></span></p>
+<p>1、用begin,rollback,commit来实现</p>
+<p>&nbsp; &nbsp; &nbsp;begin 开始一个事务</p>
+<p>&nbsp; &nbsp; &nbsp;rollback 事务回滚</p>
+<p>&nbsp; &nbsp; &nbsp;commit &nbsp;事务确认</p>
+<p>2、直接用set来改变mysql的自动提交模式</p>
+<p>&nbsp; &nbsp;MYSQL默认是自动提交的，也就是你提交一个QUERY，它就直接执行！我们可以通过</p>
+<p>&nbsp; &nbsp; &nbsp;select @@autocommit;//查看当前事务是否为自动提交(1为自动提交)</p>
+<p>&nbsp; &nbsp; &nbsp;set autocommit=0 &nbsp; 禁止自动提交</p>
+<p>&nbsp; &nbsp; &nbsp;set autocommit=1 开启自动提交</p>
+<p>&nbsp; &nbsp;来实现事务的处理。</p>
+<p>【<strong><span style="color:#ff0000">注意</span></strong>】当你用 set autocommit=0 的时候，你以后所有的SQL都将做为事务处理，直到你用commit确认或rollback结束，注意当你结束这个事务的同时也开启了个新的事务！按第一种方法只将当前的作为一个事务！</p>
+<h2 id="19）MySQL用户创建，授权以及删除"><a href="#19）MySQL用户创建，授权以及删除" class="headerlink" title="19）MySQL用户创建，授权以及删除"></a>19）MySQL用户创建，授权以及删除</h2><p>创建用户yy,密码123： create user yy identified by ‘123’;</p>
+<p>授权：grant all privileges on dbname.* to yy@localhost identified by ‘123’;</p>
+<p>授予用户yy查询数据库dbname中所有表的权限：grant select on dbname.* to yy;</p>
+<p>撤销用户yy查询数据库dbname中所有表的权限：revoke select on dbname.* from yy;</p>
+<p>删除用户：drop user yy;</p>
+<h2 id="20）select支持的运算操作"><a href="#20）select支持的运算操作" class="headerlink" title="20）select支持的运算操作"></a>20）select支持的运算操作</h2><p>select case 1 when 1 then ‘one’ when 2 then ‘two’ end;/<em>选择事件1：推荐使用单引号表示字符串</em>/</p>
+<p>select if(1&lt;2,’yes’,’no’);/<em>判断语句</em>/</p>
+<p>select char_length(‘qwert’);/<em>求字符长度</em>/</p>
+<p>select concat(‘my’,’sql’);/<em>连接字符串</em>/</p>
+<p>select locate(‘bar’,’foobarhat’);/<em>查找母串’bar’所在位置,若未找到则为0</em>/</p>
+<p>select substring(‘yichun university’,5,6);/<em>提取字串</em>/</p>
+<p>select trim(‘ bar ‘);;/<em>去掉前后空&#26684;</em>/</p>
+<p>select repeat(‘mysql’,3);/<em>mysql字符串重复3次</em>/</p>
+<p>select reverse(‘abcd’);/<em>反转</em>/</p>
+<p>select round(2.5);/<em>四舍五入到3</em>/</p>
+<p>select rand()<em>10;/</em>返回0~10之间的数*/</p>
+<p>select hex(‘cat’);/<em>查看ASCII码</em>/</p>
+<p>select true,false;/<em>输出1,0</em>/</p>
+<p>select now();/<em>显示当前日期时间</em>/</p>
+<p>select curtime();/<em>显示当前时间</em>/</p>
+<p>select current_time();/<em>显示当前时间</em>/</p>
+<p>select curdate();/<em>显示当前日期</em>/</p>
+<p>select current_date();/<em>显示当前日期</em>/</p>
+<p>select current_timestamp();/<em>显示当前时间戳</em>/</p>
+<p>select database();/<em>显示当前数据库</em>/</p>
+<p>select user();/<em>显示当前用户</em>/</p>
+<p>select version();/<em>显示当前mysql版本</em>/</p>
+<p>select database();/<em>显示当前打开的数据库</em>/</p>
+<p>select left(type_name,2) from test;/<em>查看test表中名为type_name列的所有&#20540;的前两个字母</em>/</p>
+<p>select right(type_name,2) from test;/<em>查看test表中名为type_name列的所有&#20540;的后两个字母</em>/</p>
+<h2 id="21）select支持的逻辑运算操作"><a href="#21）select支持的逻辑运算操作" class="headerlink" title="21）select支持的逻辑运算操作"></a>21）select支持的逻辑运算操作</h2><p>select 2&gt;1&amp;&amp;3&gt;2;/<em>逻辑与1</em>/</p>
+<p>select 2&gt;1 and 3&gt;2;/<em>逻辑与1</em>/</p>
+<p>select 1&gt;2 || 3&gt;2;/<em>逻辑或1</em>/</p>
+<p>select 1&gt;2 or 3&gt;2;/<em>逻辑或1</em>/</p>
+<p>select !(1&gt;2);/<em>逻辑非1</em>/</p>
+<p>select not(1&gt;2);/<em>逻辑非1</em>/</p>
+<p>select 15 ^ 2;/<em>逻辑异或：15的二进制1111，2的二进制0010，根据&quot;同0异1&quot;原则，结果为1101十进制13</em>/</p>
+<p>select 15 xor 2;/<em>逻辑异或：13</em>/</p>
+<p><strong><span style="color:#ff0000">附1：忘记密码</span></strong></p>
+<p>1.关闭正在运行的MySQL。</p>
+<p>2.打开DOS窗口，转到mysql\bin目录。</p>
+<p>3.输入mysqld –skip-grant-tables回车。如果没有出现提示信息，那就对了。</p>
+<p>4.再开一个DOS窗口(因为刚才那个DOS窗口已经不能动了)，转到mysql\bin目录。</p>
+<p>5.输入mysql回车，如果成功，将出现MySQL提示符 &gt;,接下来就可以修改密码了。</p>
+<p><strong><span style="color:#ff0000">附2：修改密码</span></strong></p>
+<p>方法一:</p>
+<p>(适用于管理员或者有全局权限的用户重设其它用户的密码)</p>
+<p>进入命令行模式</p>
+<p>mysql&gt; use mysql;</p>
+<p>mysql&gt; UPDATE user SET password=&quot;newPassword&quot; WHERE user=’name’;</p>
+<p>mysql&gt; FLUSH PRIVILEGES; //刷新权限</p>
+<p>mysql&gt; QUIT</p>
+<p>方法二:&nbsp;</p>
+<p>(应用同上,只是方法不同)</p>
+<p>mysql&gt; SET PASSWORD FOR name=PASSWORD(‘new password’);</p>
+<p>mysql&gt; QUIT</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/16 17:54:19 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45725317)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1507 评论：1 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45725317#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/" data-id="cj8yn9vi0000po49zp3iwc2ws" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-Java学习系列博客全目录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/08/原-Java学习系列博客全目录/" class="article-date">
+  <time datetime="2015-05-08T15:22:13.000Z" itemprop="datePublished">2015-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/08/原-Java学习系列博客全目录/">[原]Java学习系列博客全目录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="font-size:20px; line-height:25px">截止目前，Java系列教程已更新完毕。内容覆盖了：JavaSE基本知识点、UML建模、单元测试等。希望对想学习Java语言的朋友能够提供帮助。</span><span style="line-height:25.1875px; font-size:20px">在编写的过程中，难免会出现一些错误，希望大家能多多提些意见。</span></p>
+<p><span style="line-height:25.1875px; font-size:20px"></span></p>
+<p></p>
+<p><span style="font-size:20px"></span></p>
+<p><span style="font-size:20px">由于本书都是从笔者CSDN博客中摘抄过来的，基本没有经过什么正规的校验，所以难免会出现一些不对的地方。欢迎各位大牛对本书提出批评。</span></p>
+<p><span style="font-size:20px"></span></p>
+<p></p>
+<p><span style="font-size:20px"></span></p>
+<p><span style="font-size:18px"><strong>作者博客</strong>：<a href="http://blog.csdn.net/lhy_ycu" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu</a></span></p>
+<p><span style="font-size:18px"><strong>作者邮箱</strong>：lhy_ycu@163.com</span></p>
+<p><span style="font-size:20px"></span></p>
+<p></p>
+<p><span style="font-size:20px"><strong>笔者声明：该电子书由ITeye提供电子书DIY功能制作并发行。</strong></span></p>
+<p><span style="font-size:20px"><strong>阅读过程中有什么不懂或者不是很清楚的地方，可以发我邮箱。</strong></span></p>
+<p><span style="font-size:20px">**</span></p>
+<p>**</p>
+<p><span style="font-size:20px"></span></p>
+<p><span style="font-size:24px"><strong>下载地址：</strong><span style="line-height:25.1875px"><a href="http://www.iteye.com/blog/download_pdf/12124" target="_blank" rel="external"></a><a href="http://download.csdn.net/detail/jave_lover/7012693" target="_blank" rel="external"></a></span><a href="http://download.csdn.net/download/jave_lover/8677857" target="_blank" rel="external"><strong>http://download.csdn.net/download/jave_lover/8677857</strong></a></span></p>
+<p><span style="font-size:20px"></span></p>
+<p></p>
+<p><span style="font-size:20px"><span style="font-family:Arial; line-height:26px">附本教程目录：</span></span></p>
+<p><span style="font-size:18px; color:#ff0000">**<a href="http://blog.csdn.net/lhy_ycu/article/details/11857617" target="_blank" rel="external">Java学习系列(一)Java的运行机制、JDK的安装配置及常用命令详解</a></span></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/11881343" target="_blank" rel="external">Java学习系列(二)Java注释、标识符、基本数据类型及其转换易错点详解</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/11907873" target="_blank" rel="external">Java学习系列(三)Java运算符、控制语句、数组及其在内存中的运行分析</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/11928409" target="_blank" rel="external">Java学习系列(四)Java面向对象之修饰符、封装、继承、多态详解</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/11971455" target="_blank" rel="external">Java学习系列(五)Java面向对象之抽象类、接口、内部类、枚举类详解</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/12126693" target="_blank" rel="external">Java学习系列(六)Java面向对象之Jar命令、正则表达式、国际化详解</a></p>
+<p>[Java学习系列(七)Java面向对象之集合框架详解(上)</p>
+<p>](<a href="http://blog.csdn.net/lhy_ycu/article/details/12174825)[Java学习系列(八)Java面向对象之集合框架详解(下)](http://blog.csdn.net/lhy_ycu/article/details/14166535" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/12174825)[Java学习系列(八)Java面向对象之集合框架详解(下)](http://blog.csdn.net/lhy_ycu/article/details/14166535</a>)</p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/14225521" target="_blank" rel="external">Java学习系列(九)Java面向对象之异常机制详解</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/14497771" target="_blank" rel="external">Java学习系列(十)Java面向对象之I/O流(上)</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/14526091" target="_blank" rel="external">Java学习系列(十一)Java面向对象之I/O流(下)</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/15337379" target="_blank" rel="external">Java学习系列(十二)Java面向对象之序列化机制及版本</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/15407557" target="_blank" rel="external">Java学习系列(十三)Java面向对象之界面编程</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/16917813" target="_blank" rel="external">Java学习系列(十四)Java面向对象之细谈线程、线程通信(上)</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/16920247" target="_blank" rel="external">Java学习系列(十五)Java面向对象之细谈线程、线程通信(下)</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/16924575" target="_blank" rel="external">Java学习系列(十六)Java面向对象之基于TCP协议的网络通信</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/16948453" target="_blank" rel="external">Java学习系列(十七)Java面向对象之开发聊天工具</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/16952769" target="_blank" rel="external">Java学习系列(十八)Java面向对象之基于UDP协议的网络通信</a></p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/16964471" target="_blank" rel="external">Java学习系列(十九)Java面向对象之数据库编程</a>**</p>
+<p><span style="font-size:18px; color:#ff0000">**<a href="http://blog.csdn.net/lhy_ycu/article/details/45289391" target="_blank" rel="external">Java学习系列(二十)Java面向对象之反射详解</a></span></p>
+<p>**</p>
+<p><span style="font-size:18px; color:#ff0000">**<a href="http://blog.csdn.net/lhy_ycu/article/details/45295947" target="_blank" rel="external">Java学习系列(二十一)Java面向对象之注解详解</a></span></p>
+<p>**</p>
+<p><span style="font-size:18px; color:#ff0000">**<a href="http://blog.csdn.net/lhy_ycu/article/details/45332565" target="_blank" rel="external">Java学习系列(二十二)Java面向对象之枚举详解</a></span></p>
+<p>**</p>
+<p><a href="http://blog.csdn.net/lhy_ycu/article/details/45372395" target="_blank" rel="external"><span style="font-size:18px; color:#ff0000"><strong>Java学习系列(二十三)Java面向对象之内部类详解</strong></span></a></p>
+<p><span style="font-size:18px; color:#ff0000">**<a href="http://blog.csdn.net/lhy_ycu/article/details/45501777" target="_blank" rel="external">Java学习系列(二十四)Java正则表达式详解</a></span></p>
+<p>**</p>
+<p>###<br><a href="http://blog.csdn.net/lhy_ycu/article/details/45281449" target="_blank" rel="external"><span style="font-size:18px; color:#ff0000">Java学习系列(二十五)基于Junit3.8和Junit4.x的单元测试详解</span></a></p>
+<div><br><br>###<br><a href="http://blog.csdn.net/lhy_ycu/article/details/45506549" target="_blank" rel="external"><span style="font-size:18px; color:#ff0000">&nbsp;Java学习系列(二十六)Java代码优化讲解</span></a><br><br><div><br><br>###<br><a href="http://blog.csdn.net/lhy_ycu/article/details/39528467" target="_blank" rel="external"><span style="font-size:18px; color:#ff0000">Java学习系列(二十七)UML建模的理解和图形整理(一)<span class="actions" style="font-style:italic">&nbsp;</span></span></a><br><br>###<br><br>###<br><a href="http://blog.csdn.net/lhy_ycu/article/details/39561781" target="_blank" rel="external"><span style="font-size:18px; color:#ff0000">&nbsp;Java学习系列(二十八)UML建模的理解和图形整理(二)</span></a><br><br><div><br><br>###<br><span style="font-size:18px; color:#ff0000">&nbsp;<a href="http://blog.csdn.net/lhy_ycu/article/details/39577037" target="_blank" rel="external">Java学习系列(二十九)UML建模的理解和图形整理(三)<span class="actions" style="font-style:italic">&nbsp;</span></a></span><br><br></div><br></div><br></div>
+
+<p># </p>
+<p><span style="font-size:20px"></span></p>
+<p></p>
+<p><span style="font-size:20px"></span></p>
+<p></p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/8 23:22:13 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45587169)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1089 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45587169#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/08/原-Java学习系列博客全目录/" data-id="cj8yn9vfe0009o49zo2pdmmt5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-Java代码优化系列-一-开篇立碑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/06/原-Java代码优化系列-一-开篇立碑/" class="article-date">
+  <time datetime="2015-05-05T18:04:42.000Z" itemprop="datePublished">2015-05-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/06/原-Java代码优化系列-一-开篇立碑/">[原]Java代码优化系列(一)开篇立碑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="font-family:Arial; font-size:18px; line-height:26px; text-align:left; color:rgb(255,0,0)">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45332565" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45506549" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45506549</a></p>
+<p>在开篇之前，先补充一下《<a href="http://blog.csdn.net/lhy_ycu/article/details/11935087" target="_blank" rel="external">Java学习系列</a>》里面的instanceof关键字的使用及其陷阱。简要说明：instanceof是一个简单的二元操作符，它是用来判断一个对象是否为一个类的实例。只要instanceof左右操作数有继承或实现的关系，程序都是可以编译通过的。下面通过一个简单实例来说明一下instanceof关键字的使用及其陷阱：</p>
+<pre code_snippet_id="659776" snippet_file_name="blog_20150507_1_3672713" name="code" class="java">class A&lt;T&gt; {
+    public boolean isDateInstance(T t) {
+        return t instanceof Date;
+    }
+}
+
+public class InstanceofTest {
+
+    public static void main(String[] args) {
+        // true。一个String对象是Object实例(java中Object是所有类的父类)
+        System.out.println(&quot;zhangsan&quot; instanceof Object);
+        // false。Object是父类，它的对象明显不是String类的实例
+        System.out.println(new Object() instanceof String);
+        // true。一个String对象是String的实例
+        System.out.println(new String() instanceof String);
+        // 编译不能通过。&#39;a&#39; 为一个char类型，即基本类型
+        System.out.println(&#39;a&#39; instanceof Character);
+        // false。只要左操作数为null(本质是无类型)，那么结果就直接返回false
+        System.out.println(null instanceof String);
+        // false。即使将null强转也还是个null
+        System.out.println((String) null instanceof String);
+        // 编译不能通过。因为Date和String并没有继承或实现关系
+        System.out.println(new Date() instanceof String);
+        // false。在编译成字节码时，T已经是Object类型了，由于传递了一个&quot;lisi&quot;实参字符串，所以T实际是String类型了。
+        System.out.println(new A().isDateInstance(&quot;lisi&quot;));
+        List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+        // 编译不能通过。instanceof不允许存在泛型参数。
+        System.out.println(list instanceof List&lt;String&gt;);
+    }
+}</pre>
+
+<p><strong><span style="color:#ff0000">【注意】instanceof只能用于对象的判断，不能用于基本类型的判断。</span></strong></p>
+<p>下面开始正式进入主题，先从一个自增的陷阱开始吧。</p>
+<h3 id="1）自增的陷阱"><a href="#1）自增的陷阱" class="headerlink" title="1）自增的陷阱"></a>1）自增的陷阱</h3><pre code_snippet_id="659776" snippet_file_name="blog_20150506_2_8462968" name="code" class="java">int num = 0;
+for (int i = 0; i &lt; 100; i++) {
+    num = num++;
+}
+System.out.println(&quot;num = &quot; + num);</pre>打印结果是什么呢？答案是0，为什么呢？先看看执行步骤吧，程序第一次循环时的详细步骤如下：JVM把num&#20540;（0）拷贝到临时变量区，然后num&#20540;加1，这是num的&#20540;为1，接着返回临时变量区的&#20540;，注意这个&#20540;是1没修改过，最后将返回&#20540;赋给num，此时num的&#20540;被重置为了0。简单说来就是int temp = num; num &nbsp;&#43;= 1; return temp;这3步。所以打印结果还是0，num始终保持着原来的状态。
+
+**<span style="color:#ff0000">优化：将num=num&#43;&#43;; 修改为num&#43;&#43;即可。</span>**
+
+### 2）常量竟成变量？
+
+大家想想，常量有可能成为变量吗？答案是有可能，只不过这种做法是不被认同的。
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_3_1098375" name="code" class="java">public static final int RAND_CONST = new Random().nextInt();
+
+public static void main(String[] args) {
+    // 通过打印几次，可以看到结果变了，也就是说常量在定义的时候就没有保证它的值运行期保持不变
+    System.out.println(&quot;常量变了吗？&quot; + RAND_CONST);
+}</pre><span style="color:#ff0000">**优化建议：务必常量的&#20540;在运行期保持不变**</span>，所以可以让RAND_CONST在定义时直接赋&#20540;写死。
+
+### 3）“l” 你能看出这个字母是i的大写、数字1还是字母l的小写？
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_4_3939690" name="code" class="java">public static  long l = 11;</pre>
+
+<p><span style="color:#ff0000"><strong>优化：字母后缀l尽量大写L</strong></span></p>
+<h3 id="4）三目运算符的类型不一致？"><a href="#4）三目运算符的类型不一致？" class="headerlink" title="4）三目运算符的类型不一致？"></a>4）三目运算符的类型不一致？</h3><pre code_snippet_id="659776" snippet_file_name="blog_20150506_5_2331579" name="code" class="java">int i = 70;
+System.out.println(i &lt; 100 ? 80 : 90.0);</pre>打印结果出人意料，结果竟然为80.0，这是为什么呢？i&lt;100确实为true，但由于最后一个操作数为90.0，是一个浮点数，这时编译器会将第二个操作数80转为80.0浮点数，统一结果类型，所以打印结果为80.0。
+
+<span style="color:#ff0000">**优化：90.0改为90**</span>
+
+### **5)不要重载含有变长参数的方法**
+
+简要说明：变长参数必须是方法的最后一个参数，且一个方法不能定义多个变长参数。
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_6_1378935" name="code" class="java">public class Test01 {
+    public static void fruitPrice(int price, int discount) {
+        float realPrice = price * discount / 100.0F;
+        System.out.println(&quot;非变长参数得出的结果：realPrice = &quot; + realPrice);
+    }
+
+    public static void fruitPrice(int price, int... discounts) {
+        float realPrice = price;
+        for (int discount : discounts) {
+            realPrice = price * discount / 100.0F;
+        }
+        System.out.println(&quot;变长参数得出的结果：realPrice = &quot; + realPrice);
+    }
+
+    public static void main(String[] args) {
+        fruitPrice(48888, 85);
+    }
+}</pre>
+
+<p>打印结果是什么呢？答案是：非变长参数得出的结果：realPrice = 41554.8，也就是程序执行的是第一个方法，而没有执行变长参数方法，这是为什么呢？因为Java在编译时，首先会根据实参的数量和类型（这里是2个都是int类型的实参，注意没有转成int数组）来进行处理，也就是找到fruitPrice(int price, int discount)方法，而且确认它符合方法签名条件，由于编译器也爱“偷懒”，所以程序会执行第一个方法。再看一个：</p>
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_7_5020306" name="code" class="java">public class Test02 {
+    public void method1(String str, Integer... integers) {
+        System.out.println(&quot;变长参数类型为Integer的方法被调用...&quot;);
+    }
+
+    public void method1(String str, String... strs) {
+        System.out.println(&quot;变长参数类型为String的方法被调用...&quot;);
+    }
+
+    public static void main(String[] args) {
+        Test02 t = new Test02();
+        // 编译不通过。虽然两个方法都符合要求，但编译器并不知道调用哪一个，于是就报错了。
+        t.method1(&quot;test02&quot;);
+        // 编译不通过。因为[直接量null是没有类型的]，理由同上。
+        t.method1(&quot;test02&quot;, null);
+    }
+
+}</pre>
+
+<p>对于t.method(&quot;test02&quot;,null);如果我们提前声明String[] strs = null或者Integer[] ints = null;也就是让编译器知道这个null是String或者Integer类型的，那么就可以通过编译了。</p>
+<h3 id="6）慎用静态导入"><a href="#6）慎用静态导入" class="headerlink" title="6）慎用静态导入"></a>6）慎用静态导入</h3><p>这点比较容易理解，因为静态导入的作用是将某个类的类成员(静态变量、静态方法)引入到本类中，而如果此时刚好本类中也有同名的类成员，那么这样便可能产生混淆，后面维护起来也比较麻烦。</p>
+<p><span style="color:#ff0000"><strong>优化：类型.类成员</strong></span></p>
+<h3 id="7）-不要让类型默默转换"><a href="#7）-不要让类型默默转换" class="headerlink" title="7） 不要让类型默默转换"></a>7） 不要让类型默默转换</h3><pre code_snippet_id="659776" snippet_file_name="blog_20150506_8_6511518" name="code" class="java">public class Test03 {
+    // 光速为30万公公里
+    public static final int LIGHT_SPEED = 30 * 10000 * 1000;
+
+    public static void main(String[] args) {
+        long distance = 8 * 60 * LIGHT_SPEED;
+        // 打印结果(为负数)：地球与太阳的距离为：-2028888064
+        System.out.println(&quot;地球与太阳的距离为：&quot; + distance);
+    }
+}</pre>为什么是负数呢？这是因为**<span style="color:#ff0000">Java是先运算再进行类型转换的</span>**。distance的3个运算参数都是int类型，三者结果相等虽然也是int类型，但已经超过了int取&#20540;的最大范围，所以为负数，这样再转为long型，结果仍是负数。解决方案：long distance = 1L * 8 * 60 * LIGHT_SPEED;1L是个长整型，右边等式类型自动升级，计算出来的结果也是长整型。
+
+**<span style="color:#ff0000">优化：基本类型转换时，最好使用主动声明的方式参与运算。</span>**
+
+### 8）包装类性&#20540;为null?
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_9_5591893" name="code" class="java">public static void main(String[] args) {
+    List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+    // 自动装箱(基本类型转为包装类型)。装箱过程是调用valueOf方法实现的。
+    list.add(1);
+    list.add(2);
+    list.add(null);
+    // 自动拆箱(包装类型转为基本类型)。拆箱过程默认调用包装对象的intValue方法实现的。
+    int count = 0;
+    for (int item : list) {
+        count += item;
+    }
+    System.out.println(&quot;count = &quot; + count);
+}</pre>运行结果报异常java.lang.NullPointerException。原因很简单：拆箱过程默认调用包装对象的intValue方法实现的，由于包装类是null&#20540;，所以就报空指针异常了。解决方案：
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_10_2130994" name="code" class="java">for (Integer item : list) {
+    count += (item == null) ? 0 : item;
+}</pre>
+
+<p><strong><span style="color:#ff0000">优化：包装类型参与运算时，要做null校验。</span></strong></p>
+<h3 id="9）让工具类不可实例化"><a href="#9）让工具类不可实例化" class="headerlink" title="9）让工具类不可实例化"></a>9）让工具类不可实例化</h3><p>工具类的方法和属性都是静态的，不需要生成实例即可访问，而且其类成员在内存中只有一份拷贝，jdk也做了很好的处理。由于不希望被初始化，于是就设置其构造函数为私有（private）访问权限。</p>
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_11_749752" name="code" class="java">public class UtilClass {
+    // 构造器私有化
+    private UtilClass() {
+
+    }
+}</pre>但这样有个问题，就是在工具类里面可能方法很多，无意间new了一个新的对象，一时间也没有发现。这样就没有达到真正不需要生成实例的目的。
+
+**<span style="color:#ff0000">优化：使用工具类时，要保证所有的访问都是通过类名进行的。</span>**
+
+<pre code_snippet_id="659776" snippet_file_name="blog_20150506_12_2338382" name="code" class="java">public class UtilClass {
+    // 构造器私有化
+    private UtilClass() {
+        throw new Error(&quot;please don&#39;t instantial this util class...&quot;);
+    }
+}</pre>
+
+<p>### </p>
+<p></p><h3><span style="font-size:14px">10）不要在循环条件中带有计算</span><p></p>
+<p><span style="font-weight:normal"><span style="font-size:12px">如果在循环(for、while等)条件中计算，则每次循环都得计算一遍，这样就会降低，例如：</span></span></p>
+<p><span style="font-weight:normal"></span><pre code_snippet_id="659776" snippet_file_name="blog_20150507_13_1693939" name="code" class="java">while (n &lt; count * 2) {<br>    //…<br>}</pre></p>
+<p><span style="color:#ff0000">优化：将while里面的运算提取即可</span></p></h3><p></p>
+<div><pre code_snippet_id="659776" snippet_file_name="blog_20150507_14_4885752" name="code" class="java">int total = count * 2;<br>while (n &lt; total) {<br>    //…<br>}</pre></div>
+
+<h3 id="11）不要主动进行垃圾回收"><a href="#11）不要主动进行垃圾回收" class="headerlink" title="11）不要主动进行垃圾回收"></a>11）不要主动进行垃圾回收</h3><p>尽量不要调用System.gc();来主动对垃圾进行回收。<strong><span style="color:#ff0000">因为System.gc它会停止所有响应，才能检查内存中是否有可回收的对象。把所有对象都检查一遍，然后处理掉那些垃圾对象</span></strong>。这对一个应用系统来说风险极大，如果是一个web项目，调用System.gc它会让所有的请求都暂停，等待垃圾回收器执行完毕(可能会严重影响正常业务运行)，如果web项目里面对象很多，那么System.gc执行的时间会非常耗时，所以最好不要主动进行垃圾回收。</p>
+<h3 id="12）静态变量一定要先声明后赋-20540-（或使用）"><a href="#12）静态变量一定要先声明后赋-20540-（或使用）" class="headerlink" title="12）静态变量一定要先声明后赋&#20540;（或使用）"></a>12）静态变量一定要先声明后赋&#20540;（或使用）</h3><p><pre code_snippet_id="659776" snippet_file_name="blog_20150506_13_6720943" name="code" class="java">public class Test01 {<br>    static {<br>        num = 20;<br>    }<br>    public static int num = 2;</pre></p>
+<pre><code>public static void main(String[] args) {
+    System.out.println(num);
+}
+</code></pre><p>}大家想想，结果是多少呢？打印结果是：2。为什么呢？这是因为静态变量(类变量)是类加载时被分配到数据区，<strong><span style="color:rgb(255,0,0)">它在内存中只有一份拷贝，</span></strong>详细说来就是：<span style="color:#ff0000">静态变量是在类初始化时首先被加载的，而JVM会去查找类中所有的静态声明，然后分配地址空间(此时还没有赋&#20540;)，之后JVM会根据类中静态赋&#20540;（包括静态类赋&#20540;和静态代码块赋&#20540;）的先后顺序来执行</span>。</p>
+<p><strong><span style="color:#ff0000">优化：静态变量先声明后使用。</span></strong></p>
+<h2 id="补充1——字符串常量池"><a href="#补充1——字符串常量池" class="headerlink" title="补充1——字符串常量池"></a>补充1——字符串常量池</h2><p>大家都知道，Java中的对象是保存在堆内存中的，但是字符串(常量)池非常特殊，<strong><span style="color:rgb(255,0,0)">它在编译期就已经决定了其存在JVM的常量池中，垃圾回收器是不会对它进行回收的</span></strong>。它的创建机制是这样的：创建一个字符串时，首先检查池中是否有字符序列相等的字符串，如果有则不再创建，直接返回池中该对象的引用；若没有则创建之，然后放入池中并返回创建对象的引用。下面看一个实例：</p>
+<p><pre code_snippet_id="659776" snippet_file_name="blog_20150507_16_5979086" name="code" class="java">public class Test {<br>    public static void main(String[] args) {<br>        String str1 = &quot;java代码优化&quot;;<br>        String str2 = &quot;java代码优化&quot;;<br>        String str3 = new String(&quot;java代码优化&quot;);<br>        String str4 = str3.intern();</pre></p>
+<pre><code>    System.out.println(str1 == str2);
+    System.out.println(str1 == str3);
+    System.out.println(str1 == str4);
+}
+</code></pre><p>}结果是什么呢？答案是true、false、true。解析：创建第一个字符串&quot;java代码优化&quot;时，首先检查字符串池中是否有该对象，发现没有，于是就创建第一个&quot;java代码优化&quot;这个字符串并放入池中，待再创建str2字符串时，由于池中已经有了该字符串，于是就直接返回了该对象的引用，此时str1与str2指向的是同一个地址，所有str1==str2返回true。而new String(&quot;java代码优化&quot;)声明的是一个String对象，是不检查字符串池，也不会把对象放入池中，那当然返回false了。而使用intern方法为什么会返回true呢？因为intern会检查当前对象在池中是否有字符序列相等的引用对象，如果有则返回true，如果没有则返回false。</p>
+<p><strong><span style="color:rgb(255,0,0)">优化建议：若没有特殊要求，推荐使用String直接量赋&#20540;</span></strong></p>
+<h3 id="补充2——String、StringBuffer（线程安全）、StringBuilder-线程不安全-的使用场景"><a href="#补充2——String、StringBuffer（线程安全）、StringBuilder-线程不安全-的使用场景" class="headerlink" title="补充2——String、StringBuffer（线程安全）、StringBuilder(线程不安全)的使用场景"></a>补充2——String、StringBuffer（线程安全）、StringBuilder(线程不安全)的使用场景</h3><p>①String的使用场景：在字符串不经常变化的场景中使用String类，例如常量的声明、少量的变量运算等。</p>
+<p>②StringBuffer的使用场景：在频繁进行字符串运算（如：字符串拼接、替换、删除等），并且运行在多线程环境中，则可以考虑使用StringBuffer，例如：XML解析、HTTP参数解析和封装等。</p>
+<p>③StringBuilder的使用场景：在频繁进行字符串运算（如：字符串拼接、替换、删除等），并且运行在单线程环境中，则可以考虑使用StringBuilder，例如：SQL语句的封装、JSON封装等。</p>
+<p>参考文献：《编写高质量代码》</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/6 2:04:42 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45506549)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1555 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45506549#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/06/原-Java代码优化系列-一-开篇立碑/" data-id="cj8yn9vdo0002o49z7gvkan1n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-Java学习系列-二十四-Java正则表达式详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/05/原-Java学习系列-二十四-Java正则表达式详解/" class="article-date">
+  <time datetime="2015-05-05T09:22:00.000Z" itemprop="datePublished">2015-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/05/原-Java学习系列-二十四-Java正则表达式详解/">[原]Java学习系列(二十四)Java正则表达式详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div><span style="font-size:18px"><span style="font-family:Arial; line-height:26px; text-align:left; color:rgb(255,0,0)">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45332565" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45501777" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45501777</a></span><br><br></div><br><div><br><br></div>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><div><br><br></div>
+
+<p>正则表达式可以说是用来处理字符串的一把利器，它是一个专门匹配n个字符串的字符串模板，本质是查找和替换。在实例演示之前先了解一下Pattern、Matcher这两个工具类，Pattern：编译好的带匹配的模板(如：Pattern.compile(&quot;[a-z]{2}&quot;);/ / 取2个小写字母)；Matcher：匹配目标字符串后产生的结果(如：pattern.matcher(&quot;目标字符串&quot;);)。字符串还有一个自带的matches方法用来判断目标字符串是否匹配给定的正则表达式，&#26684;式为：targetStr.matches(regex);<br> 返回类型为boolean。</p>
+<h1 id="基本使用方式"><a href="#基本使用方式" class="headerlink" title="基本使用方式"></a>基本使用方式</h1><div><br><br></div>
+
+<h3 id="nbsp-一-支持的基本通配符："><a href="#nbsp-一-支持的基本通配符：" class="headerlink" title="&nbsp;(一)支持的基本通配符："></a>&nbsp;(一)支持的基本通配符：</h3><p>. &nbsp; -可以匹配任意字符</p>
+<p>\s &nbsp;-代表一个任意空白(空&#26684;、Tab)。</p>
+<p>\S &nbsp;-代表一个任意的非空白。</p>
+<p>\d &nbsp;-代表一个任意的数字(digital)。</p>
+<p>\D &nbsp;-代表一个任意的非数字。</p>
+<p>\w &nbsp;-代表一个单词字符。</p>
+<p>-W &nbsp;-代表一个任意的非单词字符</p>
+<p><strong><span style="color:#ff0000">注意：对于特殊字符，实际使用时记住要转义\</span> </strong>，如：( ) [ ] { } \ ? * &#43; ^（一行的开头） $（一行的结尾）|</p>
+<h3 id="二-取-20540-范围（用作出现次数的“副词”）"><a href="#二-取-20540-范围（用作出现次数的“副词”）" class="headerlink" title="(二)取&#20540;范围（用作出现次数的“副词”）"></a>(二)取&#20540;范围（用作出现次数的“副词”）</h3><p>? –代表它前面的东西可以出现0~1次</p>
+<ul>
+<li>–代表它前面的东西可以出现0~N次 <span style="white-space:pre"></span></li>
+</ul>
+<p>&#43; –代表它前面的东西可以出现1~N次</p>
+<p>{n,m} –代表它前面的东西可以出现n~m次</p>
+<p>{n,} –代表它前面的东西至少出现n次</p>
+<p>{,m} –代表它前面的东西最多出现m次</p>
+<p>{n} –代表它前面的东西必须出现n次</p>
+<h3 id="三-方括号表达式"><a href="#三-方括号表达式" class="headerlink" title="(三)方括号表达式"></a>(三)方括号表达式</h3><p>枚举：[ab1] &nbsp;–代表a或b或者1。</p>
+<p>范围：[a-c] &nbsp;–代表a,b,c中的任意一个字符。</p>
+<p>枚举与范围：[a-c1-3]–代表a,b,c,1,2,3中的任意一个字符。</p>
+<p>表示求否：[^a-c] –代表不含a,b,c其中任意一个字符。</p>
+<p>表示求交：[a-g&amp;&amp;[^b-d]]：–代表a,e,f,g中的任意一个字符。</p>
+<p>表示必须含有其中之一：(com|org|cn)</p>
+<p><strong><span style="color:#ff0000">总结：一个字符用\，多个字符用[]，字符次数用{}&nbsp;</span></strong></p>
+<h1 id="实例说明"><a href="#实例说明" class="headerlink" title="实例说明"></a>实例说明</h1><div><br><br></div>
+
+<p><strong>（一）基本用法演示：</strong></p>
+<pre code_snippet_id="659442" snippet_file_name="blog_20150505_1_8684912" name="code" class="java">/**
+ * 正则表达式实例演示说明
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年5月5日 下午2:27:50
+ */
+
+public class RegexTest {
+
+    public static void main(String[] args) {
+        // 单个字符
+        System.out.println(&quot;a&quot;.matches(&quot;.&quot;));
+        // 0~1个a
+        System.out.println(&quot;a&quot;.matches(&quot;a?&quot;));
+        // 1~N个a
+        System.out.println(&quot;aaaa&quot;.matches(&quot;a+&quot;));
+        // 0~N个a
+        System.out.println(&quot;&quot;.matches(&quot;a*&quot;));
+        // 1~N个q和1个0~9之间的数字
+        System.out.println(&quot;qqqqqq3&quot;.matches(&quot;q+[0-9]&quot;));
+        // 12~100个数字
+        System.out.println(&quot;12345667890123&quot;.matches(&quot;\\d{12,100}&quot;));
+        // 0~3个数字分别以.分割
+        System.out.println(&quot;192.168.0.1&quot;
+                .matches(&quot;\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}&quot;));
+        // 第一个数字0~2，第二个数字0~9，第三个数字0~9
+        System.out.println(&quot;192&quot;.matches(&quot;[0-2][0-9][0-9]&quot;));
+        // 4个任意空白
+        System.out.println(&quot; \n\r\t&quot;.matches(&quot;\\s{4}&quot;));
+        // 特殊字符\需转义
+        System.out.println(&quot;\\&quot;.matches(&quot;\\\\&quot;));
+        // 以h开头，中间有0~N个字符，最后以o结尾
+        System.out.println(&quot;hello&quot;.matches(&quot;^.*o$&quot;));
+        // 以h开头，中间1~3个字母尾随一个o，接着空白连着0~N个字符并以d结尾
+        System.out.println(&quot;hello world&quot;.matches(&quot;^h[a-z]{1,3}o\\b.*d$&quot;));
+        // 以任意空白且不以换行开头为开头，并以换行结尾
+        System.out.println(&quot;   \n&quot;.matches(&quot;^[\\s&amp;&amp;[^\\n]]*\\n$&quot;));
+        // 0~N个字符，连接4个数字和一个字符
+        System.out.println(&quot;aaa 2222q&quot;.matches(&quot;.*\\d{4}.&quot;));
+    }
+
+}</pre>
+
+<p><strong>（二）实际应用演示：</strong></p>
+<p>1、读取网页中所有的邮箱地址</p>
+<pre code_snippet_id="659442" snippet_file_name="blog_20150505_2_1320319" name="code" class="java">/**
+ * 读取某个网页中的所有邮箱地址--基本查找
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年5月5日 下午4:20:00
+ */
+
+public class EmailTest {
+
+    public static void main(String[] args) {
+        // 1~N个单词(可能含有.、-)连接 @1~N个单词连着 . 最后以com|org|cn|net其中之一结尾
+        String emailTemplate = &quot;[\\w[.-]]+@[\\w]+\\.(com|org|cn|net)&quot;;
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(
+                    &quot;d:\\email.html&quot;)));
+            String line = null;
+            StringBuffer sb = new StringBuffer();
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append(&quot;\n&quot;);
+            }
+            parse(sb.toString(), emailTemplate);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+
+    }
+
+    /**
+     * 打印网页中的所有邮箱地址
+     * 
+     * @param targetStr
+     *            目标字符串
+     * @param template
+     *            待编译的正则模板
+     */
+    public static void parse(String targetStr, String template) {
+        if (targetStr == null || template == null) {
+            return;
+        }
+        // 获取编译好的待匹配的模板
+        Pattern pattern = Pattern.compile(template);
+        // 获取匹配目标字符串后产生的结果
+        Matcher matcher = pattern.matcher(targetStr);
+        // 若查找下一个匹配正则表达式的字符串
+        while (matcher.find()) {
+            // 则取出上一次与正则表达式匹配的字串。
+            System.out.println(&quot;=======&quot; + matcher.group());
+        }
+    }
+
+}
+</pre>
+
+<p>2、代码行数统计：</p>
+<pre code_snippet_id="659442" snippet_file_name="blog_20150505_3_9325876" name="code" class="java">/**
+ * 代码统计：遍历某个项目的源文件的代码行数。
+ * 
+ * 包括：空白行数、代码行数、注释行数。
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年5月5日 下午4:40:12
+ */
+
+public class CodeCounter {
+    /**
+     * 空白行数
+     */
+    private static long whiteLines = 0;
+    /**
+     * 代码行数
+     */
+    private static long normalLines = 0;
+    /**
+     * 注释行数
+     */
+    private static long commentLines = 0;
+
+    public static void main(String[] args) {
+         File srcDir = new File(&quot;D:\\workspace\\android\\Abc\\src&quot;);
+        myList(srcDir);// 遍历所java源文件
+        System.out.println(&quot;whiteLines = &quot; + whiteLines);
+        System.out.println(&quot;normalLines = &quot; + normalLines);
+        System.out.println(&quot;commentLines = &quot; + commentLines);
+        System.out.println(&quot;totalLines = &quot; + getTotalLines());
+    }
+
+    /**
+     * 获取总行数
+     */
+    private static long getTotalLines() {
+        long value = whiteLines + normalLines + commentLines;
+        return value;
+    }
+
+    /**
+     * 遍历所java源文件
+     */
+    private static void myList(File srcDir) {
+        System.out.println(srcDir + &quot;目录下包含的目录和子文件有：&quot;);
+        File[] files = srcDir.listFiles();
+        for (File file : files) {
+            System.out.println(&quot;----------&quot; + file);
+            if (file.getName().matches(&quot;.*\\.java$&quot;)) {
+                parse(file);
+            }
+            if (file.isDirectory()) {
+                myList(file);
+            }
+        }
+    }
+
+    /**
+     * 读取源文件内容
+     * 
+     * @param file
+     *            java文件
+     */
+    private static void parse(File file) {
+        BufferedReader br = null;
+        /**
+         * 标识注释的开始或结束
+         */
+        boolean comment = false;
+        try {
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(
+                    file)));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                // 以任意空白且不以换行开头为开头，并以换行结尾
+                if (line.matches(&quot;^[\\s&amp;&amp;[^\\n]]*$&quot;)) {
+                    whiteLines++;
+                } else if (line.startsWith(&quot;/*&quot;)) {
+                    commentLines++;
+                    comment = true;
+                } else if (comment == true) {
+                    commentLines++;
+                    if (line.endsWith(&quot;*/&quot;)) {
+                        comment = false;
+                    }
+                } else if (line.contains(&quot;//&quot;)) {
+                    commentLines++;
+                } else {
+                    normalLines++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                    br = null;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}</pre>
+
+<p><strong>（三）正则表达式进阶使用：</strong></p>
+<p>查找子串</p>
+<pre code_snippet_id="659442" snippet_file_name="blog_20150505_4_6322326" name="code" class="java">String s1 = &quot;123-45678-987-11&quot;;
+        Pattern pattern = Pattern.compile(&quot;\\d{3,5}&quot;); // 匹配3~5个数字
+        Matcher matcher = pattern.matcher(s1);
+        System.out.println(matcher.matches());// false
+        matcher.reset();// 重置匹配器，将其添加位置设置为零
+        System.out.println(matcher.find());// true，由于重置了匹配器此时将从起始位置查找
+        System.out.println(matcher.start() + &quot;-&quot; + matcher.end());// 位置：0-3
+        // 与matches方法唯一不同的是lookingAt不需要匹配整个区域 ,它永远是从第一个子串开始
+        System.out.println(matcher.lookingAt());// true
+        System.out.println(matcher.lookingAt());// true</pre>
+
+<p>查找与替换</p>
+<pre code_snippet_id="659442" snippet_file_name="blog_20150505_5_3417834" name="code" class="java">// CASE_INSENSITIVE：忽略子串大小写
+        Pattern pattern2 = Pattern.compile(&quot;java&quot;, Pattern.CASE_INSENSITIVE);
+        Matcher matcher2 = pattern2
+                .matcher(&quot;java Java JAVA jaVA jAVA ILoveYouJaVA youhateJaVa&quot;);
+        // 将查找到的所有子串进行替换 （查找并替换）
+        System.out.println(matcher2.replaceAll(&quot;JAVA&quot;));</pre>
+
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><div><br><br></div><br><div><span style="white-space:pre"></span>关于Java中正则表达式的基本使用差不多就这些了，当然正则表达式的作用远不止这些，至于更深层次的应用以后遇到了会更新上去。截止目前，JavaSE基础差不多到这里了，后面会更新Java性能优化、深入理解JVM、Android学习系列等，敬请期待！</div><br><div><br><br></div><br><div><br><br></div><br><div><br><br></div>
+
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/5/5 17:22:00 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45501777)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：5465 评论：2 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45501777#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/05/05/原-Java学习系列-二十四-Java正则表达式详解/" data-id="cj8yn9vez0007o49z7hybriid" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-Java学习系列-二十三-Java面向对象之内部类详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/29/原-Java学习系列-二十三-Java面向对象之内部类详解/" class="article-date">
+  <time datetime="2015-04-29T15:53:41.000Z" itemprop="datePublished">2015-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/29/原-Java学习系列-二十三-Java面向对象之内部类详解/">[原]Java学习系列(二十三)Java面向对象之内部类详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="font-family:Arial; line-height:26px; text-align:left; color:rgb(255,0,0); font-size:18px">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45372395" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45372395</a></p>
+<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><div><br><br></div>
+
+<p>内部类也称寄生类，就是把一个类放在类里面（即内部类的上一级程序单元是类）定义，将其作为外部类的成员。内部类主要用几种定义形式：静态(static)内部类，非静态内部类，匿名内部类(也就是没有名字的寄生类)。内部类的好处就是内部类可以直接外部类的(包括私有)成员，反之不能。下面我们通过一些实例来详细讲解一下Java中内部类的使用及几种定义形式的相互调用。</p>
+<h1 id="二、实例说明"><a href="#二、实例说明" class="headerlink" title="二、实例说明"></a>二、实例说明</h1><div><br><br></div>
+
+<p><strong>（1）匿名内部类：当程序创建匿名内部类时，会立即创建匿名内部类(实现类)的实例。</strong></p>
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_1_7376988" name="code" class="java">interface IBreathe {
+    void breathe();
+}
+
+/**
+ * 匿名内部类的使用，定义形式如下：
+ * 
+ * new 接口() | 父类构造器&lt;参数&gt;){ 
+ *         // 类体部分... 
+ * };
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月29日 下午10:17:40
+ */
+
+public class Anonymous {
+
+    // 这里相当于创建了接口IBreathe的匿名实现类，并创建了匿名内部类的实例
+    // 将实现类的实例赋值给接口变量 ，属于向上转型
+    IBreathe breathe = new IBreathe() {
+        // 必须实现接口里的所有抽象方法
+        @Override
+        public void breathe() {
+            System.out.println(&quot;呼吸新鲜空气...&quot;);
+        }
+    };
+
+    public static void main(String[] args) {
+        Anonymous anonymous = new Anonymous();
+        anonymous.breathe.breathe();
+    }
+}</pre>
+
+<p>注意以下几点：</p>
+<p>1）只要父类是抽象类或者是一个接口，那么其子类中的方法都可以使用匿名内部类来实现；反过来也就是说使用匿名内部类有个前提：它必须显示地继承一个父类或实现一个接口。</p>
+<p>2）匿名内部类必须实现接口或抽象类中所有的抽象方法。</p>
+<p>3）匿名内部类适合创建只需一次使用的类。</p>
+<p>4）匿名内部类不能有构造器而且程序以后无法再访问它，因为它没有类名。</p>
+<p><strong>（2）静态内部类：它属于外部类(宿主类)的静态成员，所以它不能访问外部类的非静态成员(属性、方法)。</strong></p>
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_2_6566048" name="code" class="java">/**
+ * 外部类(宿主类)中包含静态内部类作为外部类的一个静态成员
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月29日 下午11:00:51
+ */
+
+public class Out {
+    private static String name = &quot;张三&quot;;
+    private String sex = &quot;男&quot;;
+
+    static class In {
+        private static String name = &quot;李四&quot;;
+
+        public void info() {
+            // 静态内部类不能访问外部类的非静态成员，所以下面这句会编译不通过
+            // System.out.println(&quot;外部类的sex = &quot; + sex);
+            System.out.println(&quot;in的info方法被调用，name：&quot; + name);
+        }
+    }
+
+    public static void main(String[] args) {
+        // 打印结果（编译器遵循就近原则）：in的info方法被调用，name：李四
+        // 这里只需要把外部类当成静态内部类的包就行了
+        // 所以In前加不加Out.都是一样的
+        new In().info();
+        new Out.In().info();
+    }
+}</pre>
+
+<p>如果要在外部类的外面访问静态内部类的成员：Out.In in = new Out.In();&nbsp;in.info();当然，静态内部类也可以派生子类：class InSub extends Out.In {}，编写和调用方式与普通类一样，这里不再赘述。下面看看重点来看看非静态内部类定义和使用。</p>
+<p><strong>（3）非静态内部类：在创建非静态内部类的实例前，必须先创建外部类实例，也就是说非静态内部类必须寄生在外部类的实例(Outer.this)里面。所以在创建非静态内部类的实例前，必须先创建外部类实例。&nbsp;</strong></p>
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_3_5123036" name="code" class="java">/**
+ * 非静态内部类的使用
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月29日 下午11:26:06
+ */
+
+public class Outer {
+    int number = 10;
+
+    // 定义非静态内部类
+    class Inner {
+        int number = 100;
+
+        public void info() {
+            int number = 1000;
+            System.out.println(&quot;Inner内部类的info()方法被调用~&quot;);
+            System.out.println(&quot;number变量的值为：&quot; + number);// 方法的局部变量，所以为1000
+            System.out.println(&quot;number变量的值为：&quot; + this.number);// 指向寄生类成员，所以为100
+            System.out.println(&quot;number变量的值为：&quot; + Outer.this.number);// 指向宿主类成员，所以为10
+        }
+    }
+
+    /**
+     * 通过外部类的方法来访问寄生类的成员(属性、方法)
+     */
+    public void info() {
+        System.out.println(&quot;Outer外部类的info()方法被调用~&quot;);
+        Inner inner = new Inner();
+        inner.info();
+        System.out.println(inner.number);
+    }
+
+    public static void main(String[] args) {
+        new Outer().info();
+    }
+}</pre>如果在外部类的外面使用内部类，那么在创建非静态内部类的实例前，必须先创建外部类实例。&nbsp;
+
+Outer outer = new Outer();
+
+Outer.Inner in = outer.new Inner();
+
+等价于==》Outer.Inner in2 = new Outer().new Inner();
+
+当然非静态内部类也可以派生子类，如下：
+
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_4_5283206" name="code" class="java">//非静态内部类派生子类
+class InnerSub extends Outer.Inner {
+    public InnerSub() {
+        // 由于Outer.Inner是非静态内部类,因此必须使用&quot;宿主对象&quot;来调用它的构造器
+        new Outer().super();
+    }}</pre>
+
+<h1 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h1><div><br><br></div>
+
+<p>1）有static修饰的内部类属于外部类本身,没有static修饰的内部类属于类实例 。</p>
+<p>2）记住方法是谁的，就用谁来调用。</p>
+<p>3）没有static修饰的内部类，【必须寄生在“外部类”的实例里】；反之则寄生在外部类本身里。</p>
+<p>4）静态内部类是寄生在类本身里面的，所以就不需要程序员理会宿主。-把外部类当成静态内部类的包就行了。</p>
+<p>5）非静态内部类派生子类：由于子类的构造器必须调用父类构造器一次，因此必须在子类构造器中使用宿主对象来调用它的构造器。</p>
+<h1 id="四、结束语"><a href="#四、结束语" class="headerlink" title="四、结束语"></a>四、结束语</h1><div><br><br></div>
+
+<p><span style="white-space:pre"></span>关于Java中的内部类的定义和使用基本内容就这些，后面会陆续更新包括：正则表达式、Java性能优化、学习JVM等等，敬请关注。</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/4/29 23:53:41 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45372395)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：867 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45372395#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/04/29/原-Java学习系列-二十三-Java面向对象之内部类详解/" data-id="cj8yn9vfe000bo49ztk6aqyxe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -199,7 +2310,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
     </div>
   </div>
 
@@ -216,7 +2327,19 @@
           </li>
         
           <li>
-            <a href="/2015/07/01/HelloHexo/">hello</a>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
           </li>
         
       </ul>

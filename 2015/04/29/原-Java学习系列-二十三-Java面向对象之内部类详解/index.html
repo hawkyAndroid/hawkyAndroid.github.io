@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[原]Java学习系列(二十三)Java面向对象之内部类详解 | Hawky的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45372395 一、前言  内部类也称寄生类，就是把一个类放在类里面（即内部类的上一级程序单元是类）定义，将其作为外部类的成员。内部类主要用几种定义形式：静态(static)内部类，非静态内部类，匿名内部类(也就是没有名字的寄生类)。内部类的好处就是内部类可以直接外部类的(包括私有)成员，反">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]Java学习系列(二十三)Java面向对象之内部类详解">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2015/04/29/原-Java学习系列-二十三-Java面向对象之内部类详解/index.html">
+<meta property="og:site_name" content="Hawky的博客">
+<meta property="og:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45372395 一、前言  内部类也称寄生类，就是把一个类放在类里面（即内部类的上一级程序单元是类）定义，将其作为外部类的成员。内部类主要用几种定义形式：静态(static)内部类，非静态内部类，匿名内部类(也就是没有名字的寄生类)。内部类的好处就是内部类可以直接外部类的(包括私有)成员，反">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-19T15:39:57.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[原]Java学习系列(二十三)Java面向对象之内部类详解">
+<meta name="twitter:description" content="转载请注明出处：http://blog.csdn.net/lhy_ycu/article/details/45372395 一、前言  内部类也称寄生类，就是把一个类放在类里面（即内部类的上一级程序单元是类）定义，将其作为外部类的成员。内部类主要用几种定义形式：静态(static)内部类，非静态内部类，匿名内部类(也就是没有名字的寄生类)。内部类的好处就是内部类可以直接外部类的(包括私有)成员，反">
+  
+    <link rel="alternate" href="/atom.xml" title="Hawky的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hawky的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">行到水穷处，坐看云起时</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hawkyAndroid.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-原-Java学习系列-二十三-Java面向对象之内部类详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/29/原-Java学习系列-二十三-Java面向对象之内部类详解/" class="article-date">
+  <time datetime="2015-04-29T15:53:41.000Z" itemprop="datePublished">2015-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [原]Java学习系列(二十三)Java面向对象之内部类详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="font-family:Arial; line-height:26px; text-align:left; color:rgb(255,0,0); font-size:18px">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45372395" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45372395</a></p>
+<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><div><br><br></div>
+
+<p>内部类也称寄生类，就是把一个类放在类里面（即内部类的上一级程序单元是类）定义，将其作为外部类的成员。内部类主要用几种定义形式：静态(static)内部类，非静态内部类，匿名内部类(也就是没有名字的寄生类)。内部类的好处就是内部类可以直接外部类的(包括私有)成员，反之不能。下面我们通过一些实例来详细讲解一下Java中内部类的使用及几种定义形式的相互调用。</p>
+<h1 id="二、实例说明"><a href="#二、实例说明" class="headerlink" title="二、实例说明"></a>二、实例说明</h1><div><br><br></div>
+
+<p><strong>（1）匿名内部类：当程序创建匿名内部类时，会立即创建匿名内部类(实现类)的实例。</strong></p>
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_1_7376988" name="code" class="java">interface IBreathe {
+    void breathe();
+}
+
+/**
+ * 匿名内部类的使用，定义形式如下：
+ * 
+ * new 接口() | 父类构造器&lt;参数&gt;){ 
+ *         // 类体部分... 
+ * };
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月29日 下午10:17:40
+ */
+
+public class Anonymous {
+
+    // 这里相当于创建了接口IBreathe的匿名实现类，并创建了匿名内部类的实例
+    // 将实现类的实例赋值给接口变量 ，属于向上转型
+    IBreathe breathe = new IBreathe() {
+        // 必须实现接口里的所有抽象方法
+        @Override
+        public void breathe() {
+            System.out.println(&quot;呼吸新鲜空气...&quot;);
+        }
+    };
+
+    public static void main(String[] args) {
+        Anonymous anonymous = new Anonymous();
+        anonymous.breathe.breathe();
+    }
+}</pre>
+
+<p>注意以下几点：</p>
+<p>1）只要父类是抽象类或者是一个接口，那么其子类中的方法都可以使用匿名内部类来实现；反过来也就是说使用匿名内部类有个前提：它必须显示地继承一个父类或实现一个接口。</p>
+<p>2）匿名内部类必须实现接口或抽象类中所有的抽象方法。</p>
+<p>3）匿名内部类适合创建只需一次使用的类。</p>
+<p>4）匿名内部类不能有构造器而且程序以后无法再访问它，因为它没有类名。</p>
+<p><strong>（2）静态内部类：它属于外部类(宿主类)的静态成员，所以它不能访问外部类的非静态成员(属性、方法)。</strong></p>
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_2_6566048" name="code" class="java">/**
+ * 外部类(宿主类)中包含静态内部类作为外部类的一个静态成员
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月29日 下午11:00:51
+ */
+
+public class Out {
+    private static String name = &quot;张三&quot;;
+    private String sex = &quot;男&quot;;
+
+    static class In {
+        private static String name = &quot;李四&quot;;
+
+        public void info() {
+            // 静态内部类不能访问外部类的非静态成员，所以下面这句会编译不通过
+            // System.out.println(&quot;外部类的sex = &quot; + sex);
+            System.out.println(&quot;in的info方法被调用，name：&quot; + name);
+        }
+    }
+
+    public static void main(String[] args) {
+        // 打印结果（编译器遵循就近原则）：in的info方法被调用，name：李四
+        // 这里只需要把外部类当成静态内部类的包就行了
+        // 所以In前加不加Out.都是一样的
+        new In().info();
+        new Out.In().info();
+    }
+}</pre>
+
+<p>如果要在外部类的外面访问静态内部类的成员：Out.In in = new Out.In();&nbsp;in.info();当然，静态内部类也可以派生子类：class InSub extends Out.In {}，编写和调用方式与普通类一样，这里不再赘述。下面看看重点来看看非静态内部类定义和使用。</p>
+<p><strong>（3）非静态内部类：在创建非静态内部类的实例前，必须先创建外部类实例，也就是说非静态内部类必须寄生在外部类的实例(Outer.this)里面。所以在创建非静态内部类的实例前，必须先创建外部类实例。&nbsp;</strong></p>
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_3_5123036" name="code" class="java">/**
+ * 非静态内部类的使用
+ * 
+ * @author [*昨日重现*] lhy_ycu@163.com
+ * @since version 1.0
+ * @datetime 2015年4月29日 下午11:26:06
+ */
+
+public class Outer {
+    int number = 10;
+
+    // 定义非静态内部类
+    class Inner {
+        int number = 100;
+
+        public void info() {
+            int number = 1000;
+            System.out.println(&quot;Inner内部类的info()方法被调用~&quot;);
+            System.out.println(&quot;number变量的值为：&quot; + number);// 方法的局部变量，所以为1000
+            System.out.println(&quot;number变量的值为：&quot; + this.number);// 指向寄生类成员，所以为100
+            System.out.println(&quot;number变量的值为：&quot; + Outer.this.number);// 指向宿主类成员，所以为10
+        }
+    }
+
+    /**
+     * 通过外部类的方法来访问寄生类的成员(属性、方法)
+     */
+    public void info() {
+        System.out.println(&quot;Outer外部类的info()方法被调用~&quot;);
+        Inner inner = new Inner();
+        inner.info();
+        System.out.println(inner.number);
+    }
+
+    public static void main(String[] args) {
+        new Outer().info();
+    }
+}</pre>如果在外部类的外面使用内部类，那么在创建非静态内部类的实例前，必须先创建外部类实例。&nbsp;
+
+Outer outer = new Outer();
+
+Outer.Inner in = outer.new Inner();
+
+等价于==》Outer.Inner in2 = new Outer().new Inner();
+
+当然非静态内部类也可以派生子类，如下：
+
+<pre code_snippet_id="656128" snippet_file_name="blog_20150429_4_5283206" name="code" class="java">//非静态内部类派生子类
+class InnerSub extends Outer.Inner {
+    public InnerSub() {
+        // 由于Outer.Inner是非静态内部类,因此必须使用&quot;宿主对象&quot;来调用它的构造器
+        new Outer().super();
+    }}</pre>
+
+<h1 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h1><div><br><br></div>
+
+<p>1）有static修饰的内部类属于外部类本身,没有static修饰的内部类属于类实例 。</p>
+<p>2）记住方法是谁的，就用谁来调用。</p>
+<p>3）没有static修饰的内部类，【必须寄生在“外部类”的实例里】；反之则寄生在外部类本身里。</p>
+<p>4）静态内部类是寄生在类本身里面的，所以就不需要程序员理会宿主。-把外部类当成静态内部类的包就行了。</p>
+<p>5）非静态内部类派生子类：由于子类的构造器必须调用父类构造器一次，因此必须在子类构造器中使用宿主对象来调用它的构造器。</p>
+<h1 id="四、结束语"><a href="#四、结束语" class="headerlink" title="四、结束语"></a>四、结束语</h1><div><br><br></div>
+
+<p><span style="white-space:pre"></span>关于Java中的内部类的定义和使用基本内容就这些，后面会陆续更新包括：正则表达式、Java性能优化、学习JVM等等，敬请关注。</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2015/4/29 23:53:41 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45372395)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：867 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45372395#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2015/04/29/原-Java学习系列-二十三-Java面向对象之内部类详解/" data-id="cj8yn9vfe000bo49ztk6aqyxe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/05/原-Java学习系列-二十四-Java正则表达式详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [原]Java学习系列(二十四)Java正则表达式详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/28/原-Java学习系列-二十二-Java面向对象之枚举详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[原]Java学习系列(二十二)Java面向对象之枚举详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/01/HelloHexo/">hello</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/26/原-Git学习系列博客全目录/">[原]Git学习系列博客全目录</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Hawky<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
