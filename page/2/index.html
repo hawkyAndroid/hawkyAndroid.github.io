@@ -69,160 +69,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-原-Java学习系列-二十一-Java面向对象之注解详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/" class="article-date">
-  <time datetime="2015-04-26T17:31:51.000Z" itemprop="datePublished">2015-04-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/">[原]Java学习系列(二十一)Java面向对象之注解详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><span style="font-family:Arial; line-height:26px; text-align:left; color:rgb(255,0,0); font-size:18px"></span><span style="font-family:Arial; line-height:26px; text-align:left; color:rgb(255,0,0); font-size:18px">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45295947" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45295947</a></p>
-<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><div><br><br></div>
-
-<p>Java中的注解Annotation运用到很多方面，比如之前讲的单元测试中的@Test、Spring、SpringMVC还有其他框架等等。Java本身自带的注解也有一些，比如：@Override(子类要重写/覆写父类的对应方法)、@Deprecated(表示方法不建议被使用)、@SuppressWarnings(抑制警告)等等。当然，我们也可以自定义一些自己需要的注解(通常可以加在包，类，字段，方法，方法的参数以及局部变量上)，这需要Java提供的四种元注解来负责完成我们的自定义注解功能。总体来说，注解还是比较简单的。下面先了解一下这四种元注解：</p>
-<h1 id="二、四种元注解-来源网络"><a href="#二、四种元注解-来源网络" class="headerlink" title="二、四种元注解(来源网络)"></a>二、四种元注解(来源网络)</h1><p><strong>(一) @Target</strong></p>
-<p>@Target 表示该注解用于什么地方，可取的&#20540;包括：</p>
-<p>ElemenetType.CONSTRUCTOR　　 &nbsp; &nbsp; 构造器声明</p>
-<p>ElemenetType.FIELD　　　　　　　 &nbsp; &nbsp; 字段声明（包括 enum 实例）</p>
-<p>ElemenetType.LOCAL_VARIABLE　　 &nbsp; 局部变量声明</p>
-<p>ElemenetType.METHOD　　　　　　　方法声明</p>
-<p>ElemenetType.PACKAGE　　　　　 &nbsp; &nbsp; &nbsp; 包声明</p>
-<p>ElemenetType.PARAMETER　　　　　 &nbsp;参数声明</p>
-<p>ElemenetType.TYPE　　　　　　　　　类，接口（包括注解类型）或enum声明</p>
-<p>ElementType.ANNOTATION_TYPE　　 &nbsp; 注解</p>
-<p>&nbsp;</p>
-<p>**(二) @Retention</p>
-<p>**@Retention 表示在什么级别保存该注解信息。可选的 RetentionPolicy 参数包括：</p>
-<p>RetentionPolicy.SOURCE　　　　　　　注解将被编译器丢弃</p>
-<p>RetentionPolicy.CLASS　　　　　　　　注解在class文件中可用，但会被VM丢弃</p>
-<p>RetentionPolicy.RUNTIME　　　　　　　JVM将在运行期也保留注解，因此可以通过反射机制读取注解的信息。</p>
-<p><strong>(三) @Documented</strong></p>
-<p>@Documented 将此注解包含在 javadoc 中</p>
-<p><strong>(四)@Inherited</strong></p>
-<p>@Inherited 允许子类继承父类中的注解</p>
-<h1 id="三、实例说明"><a href="#三、实例说明" class="headerlink" title="三、实例说明"></a>三、实例说明</h1><div>1) 作用在类上的注解</div><br><div><pre code_snippet_id="653716" snippet_file_name="blog_20150427_1_358546" name="code" class="java">// 编译器将把注解信息记录在class文件中，当运行Java程序时JVM会保留注解，因此可以通过&lt;a target=_blank href=&quot;<a href="http://blog.csdn.net/lhy_ycu/article/details/45289391&quot;&gt;反射&lt;/a&gt;机制来读取注解的信息。" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45289391&quot;&gt;反射&lt;/a&gt;机制来读取注解的信息。</a><br>@Retention(RetentionPolicy.RUNTIME)<br>// 注解作用在类上面<br>@Target(ElementType.TYPE)<br>public @interface ClassName {<br>    // 声明默认值<br>    String name() default &quot;豆豆&quot;;<br><br>    // 特殊的值<br>    String value();<br>}</pre><br><div><br><br></div><br>2) 作用在属性(字段)上的注解</div><br><div><pre code_snippet_id="653716" snippet_file_name="blog_20150427_2_5926535" name="code" class="java">@Retention(RetentionPolicy.RUNTIME)<br>// 注解作用在属性(字段)上<br>@Target(ElementType.FIELD)<br>public @interface FieldName {<br>    String value();<br>}</pre><br><br>3）作用在方法上的注解</div><br><div><pre code_snippet_id="653716" snippet_file_name="blog_20150427_3_4450503" name="code" class="java">@Retention(RetentionPolicy.RUNTIME)<br>// 注释作用在方法上<br>@Target(ElementType.METHOD)<br>public @interface MethodName {<br>    String value();<br><br>    Class&lt;?&gt; type();<br>}</pre><br><br>4）实例演示</div>
-
-<pre code_snippet_id="653716" snippet_file_name="blog_20150427_4_8051229" name="code" class="java">import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-/**
- * @author [*昨日重现*] lhy_ycu@163.com
- * @since version 1.0
- * @datetime 2015年4月27日 上午12:57:03
- */
-
-// 指定用的是哪个自定义注解的类，若把name去掉，则name默认为：豆豆
-@ClassName(name = &quot;实体&quot;, value = &quot;用户&quot;)
-public class User {
-    @FieldName(&quot;姓名&quot;)
-    private String name;
-    @FieldName(&quot;性别&quot;)
-    private String sex;
-
-    public String getName() {
-        return name;
-    }
-
-    @MethodName(type = java.lang.String.class, value = &quot;王五&quot;)
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    @MethodName(type = java.lang.String.class, value = &quot;男&quot;)
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    @Override
-    public String toString() {
-        return &quot;User [name=&quot; + name + &quot;, sex=&quot; + sex + &quot;]&quot;;
-    }
-
-    public static void main(String[] args) throws Exception {
-        Class&lt;?&gt; c1 = Class.forName(&quot;com.leo.annotation.User&quot;);
-        // Class&lt;?&gt; c1 = Student.class;
-
-        // 一: 获取类上的注解信息
-        // 如果该元素的指定注解类型的注解存在于此对象上则返回这些注解，否则返回 null
-        ClassName cn = c1.getAnnotation(ClassName.class);
-        System.out.println(cn.name() + &quot; ,&quot; + cn.value());
-        System.out.println(&quot;\n=============================&quot;);
-
-        // 二：获取属性(字段)上的注解信息
-        Field f1 = c1.getDeclaredField(&quot;sex&quot;);
-        f1.setAccessible(true);
-        FieldName fn = f1.getAnnotation(FieldName.class);
-        System.out.println(fn.value());
-
-        // Field[] fields = c1.getDeclaredFields();
-        // for (Field field : fields) {
-        // field.setAccessible(true);
-        // FieldName fn = field.getAnnotation(FieldName.class);
-        // if (fn != null) {
-        // System.out.println(fn.value());
-        // }
-        // }
-
-        // 三：获取方法上的注解信息
-        Method[] methods = c1.getDeclaredMethods();
-        User obj = (User) c1.newInstance();
-        for (Method method : methods) {
-            System.out.println(&quot;方法名：&quot; + method.getName());
-            // 检查方法上面是否有Annotation
-            MethodName mn = method.getAnnotation(MethodName.class);
-            if (mn != null) {
-                // 回调赋值。第一个参数为目标对象，第二个参数为被访问的方法实参
-                method.invoke(obj, mn.value());
-            }
-        }
-        System.out.println(obj.getName() + &quot; ,&quot; + obj.getSex());
-    }
-
-}</pre>
-
-<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>1）注意：注解不是注释。注解是实现程序功能的重要组成部分，而注释提供代码功能的说明。</p>
-<p>2）注解使得Java源代码中不但可以包含功能性的实现代码，还可以添加元数据。</p>
-<pre><code>&lt;div&gt;
-    作者：JAVE_LOVER 发表于2015/4/27 1:31:51 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45295947)
-&lt;/div&gt;
-&lt;div&gt;
-阅读：1648 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45295947#comments)
-&lt;/div&gt;
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/" data-id="cj8ync477000b349z1v4i8p5j" class="article-share-link">Share</a>
-      
-        <a href="http://hawkyAndroid.github.io/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-原-Java学习系列-二十-Java面向对象之反射详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/" class="article-date">
@@ -281,7 +127,7 @@ public class User {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/" data-id="cj8ync46w0009349zv29rl4n8" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/" data-id="cj8ynscod0008o49z3fvgcigh" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -547,7 +393,7 @@ public class CalculatorTest2 {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/" data-id="cj8ync49c000r349zen4a2rsu" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/" data-id="cj8ynscsy000qo49zgd7sbyk1" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -640,7 +486,7 @@ public class CalculatorTest2 {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式博客全目录/" data-id="cj8ync47d000c349zbv67xe98" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式博客全目录/" data-id="cj8ynscq2000jo49zj8r0rzao" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式博客全目录/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -769,7 +615,7 @@ public class Test {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十三-访问者模式建模与实现/" data-id="cj8ync48e000k349z2291kojf" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十三-访问者模式建模与实现/" data-id="cj8ynscqb000ko49z0iw82dbk" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十三-访问者模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -924,7 +770,7 @@ public class Test {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十二-中介者模式建模与实现/" data-id="cj8ync48s000n349z93m0wpgu" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十二-中介者模式建模与实现/" data-id="cj8ynscpw000io49z7kwk9oj5" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十二-中介者模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -1053,7 +899,7 @@ System.out.println(factory.getCount());
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十一-享元模式建模与实现/" data-id="cj8ync488000j349zd4vel3js" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十一-享元模式建模与实现/" data-id="cj8ynscpg000fo49z5xv6ew31" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十一-享元模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -1195,7 +1041,7 @@ public class Test {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十-解释器模式建模与实现/" data-id="cj8ync481000i349zp0odfn0l" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十-解释器模式建模与实现/" data-id="cj8ynscpo000ho49zbsiw0hnv" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十-解释器模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -1347,7 +1193,7 @@ public class Test {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十九-备忘录模式建模与实现/" data-id="cj8ync48m000m349zmwwuzbvc" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十九-备忘录模式建模与实现/" data-id="cj8ynscqx000mo49zi7tf31o9" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十九-备忘录模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -1488,9 +1334,144 @@ public class Test {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" data-id="cj8ync48x000o349zi7rf46qu" class="article-share-link">Share</a>
+      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" data-id="cj8ynscr2000no49zyv5zppov" class="article-share-link">Share</a>
       
         <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-Java设计模式菜鸟系列-十七-桥接模式建模与实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/" class="article-date">
+  <time datetime="2014-10-11T17:20:27.000Z" itemprop="datePublished">2014-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/">[原]Java设计模式菜鸟系列(十七)桥接模式建模与实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-size:18px"><strong>转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/40008711</a></strong></span></p>
+<p><span style="font-size:18px; color:rgb(255,0,0)"></span></p>
+<p></p>
+<p><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span></p>
+<p>桥接模式(Bridge)： 把事物和其具体实现分开(抽象化与实现化解耦)，使他们可以各自独立的变化。假设你的电脑是双系统(WinXP、Win7)，而且都安装了mysql、oracle、sqlserver、DB2这4种数据库,那么你有2<em>4种选择去连接数据库。按平常的写法，咱要写2</em>4个类，但是使用了桥接模式，你只需写2&#43;4个类,可以看出桥接模式其实就是一种将N*M转化成N&#43;M组合的思想。</p>
+<h2 id="一、uml建模："><a href="#一、uml建模：" class="headerlink" title="一、uml建模："></a>一、uml建模：</h2><p><img src="http://img.blog.csdn.net/20141012012037231?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h2 id="二、代码实现"><a href="#二、代码实现" class="headerlink" title="二、代码实现"></a>二、代码实现</h2><pre code_snippet_id="482662" snippet_file_name="blog_20141012_1_5743718" name="code" class="java">/**
+ * 桥接模式(Bridge)： 把事物和其具体实现分开(抽象化与实现化解耦)，使他们可以各自独立的变化。
+ * 
+ * 假设你的电脑是双系统(WinXP、Win7)，而且都安装了mysql、oracle、sqlserver、DB2这4种数据库
+ * 
+ * 那么你有2*4种选择去连接数据库。按平常的写法，咱要写2*4个类，但是使用了桥接模式，你只需写2+4个类
+ * 
+ * 可以看出桥接模式其实就是一种将N*M转化成N+M组合的思想。
+ */
+interface Driver {
+    public void method();
+}
+
+class MysqlDriver implements Driver {
+
+    @Override
+    public void method() {
+        System.out.println(&quot;use mysql driver to connection db...\n&quot;);
+    }
+}
+
+class OracleDriver implements Driver {
+
+    @Override
+    public void method() {
+        System.out.println(&quot;use oracle driver to connection db...\n&quot;);
+    }
+}
+
+/**
+ * 这里你还可以写SqlserverDriver、DB2Driver...
+ */
+
+abstract class Computer {
+    public abstract void connection(Driver driver);
+}
+
+class WinXP extends Computer {
+    @Override
+    public void connection(Driver driver) {
+        System.out.println(&quot;WinXP Computer&quot;);
+        driver.method();
+    }
+}
+
+class Win7 extends Computer {
+    @Override
+    public void connection(Driver driver) {
+        System.out.println(&quot;Win7 Computer&quot;);
+        driver.method();
+    }
+}
+
+/**
+ * 客户端测试类
+ * 
+ * @author Leo
+ */
+public class Test {
+    public static void main(String[] args) {
+        /**
+         * 第一种组合：winXP使用mysql驱动连接数据库
+         */
+        Computer winxp = new WinXP();
+        winxp.connection(new MysqlDriver());
+        /**
+         * 第二种组合：win7使用mysql驱动连接数据库
+         */
+        Computer win7 = new Win7();
+        win7.connection(new MysqlDriver());
+        /**
+         * 第三种组合：winXP使用oracle驱动连接数据库
+         */
+        Computer cwinxp = new WinXP();
+        cwinxp.connection(new OracleDriver());
+        /**
+         * 第四种组合：winXP使用oracle驱动连接数据库
+         */
+        Computer cwin7 = new Win7();
+        cwin7.connection(new OracleDriver());
+
+    }
+}</pre>
+
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>桥接的核心思想是：将抽象化与实现化解耦，使得二者可以独立变化。</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2014/10/12 1:20:27 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/40008711)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：2143 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/40008711#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/" data-id="cj8ynscqr000lo49z0nd86uc0" class="article-share-link">Share</a>
+      
+        <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
       
     </footer>
@@ -1503,7 +1484,7 @@ public class Test {
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 </section>
         
@@ -1513,7 +1494,7 @@ public class Test {
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/">��־</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/��־/����L¼/">����Ŀ¼</a></li></ul></li></ul>
+      <ul class="category-list"></ul>
     </div>
   </div>
 
@@ -1523,7 +1504,7 @@ public class Test {
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello/">hello</a></li></ul>
+      <ul class="tag-list"></ul>
     </div>
   </div>
 
@@ -1533,7 +1514,7 @@ public class Test {
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/hello/" style="font-size: 10px;">hello</a>
+      
     </div>
   </div>
 
@@ -1542,7 +1523,7 @@ public class Test {
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
     </div>
   </div>
 
@@ -1553,10 +1534,6 @@ public class Test {
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2017/07/01/HelloHexo/">hello</a>
-          </li>
         
           <li>
             <a href="/2016/04/04/原-Android学习系列-三-四大组件之Service详解/">[原]Android学习系列(三)四大组件之Service详解</a>
@@ -1572,6 +1549,10 @@ public class Test {
         
           <li>
             <a href="/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/">[原]全面掌握Mysql知识点及select支持的运算操作</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/08/原-Java学习系列博客全目录/">[原]Java学习系列博客全目录</a>
           </li>
         
       </ul>
