@@ -69,145 +69,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-原-Java设计模式菜鸟系列-十八-责任链模式建模与实现" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" class="article-date">
-  <time datetime="2014-10-12T07:16:47.000Z" itemprop="datePublished">2014-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/">[原]Java设计模式菜鸟系列(十八)责任链模式建模与实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><span style="color:rgb(255,0,0); font-size:18px"><strong>转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/40018231</a></strong></span></p>
-<p><span style="font-size:18px; color:rgb(255,0,0)"></span></p>
-<p></p>
-<p><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span></p>
-<p>责任链模式(ChainOfResponsibility)： 有多个对象，每个对象持有下一个对象的引用，形成一条链，请求在这条链上传递，直到某一对象决定处理该请求，但是发出者并不清楚最终哪个对象会处理该请求。</p>
-<h2 id="一、uml建模："><a href="#一、uml建模：" class="headerlink" title="一、uml建模："></a>一、uml建模：</h2><p><img src="http://img.blog.csdn.net/20141012151702191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<h2 id="二、代码实现"><a href="#二、代码实现" class="headerlink" title="二、代码实现"></a>二、代码实现</h2><pre code_snippet_id="482888" snippet_file_name="blog_20141012_1_8894193" name="code" class="java">/**
- * 责任链模式：有多个对象，每个对象持有下一个对象的引用，形成一条链，
- * 
- * 请求在这条链上传递，直到某一对象决定处理该请求，
- * 
- * 但是发出者并不清楚最终哪个对象会处理该请求。
- */
-interface Handler {
-    public void operator();
-}
-
-/**
- * 这里单独对Handler进行封装，方便修改引用对象
- */
-abstract class AbstractHandler implements Handler {
-    private Handler handler;
-
-    public Handler getHandler() {
-        return handler;
-    }
-
-    public void setHandler(Handler handler) {
-        this.handler = handler;
-    }
-}
-
-class MyHandler extends AbstractHandler implements Handler {
-    private String name;
-
-    public MyHandler(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void operator() {
-        if (getHandler() != null) {
-            System.out.print(name + &quot;，将BUG交给——&gt;&quot;);
-            /**
-             * 这里是关键。【注意1】这里不是递归哦~
-             * 
-             * 递归：A(operator)——&gt;A(operator)——&gt;A(operator)
-             * 
-             * 责任链：A(operator)——&gt;B(operator)——&gt;C(operator)
-             */
-            getHandler().operator();
-        } else {
-            System.out.println(name + &quot;处理BUG...\n&quot;);
-        }
-    }
-}
-
-/**
- * 客户端测试类
- * 
- * @author Leo
- */
-public class Test {
-    public static void main(String[] args) {
-        MyHandler handler1 = new MyHandler(&quot;技术总监&quot;);
-        MyHandler handler2 = new MyHandler(&quot;项目经理&quot;);
-        MyHandler handler3 = new MyHandler(&quot;程序员&quot;);
-        /**
-         * 如果没有下家，将会自行处理
-         * 
-         * 打印结果：技术总监处理BUG...
-         */
-        handler1.operator();
-        /**
-         * 只要有下家，就传给下家处理
-         * 
-         * 下面的打印结果：技术总监，将BUG交给——&gt;项目经理，将BUG交给——&gt;程序员处理BUG...
-         * 
-         * 就这样，原本是技术总监自行处理的BUG，现在一层一层的把责任推给了程序员去处理
-         */
-        handler1.setHandler(handler2);
-        handler2.setHandler(handler3);
-        /**
-         * 透过打印结果可以知道：MyHandler实例化后将生成一系列相互持有的对象(handler)，构成一条链。
-         */
-        handler1.operator();
-        /**
-         * 【注意2】责任链不是链表：链表有个头结点，咱每次必须通过头结点才能访问后面的节点
-         * 
-         * 而责任链它可以从头访问，也可以从中间开始访问，如：handler2.operator();
-         */
-
-    }
-}</pre>
-
-<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>1、责任链模式可以实现，在隐瞒客户端(不知道具体处理的人是谁)的情况下，对系统进行动态的调整。</p>
-<p>2、链接上的请求可以是一条链，可以是一个树，还可以是一个环，模式本身不约束这个，需要自己去实现，同时，在一个时刻，命令只允许由一个对象传给另一个对象，而不允许传给多个对象。</p>
-<pre><code>&lt;div&gt;
-    作者：JAVE_LOVER 发表于2014/10/12 15:16:47 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/40018231)
-&lt;/div&gt;
-&lt;div&gt;
-阅读：1718 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/40018231#comments)
-&lt;/div&gt;
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" data-id="cj8ync48x000o349zi7rf46qu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-原-Java设计模式菜鸟系列-十七-桥接模式建模与实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/" class="article-date">
@@ -333,6 +194,8 @@ public class Test {
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/" data-id="cj8ync48i000l349zfatikuiz" class="article-share-link">Share</a>
       
+        <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十七-桥接模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
+      
       
     </footer>
   </div>
@@ -383,7 +246,7 @@ public class Test {
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
     </div>
   </div>
 
@@ -394,10 +257,6 @@ public class Test {
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2017/10/18/hello-world/">Hello World</a>
-          </li>
         
           <li>
             <a href="/2017/07/01/HelloHexo/">hello</a>
@@ -413,6 +272,10 @@ public class Test {
         
           <li>
             <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/">[原]全面掌握Mysql知识点及select支持的运算操作</a>
           </li>
         
       </ul>
@@ -441,6 +304,18 @@ public class Test {
   
 </nav>
     
+<script>
+  var disqus_shortname = 'jslite';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 

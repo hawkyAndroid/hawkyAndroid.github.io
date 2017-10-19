@@ -69,74 +69,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-原-Java学习系列-二十二-Java面向对象之枚举详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/28/原-Java学习系列-二十二-Java面向对象之枚举详解/" class="article-date">
-  <time datetime="2015-04-28T02:39:23.000Z" itemprop="datePublished">2015-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/28/原-Java学习系列-二十二-Java面向对象之枚举详解/">[原]Java学习系列(二十二)Java面向对象之枚举详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><span style="color:rgb(255,0,0); font-size:18px">转载请注明出处：</span><a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018967" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40019829" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40021651" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40027109" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/45332565" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/45332565</a></p>
-<h1 id="一、前言-nbsp"><a href="#一、前言-nbsp" class="headerlink" title="一、前言&nbsp;"></a>一、前言&nbsp;</h1><div><br><br></div>
-
-<p>今天我们来讲讲枚举，希望通过这篇博客大家能对枚举有个更全面的了解。枚举是一种实例(大写)数固定的类(不能再创建实例)，枚举改变了常量的声明方式，而且它在编译期间就限定了类型。枚举多用于确定的状态数(如：鼠标上下左右、IM消息已读未读)、类型数(如：系统、聊天、添加好友消息，我的他的)、模式数(回复、评论模式，刷选、全部模式)等等。枚举和类一样，同样有抽象类、可以实现接口、可含内部类、初始化块，&#20540;得注意的是：枚举的构造器无论是否使用private修饰，默认总是被private修饰；当然，枚举变量也可以在switch使用。下面我们通过实例来全面了解一下Java中的枚举。</p>
-<h1 id="二、实例说明-nbsp"><a href="#二、实例说明-nbsp" class="headerlink" title="二、实例说明&nbsp;"></a>二、实例说明&nbsp;</h1><div><strong>（1）实例演示</strong></div><br><div><pre code_snippet_id="654487" snippet_file_name="blog_20150506_1_345149" name="code" class="java">/<strong><br> <em> 修饰符 enum 枚举名{ 
- </em>         //立即在第一行列出该枚举的所有实例（但实际上是创建枚举实例,会默认调用无参构造器）。<br> <em> }
- </em><br> <em> @author [</em>昨日重现<em>] lhy_ycu@163.com
- </em> @since version 1.0<br> <em> @datetime 2015年4月27日 下午8:36:44
- </em>/<br><br>public enum Gender {<br>    // MALE(&quot;男&quot;)相当于：Gender MALE = new Gender(&quot;男&quot;);<br>    // 列出所有枚举值，也就是该枚举所有可能的实例–实例列表<br>    // WOMENMALE其实默认就是WOMENMALE()<br>    MALE(&quot;男&quot;), FEMALE(&quot;女&quot;), MANMALE(), WOMENMALE;<br>    private String name;<br><br>    // –构造器无论是否使用private修饰，默认总是被private修饰<br>    Gender() {<br>        System.out.println(&quot;无参构造方法被调用…&quot;);<br>    }<br><br>    private Gender(String name) {<br>        System.out.println(&quot;含参构造方法被调用…&quot; + name);<br>        this.name = name;<br>    }<br><br>    // 注意：初始化块只能被static修饰。<br>    // 编译时实例初始化块的代码都会被提取到构造器的“最前面”，所以它执行的优先级高于构造器<br>    {<br>        System.out.println(&quot;实例初始化块….&quot;);<br>    }<br><br>    // 当类被加载后，对类初始化后时被隐式执行，且一个JVM对一个类只初始化一次。<br>    static {<br>        System.out.println(&quot;静态/类初始化块…&quot;);<br>    }<br><br>    public void info() {<br>        System.out.println(this + &quot; 枚举中的info方法被调用&quot;);<br>    }<br><br>    /</strong><br>     <em> 枚举在switch中的使用 –switch(byte/short/char/int/String/枚举)
-     </em><br>     <em> @param gender
-     </em>/<br>    public static void chooseSex(Gender gender) {<br>        if (gender == null) {<br>            return;<br>        }<br>        switch (gender) {// 传一个枚举变量给switch<br>        case MALE:<br>            System.out.println(&quot;男性…&quot;);<br>            break;<br>        case FEMALE:<br>            System.out.println(&quot;女性…&quot;);<br>            break;<br>        case MANMALE:<br>            System.out.println(&quot;男同…&quot;);<br>            break;<br>        case WOMENMALE:<br>            System.out.println(&quot;女同…&quot;);<br>            break;<br>        default:<br>            break;<br>        }<br>    }<br><br>    class A {<br>        {<br>            System.out.println(&quot;A中实例初始化块…&quot;);<br>        }<br><br>        public void info() {<br>            System.out.println(this + &quot;A类中的info方法被调用&quot;);<br>        }<br>    }<br><br>    public static void main(String[] args) {<br>        // 初始化块及构造器（无参或含参）按实例列表顺序挨个被执行，接着执行静态(类)初始化块<br>        Gender g1 = Gender.MALE;<br>        Gender.chooseSex(g1);<br>        g1.info();<br><br>        // 创建寄生类(内部类)实例<br>        A a = g1.new A();<br>        a.info();<br><br>        // 打印该枚举变量g1所在的实例列表所在的位置，从0开始<br>        System.out.println(g1.ordinal());<br>        // Gender g2 = Gender.FEMALE;<br>        // System.out.println(g2.ordinal());<br><br>        // 打印该枚举的所有实例<br>        for (Gender g : Gender.values()) {<br>            System.out.println(g);<br>        }<br>    }<br>}<br></pre><br><br></div><br><div><br><div>========= 打印结果 =============<br><br>实例初始化块….<br><br>含参构造方法被调用…男<br><br>实例初始化块….<br><br>含参构造方法被调用…女<br><br>实例初始化块….<br><br>无参构造方法被调用…<br><br>实例初始化块….<br><br>无参构造方法被调用…<br><br>静态/类初始化块…<br><br>男性…<br><br>MALE 枚举中的info方法被调用<br><br>A中实例初始化块…<br><br>com.leo.enumation.Gender$A@c17164A类中的info方法被调用<br><br>0<br><br>MALE<br><br>FEMALE<br><br>MANMALE<br><br>WOMENMALE<br><br></div><br><div><br><br></div>
-
-<p><strong>（2）下面看看抽象枚举的使用</strong></p></div><p></p>
-<div><pre code_snippet_id="654487" snippet_file_name="blog_20150427_2_2709995" name="code" class="java">// 编译器将把注解信息记录在class文件中，当运行Java程序时JVM会保留注解，因此可以通过反射机制来读取注解的信息。<br>@Retention(RetentionPolicy.RUNTIME)<br>// 注解作用在类上面<br>@Target(ElementType.TYPE)<br>public @interface ClassName {<br>    // 声明默认值<br>    String name() default &quot;计算&quot;;<br><br>    // 特殊的值<br>    String value();<br>}</pre><br><br></div><br><div><pre code_snippet_id="654487" snippet_file_name="blog_20150427_3_1253859" name="code" class="java">/<strong><br> <em> 利用抽象枚举来模拟一个四则运算，需要创建匿名内部类来重写相关抽象方法。
- </em><br> <em> @author [</em>昨日重现<em>] lhy_ycu@163.com
- </em> @since version 1.0<br> <em> @datetime 2015年4月27日 下午10:14:02
- </em>/<br><br>// 指定用的是哪个自定义注解的类，若把name去掉，则name默认为：计算<br>@ClassName(name = &quot;枚举&quot;, value = &quot;四则运算&quot;)<br>public enum Calculator {<br><br>    ADD(&quot;张三&quot;) {<br>        @Override<br>        public double eval(double x, double y) {<br>            return x + y;<br>        }<br>    },<br><br>    SUB {<br>        @Override<br>        public double eval(double x, double y) {<br>            return x - y;<br>        }<br>    },<br><br>    MULTIPLY {<br>        @Override<br>        public double eval(double x, double y) {<br>            return x * y;<br>        }<br>    },<br><br>    DIVIDE {<br>        @Override<br>        public double eval(double x, double y) {<br>            if (y == 0) {<br>                throw new ArithmeticException(&quot;除数不能为0&quot;);<br>            }<br>            return x / y;<br>        }<br>    };<br>    private String name;<br><br>    private Calculator() {<br>        System.out.println(&quot;无参构造器被执行…&quot; + this);<br>    }<br><br>    private Calculator(String name) {<br>        this.name = name;<br>        System.out.println(&quot;含参构造器被执行…&quot; + this.name);<br>    }<br><br>    public abstract double eval(double x, double y);<br><br>    public static void main(String[] args) throws ClassNotFoundException {<br>        Calculator c1 = Calculator.ADD;<br>        System.out.println(c1.eval(1, 2));<br><br>        // Calculator c2 = Calculator.SUB;<br>        // System.out.println(c2.eval(1, 2));<br><br>        // 打印该枚举的一些注解信息<br>        Class&lt;?&gt; clazz = Class.forName(&quot;com.leo.enumation.Calculator&quot;);<br>        ClassName cn = clazz.getAnnotation(ClassName.class);<br>        System.out.println(cn.name() + &quot; ,&quot; + cn.value());<br>    }<br>}</strong></pre>
-
-（3）枚举实现接口<strong></strong></div><br><div><pre code_snippet_id="654487" snippet_file_name="blog_20150427_4_4695277" name="code" class="java">interface IDirection {<br>    void pointDirection();<br>}<br><br>/<br> <em> 枚举实现接口
- </em><br> <em> @author [</em>昨日重现<em>] lhy_ycu@163.com
- </em> @since version 1.0<br> <em> @datetime 2015年4月27日 下午11:01:50
- </em>/<br><br>public enum Orientation implements IDirection {<br>    EAST, WEST, SOUTH(), NORTH;<br><br>    @Override<br>    public void pointDirection() {<br>        System.out.println(&quot;指向 —&gt; &quot; + this);<br>    }<br><br>    public static void main(String[] args) {<br>        IDirection direction = Orientation.SOUTH;<br>        direction.pointDirection();<br>    }<br>}</pre><br><br></div>
-
-<h1 id="nbsp-三、总结"><a href="#nbsp-三、总结" class="headerlink" title="&nbsp;三、总结"></a>&nbsp;三、总结</h1><div><br><br></div>
-
-<p>&nbsp;关于Java中的枚举相关知识点大体就这些了，后面讲陆续更新内部类、正则表示式、改善Java代码质量的一些建议等等，敬请关注!</p>
-<pre><code>&lt;div&gt;
-    作者：JAVE_LOVER 发表于2015/4/28 10:39:23 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/45332565)
-&lt;/div&gt;
-&lt;div&gt;
-阅读：1348 评论：2 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/45332565#comments)
-&lt;/div&gt;
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://hawkyAndroid.github.io/2015/04/28/原-Java学习系列-二十二-Java面向对象之枚举详解/" data-id="cj8ync47h000d349zthcc2i6a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-原-Java学习系列-二十一-Java面向对象之注解详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/" class="article-date">
@@ -281,6 +213,8 @@ public class User {
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/" data-id="cj8ync477000b349z1v4i8p5j" class="article-share-link">Share</a>
       
+        <a href="http://hawkyAndroid.github.io/2015/04/27/原-Java学习系列-二十一-Java面向对象之注解详解/#disqus_thread" class="article-comment-link">留言</a>
+      
       
     </footer>
   </div>
@@ -348,6 +282,8 @@ public class User {
     </div>
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/" data-id="cj8ync46w0009349zv29rl4n8" class="article-share-link">Share</a>
+      
+        <a href="http://hawkyAndroid.github.io/2015/04/26/原-Java学习系列-二十-Java面向对象之反射详解/#disqus_thread" class="article-comment-link">留言</a>
       
       
     </footer>
@@ -613,6 +549,8 @@ public class CalculatorTest2 {
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/" data-id="cj8ync49c000r349zen4a2rsu" class="article-share-link">Share</a>
       
+        <a href="http://hawkyAndroid.github.io/2015/04/26/原-基于Junit3-8和Junit4-x的单元测试详解/#disqus_thread" class="article-comment-link">留言</a>
+      
       
     </footer>
   </div>
@@ -703,6 +641,8 @@ public class CalculatorTest2 {
     </div>
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式博客全目录/" data-id="cj8ync47d000c349zbv67xe98" class="article-share-link">Share</a>
+      
+        <a href="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式博客全目录/#disqus_thread" class="article-comment-link">留言</a>
       
       
     </footer>
@@ -830,6 +770,8 @@ public class Test {
     </div>
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十三-访问者模式建模与实现/" data-id="cj8ync48e000k349z2291kojf" class="article-share-link">Share</a>
+      
+        <a href="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十三-访问者模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
       
     </footer>
@@ -984,6 +926,8 @@ public class Test {
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十二-中介者模式建模与实现/" data-id="cj8ync48s000n349z93m0wpgu" class="article-share-link">Share</a>
       
+        <a href="http://hawkyAndroid.github.io/2014/10/13/原-Java设计模式菜鸟系列-二十二-中介者模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
+      
       
     </footer>
   </div>
@@ -1110,6 +1054,8 @@ System.out.println(factory.getCount());
     </div>
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十一-享元模式建模与实现/" data-id="cj8ync488000j349zd4vel3js" class="article-share-link">Share</a>
+      
+        <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十一-享元模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
       
     </footer>
@@ -1250,6 +1196,8 @@ public class Test {
     </div>
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十-解释器模式建模与实现/" data-id="cj8ync481000i349zp0odfn0l" class="article-share-link">Share</a>
+      
+        <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-二十-解释器模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
       
       
     </footer>
@@ -1401,6 +1349,149 @@ public class Test {
     <footer class="article-footer">
       <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十九-备忘录模式建模与实现/" data-id="cj8ync48m000m349zmwwuzbvc" class="article-share-link">Share</a>
       
+        <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十九-备忘录模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-原-Java设计模式菜鸟系列-十八-责任链模式建模与实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" class="article-date">
+  <time datetime="2014-10-12T07:16:47.000Z" itemprop="datePublished">2014-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/">[原]Java设计模式菜鸟系列(十八)责任链模式建模与实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color:rgb(255,0,0); font-size:18px"><strong>转载请注明出处：<a href="http://blog.csdn.net/lhy_ycu/article/details/39721563" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39755577" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39759199" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39784403" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39804057" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805069" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39805735" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39806973" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39828653" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39856435" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39863125" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/39997337" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40008711" target="_blank" rel="external"></a><a href="http://blog.csdn.net/lhy_ycu/article/details/40018231" target="_blank" rel="external">http://blog.csdn.net/lhy_ycu/article/details/40018231</a></strong></span></p>
+<p><span style="font-size:18px; color:rgb(255,0,0)"></span></p>
+<p></p>
+<p><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span><span style="font-family:Arial; font-size:14px; line-height:26px; text-align:left"></span></p>
+<p>责任链模式(ChainOfResponsibility)： 有多个对象，每个对象持有下一个对象的引用，形成一条链，请求在这条链上传递，直到某一对象决定处理该请求，但是发出者并不清楚最终哪个对象会处理该请求。</p>
+<h2 id="一、uml建模："><a href="#一、uml建模：" class="headerlink" title="一、uml建模："></a>一、uml建模：</h2><p><img src="http://img.blog.csdn.net/20141012151702191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h2 id="二、代码实现"><a href="#二、代码实现" class="headerlink" title="二、代码实现"></a>二、代码实现</h2><pre code_snippet_id="482888" snippet_file_name="blog_20141012_1_8894193" name="code" class="java">/**
+ * 责任链模式：有多个对象，每个对象持有下一个对象的引用，形成一条链，
+ * 
+ * 请求在这条链上传递，直到某一对象决定处理该请求，
+ * 
+ * 但是发出者并不清楚最终哪个对象会处理该请求。
+ */
+interface Handler {
+    public void operator();
+}
+
+/**
+ * 这里单独对Handler进行封装，方便修改引用对象
+ */
+abstract class AbstractHandler implements Handler {
+    private Handler handler;
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+}
+
+class MyHandler extends AbstractHandler implements Handler {
+    private String name;
+
+    public MyHandler(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void operator() {
+        if (getHandler() != null) {
+            System.out.print(name + &quot;，将BUG交给——&gt;&quot;);
+            /**
+             * 这里是关键。【注意1】这里不是递归哦~
+             * 
+             * 递归：A(operator)——&gt;A(operator)——&gt;A(operator)
+             * 
+             * 责任链：A(operator)——&gt;B(operator)——&gt;C(operator)
+             */
+            getHandler().operator();
+        } else {
+            System.out.println(name + &quot;处理BUG...\n&quot;);
+        }
+    }
+}
+
+/**
+ * 客户端测试类
+ * 
+ * @author Leo
+ */
+public class Test {
+    public static void main(String[] args) {
+        MyHandler handler1 = new MyHandler(&quot;技术总监&quot;);
+        MyHandler handler2 = new MyHandler(&quot;项目经理&quot;);
+        MyHandler handler3 = new MyHandler(&quot;程序员&quot;);
+        /**
+         * 如果没有下家，将会自行处理
+         * 
+         * 打印结果：技术总监处理BUG...
+         */
+        handler1.operator();
+        /**
+         * 只要有下家，就传给下家处理
+         * 
+         * 下面的打印结果：技术总监，将BUG交给——&gt;项目经理，将BUG交给——&gt;程序员处理BUG...
+         * 
+         * 就这样，原本是技术总监自行处理的BUG，现在一层一层的把责任推给了程序员去处理
+         */
+        handler1.setHandler(handler2);
+        handler2.setHandler(handler3);
+        /**
+         * 透过打印结果可以知道：MyHandler实例化后将生成一系列相互持有的对象(handler)，构成一条链。
+         */
+        handler1.operator();
+        /**
+         * 【注意2】责任链不是链表：链表有个头结点，咱每次必须通过头结点才能访问后面的节点
+         * 
+         * 而责任链它可以从头访问，也可以从中间开始访问，如：handler2.operator();
+         */
+
+    }
+}</pre>
+
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>1、责任链模式可以实现，在隐瞒客户端(不知道具体处理的人是谁)的情况下，对系统进行动态的调整。</p>
+<p>2、链接上的请求可以是一条链，可以是一个树，还可以是一个环，模式本身不约束这个，需要自己去实现，同时，在一个时刻，命令只允许由一个对象传给另一个对象，而不允许传给多个对象。</p>
+<pre><code>&lt;div&gt;
+    作者：JAVE_LOVER 发表于2014/10/12 15:16:47 [原文链接](http://blog.csdn.net/lhy_ycu/article/details/40018231)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：1718 评论：0 [查看评论](http://blog.csdn.net/lhy_ycu/article/details/40018231#comments)
+&lt;/div&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/" data-id="cj8ync48x000o349zi7rf46qu" class="article-share-link">Share</a>
+      
+        <a href="http://hawkyAndroid.github.io/2014/10/12/原-Java设计模式菜鸟系列-十八-责任链模式建模与实现/#disqus_thread" class="article-comment-link">留言</a>
+      
       
     </footer>
   </div>
@@ -1451,7 +1542,7 @@ public class Test {
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a></li></ul>
     </div>
   </div>
 
@@ -1462,10 +1553,6 @@ public class Test {
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2017/10/18/hello-world/">Hello World</a>
-          </li>
         
           <li>
             <a href="/2017/07/01/HelloHexo/">hello</a>
@@ -1481,6 +1568,10 @@ public class Test {
         
           <li>
             <a href="/2015/05/18/原-SQLite应用详解/">[原]SQLite应用详解</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/16/原-全面掌握Mysql知识点及select支持的运算操作/">[原]全面掌握Mysql知识点及select支持的运算操作</a>
           </li>
         
       </ul>
@@ -1509,6 +1600,18 @@ public class Test {
   
 </nav>
     
+<script>
+  var disqus_shortname = 'jslite';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
