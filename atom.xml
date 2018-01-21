@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-01-19T13:10:07.306Z</updated>
+  <updated>2018-01-21T11:04:37.141Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -17,51 +17,104 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>haha</title>
-    <link href="http://hawkyAndroid.github.io/2018/01/19/haha/"/>
-    <id>http://hawkyAndroid.github.io/2018/01/19/haha/</id>
-    <published>2018-01-19T12:43:21.000Z</published>
-    <updated>2018-01-19T13:10:07.306Z</updated>
+    <title>JNI系列(一)AS gradle3.0+ so库的生成及使用</title>
+    <link href="http://hawkyAndroid.github.io/2018/01/15/JNI%E7%B3%BB%E5%88%97(%E4%B8%80)AS%20gradle3.0+%20so%E5%BA%93%E7%9A%84%E7%94%9F%E6%88%90%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
+    <id>http://hawkyAndroid.github.io/2018/01/15/JNI系列(一)AS gradle3.0+ so库的生成及使用/</id>
+    <published>2018-01-15T08:32:07.000Z</published>
+    <updated>2018-01-21T11:04:37.141Z</updated>
     
-    <content type="html"><![CDATA[<p>sfsdfsdfsd   Hexo,fsd Games</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数<span style="color: rgb(79, 79, 79); text-align: justify;">库</span>)文件。这样做的好处是保护代码(反编译难度大)，提供程序的执行效率(c代码)，并且能够移植到其它平台上。</p><p>JNI(Java Native Interface)提供了一些API实现了Java与其它语言(如: c/c++)的通信，咱们可以通过这些API使java方法能够调用c/c++函数。</p><h3 id="一）环境搭建"><a href="#一）环境搭建" class="headerlink" title="一）环境搭建"></a>一）环境搭建</h3><p>下载NDK：打开File-&gt;Settings-&gt;Android SDK-&gt;SDK Tools选中<span style="color:#ff0000;"><strong>CMake</strong></span>、LLDB及NDK后，点击Apply，软件会自动安装NDK。</p><h3 id="二）生成so库"><a href="#二）生成so库" class="headerlink" title="二）生成so库"></a>二）生成so库</h3><p>1.创建项目JNIApis (勾选Include C++ support)</p><p>2. 新建一个JNI API文件，内容如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hawky.jni;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [*昨日重现*] lhy_ycu@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNIApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> String <span class="title">getStringFromC</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>3. 生成.h文件：<br><img src="http://img.blog.csdn.net/20180115225004123?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p><p>执行命令后，可以看到生成了com_hawky_jni_JNIApi.h(接口函数)文件（<strong>目的是为了写C代码</strong>），内容如下：</p><p><img src="http://img.blog.csdn.net/20180115225351611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p><p>4. 接下来就是实现该接口函数：</p><p><img src="http://img.blog.csdn.net/20180115230901449?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p><p>5. 修改CMakeLists.txt文件，将默认的native-lib替换成JNIApi, c源文件路径替换成src/main/jni/JNIApi.c ，然后sync一下即可。</p><p>6. rebuild一下，生成so库文件：</p><p><img src="http://img.blog.csdn.net/20180115232050994?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p><h3 id="三）使用so库"><a href="#三）使用so库" class="headerlink" title="三）使用so库"></a>三）使用so库</h3><p>1. 新建项目JNIApiSample（为了区分so库的生成过程）</p><p>2. 在src/main 目录下新建jniLibs文件夹，并将之前生成的那些so库文件拷贝至jniLibs文件夹中，然后在build.gradle(app目录下)配置：</p><pre style="background-color:#2b2b2b;color:#a9b7c6;font-family:'宋体';font-size:10.8pt;">sourceSets {    main {        <span style="color:#9876aa;">jni</span>.<span style="color:#9876aa;">srcDirs </span>= []    }}</pre><p>3. 编写Native接口文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hawky.jni;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [*昨日重现*] lhy_ycu@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNIApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> String <span class="title">getStringFromC</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.loadLibrary(&amp;quot;JNIApi&amp;quot;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsatisfiedLinkError ule) &#123;</span><br><span class="line">            System.out.println(&amp;quot;loadLibrary(JNIApi),&amp;quot; + ule.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>4. 测试JNI接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>, &amp;quot;Java调用C代码：&amp;quot; + JNIApi.getStringFromC(), Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>rebuild后运行一下可以看到手机界面弹出了“Java调用C代码：I’m String from C!”。OK，大功告成。</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>AS越来越人性化了，gradle3.0之后编写JNI代码也没那么麻烦了，咱们只需要关心具体的核心业务逻辑,专注写C，so库配置一下便会自动生成，然后供Java开发者调用。<span style="color:#ff0000;">需要</span><span style="color: rgb(255, 0, 0); text-align: justify;">注意的是：JNI接口的包名要与C代码里面的包名一致。</span></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;sfsdfsdfsd   Hexo,fsd Games&lt;/p&gt;
+        &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数&lt;sp
+      
+    
+    </summary>
+    
+      <category term="JNI系列" scheme="http://hawkyAndroid.github.io/categories/JNI%E7%B3%BB%E5%88%97/"/>
+    
+    
+      <category term="JNI" scheme="http://hawkyAndroid.github.io/tags/JNI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android插件化系列(一)插件化概述</title>
+    <link href="http://hawkyAndroid.github.io/2017/08/26/Android%E6%8F%92%E4%BB%B6%E5%8C%96%E7%B3%BB%E5%88%97(%E4%B8%80)%E6%8F%92%E4%BB%B6%E5%8C%96%E6%A6%82%E8%BF%B0/"/>
+    <id>http://hawkyAndroid.github.io/2017/08/26/Android插件化系列(一)插件化概述/</id>
+    <published>2017-08-26T08:29:56.000Z</published>
+    <updated>2018-01-21T11:13:12.163Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android插件化系列[1]插件化概述</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Android插件化系列[1]插件化概述&lt;/p&gt;
 
       
     
     </summary>
     
-      <category term="目前" scheme="http://hawkyAndroid.github.io/categories/%E7%9B%AE%E5%89%8D/"/>
+      <category term="Android插件化系列" scheme="http://hawkyAndroid.github.io/categories/Android%E6%8F%92%E4%BB%B6%E5%8C%96%E7%B3%BB%E5%88%97/"/>
     
     
-      <category term="Hexo" scheme="http://hawkyAndroid.github.io/tags/Hexo/"/>
-    
-      <category term="Games" scheme="http://hawkyAndroid.github.io/tags/Games/"/>
+      <category term="Android插件化" scheme="http://hawkyAndroid.github.io/tags/Android%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
     
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://hawkyAndroid.github.io/2018/01/17/hello-world/"/>
-    <id>http://hawkyAndroid.github.io/2018/01/17/hello-world/</id>
-    <published>2018-01-17T12:48:37.508Z</published>
-    <updated>2018-01-17T12:48:37.509Z</updated>
+    <title>自定义View系列(一)自定义View概述</title>
+    <link href="http://hawkyAndroid.github.io/2017/06/26/%E8%87%AA%E5%AE%9A%E4%B9%89View%E7%B3%BB%E5%88%97(%E4%B8%80)%E8%87%AA%E5%AE%9A%E4%B9%89View%E6%A6%82%E8%BF%B0/"/>
+    <id>http://hawkyAndroid.github.io/2017/06/26/自定义View系列(一)自定义View概述/</id>
+    <published>2017-06-26T08:29:56.000Z</published>
+    <updated>2018-01-21T11:12:49.747Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>自定义View系列[1]自定义View概述</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+        &lt;p&gt;自定义View系列[1]自定义View概述&lt;/p&gt;
+
       
     
     </summary>
     
+      <category term="自定义View系列" scheme="http://hawkyAndroid.github.io/categories/%E8%87%AA%E5%AE%9A%E4%B9%89View%E7%B3%BB%E5%88%97/"/>
+    
+    
+      <category term="View" scheme="http://hawkyAndroid.github.io/tags/View/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RxJava系列(一)RxJava概述</title>
+    <link href="http://hawkyAndroid.github.io/2017/05/26/RxJava%E7%B3%BB%E5%88%97(%E4%B8%80)RxJava%E6%A6%82%E8%BF%B0/"/>
+    <id>http://hawkyAndroid.github.io/2017/05/26/RxJava系列(一)RxJava概述/</id>
+    <published>2017-05-26T08:29:56.000Z</published>
+    <updated>2018-01-21T13:52:27.917Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考<a href="https://github.com/hawkyAndroid/rxpal" target="_blank" rel="noopener">rxpal</a><a href="https://github.com/hawkyAndroid/rxpal" target="_blank" rel="noopener">https://github.com/hawkyAndroid/rxpal</a><br><!-- UY BEGIN --></p><p><div id="uyan_frame"></div></p><p><script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2156359"></script><br><!-- UY END --></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;参考&lt;a href=&quot;https://github.com/hawkyAndroid/rxpal&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;rxpal&lt;/a&gt;&lt;a href=&quot;https://github.com/hawkyAndroid/rxpal&quot;
+      
+    
+    </summary>
+    
+      <category term="RxJava系列" scheme="http://hawkyAndroid.github.io/categories/RxJava%E7%B3%BB%E5%88%97/"/>
+    
+    
+      <category term="RxJava" scheme="http://hawkyAndroid.github.io/tags/RxJava/"/>
     
   </entry>
   
