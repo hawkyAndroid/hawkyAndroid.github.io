@@ -2056,7 +2056,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0f2617;
+  background: #b6fce3;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2605,14 +2605,6 @@ img:hover {
 .site-uv::after {
   content: "|";
   padding-left: 10px;
-}
-.gt-header a,
-.gt-comments a,
-.gt-popup a {
-  border-bottom: none;
-}
-.gt-container .gt-popup .gt-action.is--active:before {
-  top: 0.7em;
 }
 .page-archive .archive-page-counter {
   position: relative;
