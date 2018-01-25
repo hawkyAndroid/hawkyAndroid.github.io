@@ -390,17 +390,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/26/Android插件化系列(一)插件化概述/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/26/Android插件化系列(一)插件化概述/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -561,15 +550,10 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
+	<div class="comments" id="comments">
+		 <div id="gitalk-container"></div>
+  </div>
+  
   
 
 
@@ -870,26 +854,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://hawky.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://hawkyAndroid.github.io/2017/08/26/Android插件化系列(一)插件化概述/';
-          this.page.identifier = '2017/08/26/Android插件化系列(一)插件化概述/';
-          this.page.title = 'Android插件化系列(一)插件化概述';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://hawky.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -905,6 +869,7 @@
 
 
 
+  
 
 
 
@@ -913,6 +878,24 @@
 
 
 
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '1b9404419e7dd89779e3',
+          clientSecret: '32b1a20e453dbc283e36a0c5cb5e283d468b387a',
+          repo: 'hawkyAndroid.github.io',
+          owner: 'hawkyAndroid',
+          admin: ['hawkyAndroid'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
   
 
