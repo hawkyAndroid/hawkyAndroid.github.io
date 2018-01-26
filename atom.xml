@@ -18,8 +18,8 @@
   
   <entry>
     <title>JNI系列(一)AS gradle3.0+ so库的生成及使用</title>
-    <link href="http://hawkyAndroid.github.io/2018/01/15/JNI%E7%B3%BB%E5%88%97(%E4%B8%80)AS%20gradle3.0+%20so%E5%BA%93%E7%9A%84%E7%94%9F%E6%88%90%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
-    <id>http://hawkyAndroid.github.io/2018/01/15/JNI系列(一)AS gradle3.0+ so库的生成及使用/</id>
+    <link href="http://hawkyAndroid.github.io/2018/01/15/jni-001/"/>
+    <id>http://hawkyAndroid.github.io/2018/01/15/jni-001/</id>
     <published>2018-01-15T08:32:07.000Z</published>
     <updated>2018-01-24T16:01:11.630Z</updated>
     
@@ -43,18 +43,18 @@
   
   <entry>
     <title>Android插件化系列(一)插件化概述</title>
-    <link href="http://hawkyAndroid.github.io/2017/08/26/Android%E6%8F%92%E4%BB%B6%E5%8C%96%E7%B3%BB%E5%88%97(%E4%B8%80)%E6%8F%92%E4%BB%B6%E5%8C%96%E6%A6%82%E8%BF%B0/"/>
-    <id>http://hawkyAndroid.github.io/2017/08/26/Android插件化系列(一)插件化概述/</id>
+    <link href="http://hawkyAndroid.github.io/2017/08/26/pluggable-001/"/>
+    <id>http://hawkyAndroid.github.io/2017/08/26/pluggable-001/</id>
     <published>2017-08-26T08:29:56.000Z</published>
-    <updated>2018-01-21T11:13:12.163Z</updated>
+    <updated>2018-01-26T15:01:19.147Z</updated>
     
-    <content type="html"><![CDATA[<p>Android插件化系列[1]插件化概述</p>]]></content>
+    <content type="html"><![CDATA[<p>Android插件化概述</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;Android插件化系列[1]插件化概述&lt;/p&gt;
+        &lt;p&gt;Android插件化概述&lt;/p&gt;
 
       
     
@@ -69,8 +69,8 @@
   
   <entry>
     <title>自定义View系列(一)自定义View概述</title>
-    <link href="http://hawkyAndroid.github.io/2017/06/26/%E8%87%AA%E5%AE%9A%E4%B9%89View%E7%B3%BB%E5%88%97(%E4%B8%80)%E8%87%AA%E5%AE%9A%E4%B9%89View%E6%A6%82%E8%BF%B0/"/>
-    <id>http://hawkyAndroid.github.io/2017/06/26/自定义View系列(一)自定义View概述/</id>
+    <link href="http://hawkyAndroid.github.io/2017/06/26/view-001/"/>
+    <id>http://hawkyAndroid.github.io/2017/06/26/view-001/</id>
     <published>2017-06-26T08:29:56.000Z</published>
     <updated>2018-01-21T11:12:49.747Z</updated>
     
@@ -95,8 +95,8 @@
   
   <entry>
     <title>RxJava系列(一)RxJava概述</title>
-    <link href="http://hawkyAndroid.github.io/2017/05/26/RxJava%E7%B3%BB%E5%88%97(%E4%B8%80)RxJava%E6%A6%82%E8%BF%B0/"/>
-    <id>http://hawkyAndroid.github.io/2017/05/26/RxJava系列(一)RxJava概述/</id>
+    <link href="http://hawkyAndroid.github.io/2017/05/26/rxjava-001/"/>
+    <id>http://hawkyAndroid.github.io/2017/05/26/rxjava-001/</id>
     <published>2017-05-26T08:29:56.000Z</published>
     <updated>2018-01-21T13:52:27.917Z</updated>
     
