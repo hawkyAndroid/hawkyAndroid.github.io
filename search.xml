@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2018年度计划]]></title>
+    <url>%2F2018%2F03%2F16%2Ftask-and-dream-for-2018%2F</url>
+    <content type="text"><![CDATA[2018年度计划工作方面 工作环境：尽管现在所在的公司不怎么加班，但感觉待遇和技术很难上去，平常接触的大多是协议(HTTP、MQTT、TCP/UDP)及通信层的封装、数据管理层的封装; 对新的技术接触的很少、晋升至管理级别的可能性几乎为0。所以如果有好的工作机会的话会考虑换个环境，毕竟年纪也不小了，不想再这么耗下去。 业务交流：感觉搞技术这一行的人都有点内向，都不怎么爱说话，见识的世面太少。有时候跟业务人员交流起来比较费劲，程序员总是习惯按照自己思维去解释一下东西，但实际上很多时候这并不是业务人员想要的答案，毕竟他们的需求是推销产品或服务给客户而不是程序员的逻辑。所以思考怎么更合理的站在业务角度去阐述和解释是需要花时间学习的。当国外客户需要一个SDK给他们用时，英语不怎么好的程序员身边可能需要一个业务员帮忙翻译那些接口文档了。 解决方案：当公司或客户提出新需求、软件出现漏洞、开会讨论产生问题，如何快速思考、整合资源、得出单个或多个有效的解决方案是程序员生涯必须要学会的一样技能。 学习方面 专业技术：学习Android插件化、继续学习自定义View。 自学炒股：掌握股票基础知识、买几只股票、学习如何投资。 拿驾照：争取今年3、4月份通过科三、科四考试、拿到驾驶证。 微信公众号：写故事、文章，并同步至hawky.me托管网站上。 生活方面 看病：尽可能多做轻运动（跑步、游泳、爬山） 女票：解决单身问题。多与女生接触交流(不要频繁问问题、查户口，用曲解法、冷读法)、适当学习沟通技巧及话术、与女生沟通时尽量”减少理性思考，多用感性表达”。 买房：今年要攒够钱付首付、不要乱花钱、理财。 旅游：4月份计划去日本旅游，做好攻略安排、记录旅游心得。 多看些技术以外的书籍并记录感悟、丰富知识面。 未来计划1. 拍一部爱情、人性方面的微电影。2. 写一本关于记录人生成长故事、情感方面的书。]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>Life</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JNI系列(一)AS gradle3.0+ so库的生成及使用]]></title>
     <url>%2F2018%2F01%2F15%2Fjni-001%2F</url>
     <content type="text"><![CDATA[前言NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数库)文件。这样做的好处是保护代码(反编译难度大)，提供程序的执行效率(c代码)，并且能够移植到其它平台上。 JNI(Java Native Interface)提供了一些API实现了Java与其它语言(如: c/c++)的通信，咱们可以通过这些API使java方法能够调用c/c++函数。 一）环境搭建下载NDK：打开File-&gt;Settings-&gt;Android SDK-&gt;SDK Tools选中CMake、LLDB及NDK后，点击Apply，软件会自动安装NDK。 二）生成so库1.创建项目JNIApis (勾选Include C++ support) 2. 新建一个JNI API文件，内容如下：123456789package com.hawky.jni;/** * @author [*昨日重现*] lhy_ycu@163.com * @since version 1.0 */public class JNIApi &#123; public static native String getStringFromC();&#125; 3. 生成.h文件： 执行命令后，可以看到生成了com_hawky_jni_JNIApi.h(接口函数)文件（目的是为了写C代码），内容如下： 4. 接下来就是实现该接口函数： 5. 修改CMakeLists.txt文件，将默认的native-lib替换成JNIApi, c源文件路径替换成src/main/jni/JNIApi.c ，然后sync一下即可。 6. rebuild一下，生成so库文件： 三）使用so库1. 新建项目JNIApiSample（为了区分so库的生成过程） 2. 在src/main 目录下新建jniLibs文件夹，并将之前生成的那些so库文件拷贝至jniLibs文件夹中，然后在build.gradle(app目录下)配置： sourceSets { main { jni.srcDirs = [] } } 3. 编写Native接口文件：1234567891011121314151617package com.hawky.jni;/** * @author [*昨日重现*] lhy_ycu@163.com * @since version 1.0 */public class JNIApi &#123; public static native String getStringFromC(); static &#123; try &#123; System.loadLibrary(&amp;quot;JNIApi&amp;quot;); &#125; catch (UnsatisfiedLinkError ule) &#123; System.out.println(&amp;quot;loadLibrary(JNIApi),&amp;quot; + ule.getMessage()); &#125; &#125;&#125; 4. 测试JNI接口：123456789public class MainActivity extends AppCompatActivity &#123; @Override protected void onCreate(Bundle savedInstanceState) &#123; super.onCreate(savedInstanceState); setContentView(R.layout.activity_main); Toast.makeText(this, &amp;quot;Java调用C代码：&amp;quot; + JNIApi.getStringFromC(), Toast.LENGTH_SHORT).show(); &#125;&#125; rebuild后运行一下可以看到手机界面弹出了“Java调用C代码：I’m String from C!”。OK，大功告成。 总结AS越来越人性化了，gradle3.0之后编写JNI代码也没那么麻烦了，咱们只需要关心具体的核心业务逻辑,专注写C，so库配置一下便会自动生成，然后供Java开发者调用。需要注意的是：JNI接口的包名要与C代码里面的包名一致。]]></content>
