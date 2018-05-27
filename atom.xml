@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-05-09T15:55:56.906Z</updated>
+  <updated>2018-05-27T08:54:55.537Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为人处世</title>
+    <link href="http://hawkyAndroid.github.io/2018/05/27/summery-do-something-2018-5-27/"/>
+    <id>http://hawkyAndroid.github.io/2018/05/27/summery-do-something-2018-5-27/</id>
+    <published>2018-05-27T08:54:10.000Z</published>
+    <updated>2018-05-27T08:54:55.537Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>看望病友：安慰、鼓励、善意的“欺骗”。</p></li><li><p>日常朋友聊天：谦逊、求同存异、“不离间”。</p></li><li><p>问朋友借东西：用商量的语气、别说气话、礼貌归还。</p></li><li><p>为朋友劝架：心平气和、用幽默解围、不要有个人情绪。</p></li><li><p>邻里相处：平等、表扬、切勿探究别人的私事。</p></li><li><p>对朋友下逐客令：把理由说清楚、商量性的提醒、安排他干点别的事。</p></li><li><p>在酒桌上说话：话题顾忌他人，尊重宾主、别强求劝酒。</p></li><li><p>同事之间：巧用称谓搞好关系、不要过分表现自己、建设性口气。</p></li><li><p>寻找陌生人之间话题：发现共同点、话题符合身份、避免过多使用专业术语、尽量选择众人关心的事件、不要轻易转移话题、虚心请教、换位思考、目的性不要太强。</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;看望病友：安慰、鼓励、善意的“欺骗”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;日常朋友聊天：谦逊、求同存异、“不离间”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;问朋友借东西：用商量的语气、别说气话、礼貌归还。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;为朋友劝架：心平气和
+      
+    
+    </summary>
+    
+      <category term="Life" scheme="http://hawkyAndroid.github.io/categories/Life/"/>
+    
+    
+      <category term="Life" scheme="http://hawkyAndroid.github.io/tags/Life/"/>
+    
+  </entry>
   
   <entry>
     <title>MQTT协议总结</title>
