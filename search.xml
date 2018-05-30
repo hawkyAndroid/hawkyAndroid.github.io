@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AS使用总结]]></title>
+    <url>%2F2018%2F05%2F30%2Fsummary-as-develop-2018-5-28%2F</url>
+    <content type="text"><![CDATA[android gradle依赖的几种方式implementation使用了该命令编译的依赖，它仅仅对当前的Moudle提供接口。好处： 1. 加快编译速度。2. 隐藏对外不必要的接口。 api跟 2.x 版本的 compile完全相同。与implementation的区别是：implementation内部module使用，而api可对外提供接口。 provided（compileOnly）只在编译时有效，不会参与打包可以在自己的moudle中使用该方式依赖一些比如com.android.support，gson这些使用者常用的库，避免冲突。 apk（runtimeOnly）只在生成apk的时候参与打包，编译时不会参与，很少用。]]></content>
+      <categories>
+        <category>AS总结</category>
+      </categories>
+      <tags>
+        <tag>AS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[为人处世]]></title>
     <url>%2F2018%2F05%2F27%2Fsummery-do-something-2018-5-27%2F</url>
     <content type="text"><![CDATA[看望病友：安慰、鼓励、善意的“欺骗”。 日常朋友聊天：谦逊、求同存异、“不离间”。 问朋友借东西：用商量的语气、别说气话、礼貌归还。 为朋友劝架：心平气和、用幽默解围、不要有个人情绪。 邻里相处：平等、表扬、切勿探究别人的私事。 对朋友下逐客令：把理由说清楚、商量性的提醒、安排他干点别的事。 在酒桌上说话：话题顾忌他人，尊重宾主、别强求劝酒。 同事之间：巧用称谓搞好关系、不要过分表现自己、建设性口气。 寻找陌生人之间话题：发现共同点、话题符合身份、避免过多使用专业术语、尽量选择众人关心的事件、不要轻易转移话题、虚心请教、换位思考、目的性不要太强。]]></content>

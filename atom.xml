@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-05-27T08:54:55.537Z</updated>
+  <updated>2018-05-30T15:03:17.261Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AS使用总结</title>
+    <link href="http://hawkyAndroid.github.io/2018/05/30/summary-as-develop-2018-5-28/"/>
+    <id>http://hawkyAndroid.github.io/2018/05/30/summary-as-develop-2018-5-28/</id>
+    <published>2018-05-30T15:02:36.000Z</published>
+    <updated>2018-05-30T15:03:17.261Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="android-gradle依赖的几种方式"><a href="#android-gradle依赖的几种方式" class="headerlink" title="android gradle依赖的几种方式"></a>android gradle依赖的几种方式</h3><p></p><h5>implementation</h5><br>使用了该命令编译的依赖，它仅仅对当前的Moudle提供接口。<br>好处： 1. 加快编译速度。2. 隐藏对外不必要的接口。<p></p><p></p><h5>api</h5><br>跟 2.x 版本的 compile完全相同。与implementation的区别是：implementation内部module使用，而api可对外提供接口。<p></p><p></p><h5>provided（compileOnly）</h5><br>只在编译时有效，不会参与打包<br>可以在自己的moudle中使用该方式依赖一些比如com.android.support，gson这些使用者常用的库，避免冲突。<p></p><p></p><h5>apk（runtimeOnly）</h5><br>只在生成apk的时候参与打包，编译时不会参与，很少用。<p></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;android-gradle依赖的几种方式&quot;&gt;&lt;a href=&quot;#android-gradle依赖的几种方式&quot; class=&quot;headerlink&quot; title=&quot;android gradle依赖的几种方式&quot;&gt;&lt;/a&gt;android gradle依赖的几种方式&lt;/
+      
+    
+    </summary>
+    
+      <category term="AS总结" scheme="http://hawkyAndroid.github.io/categories/AS%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="AS" scheme="http://hawkyAndroid.github.io/tags/AS/"/>
+    
+  </entry>
   
   <entry>
     <title>为人处世</title>
