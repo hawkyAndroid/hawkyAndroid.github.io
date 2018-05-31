@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="JNI," />
+  <meta name="keywords" content="MQTT," />
 
 
 
@@ -97,23 +97,18 @@
 
 
 
-<meta name="description" content="前言NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数库)文件。这样做的好处是保护代码(反编译难度大)，提供程序的执行效率(c代码)，并且能够移植到其它平台上。 JNI(Java Native Interface)提供了一些API实现了Java与其它语言(如: c/c++)的通信，咱们可以通过这些API使java方">
-<meta name="keywords" content="JNI">
+<meta name="description" content="1. MQTT控制报文的格式1.1 MQTT控制报文的结构   MQTT控制报文的结构     Fixed header 固定报头，所有控制报文都包含   Variable header 可变报头，部分控制报文包含   Payload 有效载荷，部分控制报文包含    1.2 固定报头（2个字节）            Bit        7        6        5        4">
+<meta name="keywords" content="MQTT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JNI系列(一)AS gradle3.0+ so库的生成及使用">
-<meta property="og:url" content="http://hawkyAndroid.github.io/2018/01/15/jni-001/index.html">
+<meta property="og:title" content="MQTT协议总结">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2018/05/09/summary-mqtt-protocol/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="前言NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数库)文件。这样做的好处是保护代码(反编译难度大)，提供程序的执行效率(c代码)，并且能够移植到其它平台上。 JNI(Java Native Interface)提供了一些API实现了Java与其它语言(如: c/c++)的通信，咱们可以通过这些API使java方">
+<meta property="og:description" content="1. MQTT控制报文的格式1.1 MQTT控制报文的结构   MQTT控制报文的结构     Fixed header 固定报头，所有控制报文都包含   Variable header 可变报头，部分控制报文包含   Payload 有效载荷，部分控制报文包含    1.2 固定报头（2个字节）            Bit        7        6        5        4">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.blog.csdn.net/20180115225004123?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20180115225351611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20180115230901449?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20180115232050994?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-01-24T16:01:11.630Z">
+<meta property="og:updated_time" content="2018-05-09T15:55:56.906Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JNI系列(一)AS gradle3.0+ so库的生成及使用">
-<meta name="twitter:description" content="前言NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数库)文件。这样做的好处是保护代码(反编译难度大)，提供程序的执行效率(c代码)，并且能够移植到其它平台上。 JNI(Java Native Interface)提供了一些API实现了Java与其它语言(如: c/c++)的通信，咱们可以通过这些API使java方">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20180115225004123?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="MQTT协议总结">
+<meta name="twitter:description" content="1. MQTT控制报文的格式1.1 MQTT控制报文的结构   MQTT控制报文的结构     Fixed header 固定报头，所有控制报文都包含   Variable header 可变报头，部分控制报文包含   Payload 有效载荷，部分控制报文包含    1.2 固定报头（2个字节）            Bit        7        6        5        4">
 
 
 
@@ -143,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/01/15/jni-001/"/>
+  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/05/09/summary-mqtt-protocol/"/>
 
 
 
 
 
-  <title>JNI系列(一)AS gradle3.0+ so库的生成及使用 | Hawky的博客</title>
+  <title>MQTT协议总结 | Hawky的博客</title>
   
 
 
@@ -312,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/01/15/jni-001/">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/05/09/summary-mqtt-protocol/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hawky">
@@ -329,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JNI系列(一)AS gradle3.0+ so库的生成及使用</h1>
+          <h1 class="post-title" itemprop="name headline">MQTT协议总结</h1>
         
 
         <div class="post-meta">
@@ -341,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T16:32:07+08:00">
-                2018-01-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T22:51:10+08:00">
+                2018-05-09
               </time>
             
 
@@ -364,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JNI系列/" itemprop="url" rel="index">
-                    <span itemprop="name">JNI系列</span>
+                  <a href="/categories/MQTT/" itemprop="url" rel="index">
+                    <span itemprop="name">MQTT</span>
                   </a>
                 </span>
 
@@ -381,7 +376,7 @@
 
           
           
-             <span id="/2018/01/15/jni-001/" class="leancloud_visitors" data-flag-title="JNI系列(一)AS gradle3.0+ so库的生成及使用">
+             <span id="/2018/05/09/summary-mqtt-protocol/" class="leancloud_visitors" data-flag-title="MQTT协议总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,31 +407,432 @@
       
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数<span style="color: rgb(79, 79, 79); text-align: justify;">库</span>)文件。这样做的好处是保护代码(反编译难度大)，提供程序的执行效率(c代码)，并且能够移植到其它平台上。</p>
-<p>JNI(Java Native Interface)提供了一些API实现了Java与其它语言(如: c/c++)的通信，咱们可以通过这些API使java方法能够调用c/c++函数。</p>
-<h3 id="一）环境搭建"><a href="#一）环境搭建" class="headerlink" title="一）环境搭建"></a>一）环境搭建</h3><p>下载NDK：打开File-&gt;Settings-&gt;Android SDK-&gt;SDK Tools选中<span style="color:#ff0000;"><strong>CMake</strong></span>、LLDB及NDK后，点击Apply，软件会自动安装NDK。</p>
-<h3 id="二）生成so库"><a href="#二）生成so库" class="headerlink" title="二）生成so库"></a>二）生成so库</h3><p>1.创建项目JNIApis (勾选Include C++ support)</p>
-<p>2. 新建一个JNI API文件，内容如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hawky.jni;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [*昨日重现*] lhy_ycu@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNIApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> String <span class="title">getStringFromC</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3. 生成.h文件：<br><img src="http://img.blog.csdn.net/20180115225004123?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<p>执行命令后，可以看到生成了com_hawky_jni_JNIApi.h(接口函数)文件（<strong>目的是为了写C代码</strong>），内容如下：</p>
-<p><img src="http://img.blog.csdn.net/20180115225351611?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<p>4. 接下来就是实现该接口函数：</p>
-<p><img src="http://img.blog.csdn.net/20180115230901449?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<p>5. 修改CMakeLists.txt文件，将默认的native-lib替换成JNIApi, c源文件路径替换成src/main/jni/JNIApi.c ，然后sync一下即可。</p>
-<p>6. rebuild一下，生成so库文件：</p>
-<p><img src="http://img.blog.csdn.net/20180115232050994?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh5X3ljdQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<h3 id="三）使用so库"><a href="#三）使用so库" class="headerlink" title="三）使用so库"></a>三）使用so库</h3><p>1. 新建项目JNIApiSample（为了区分so库的生成过程）</p>
-<p>2. 在src/main 目录下新建jniLibs文件夹，并将之前生成的那些so库文件拷贝至jniLibs文件夹中，然后在build.gradle(app目录下)配置：</p>
-<pre style="background-color:#2b2b2b;color:#a9b7c6;font-family:'宋体';font-size:10.8pt;">sourceSets {
-    main {
-        <span style="color:#9876aa;">jni</span>.<span style="color:#9876aa;">srcDirs </span>= []
-    }
-}</pre>
+        <h3 id="1-MQTT控制报文的格式"><a href="#1-MQTT控制报文的格式" class="headerlink" title="1. MQTT控制报文的格式"></a>1. MQTT控制报文的格式</h3><h4 id="1-1-MQTT控制报文的结构"><a href="#1-1-MQTT控制报文的结构" class="headerlink" title="1.1 MQTT控制报文的结构"></a>1.1 MQTT控制报文的结构</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">MQTT控制报文的结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Fixed header 固定报头，所有控制报文都包含</td>
+</tr>
+<tr>
+<td style="text-align:center">Variable header 可变报头，部分控制报文包含</td>
+</tr>
+<tr>
+<td style="text-align:center">Payload 有效载荷，部分控制报文包含</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-2-固定报头（2个字节）"><a href="#1-2-固定报头（2个字节）" class="headerlink" title="1.2 固定报头（2个字节）"></a>1.2 固定报头（2个字节）</h4><table><br>    <tr><br>        <td>Bit</td><br>        <td>7</td><br>        <td>6</td><br>        <td>5</td><br>        <td>4</td><br>        <td>3</td><br>        <td>2</td><br>        <td>1</td><br>        <td>0</td><br>   </tr><br>    <tr><br>        <td>byte 1</td><br>        <td colspan="4" align="center">MQTT控制报文的类型</td><br>        <td colspan="4" align="center">用于指定控制报文类型的标志位</td><br>    </tr><br>    <tr><br>        <td>byte 2</td><br>        <td colspan="8" align="center">剩余长度</td><br>    </tr><br></table>
 
-<p>3. 编写Native接口文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hawky.jni;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [*昨日重现*] lhy_ycu@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNIApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> String <span class="title">getStringFromC</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.loadLibrary(&amp;quot;JNIApi&amp;quot;);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsatisfiedLinkError ule) &#123;</span><br><span class="line">            System.out.println(&amp;quot;loadLibrary(JNIApi),&amp;quot; + ule.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>4. 测试JNI接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>, &amp;quot;Java调用C代码：&amp;quot; + JNIApi.getStringFromC(), Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>rebuild后运行一下可以看到手机界面弹出了“Java调用C代码：I’m String from C!”。OK，大功告成。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>AS越来越人性化了，gradle3.0之后编写JNI代码也没那么麻烦了，咱们只需要关心具体的核心业务逻辑,专注写C，so库配置一下便会自动生成，然后供Java开发者调用。<span style="color:#ff0000;">需要</span><span style="color: rgb(255, 0, 0); text-align: justify;">注意的是：JNI接口的包名要与C代码里面的包名一致。</span></p>
+<h5 id="1-2-1-控制报文的类型（14种）–高四位"><a href="#1-2-1-控制报文的类型（14种）–高四位" class="headerlink" title="1.2.1 控制报文的类型（14种）–高四位"></a>1.2.1 控制报文的类型（14种）–高四位</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">名字</th>
+<th style="text-align:center">值</th>
+<th style="text-align:center">报文流动方向</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">禁止</td>
+<td style="text-align:center">保留</td>
+</tr>
+<tr>
+<td style="text-align:center">CONNECT</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">客户端到服务端</td>
+<td style="text-align:center">客户端请求连接服务端</td>
+</tr>
+<tr>
+<td style="text-align:center">CONNACK</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">服务端到客户端</td>
+<td style="text-align:center">连接报文确认</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBLISH</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">两个方向都允许</td>
+<td style="text-align:center">发布消息</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBACK</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">两个方向都允许</td>
+<td style="text-align:center">QoS 1 消息发布收到确认</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBREC</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">两个方向都允许</td>
+<td style="text-align:center">发布收到（保证交付第一步）</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBREL</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">两个方向都允许</td>
+<td style="text-align:center">发布释放（保证交付第二步）</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBCOMP</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">两个方向都允许</td>
+<td style="text-align:center">QoS 2 消息发布完成（保证交互第三步）</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBSCRIBE</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">客户端到服务端</td>
+<td style="text-align:center">客户端订阅请求</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBACK</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">服务端到客户端</td>
+<td style="text-align:center">订阅请求报文确认</td>
+</tr>
+<tr>
+<td style="text-align:center">UNSUBSCRIBE</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">客户端到服务端</td>
+<td style="text-align:center">客户端取消订阅请求</td>
+</tr>
+<tr>
+<td style="text-align:center">UNSUBACK</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">服务端到客户端</td>
+<td style="text-align:center">取消订阅报文确认</td>
+</tr>
+<tr>
+<td style="text-align:center">PINGREQ</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">客户端到服务端</td>
+<td style="text-align:center">心跳请求</td>
+</tr>
+<tr>
+<td style="text-align:center">PINGRESP</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">服务端到客户端</td>
+<td style="text-align:center">心跳响应</td>
+</tr>
+<tr>
+<td style="text-align:center">DISCONNECT</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">客户端到服务端</td>
+<td style="text-align:center">客户端断开连接</td>
+</tr>
+<tr>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">禁止</td>
+<td style="text-align:center">保留</td>
+</tr>
+</tbody>
+</table>
+<h5 id="1-2-2-标志位-–低四位"><a href="#1-2-2-标志位-–低四位" class="headerlink" title="1.2.2 标志位 –低四位"></a>1.2.2 标志位 –低四位</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">控制报文</th>
+<th style="text-align:center">固定报头标志</th>
+<th style="text-align:center">Bit 3</th>
+<th style="text-align:center">Bit 2</th>
+<th>Bit 1</th>
+<th>Bit 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CONNECT</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">CONNACK</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBLISH</td>
+<td style="text-align:center">Used in MQTT 3.1.1</td>
+<td style="text-align:center">DUP 1</td>
+<td style="text-align:center">QoS 2</td>
+<td>QoS 2</td>
+<td>RETAIN 3</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBACK</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBREC</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBREL</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBCOMP</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBSCRIBE</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBACK</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">UNSUBSCRIBE</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">UNSUBACK</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">PINGREQ</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">PINGRESP</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align:center">DISCONNECT</td>
+<td style="text-align:center">Reserved</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h5 id="1-2-3-剩余长度-–从第-2-个字节开始位置"><a href="#1-2-3-剩余长度-–从第-2-个字节开始位置" class="headerlink" title="1.2.3 剩余长度 –从第 2 个字节开始位置"></a>1.2.3 剩余长度 –从第 2 个字节开始位置</h5><p>剩余长度（Remaining Length）表示当前报文剩余部分的字节数，包括可变报头和负载的数据。剩余长度不包括用于编码剩余长度字段本身的字节数。</p>
+<p>剩余长度字段使用一个变长度编码方案，对小于 128 的值它使用单字节编码。更大的值按下面的方式处理。低 7 位有效位用于编码数据，最高有效位用于指示是否有更多的字节。因此每个字节可以编码 128 个数值和一个 延续位（ continuation bit ） 。剩余长度字段最大 4 个字节。</p>
+<p>分别表示（每个字节的低 7 位用于编码数据，最高位是标志位）：<br>1 个字节时，从 0(0x00)到 127(0x7f)<br>2 个字节时，从 128(0x80,0x01)到 16383(0Xff,0x7f)<br>3 个字节时，从 16384(0x80,0x80,0x01)到 2097151(0xFF,0xFF,0x7F)<br>4 个字节时，从 2097152(0x80,0x80,0x80,0x01)到 268435455(0xFF,0xFF,0xFF,0x7F)</p>
+<h4 id="1-3-可变报头"><a href="#1-3-可变报头" class="headerlink" title="1.3 可变报头"></a>1.3 可变报头</h4><p>某些 MQTT 控制报文包含一个可变报头部分。它在固定报头和负载之间。可变报头的内容根据报文类型的不同而不同。可变报头的报文标识符（Packet Identifier）字段存在于在多个类型的报文里。</p>
+<p>很多控制报文的可变报头部分包含一个两字节的报文标识符字段。这些报文是 PUBLISH（QoS&gt;0 时），PUBACK，PUBREC，PUBREL，PUBCOMP，SUBSCRIBE, SUBACK，UNSUBSCIBE，UNSUBACK。</p>
+<p>注意：QoS 设置为 0 的 PUBLISH 报文 不能包含报文标识符。PUBACK, PUBREC, PUBREL 报文 必须包含与最初发送的 PUBLISH 报文相同的报文标识符。类似地，SUBACK 和 UNSUBACK  必须包含在对应的 SUBSCRIBE 和 UNSUBSCRIBE 报文中使用的<br>报文标识符。</p>
+<h4 id="1-4-有效载荷"><a href="#1-4-有效载荷" class="headerlink" title="1.4 有效载荷"></a>1.4 有效载荷</h4><p>某些 MQTT 控制报文在报文的最后部分包含一个有效载荷。对于PUBLIC来说，有效载荷就是应用消息。</p>
+<h5 id="1-4-1-包含有效载荷的控制报文"><a href="#1-4-1-包含有效载荷的控制报文" class="headerlink" title="1.4.1 包含有效载荷的控制报文"></a>1.4.1 包含有效载荷的控制报文</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">控制报文</th>
+<th style="text-align:center">有效载荷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CONNECT</td>
+<td style="text-align:center">需要</td>
+</tr>
+<tr>
+<td style="text-align:center">CONNACK</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBLISH</td>
+<td style="text-align:center">可选</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBACK</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBREC</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBREL</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">PUBCOMP</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBSCRIBE</td>
+<td style="text-align:center">需要</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBACK</td>
+<td style="text-align:center">需要</td>
+</tr>
+<tr>
+<td style="text-align:center">UNSUBSCRIBE</td>
+<td style="text-align:center">需要</td>
+</tr>
+<tr>
+<td style="text-align:center">PINGRESP</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">DISCONNECT</td>
+<td style="text-align:center">不需要</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-MQTT控制报文（14种）"><a href="#2-MQTT控制报文（14种）" class="headerlink" title="2. MQTT控制报文（14种）"></a>2. MQTT控制报文（14种）</h3><h4 id="2-1-CONNECT-–-连接服务端"><a href="#2-1-CONNECT-–-连接服务端" class="headerlink" title="2.1 CONNECT –  连接服务端"></a>2.1 CONNECT –  连接服务端</h4><p>客户端到服务端的网络连接建立后，客户端发送给服务端的第一个报文必须是CONNECT报文。<br>在一个网络连接上，客户端只能发送一次 CONNECT 报文。服务端 必须将客户端发送的第二个 CONNECT报文当作协议违规处理并断开客户端的连接。有效载荷包含一个或多个编码的字段。包括客户端的唯一标识符，Will 主题，Will 消息，用户名和密码。除了客户端标识之外，其它的字段都是可选的，基于标志位来决定可变报头中是否需要包含这些字段。</p>
+<h4 id="2-2-CONNACK-–-确认连接请求"><a href="#2-2-CONNACK-–-确认连接请求" class="headerlink" title="2.2 CONNACK – 确认连接请求"></a>2.2 CONNACK – 确认连接请求</h4><p>服务端发送 CONNACK 报文响应从客户端收到的 CONNECT 报文。服务端发送给客户端的第一个报文必须须是 CONNACK。如果客户端在合理的时间内没有收到服务端的 CONNACK 报文，客户端 应该关闭网络连接。合理的时间取决于应用的类型和通信基础设施。</p>
+<h5 id="连接返回码的值"><a href="#连接返回码的值" class="headerlink" title="连接返回码的值"></a>连接返回码的值</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">返回码响应</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0x00 连接已接受</td>
+<td style="text-align:center">连接已被服务端接受</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0x01 连接已拒绝，不支持的协议版本</td>
+<td style="text-align:center">服务端不支持客户端请求的 MQTT 协议级别</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0x02 连接已拒绝，不合格的客户端标识符</td>
+<td style="text-align:center">客户端标识符是正确的 UTF-8 编码，但服务端不允许使用</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0x03 连接已拒绝，服务端不可用</td>
+<td style="text-align:center">网络连接已建立，但 MQTT 服务不可用</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0x04 连接已拒绝，无效的用户名或密码</td>
+<td style="text-align:center">用户名或密码的数据格式无效</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0x05 连接已拒绝，未授权</td>
+<td style="text-align:center">客户端未被授权连接到此服务器</td>
+</tr>
+<tr>
+<td style="text-align:center">6-255</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">保留</td>
+</tr>
+</tbody>
+</table>
+<p>如果认为上表中的所有连接返回码都不太合适，那么服务端 必须关闭网络连接，不需要发送 CONNACK 报文。</p>
+<h4 id="2-3-PUBLISH-–-发布消息"><a href="#2-3-PUBLISH-–-发布消息" class="headerlink" title="2.3 PUBLISH – 发布消息"></a>2.3 PUBLISH – 发布消息</h4><p>PUBLISH 控制报文是指从客户端向服务端或者服务端向客户端传输一个应用消息。</p>
+<h5 id="PUBLISH-报文固定报头"><a href="#PUBLISH-报文固定报头" class="headerlink" title="PUBLISH 报文固定报头"></a>PUBLISH 报文固定报头</h5><table><br>    <tr><br>        <td>Bit</td><br>        <td>7</td><br>        <td>6</td><br>        <td>5</td><br>        <td>4</td><br>        <td>3</td><br>        <td>2</td><br>        <td>1</td><br>        <td>0</td><br>   </tr><br>    <tr><br>        <td>byte 1</td><br>        <td colspan="4" align="center">MQTT控制报文的类型</td><br>        <td>DUP(重发标志)</td><br>        <td colspan="2">QoS等级</td><br>        <td>RETAIN</td><br>    </tr><br>    <tr><br>        <td>byte 2</td><br>        <td colspan="8" align="center">剩余长度</td><br>    </tr><br></table>
+
+<p>备注：① 如果 DUP 标志被设置为 0，表示这是客户端或服务端第一次请求发送这个 PUBLISH 报文。如果 DUP 标志被设置为 1，表示这可能是一个早前报文请求的重发。② QoS=0表示最多分发1次、QoS=1表示至少分发一次、QoS=2表示只分发一次。③ 如果客户端发给服务端的 PUBLISH 报文的保留标志位 0，服务端 不能存储这个消息也 不能移除或替换任何现存的保留消息。④ 服务端发送给订阅客户端的 PUBLISH 报文的主题名 必须匹配该订阅的主题过滤器。</p>
+<h4 id="2-4-PUBACK-–-发布确认"><a href="#2-4-PUBACK-–-发布确认" class="headerlink" title="2.4 PUBACK – 发布确认"></a>2.4 PUBACK – 发布确认</h4><p>PUBACK 报文是对 QoS 1 等级的 PUBLISH 报文的响应。</p>
+<h4 id="2-5-PUBREC-–-发布收到"><a href="#2-5-PUBREC-–-发布收到" class="headerlink" title="2.5 PUBREC – 发布收到"></a>2.5 PUBREC – 发布收到</h4><p>PUBREC 报文是对 QoS 等级 2 的 PUBLISH 报文的响应。它是 QoS 2 等级协议交换的第二个报文。</p>
+<h4 id="2-6-PUBREL-–-发布释放"><a href="#2-6-PUBREL-–-发布释放" class="headerlink" title="2.6 PUBREL – 发布释放"></a>2.6 PUBREL – 发布释放</h4><p>PUBREL 报文是对 PUBREC 报文的响应。它是 QoS 2 等级协议交换的第三个报文。</p>
+<h4 id="2-7-PUBCOMP-–-发布完成"><a href="#2-7-PUBCOMP-–-发布完成" class="headerlink" title="2.7  PUBCOMP – 发布完成"></a>2.7  PUBCOMP – 发布完成</h4><p>PUBCOMP报文是对PUBREL报文的响应。它是QoS 2等级协议交换的第四个也是最后一个报文。</p>
+<h4 id="2-8-SUBSCRIBE-订阅主题"><a href="#2-8-SUBSCRIBE-订阅主题" class="headerlink" title="2.8 SUBSCRIBE - 订阅主题"></a>2.8 SUBSCRIBE - 订阅主题</h4><p>客户端向服务端发送 SUBSCRIBE 报文用于创建一个或多个订阅。每个订阅注册客户端关心的一个或多个主题。为了将应用消息转发给与那些订阅匹配的主题，服务端发送 PUBLISH 报文给客户端。SUBSCRIBE报文也（为每个订阅）指定了最大的 QoS 等级，服务端根据这个发送应用消息给客户端。SUBSCRIBE 报文的有效载荷包含了一个主题过滤器列表，它们表示客户端想要订阅的主题。每一个过滤器后面跟着一个字节，这个字节被叫做服务质量要求（Requested QoS）。它给出了服务端向客户端发送应用消息所允许的最大 QoS 等级。SUBSCRIBE 报文的有效载荷 必须包含至少一对主题过滤器 和 QoS 等级字段组合。服务端收到客户端发送的一个 SUBSCRIBE 报文时， 必须使用 SUBACK 报文响应SUBACK 报文 必须和等待确认的 SUBSCRIBE 报文有相同的报文标识符。</p>
+<h4 id="2-9-SUBACK-–-订阅确认"><a href="#2-9-SUBACK-–-订阅确认" class="headerlink" title="2.9  SUBACK – 订阅确认"></a>2.9  SUBACK – 订阅确认</h4><p>服务端发送 SUBACK 报文给客户端，用于确认它已收到并且正在处理 SUBSCRIBE 报文。SUBACK 报文包含一个返回码清单，它们指定了 SUBSCRIBE 请求的每个订阅被授予的最大 QoS 等级。SUBACK有效载荷包含一个返回码清单。每个返回码对应等待确认的 SUBSCRIBE 报文中的一个主题过滤器。返回码的顺序 必须和 SUBSCRIBE 报文中主题过滤器的顺序相同。</p>
+<h4 id="2-10-UNSUBSCRIBE-–-取消订阅"><a href="#2-10-UNSUBSCRIBE-–-取消订阅" class="headerlink" title="2.10 UNSUBSCRIBE – 取消订阅"></a>2.10 UNSUBSCRIBE – 取消订阅</h4><p>客户端发送 UNSUBSCRIBE 报文给服务端，用于取消订阅主题。UNSUBSCRIBE 报文固定报头的第 3,2,1,0 位是保留位且 必须分别设置为 0,0,1,0。服务端 必须认为任何其<br>它的值都是不合法的并关闭网络连接。UNSUBSCRIBE 报文的有效载荷 必须至少包含一个消息过滤器。</p>
+<h4 id="2-11-UNSUBACK-–-取消订阅确认"><a href="#2-11-UNSUBACK-–-取消订阅确认" class="headerlink" title="2.11 UNSUBACK – 取消订阅确认"></a>2.11 UNSUBACK – 取消订阅确认</h4><p>服务端发送 UNSUBACK 报文给客户端用于确认收到 UNSUBSCRIBE 报文。</p>
+<h4 id="2-12-12-PINGREQ-–-心跳请求"><a href="#2-12-12-PINGREQ-–-心跳请求" class="headerlink" title="2.12 12 PINGREQ – 心跳请求"></a>2.12 12 PINGREQ – 心跳请求</h4><p>客户端发送 PINGREQ 报文给服务端的。用于：</p>
+<ol>
+<li>在没有任何其它控制报文从客户端发给服务的时，告知服务端客户端还活着。</li>
+<li>请求服务端发送 响应确认它还活着。</li>
+<li>使用网络以确认网络连接没有断开。</li>
+</ol>
+<p>—注意：保持连接（Keep Alive）处理中用到这个报文</p>
+<h4 id="2-13-PINGRESP-–-心跳响应"><a href="#2-13-PINGRESP-–-心跳响应" class="headerlink" title="2.13 PINGRESP – 心跳响应"></a>2.13 PINGRESP – 心跳响应</h4><p>服务端发送 PINGRESP 报文响应客户端的 PINGREQ 报文。表示服务端还活着。</p>
+<p>—注意：保持连接（Keep Alive）处理中用到这个报文</p>
+<h4 id="2-14-DISCONNECT-–-断开连接"><a href="#2-14-DISCONNECT-–-断开连接" class="headerlink" title="2.14 DISCONNECT – 断开连接"></a>2.14 DISCONNECT – 断开连接</h4><p>DISCONNECT 报文是客户端发给服务端的最后一个控制报文。表示客户端正常断开连接。<br>服务端在收到 DISCONNECT 报文时：</p>
+<ol>
+<li>必须丢弃任何与当前连接关联的未发布的遗嘱消息。</li>
+<li>应该关闭网络连接，如果客户端还没有这么做。</li>
+</ol>
+<h3 id="3-服务质量等级"><a href="#3-服务质量等级" class="headerlink" title="3. 服务质量等级"></a>3. 服务质量等级</h3><h4 id="3-1-QoS-0-最多分发一次"><a href="#3-1-QoS-0-最多分发一次" class="headerlink" title="3.1  QoS 0: 最多分发一次"></a>3.1  QoS 0: 最多分发一次</h4><p>消息的分发依赖于底层网络的能力。接收者不会发送响应，发送者也不会重试。消息可能送达一次也可能根本没送达。</p>
+<ol>
+<li>对于 QoS 0 的分发协议，发送者必须发送 QoS 等于 0，DUP 等于 0 的 PUBLISH 报文。</li>
+<li>对于 QoS 0 的分发协议，接收者接受 PUBLISH 报文时同时接受消息的所有权。</li>
+</ol>
+<h4 id="3-2-QoS-1-至少分发一次（推荐）"><a href="#3-2-QoS-1-至少分发一次（推荐）" class="headerlink" title="3.2 QoS 1:  至少分发一次（推荐）"></a>3.2 QoS 1:  至少分发一次（推荐）</h4><p>服务质量确保消息至少送达一次。QoS 1 的 PUBLISH 报文的可变报头中包含一个报文标识符，需要PUBACK 报文确认。</p>
+<h6 id="3-2-1-对于QoS-1的分发协议，发送者"><a href="#3-2-1-对于QoS-1的分发协议，发送者" class="headerlink" title="3.2.1 对于QoS 1的分发协议，发送者"></a>3.2.1 对于QoS 1的分发协议，发送者</h6><ol>
+<li>每次发送新的应用消息都必须分配一个未使用的报文标识符。</li>
+<li>发送的 PUBLISH 报文 必须包含报文标识符且 QoS 等于 1，DUP 等于 0。</li>
+<li>必须将这个 PUBLISH 报文看作是未确认的 ，直到从接收者那收到对应的 PUBACK 报文。一旦发送者收到 PUBACK 报文，这个报文标识符就可以重用。</li>
+</ol>
+<h6 id="3-2-2-对于-QoS-1-的分发协议，接收者"><a href="#3-2-2-对于-QoS-1-的分发协议，接收者" class="headerlink" title="3.2.2 对于 QoS 1 的分发协议，接收者"></a>3.2.2 对于 QoS 1 的分发协议，接收者</h6><ol>
+<li>响应的 PUBACK 报文 必须包含一个报文标识符，这个标识符来自接收到的、已经接受所有权的PUBLISH 报文。</li>
+<li>发送了 PUBACK 报文之后，接收者必须将任何包含相同报文标识符的入站 PUBLISH 报文当作一个新的消息，并忽略它的 DUP 标志的值。</li>
+</ol>
+<h4 id="3-3-QoS-2-仅分发一次"><a href="#3-3-QoS-2-仅分发一次" class="headerlink" title="3.3 QoS 2: 仅分发一次"></a>3.3 QoS 2: 仅分发一次</h4><p>这是最高等级的服务质量，消息丢失和重复都是不可接受的。使用这个服务质量等级会有额外的开销。</p>
+<h6 id="3-3-1-对于-QoS-2-的分发协议，发送者"><a href="#3-3-1-对于-QoS-2-的分发协议，发送者" class="headerlink" title="3.3.1 对于 QoS 2 的分发协议，发送者"></a>3.3.1 对于 QoS 2 的分发协议，发送者</h6><ol>
+<li>必须给要发送的新应用消息分配一个未使用的报文标识符。</li>
+<li>发送的 PUBLISH 报文 必须包含报文标识符且报文的 QoS 等于 2,，DUP 等于 0。</li>
+<li>必须将这个 PUBLISH 报文看作是  未确认的 ，直到从接收者那收到对应的 PUBREC 报文。</li>
+<li>收到 PUBREC 报文后 必须发送一个 PUBREL 报文。PUBREL 报文必须包含与原始 PUBLISH 报文相同的报文标识符。</li>
+<li>必须将这个 PUBREL 报文看作是未确认的 ，直到从接收者那收到对应的 PUBCOMP 报文。</li>
+<li>一旦发送了对应的 PUBREL 报文就 不能重发这个 PUBLISH 报文。一旦发送者收到 PUBCOMP 报文，这个报文标识符就可以重用。</li>
+</ol>
+<p>注意：允许发送者在等待确认时使用不同的报文标识符发送后续的 PUBLISH 报文。</p>
+<h6 id="3-3-2-对于QoS-2的分发协议，接收者"><a href="#3-3-2-对于QoS-2的分发协议，接收者" class="headerlink" title="3.3.2 对于QoS 2的分发协议，接收者"></a>3.3.2 对于QoS 2的分发协议，接收者</h6><ol>
+<li>响应的 PUBREC 报文 必须包含报文标识符，这个标识符来自接收到的、已经接受所有权的<br>PUBLISH 报文。</li>
+<li>在收到对应的 PUBREL 报文之前，接收者 必须发送 PUBREC 报文确认任何后续的具有相同标识符的 PUBLISH 报文。 在这种情况下，它不能重复分发消息给任何后续的接收者。</li>
+<li>响应 PUBREL 报文的 PUBCOMP 报文 必须包含与 PUBREL 报文相同的标识符。</li>
+<li>发送 PUBCOMP 报文之后，接收者必须将包含相同报文标识符的任何后续 PUBLISH 报文当作一个新的发布。</li>
+</ol>
 
       
     </div>
@@ -489,7 +885,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hawkyAndroid.github.io/2018/01/15/jni-001/" title="JNI系列(一)AS gradle3.0+ so库的生成及使用">http://hawkyAndroid.github.io/2018/01/15/jni-001/</a>
+    <a href="http://hawkyAndroid.github.io/2018/05/09/summary-mqtt-protocol/" title="MQTT协议总结">http://hawkyAndroid.github.io/2018/05/09/summary-mqtt-protocol/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -504,7 +900,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JNI/" rel="tag"><i class="fa fa-tag"></i> JNI</a>
+            <a href="/tags/MQTT/" rel="tag"><i class="fa fa-tag"></i> MQTT</a>
           
         </div>
       
@@ -517,8 +913,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/26/pluggable-001/" rel="next" title="Android插件化系列(一)插件化概述">
-                <i class="fa fa-chevron-left"></i> Android插件化系列(一)插件化概述
+              <a href="/2018/04/20/summary-japan-trip-4_13/" rel="next" title="日本之旅">
+                <i class="fa fa-chevron-left"></i> 日本之旅
               </a>
             
           </div>
@@ -527,8 +923,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/16/task-and-dream-for-2018/" rel="prev" title="2018年度计划">
-                2018年度计划 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/27/summery-do-something-2018-5-27/" rel="prev" title="为人处世">
+                为人处世 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -739,7 +1135,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一）环境搭建"><span class="nav-number">2.</span> <span class="nav-text">一）环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二）生成so库"><span class="nav-number">3.</span> <span class="nav-text">二）生成so库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三）使用so库"><span class="nav-number">4.</span> <span class="nav-text">三）使用so库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-MQTT控制报文的格式"><span class="nav-number">1.</span> <span class="nav-text">1. MQTT控制报文的格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-MQTT控制报文的结构"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 MQTT控制报文的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-固定报头（2个字节）"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 固定报头（2个字节）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1-控制报文的类型（14种）–高四位"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 控制报文的类型（14种）–高四位</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-2-标志位-–低四位"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 标志位 –低四位</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-3-剩余长度-–从第-2-个字节开始位置"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 剩余长度 –从第 2 个字节开始位置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-可变报头"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 可变报头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-有效载荷"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 有效载荷</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-1-包含有效载荷的控制报文"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 包含有效载荷的控制报文</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-MQTT控制报文（14种）"><span class="nav-number">2.</span> <span class="nav-text">2. MQTT控制报文（14种）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-CONNECT-–-连接服务端"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 CONNECT –  连接服务端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-CONNACK-–-确认连接请求"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 CONNACK – 确认连接请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#连接返回码的值"><span class="nav-number">2.2.1.</span> <span class="nav-text">连接返回码的值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-PUBLISH-–-发布消息"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 PUBLISH – 发布消息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PUBLISH-报文固定报头"><span class="nav-number">2.3.1.</span> <span class="nav-text">PUBLISH 报文固定报头</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-PUBACK-–-发布确认"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 PUBACK – 发布确认</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-PUBREC-–-发布收到"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 PUBREC – 发布收到</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-PUBREL-–-发布释放"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 PUBREL – 发布释放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-PUBCOMP-–-发布完成"><span class="nav-number">2.7.</span> <span class="nav-text">2.7  PUBCOMP – 发布完成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-SUBSCRIBE-订阅主题"><span class="nav-number">2.8.</span> <span class="nav-text">2.8 SUBSCRIBE - 订阅主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-9-SUBACK-–-订阅确认"><span class="nav-number">2.9.</span> <span class="nav-text">2.9  SUBACK – 订阅确认</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-10-UNSUBSCRIBE-–-取消订阅"><span class="nav-number">2.10.</span> <span class="nav-text">2.10 UNSUBSCRIBE – 取消订阅</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-11-UNSUBACK-–-取消订阅确认"><span class="nav-number">2.11.</span> <span class="nav-text">2.11 UNSUBACK – 取消订阅确认</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-12-12-PINGREQ-–-心跳请求"><span class="nav-number">2.12.</span> <span class="nav-text">2.12 12 PINGREQ – 心跳请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-13-PINGRESP-–-心跳响应"><span class="nav-number">2.13.</span> <span class="nav-text">2.13 PINGRESP – 心跳响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-14-DISCONNECT-–-断开连接"><span class="nav-number">2.14.</span> <span class="nav-text">2.14 DISCONNECT – 断开连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-服务质量等级"><span class="nav-number">3.</span> <span class="nav-text">3. 服务质量等级</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-QoS-0-最多分发一次"><span class="nav-number">3.1.</span> <span class="nav-text">3.1  QoS 0: 最多分发一次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-QoS-1-至少分发一次（推荐）"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 QoS 1:  至少分发一次（推荐）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-1-对于QoS-1的分发协议，发送者"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">3.2.1 对于QoS 1的分发协议，发送者</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-2-对于-QoS-1-的分发协议，接收者"><span class="nav-number">3.2.0.2.</span> <span class="nav-text">3.2.2 对于 QoS 1 的分发协议，接收者</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-QoS-2-仅分发一次"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 QoS 2: 仅分发一次</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-1-对于-QoS-2-的分发协议，发送者"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">3.3.1 对于 QoS 2 的分发协议，发送者</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-2-对于QoS-2的分发协议，接收者"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">3.3.2 对于QoS 2的分发协议，接收者</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -100,8 +100,8 @@
   
   <entry>
     <title>MQTT协议总结</title>
-    <link href="http://hawkyAndroid.github.io/2018/05/09/summary_mqtt_protocol/"/>
-    <id>http://hawkyAndroid.github.io/2018/05/09/summary_mqtt_protocol/</id>
+    <link href="http://hawkyAndroid.github.io/2018/05/09/summary-mqtt-protocol/"/>
+    <id>http://hawkyAndroid.github.io/2018/05/09/summary-mqtt-protocol/</id>
     <published>2018-05-09T14:51:10.000Z</published>
     <updated>2018-05-09T15:55:56.906Z</updated>
     
@@ -202,8 +202,8 @@
   
   <entry>
     <title>JNI系列(一)AS gradle3.0+ so库的生成及使用</title>
-    <link href="http://hawkyAndroid.github.io/2018/01/15/jni-001/"/>
-    <id>http://hawkyAndroid.github.io/2018/01/15/jni-001/</id>
+    <link href="http://hawkyAndroid.github.io/2018/01/15/summary-jni-01/"/>
+    <id>http://hawkyAndroid.github.io/2018/01/15/summary-jni-01/</id>
     <published>2018-01-15T08:32:07.000Z</published>
     <updated>2018-01-24T16:01:11.630Z</updated>
     
@@ -227,10 +227,10 @@
   
   <entry>
     <title>Android插件化系列(一)插件化概述</title>
-    <link href="http://hawkyAndroid.github.io/2017/08/26/pluggable-001/"/>
-    <id>http://hawkyAndroid.github.io/2017/08/26/pluggable-001/</id>
+    <link href="http://hawkyAndroid.github.io/2017/08/26/summary-android-pluggable-01/"/>
+    <id>http://hawkyAndroid.github.io/2017/08/26/summary-android-pluggable-01/</id>
     <published>2017-08-26T08:29:56.000Z</published>
-    <updated>2018-01-26T15:01:19.147Z</updated>
+    <updated>2018-05-31T14:08:50.166Z</updated>
     
     <content type="html"><![CDATA[<p>Android插件化概述</p>]]></content>
     
@@ -244,7 +244,7 @@
     
     </summary>
     
-      <category term="Android插件化系列" scheme="http://hawkyAndroid.github.io/categories/Android%E6%8F%92%E4%BB%B6%E5%8C%96%E7%B3%BB%E5%88%97/"/>
+      <category term="Android插件化" scheme="http://hawkyAndroid.github.io/categories/Android%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
     
     
       <category term="Android插件化" scheme="http://hawkyAndroid.github.io/tags/Android%E6%8F%92%E4%BB%B6%E5%8C%96/"/>
@@ -253,10 +253,10 @@
   
   <entry>
     <title>自定义View系列(一)自定义View概述</title>
-    <link href="http://hawkyAndroid.github.io/2017/06/26/view-001/"/>
-    <id>http://hawkyAndroid.github.io/2017/06/26/view-001/</id>
+    <link href="http://hawkyAndroid.github.io/2017/06/26/summary-view-01/"/>
+    <id>http://hawkyAndroid.github.io/2017/06/26/summary-view-01/</id>
     <published>2017-06-26T08:29:56.000Z</published>
-    <updated>2018-01-21T11:12:49.747Z</updated>
+    <updated>2018-05-31T14:08:30.370Z</updated>
     
     <content type="html"><![CDATA[<p>自定义View系列[1]自定义View概述</p>]]></content>
     
@@ -270,7 +270,7 @@
     
     </summary>
     
-      <category term="自定义View系列" scheme="http://hawkyAndroid.github.io/categories/%E8%87%AA%E5%AE%9A%E4%B9%89View%E7%B3%BB%E5%88%97/"/>
+      <category term="自定义View" scheme="http://hawkyAndroid.github.io/categories/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
     
     
       <category term="View" scheme="http://hawkyAndroid.github.io/tags/View/"/>
