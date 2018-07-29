@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-07-29T12:26:19.387Z</updated>
+  <updated>2018-07-29T13:14:35.681Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android开发规范总结</title>
+    <link href="http://hawkyAndroid.github.io/2018/07/29/summary-develop-standard/"/>
+    <id>http://hawkyAndroid.github.io/2018/07/29/summary-develop-standard/</id>
+    <published>2018-07-29T13:14:30.000Z</published>
+    <updated>2018-07-29T13:14:35.681Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Android-命令规范"><a href="#Android-命令规范" class="headerlink" title="Android 命令规范"></a>Android 命令规范</h3><ol><li><p>类名：名词+动词+组件名。(activity/fragment/adapter/receiver/provider/service)</p></li><li><p>布局组件ID：组件缩写_<em>模块缩写</em>具体业务</p></li><li><p>组件变量：m组件缩写+具体含义，如mIvAvatar</p></li><li><p>string.xml：模块名简称<em>activity名字简称</em>具体意思简称</p></li><li><p>方法命名：<br>initXX（初始化）、<br>isXX/checkXX（检查数据）、<br>handleXX/processXX（处理数据）、<br>displayXX/showXX（显示控件/数据）、<br>updateXX（更新控件/数据）、<br>saveXX/insertXX（保存数据）、<br>resetXX（重置控件/数据）、<br>drawXX（绘制控件）</p></li></ol><h3 id="代码设计原则"><a href="#代码设计原则" class="headerlink" title="代码设计原则"></a>代码设计原则</h3><p>1)找出应用中可能需要改变的地方，把它们“抽取”出来并进行“封装”。</p><p>2)针对接口编程。</p><p>3)多用组合，少用继承。</p><p>4)对扩展开放，对修改关闭。</p><p>5)依赖倒置：要依赖抽象(不管是高层组件还是底层组件)，不要依赖具体类。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Android-命令规范&quot;&gt;&lt;a href=&quot;#Android-命令规范&quot; class=&quot;headerlink&quot; title=&quot;Android 命令规范&quot;&gt;&lt;/a&gt;Android 命令规范&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;类名：名词+动词+组件名。(activit
+      
+    
+    </summary>
+    
+      <category term="Android开发" scheme="http://hawkyAndroid.github.io/categories/Android%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Android开发" scheme="http://hawkyAndroid.github.io/tags/Android%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Android屏幕适配</title>
