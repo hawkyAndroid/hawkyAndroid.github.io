@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-07-29T13:14:35.681Z</updated>
+  <updated>2018-08-02T15:35:44.585Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android性能优化之磁盘篇</title>
+    <link href="http://hawkyAndroid.github.io/2018/08/02/summery-performance-disk-01/"/>
+    <id>http://hawkyAndroid.github.io/2018/08/02/summery-performance-disk-01/</id>
+    <published>2018-08-02T15:00:10.000Z</published>
+    <updated>2018-08-02T15:35:44.585Z</updated>
+    
+    <content type="html"><![CDATA[<p>–参考书籍：《Android移动性能实战》</p><h2 id="1-StrictMode"><a href="#1-StrictMode" class="headerlink" title="1. StrictMode"></a>1. StrictMode</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">在Applcation/Activity的onCreate方法中使用严苛模式：</span><br><span class="line"><span class="keyword">if</span> (BuildConfig.DEBUG) &#123;</span><br><span class="line">    <span class="comment">// 严苛模式-1：使用线程策略</span></span><br><span class="line">    StrictMode.setThreadPolicy(<span class="keyword">new</span> StrictMode.ThreadPolicy.Builder()</span><br><span class="line">            .detectDiskReads()</span><br><span class="line">            .detectDiskWrites()</span><br><span class="line">            .detectNetwork()</span><br><span class="line">            .penaltyLog()</span><br><span class="line">            .build());</span><br><span class="line">    <span class="comment">// 严苛模式-2：使用VM策略（可与线程策略一起使用）</span></span><br><span class="line">    StrictMode.setVmPolicy(<span class="keyword">new</span> StrictMode.VmPolicy.Builder()</span><br><span class="line">            .detectActivityLeaks()</span><br><span class="line">            .detectLeakedSqlLiteObjects()</span><br><span class="line">            .penaltyLog()</span><br><span class="line">            .build());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">---查看日志： adb logcat | grep StrictMode</span><br><span class="line">其它用法：直接提示(自定义) StrictMode.noteSlowCall(<span class="string">"slowCall timeout="</span> + timeout);</span><br></pre></td></tr></table></figure><h2 id="2-文件操作"><a href="#2-文件操作" class="headerlink" title="2. 文件操作"></a>2. 文件操作</h2><ol><li><p>避免冗余读/写：要尽量延迟写入(如：对于SharedPreferences，只保留最后一个apply即可)。</p></li><li><p>减少I/O操作次数：使用6~8KB Buffer读/写、批量更新数据库使用事务。</p></li></ol><h2 id="3-数据库操作"><a href="#3-数据库操作" class="headerlink" title="3. 数据库操作"></a>3. 数据库操作</h2><h4 id="3-1-缓存数据库连接"><a href="#3-1-缓存数据库连接" class="headerlink" title="3.1  缓存数据库连接"></a>3.1  缓存数据库连接</h4><p>数据库在打开后，先不要关闭，在应用程序退出时再关闭。</p><h4 id="3-2-使用索引"><a href="#3-2-使用索引" class="headerlink" title="3.2 使用索引"></a>3.2 使用索引</h4><p>可提高查询速度，但由于要维护索引会使插入效率有所降低。</p><h4 id="3-3-尽量不使用Autoincrement关键字"><a href="#3-3-尽量不使用Autoincrement关键字" class="headerlink" title="3.3  尽量不使用Autoincrement关键字"></a>3.3  尽量不使用Autoincrement关键字</h4><ol><li><p>作用：会保证主键是严格单调递增的，如果行号的最大值被用过，那么插入新数据时会包SQLITE_FULL错误。</p></li><li><p>原理：SQLite创建一个叫sqlite_sequence的内部表来记录该表使用的最大行号，维护sqlite_sequence表带来的额外开销会导致INSERT效率降低。</p></li><li><p>总结：autoincrement会增加CPU、内存、磁盘空间和磁盘I/O的负担，所以尽量不要用，除非必需(如：客户端需要拿该主键和服务器校对数据，需要保证主键唯一性)</p></li></ol><h4 id="3-4-数据库移到工作线程"><a href="#3-4-数据库移到工作线程" class="headerlink" title="3.4 数据库移到工作线程"></a>3.4 数据库移到工作线程</h4><p>数据库及IO操作都移到工作线程(Thread)，并且设置线程优先级为THREAD_PRIORITY_BACKGROUND，这样工作线程最多能获取到10%的时间片，优先保证主线程执行。</p><h2 id="4-Bitmap操作"><a href="#4-Bitmap操作" class="headerlink" title="4. Bitmap操作"></a>4. Bitmap操作</h2><h4 id="4-1-提高Bitmap解码效率"><a href="#4-1-提高Bitmap解码效率" class="headerlink" title="4.1 提高Bitmap解码效率"></a>4.1 提高Bitmap解码效率</h4><p>可考虑使用decodeStream、decodeResourceStream，并传入BufferedInputStream参数。</p><p>================= 补充问题及方案 =====================</p><h4 id="1-APP卡顿问题"><a href="#1-APP卡顿问题" class="headerlink" title="1. APP卡顿问题"></a>1. APP卡顿问题</h4><p>原因：Android系统每隔16ms会发出VSYNC信号重绘我们的界面(Activity)。(假定刷新帧率由正常的60FPS(Android系统设定的刷新帧率)降到30FPS，用户就会明显感知到卡顿)。由于任何原因导致接收到VSYNC信号的时候无法完成本次刷新操作，就会产生掉帧(卡顿)的现象。</p><h4 id="2-Handler内存泄露问题"><a href="#2-Handler内存泄露问题" class="headerlink" title="2. Handler内存泄露问题"></a>2. Handler内存泄露问题</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用静态内部类 + 弱引用</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> WorkHandler mHandler = <span class="keyword">new</span> WorkHandler(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> WeakReference&lt;MainActivity&gt; mActivity;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">WorkHandler</span><span class="params">(MainActivity activity)</span> </span>&#123;</span><br><span class="line">  mActivity = <span class="keyword">new</span> WeakReference&lt;&gt;(activity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">  MainActivity activity = mActivity.get();</span><br><span class="line">  <span class="keyword">if</span> (activity != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;–参考书籍：《Android移动性能实战》&lt;/p&gt;
+&lt;h2 id=&quot;1-StrictMode&quot;&gt;&lt;a href=&quot;#1-StrictMode&quot; class=&quot;headerlink&quot; title=&quot;1. StrictMode&quot;&gt;&lt;/a&gt;1. StrictMode&lt;/h2&gt;&lt;f
+      
+    
+    </summary>
+    
+      <category term="Android开发" scheme="http://hawkyAndroid.github.io/categories/Android%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Android开发" scheme="http://hawkyAndroid.github.io/tags/Android%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Android开发规范总结</title>
