@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="–参考书籍：《Android移动性能实战》 1. StrictMode12345678910111213141516171819// 在Applcation/Activity的onCreate方法中使用严苛模式：if (BuildConfig.DEBUG) &amp;#123;    // 严苛模式-1：使用线程策略    StrictMode.setThreadPolicy(new StrictMode">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-29T13:26:34.438Z">
+<meta property="og:updated_time" content="2018-08-31T11:41:49.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android性能优化之磁盘篇">
 <meta name="twitter:description" content="–参考书籍：《Android移动性能实战》 1. StrictMode12345678910111213141516171819// 在Applcation/Activity的onCreate方法中使用严苛模式：if (BuildConfig.DEBUG) &amp;#123;    // 严苛模式-1：使用线程策略    StrictMode.setThreadPolicy(new StrictMode">
@@ -414,6 +414,8 @@
 </li>
 <li><p>减少I/O操作次数：使用6~8KB Buffer读/写、批量更新数据库使用事务。</p>
 </li>
+<li><p>使用LruCache和DiskLruCache做内存和磁盘缓存；</p>
+</li>
 </ol>
 <h2 id="3-数据库操作"><a href="#3-数据库操作" class="headerlink" title="3. 数据库操作"></a>3. 数据库操作</h2><h4 id="3-1-缓存数据库连接"><a href="#3-1-缓存数据库连接" class="headerlink" title="3.1  缓存数据库连接"></a>3.1  缓存数据库连接</h4><p>数据库在打开后，先不要关闭，在应用程序退出时再关闭。</p>
 <h4 id="3-2-使用索引"><a href="#3-2-使用索引" class="headerlink" title="3.2 使用索引"></a>3.2 使用索引</h4><p>可提高查询速度，但由于要维护索引会使插入效率有所降低。</p>
@@ -425,9 +427,15 @@
 <li><p>总结：autoincrement会增加CPU、内存、磁盘空间和磁盘I/O的负担，所以尽量不要用，除非必需(如：客户端需要拿该主键和服务器校对数据，需要保证主键唯一性)</p>
 </li>
 </ol>
-<h4 id="3-4-数据库操作移到工作线程"><a href="#3-4-数据库操作移到工作线程" class="headerlink" title="3.4 数据库操作移到工作线程"></a>3.4 数据库操作移到工作线程</h4><p>数据库及IO操作都移到工作线程(Thread)，并且设置线程优先级为THREAD_PRIORITY_BACKGROUND，这样工作线程最多能获取到10%的时间片，优先保证主线程执行。</p>
+<h4 id="3-4-数据库操作移到工作线程"><a href="#3-4-数据库操作移到工作线程" class="headerlink" title="3.4 数据库操作移到工作线程"></a>3.4 数据库操作移到工作线程</h4><p>  数据库及IO操作都移到工作线程(Thread)，并且设置线程优先级为THREAD_PRIORITY_BACKGROUND，这样工作线程最多能获取到10%的时间片，优先保证主线程执行。</p>
 <h2 id="4-Bitmap操作"><a href="#4-Bitmap操作" class="headerlink" title="4. Bitmap操作"></a>4. Bitmap操作</h2><h4 id="4-1-提高Bitmap解码效率"><a href="#4-1-提高Bitmap解码效率" class="headerlink" title="4.1 提高Bitmap解码效率"></a>4.1 提高Bitmap解码效率</h4><p>可考虑使用decodeStream、decodeResourceStream，并传入BufferedInputStream参数。</p>
 <h4 id="4-2-TinyPng"><a href="#4-2-TinyPng" class="headerlink" title="4.2 TinyPng"></a>4.2 TinyPng</h4><p>由于PNG是一种无损格式，JPG是有损格式。所有：小尺寸、色彩较少或者有alpha通道透明度的时候，使用PNG; 大尺寸、色彩渐变多的使用JPG。<br>—图片压缩工具：<a href="https://tinypng.com/" target="_blank" rel="noopener">TinyPng</a></p>
+<h4 id="4-3-合理选择Bitmap-Config"><a href="#4-3-合理选择Bitmap-Config" class="headerlink" title="4.3 合理选择Bitmap.Config"></a>4.3 合理选择Bitmap.Config</h4><p>Bitmap.Config用来描述图片的像素是怎么被存储的：</p>
+<pre><code>ARGB_8888: 每个像素4字节. 共32位，默认设置。
+Alpha_8: 只保存透明度，共8位，1字节。
+ARGB_4444: 共16位，2字节。
+RGB_565:共16位，2字节，只存储RGB值(推荐)。
+</code></pre><h4 id="4-4-WebP格式图片"><a href="#4-4-WebP格式图片" class="headerlink" title="4.4 WebP格式图片"></a>4.4 WebP格式图片</h4><p>WebP既支持有损压缩也支持无损压缩。体积小，但占用CPU内存是JPG格式的3倍。</p>
 
       
     </div>
@@ -730,7 +738,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-StrictMode"><span class="nav-number">1.</span> <span class="nav-text">1. StrictMode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文件操作"><span class="nav-number">2.</span> <span class="nav-text">2. 文件操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-数据库操作"><span class="nav-number">3.</span> <span class="nav-text">3. 数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-缓存数据库连接"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1  缓存数据库连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-使用索引"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2 使用索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-尽量不使用Autoincrement关键字"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.3  尽量不使用Autoincrement关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-数据库操作移到工作线程"><span class="nav-number">3.0.4.</span> <span class="nav-text">3.4 数据库操作移到工作线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Bitmap操作"><span class="nav-number">4.</span> <span class="nav-text">4. Bitmap操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-提高Bitmap解码效率"><span class="nav-number">4.0.1.</span> <span class="nav-text">4.1 提高Bitmap解码效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-TinyPng"><span class="nav-number">4.0.2.</span> <span class="nav-text">4.2 TinyPng</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-StrictMode"><span class="nav-number">1.</span> <span class="nav-text">1. StrictMode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文件操作"><span class="nav-number">2.</span> <span class="nav-text">2. 文件操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-数据库操作"><span class="nav-number">3.</span> <span class="nav-text">3. 数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-缓存数据库连接"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1  缓存数据库连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-使用索引"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2 使用索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-尽量不使用Autoincrement关键字"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.3  尽量不使用Autoincrement关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-数据库操作移到工作线程"><span class="nav-number">3.0.4.</span> <span class="nav-text">3.4 数据库操作移到工作线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Bitmap操作"><span class="nav-number">4.</span> <span class="nav-text">4. Bitmap操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-提高Bitmap解码效率"><span class="nav-number">4.0.1.</span> <span class="nav-text">4.1 提高Bitmap解码效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-TinyPng"><span class="nav-number">4.0.2.</span> <span class="nav-text">4.2 TinyPng</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-合理选择Bitmap-Config"><span class="nav-number">4.0.3.</span> <span class="nav-text">4.3 合理选择Bitmap.Config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-WebP格式图片"><span class="nav-number">4.0.4.</span> <span class="nav-text">4.4 WebP格式图片</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
