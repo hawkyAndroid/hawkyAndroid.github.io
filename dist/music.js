@@ -10,16 +10,16 @@ const ap = new APlayer({
         cover: 'http://imge.kugou.com/stdmusic/240/20150718/20150718044549325738.jpg',
       },
       {
-        name: '9420',
-        artist: '��С��',
-        url: 'http://up.mcyt.net/?down/45967.mp3',
-        cover: 'http://oeff2vktt.bkt.clouddn.com/image/8.jpg',
+        name: 'Bressanone',
+        artist: 'Matthew Lien',
+        url: 'http://fs.w.kugou.com/201809182007/b9fb7cb026d93e13d7277b016ecc495d/G046/M01/09/1F/zoYBAFYMAXmAU6yOAEgNFkKzm1I885.mp3',
+        cover: 'http://singerimg.kugou.com/uploadpic/softhead/400/20121214/20121214154728327.jpg',
       },
       {
-        name: '������',
-        artist: '������',
-        url: 'http://up.mcyt.net/?down/46644.mp3',
-        cover: 'http://oeff2vktt.bkt.clouddn.com/image/96.jpg',
+        name: 'Moonlight Shadow',
+        artist: 'Dana Winner',
+        url: 'http://fs.w.kugou.com/201809182014/366baeff5ae5be8b20d904be87e57a0c/G001/M09/1C/13/QQ0DAFSXev-AXQ7LAEHxoZNaFdo166.mp3',
+        cover: 'http://imge.kugou.com/stdmusic/20160907/20160907231743395186.jpg',
       }
     ]
 });
