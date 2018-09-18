@@ -4,9 +4,9 @@ const ap = new APlayer({
     autoplay: false,
     audio: [
       {
-        name: "PDD����֮��",
-        artist: '����Բ',
-        url: 'http://up.mcyt.net/?down/39868.mp3',
+        name: "I Miss You",
+        artist: 'Czarina',
+        url: 'http://fs.w.kugou.com/201809181831/08a74580fe5f30932c8aaf2e1f170813/G013/M06/04/11/TQ0DAFULdt-AfwSvADgNY3dhOQc093.mp3',
         cover: 'http://oeff2vktt.bkt.clouddn.com/image/84.jpg',
       },
       {
