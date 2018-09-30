@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="1. 常用检测方法及工具1.1 获取内存使用情况通过命令行adb shell dumpsys meminfo packagename查看内存详细占用情况 1.2 获取堆内存最大值 DebugLog.e(“堆内存最大值：” + Runtime.getRuntime().maxMemory()); 1.3 反编译APK(可查看方法数) https://github.com/google/android">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-20T12:32:48.275Z">
+<meta property="og:updated_time" content="2018-09-30T15:44:42.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android性能优化之测试工具篇">
 <meta name="twitter:description" content="1. 常用检测方法及工具1.1 获取内存使用情况通过命令行adb shell dumpsys meminfo packagename查看内存详细占用情况 1.2 获取堆内存最大值 DebugLog.e(“堆内存最大值：” + Runtime.getRuntime().maxMemory()); 1.3 反编译APK(可查看方法数) https://github.com/google/android">
@@ -416,6 +416,8 @@
 <h4 id="1-2-获取堆内存最大值"><a href="#1-2-获取堆内存最大值" class="headerlink" title="1.2 获取堆内存最大值"></a>1.2 获取堆内存最大值</h4><p> DebugLog.e(“堆内存最大值：” + Runtime.getRuntime().maxMemory());</p>
 <h4 id="1-3-反编译APK-可查看方法数"><a href="#1-3-反编译APK-可查看方法数" class="headerlink" title="1.3 反编译APK(可查看方法数)"></a>1.3 反编译APK(可查看方法数)</h4><p> <a href="https://github.com/google/android-classyshark" target="_blank" rel="noopener">https://github.com/google/android-classyshark</a></p>
 <p>–注意：Android默认没有虚拟内存。App占用内存越多，被Low Memory Killer(劫富济贫)处理掉的机会越大。</p>
+<h4 id="1-4-查看应用的进程优先级"><a href="#1-4-查看应用的进程优先级" class="headerlink" title="1.4 查看应用的进程优先级"></a>1.4 查看应用的进程优先级</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ adb ps | grep [package_name] #获取应用pid</span><br><span class="line"></span><br><span class="line">$ cat /proc/[pid]/ oom_adj  #获取进程优先级</span><br></pre></td></tr></table></figure>
+<p>–注意：oom_adj越小、优先级越大</p>
 <h4 id="1-5-查看ANR日志"><a href="#1-5-查看ANR日志" class="headerlink" title="1.5 查看ANR日志"></a>1.5 查看ANR日志</h4><p>adb pull /data/anr/traces.txt e:\trace.txt</p>
 <h4 id="1-6-查看嵌套层次及控件个数"><a href="#1-6-查看嵌套层次及控件个数" class="headerlink" title="1.6 查看嵌套层次及控件个数"></a>1.6 查看嵌套层次及控件个数</h4><p>–检测工具：Hierarchy Viewer –&gt; <a href="https://github.com/romainguy/ViewServer" target="_blank" rel="noopener">https://github.com/romainguy/ViewServer</a></p>
 <h4 id="1-7-检测内存泄漏"><a href="#1-7-检测内存泄漏" class="headerlink" title="1.7 检测内存泄漏"></a>1.7 检测内存泄漏</h4><p><a href="https://github.com/markzhai/AndroidPerformanceMonitor" target="_blank" rel="noopener">BlockCanary</a>(A transparent ui-block detection library for Android)</p>
@@ -650,7 +652,7 @@ http.host == &quot;www.xxx.com&quot;
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +663,7 @@ http.host == &quot;www.xxx.com&quot;
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -672,7 +674,7 @@ http.host == &quot;www.xxx.com&quot;
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -754,7 +756,7 @@ http.host == &quot;www.xxx.com&quot;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-常用检测方法及工具"><span class="nav-number">1.</span> <span class="nav-text">1. 常用检测方法及工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-获取内存使用情况"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 获取内存使用情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-获取堆内存最大值"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 获取堆内存最大值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-反编译APK-可查看方法数"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 反编译APK(可查看方法数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-查看ANR日志"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.5 查看ANR日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-查看嵌套层次及控件个数"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.6 查看嵌套层次及控件个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-检测内存泄漏"><span class="nav-number">1.0.6.</span> <span class="nav-text">1.7 检测内存泄漏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-网络检测工具"><span class="nav-number">2.</span> <span class="nav-text">2. 网络检测工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-抓包工具-入门级-：Fiddler"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1. 抓包工具(入门级)：Fiddler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-模拟网络请求：Postman-安装谷歌插件即可-chrome-apps"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2. 模拟网络请求：Postman(安装谷歌插件即可) chrome://apps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Stecho-调试神器-chrome-inspect"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3. Stecho(调试神器) chrome://inspect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-协议-流量-分析神器：WireShark"><span class="nav-number">2.0.4.</span> <span class="nav-text">2.4. 协议(流量)分析神器：WireShark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-验收测试工具：Fitnesse"><span class="nav-number">2.0.5.</span> <span class="nav-text">2.5. 验收测试工具：Fitnesse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-压力测试工具：JMeter、XMeter-收费"><span class="nav-number">2.0.6.</span> <span class="nav-text">2.6. 压力测试工具：JMeter、XMeter(收费)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-常用检测方法及工具"><span class="nav-number">1.</span> <span class="nav-text">1. 常用检测方法及工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-获取内存使用情况"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 获取内存使用情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-获取堆内存最大值"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 获取堆内存最大值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-反编译APK-可查看方法数"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 反编译APK(可查看方法数)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-查看应用的进程优先级"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.4 查看应用的进程优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-查看ANR日志"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.5 查看ANR日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-查看嵌套层次及控件个数"><span class="nav-number">1.0.6.</span> <span class="nav-text">1.6 查看嵌套层次及控件个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-检测内存泄漏"><span class="nav-number">1.0.7.</span> <span class="nav-text">1.7 检测内存泄漏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-网络检测工具"><span class="nav-number">2.</span> <span class="nav-text">2. 网络检测工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-抓包工具-入门级-：Fiddler"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1. 抓包工具(入门级)：Fiddler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-模拟网络请求：Postman-安装谷歌插件即可-chrome-apps"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2. 模拟网络请求：Postman(安装谷歌插件即可) chrome://apps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Stecho-调试神器-chrome-inspect"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3. Stecho(调试神器) chrome://inspect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-协议-流量-分析神器：WireShark"><span class="nav-number">2.0.4.</span> <span class="nav-text">2.4. 协议(流量)分析神器：WireShark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-验收测试工具：Fitnesse"><span class="nav-number">2.0.5.</span> <span class="nav-text">2.5. 验收测试工具：Fitnesse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-压力测试工具：JMeter、XMeter-收费"><span class="nav-number">2.0.6.</span> <span class="nav-text">2.6. 压力测试工具：JMeter、XMeter(收费)</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

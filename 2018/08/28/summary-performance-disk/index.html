@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="–参考书籍：《Android移动性能实战》 1. StrictMode12345678910111213141516171819// 在Applcation/Activity的onCreate方法中使用严苛模式：if (BuildConfig.DEBUG) &amp;#123;    // 严苛模式-1：使用线程策略    StrictMode.setThreadPolicy(new StrictMode">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-20T12:44:27.199Z">
+<meta property="og:updated_time" content="2018-09-30T15:45:20.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android性能优化之磁盘篇">
 <meta name="twitter:description" content="–参考书籍：《Android移动性能实战》 1. StrictMode12345678910111213141516171819// 在Applcation/Activity的onCreate方法中使用严苛模式：if (BuildConfig.DEBUG) &amp;#123;    // 严苛模式-1：使用线程策略    StrictMode.setThreadPolicy(new StrictMode">
@@ -421,6 +421,8 @@
 </li>
 <li><p>使用LruCache和DiskLruCache做内存和磁盘缓存；</p>
 </li>
+<li><p>不建议在进程间通信中使用SharedPreferences，因为高并发的读写访问可能会丢失数据。</p>
+</li>
 </ol>
 <h2 id="3-数据库操作"><a href="#3-数据库操作" class="headerlink" title="3. 数据库操作"></a>3. 数据库操作</h2><h4 id="3-1-缓存数据库连接"><a href="#3-1-缓存数据库连接" class="headerlink" title="3.1  缓存数据库连接"></a>3.1  缓存数据库连接</h4><p>数据库在打开后，先不要关闭，在应用程序退出时再关闭。</p>
 <h4 id="3-2-使用索引"><a href="#3-2-使用索引" class="headerlink" title="3.2 使用索引"></a>3.2 使用索引</h4><p>可提高查询速度，但由于要维护索引会使插入效率有所降低。</p>
@@ -639,7 +641,7 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -650,7 +652,7 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -661,7 +663,7 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
