@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-11-05T11:44:51.235Z</updated>
+  <updated>2018-11-07T14:05:08.559Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android Paint和Canvas</title>
+    <link href="http://hawkyAndroid.github.io/2018/11/07/summary-view-02/"/>
+    <id>http://hawkyAndroid.github.io/2018/11/07/summary-view-02/</id>
+    <published>2018-11-07T14:15:25.000Z</published>
+    <updated>2018-11-07T14:05:08.559Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="（一）Paint的属性及使用"><a href="#（一）Paint的属性及使用" class="headerlink" title="（一）Paint的属性及使用"></a>（一）Paint的属性及使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Paint paint = <span class="keyword">new</span> Paint();<span class="comment">// 创建画笔</span></span><br><span class="line">paint.setAntiAlias(<span class="keyword">true</span>);<span class="comment">// 抗锯齿</span></span><br><span class="line">paint.setColor(Color.GREEN);<span class="comment">// 颜色</span></span><br><span class="line">paint.setStyle(Paint.Style.FILL);<span class="comment">// 填充</span></span><br><span class="line">paint.setTextAlign(Paint.Align.LEFT);<span class="comment">// 向左对齐</span></span><br><span class="line">paint.setTextSize(<span class="number">20f</span>);<span class="comment">// 字体大小</span></span><br><span class="line">paint.setTextSkewX(-<span class="number">0.5f</span>);<span class="comment">// 倾斜程度0-1</span></span><br><span class="line">paint.setUnderlineText(<span class="keyword">true</span>);<span class="comment">// 下划线</span></span><br><span class="line">paint.setFakeBoldText(<span class="keyword">true</span>);<span class="comment">// 加粗</span></span><br><span class="line">paint.setStrokeWidth(<span class="number">20f</span>);<span class="comment">// 笔粗</span></span><br><span class="line">paint.setStrokeJoin(Paint.Join.ROUND);<span class="comment">// 拐角样式</span></span><br><span class="line">paint.setStrokeCap(Paint.Cap.ROUND);<span class="comment">// 落笔样式</span></span><br></pre></td></tr></table></figure><h4 id="（二）Canvas的属性及使用"><a href="#（二）Canvas的属性及使用" class="headerlink" title="（二）Canvas的属性及使用"></a>（二）Canvas的属性及使用</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;（一）Paint的属性及使用&quot;&gt;&lt;a href=&quot;#（一）Paint的属性及使用&quot; class=&quot;headerlink&quot; title=&quot;（一）Paint的属性及使用&quot;&gt;&lt;/a&gt;（一）Paint的属性及使用&lt;/h4&gt;&lt;figure class=&quot;highlight 
+      
+    
+    </summary>
+    
+      <category term="View" scheme="http://hawkyAndroid.github.io/categories/View/"/>
+    
+    
+      <category term="View" scheme="http://hawkyAndroid.github.io/tags/View/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android View的坐标系</title>
+    <link href="http://hawkyAndroid.github.io/2018/11/07/summary-view-01/"/>
+    <id>http://hawkyAndroid.github.io/2018/11/07/summary-view-01/</id>
+    <published>2018-11-07T13:56:15.000Z</published>
+    <updated>2018-11-07T14:01:17.637Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="（一）View的坐标系"><a href="#（一）View的坐标系" class="headerlink" title="（一）View的坐标系"></a>（一）View的坐标系</h4><p>  – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getTop();       <span class="comment">//获取子View左上角距父View顶部的距离</span></span><br><span class="line"></span><br><span class="line">getLeft();      <span class="comment">//获取子View左上角距父View左侧的距离</span></span><br><span class="line"></span><br><span class="line">getBottom();    <span class="comment">//获取子View右下角距父View顶部的距离</span></span><br><span class="line"></span><br><span class="line">getRight();     <span class="comment">//获取子View右下角距父View左侧的距离</span></span><br></pre></td></tr></table></figure><h4 id="（二）MotionEvent中-get-和-getRaw-的区别"><a href="#（二）MotionEvent中-get-和-getRaw-的区别" class="headerlink" title="（二）MotionEvent中 get 和 getRaw 的区别"></a>（二）MotionEvent中 get 和 getRaw 的区别</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">event.getX();       <span class="comment">//触摸点相对于其所在组件(自身)坐标系的坐标</span></span><br><span class="line">event.getY();</span><br><span class="line"></span><br><span class="line">event.getRawX();    <span class="comment">//触摸点相对于屏幕默认坐标系的坐标</span></span><br><span class="line">event.getRawY();</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;（一）View的坐标系&quot;&gt;&lt;a href=&quot;#（一）View的坐标系&quot; class=&quot;headerlink&quot; title=&quot;（一）View的坐标系&quot;&gt;&lt;/a&gt;（一）View的坐标系&lt;/h4&gt;&lt;p&gt;  – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为
+      
+    
+    </summary>
+    
+      <category term="View" scheme="http://hawkyAndroid.github.io/categories/View/"/>
+    
+    
+      <category term="View" scheme="http://hawkyAndroid.github.io/tags/View/"/>
+    
+  </entry>
   
   <entry>
     <title>Android View的绘制篇</title>
@@ -477,58 +527,6 @@
     
     
       <category term="MQTT" scheme="http://hawkyAndroid.github.io/tags/MQTT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>日本之旅</title>
-    <link href="http://hawkyAndroid.github.io/2018/04/20/summary-japan-trip-4_13/"/>
-    <id>http://hawkyAndroid.github.io/2018/04/20/summary-japan-trip-4_13/</id>
-    <published>2018-04-20T13:31:10.000Z</published>
-    <updated>2018-05-03T15:48:06.095Z</updated>
-    
-    <content type="html"><![CDATA[<p>– 其实2月初就开始准备签证资料了。只是那时快放假了，有些资料不充分，所以就拖到年后上班才接着备齐资料证明。从提交材料才拿到签证(签证+保险花了596，妹的第一次因为没办金卡还好有流水。个人感觉偏贵，朋友用金卡和居住证办的签证才花了300多)，花了近半个月的时间。然后开始买机票(花了1555，如果年前买的话可能更便宜，朋友比我提前几分钟买的票，尽然比我少花了300多，汗！)、订酒店(都是朋友搞定的，5个晚上平摊940)。<br>接着朋友推荐买了大阪周游卡185、交通卡ICOCA138、随身wifi6*8、到银行换了点日元15000円(妹的，去了日本才知道取的现金不够，日本消费不是一般的贵，还好后来办了信用卡)。一切准备就绪后，最后就是用APP搜索计划要景点、路线规划及准备行李了。4月13号出发，6天的行程(计划旅游城市：大阪-Osaka 2~3天、京都-The Kyoto 2天)就这样开始了。</p><h4 id="第一天"><a href="#第一天" class="headerlink" title="第一天"></a>第一天</h4><p>从深圳口岸(还好朋友带了300RMB换了点港币)出发、经过人工通道”一地两检”，然后坐大巴到了香港，接着坐地铁(不是一般的贵，还好充了100)到了机场(香港机场不是一般的大，先是值机取票，然后坐个摆渡车 找个闸口找半天，汗！)，飞到大阪大概是晚上8~9点的样子，不太记得了。一下飞机就给ICOCA卡充值(买的卡里面只有1500円，想想肯定不够的，于是就充了3000円)，接着就是找住的地方了(民宿，很小，大概只有5~6平米的样子吧)。说实话，日本的地铁比较复杂绕来绕去，一开始我们都蒙了，找个公共地跌路线都走来走去饶了很久，朋友说要要坐普通公共地跌的那种比较便宜(像JR、阪急、阪神、特急、急行都比较贵)。就这样下了地铁后跟着google地图导航找到了住的地方(说话了一路上感觉这边的环境真的挺干净的)。很神奇，房东压根不在这，你只要一个大门和住的房子密码就可以拎包入住了。那时已经是晚上10点半了，肚子已经饿的步行了，于是就在街上逛了逛这边的夜市，吃了点小吃(这边的吃的贼贵，几个丸子花了500円，汗!)，一路上都能看到很多写着”居酒屋”的店(其实就相当于一个小型的KTV或者酒吧，可以边喝酒边唱歌)。接着找了个超市买了点早餐和零食然后就回家睡觉去了。</p><h4 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h4><p>准确的说，这天应该算是游玩的第一天了。这天起的还算早，一吃完早餐就直奔大阪城了，蹭别人的导游的解说(主要讲了讲丰臣秀吉的平生)顺便便拍了点风景照，嘿嘿！紧接着参观了一下天守阁、西之丸庭园和大阪历史博物馆。中午肚子已经饿得不行了(但还是赶着去下午的目的地)，本来想找家便宜点的地方吃饭，没想到附近吃的都那么贵，最后去麦当劳吃了一顿(话说还算相对便宜的)，吃完饭后紧接着下午去了道顿崛(坐船观光)、日本桥(电子产品、动漫、光碟特别多)、心斋桥(购物的天堂)，晚上坐了下HEP FIVE摩天轮、玩了下Wile River、还去了梅田蓝天大厦(在楼顶上看大阪的夜景还是挺不错的)。因为要去的景点比较多，所以玩得比较赶，不想浪费时间，毕竟是请假来旅游的，我和同事的想法是一致的，尽可能的多玩一些景点。还好有周游券，省了不少钱。回去大概已经是晚上10点多了，到了超市买了点早餐、零食，回去喝了点小酒就休息了。</p><h4 id="第三天"><a href="#第三天" class="headerlink" title="第三天"></a>第三天</h4><p>这天起得比较晚，将近10点才动身。早上先去动物园看了看，话说这里的动物确实挺多的，很多没见过。本来还想看看大象的，没想到大象已经永眠了，汗！接着去了四天王寺，由于起得比较晚，所以没去几个景点。下午就按原计划去去了海游馆(说实话，这是我见过海洋生物最多、面积最大的地方)，花了129RMB值了。然后就去坐船观赏，顺便去环球影城看了一下(没进去，门票太贵了)，就在周围瞎逛了逛，顺便买了个便当，把晚饭也给解决了。大概晚上6点半的样子坐上了返回的游船。快上岸的时候发现那个天保山摩天轮很大、而且五颜六色的很漂亮，然后就跟朋友商量去玩了一下，摩天轮上观赏夜景真的很美。由于要去京都，行程比较紧，所以晚上我们就坐地铁到大阪JR站，然后换乘JR京都线到了京都站，接着坐公交到了我们定好的酒店，顺便找了便利店买了早点、零食和两张公交劵(公交太TMD贵了，230円一次，所以就弄了两张公交劵，比刷ICOCA卡更划算)，到酒店已经很晚了，又是30000多步，累趴了。</p><h4 id="第四天"><a href="#第四天" class="headerlink" title="第四天"></a>第四天</h4><p>妹的，今天起得更晚了，睡到下午1点多一点反应去没有，闹钟都没叫醒，晕！起床随便吃了点，下午2点才出的门。话说京都的寺庙不是一般的多，空气也很好，非常适合旅游。游玩的景点有伏见稻荷大社(需要爬山)、三十三间堂(错过了)、清水寺(没进去)、清水坂、八坂神社、衹园、花见小路、鸭川、锦市场。由于去的比较晚，好多景点都关门或者一眼带过了。晚上回到酒店已经是10点多了。</p><h4 id="第五天"><a href="#第五天" class="headerlink" title="第五天"></a>第五天</h4><p>今天起得还算比较早。跟前几天一样，吃了前一天晚上买的零食早点就出发了。上午逛了下二条城、金阁寺。妹的，一个那个小的景点都是世界文化遗产也是醉了，汗！中午还是吃的麦当劳(算是便宜的，别的真的挺贵的)。下午继续做公交，去了天龙寺、岚山，话说人真的很多，由于有些项目收费比较高，所以就没怎么玩了，就沿途看看风景(据说这里是赏樱圣地，可以已经4月樱花已经没了，如果是3个月来的话就好了)、拍了些照片。由于买的是香港至大阪的往返机票，所以我们就买了点特产，晚上赶回了大阪。</p><h4 id="第六天"><a href="#第六天" class="headerlink" title="第六天"></a>第六天</h4><p>这天是日本旅游的最后一天。由于大阪的所以景点(除了环球影城)基本都玩过了，所以最后一天我们选择了逛逛逛。来到日本桥，这边的动漫、电子产品、游戏、还有成人(GD) 比较多。相比之下，大阪更适合购物、京都更适合游玩观光。由于下午的时间比较紧，所以我们随便找了家吃饭的地方把午餐解决了，然后买了蓝牙音箱(好像是双向连接，充满电可以用很久、挺好用的)、还有一根数据线就赶到机场准备回去了。</p><p> —下次有机会再去的话，可能会去东京、北海道。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;– 其实2月初就开始准备签证资料了。只是那时快放假了，有些资料不充分，所以就拖到年后上班才接着备齐资料证明。从提交材料才拿到签证(签证+保险花了596，妹的第一次因为没办金卡还好有流水。个人感觉偏贵，朋友用金卡和居住证办的签证才花了300多)，花了近半个月的时间。然后开始买
-      
-    
-    </summary>
-    
-      <category term="Life" scheme="http://hawkyAndroid.github.io/categories/Life/"/>
-    
-    
-      <category term="Life" scheme="http://hawkyAndroid.github.io/tags/Life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>4月份计划</title>
-    <link href="http://hawkyAndroid.github.io/2018/04/10/summary-2018-4-10/"/>
-    <id>http://hawkyAndroid.github.io/2018/04/10/summary-2018-4-10/</id>
-    <published>2018-04-10T14:41:10.000Z</published>
-    <updated>2018-07-03T16:08:54.997Z</updated>
-    
-    <content type="html"><![CDATA[<p> – 惭愧，对着2018年度计划来看，还有很多事情要做。</p><h3 id="3月份总结"><a href="#3月份总结" class="headerlink" title="3月份总结"></a>3月份总结</h3><ol><li>通过科三、科三考试，拿到驾照。</li><li>偶尔跑步、爬山、游玩。</li><li>接触过几个女生。可能是我性格(偏内)的原因，还是感觉有种词穷的感觉，让女生也感觉尴尬。</li><li>花钱有点大手大脚、大冰的书没坚持看下去，</li><li>生活懒散，不愿做饭、吃药。</li></ol><h3 id="4月份安排"><a href="#4月份安排" class="headerlink" title="4月份安排"></a>4月份安排</h3><h4 id="工作方面"><a href="#工作方面" class="headerlink" title="工作方面"></a>工作方面</h4><ol><li>试着多与女同事沟通、与男同事交流技术。</li><li>容易发脾气的时候试着仍住，想想值不值得?</li><li>多与经理交流想法和方案、适当学习其为人处世及管理之道(月底要总结)。</li><li>月底更新一次简历。若简历没有新东西则要产生危机感(新技术没跟上? 待遇上不去? 未来何去何从?)。</li></ol><h4 id="学习方面"><a href="#学习方面" class="headerlink" title="学习方面"></a>学习方面</h4><ol><li>看完自学炒股这本书。</li><li>读大冰的书里面的故事。</li></ol><h4 id="生活方面"><a href="#生活方面" class="headerlink" title="生活方面"></a>生活方面</h4><ol><li>硬着头皮吃药。</li><li>跑步、学习游泳。</li><li>少玩王者荣耀，不上瘾、不以段位论英雄。多花时间与妹纸用心交流(要认真对待，不能再无所谓了)。</li><li>旅游：4月中旬去日本、多了解一些文化、景点，回来记录旅游心得。</li></ol><p>– 世上无难事，只要肯用心。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt; – 惭愧，对着2018年度计划来看，还有很多事情要做。&lt;/p&gt;
-&lt;h3 id=&quot;3月份总结&quot;&gt;&lt;a href=&quot;#3月份总结&quot; class=&quot;headerlink&quot; title=&quot;3月份总结&quot;&gt;&lt;/a&gt;3月份总结&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;通过科三、科三考试，拿到驾照。&lt;
-      
-    
-    </summary>
-    
-      <category term="Life" scheme="http://hawkyAndroid.github.io/categories/Life/"/>
-    
-    
-      <category term="Life" scheme="http://hawkyAndroid.github.io/tags/Life/"/>
     
   </entry>
   

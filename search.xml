@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Android Paint和Canvas]]></title>
+    <url>%2F2018%2F11%2F07%2Fsummary-view-02%2F</url>
+    <content type="text"><![CDATA[（一）Paint的属性及使用123456789101112Paint paint = new Paint();// 创建画笔paint.setAntiAlias(true);// 抗锯齿paint.setColor(Color.GREEN);// 颜色paint.setStyle(Paint.Style.FILL);// 填充paint.setTextAlign(Paint.Align.LEFT);// 向左对齐paint.setTextSize(20f);// 字体大小paint.setTextSkewX(-0.5f);// 倾斜程度0-1paint.setUnderlineText(true);// 下划线paint.setFakeBoldText(true);// 加粗paint.setStrokeWidth(20f);// 笔粗paint.setStrokeJoin(Paint.Join.ROUND);// 拐角样式paint.setStrokeCap(Paint.Cap.ROUND);// 落笔样式 （二）Canvas的属性及使用]]></content>
+      <categories>
+        <category>View</category>
+      </categories>
+      <tags>
+        <tag>View</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Android View的坐标系]]></title>
+    <url>%2F2018%2F11%2F07%2Fsummary-view-01%2F</url>
+    <content type="text"><![CDATA[（一）View的坐标系 – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向。 1234567getTop(); //获取子View左上角距父View顶部的距离getLeft(); //获取子View左上角距父View左侧的距离getBottom(); //获取子View右下角距父View顶部的距离getRight(); //获取子View右下角距父View左侧的距离 （二）MotionEvent中 get 和 getRaw 的区别12345event.getX(); //触摸点相对于其所在组件(自身)坐标系的坐标event.getY();event.getRawX(); //触摸点相对于屏幕默认坐标系的坐标event.getRawY();]]></content>
+      <categories>
+        <category>View</category>
+      </categories>
+      <tags>
+        <tag>View</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Android View的绘制篇]]></title>
     <url>%2F2018%2F11%2F05%2Fsummary-view-drawing-01%2F</url>
     <content type="text"><![CDATA[(一) MeasureSpec MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutParams总的wrap_content。 1.2 MeasureSpec与LayoutParams的对应关系在测量View的时候，系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，然后根据MeasureSpec确定View测量后的宽/高。 (二) View的工作流程2.1 measure：确定View的测量宽/高–最佳实践：在onLayout方法中去获取View的测量宽/高或者最终宽/高。 – 注意：View的measure过程和Activity的生命周期方法不是同步执行的。 2.2 layout：ViewGroup用来确定子元素的位置。– 注意：layout方法确定View本身的位置，而onLayout方法则会确定所有子元素的位置。 2.3 draw：将View绘制到屏幕上1、绘制背景 background.draw(canvas) 2、绘制自己(onDraw) 3、绘制children(dispatchDraw) 4、绘制装饰(onDrawScrollsBars) (三) View的注意事项1、让View支持wrap_content； 2、如果有必要，让View支持padding； 3、尽量不要在View中使用Handler(除非是发消息) 4、View如果有线程或者动画，需要及时停止，可调用View.onDetachedFromWindow。 5、View带有滑动嵌套情况时，需要处理好滑动冲突。 – 注意：直接继承View或ViewGroup的控件，padding默认不生效。]]></content>
