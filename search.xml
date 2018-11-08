@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Android View之Color]]></title>
+    <title><![CDATA[Android View之Path]]></title>
     <url>%2F2018%2F11%2F08%2Fsummary-view-path%2F</url>
     <content type="text"><![CDATA[（一）Path线条1234567891011// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。path.moveTo(float x, float y);// 新点在上一个点的基础上偏移（dx，dy），使用的是相对定位(X=x+dx)。path.rMoveTo(float dx, float dy);// 将画笔移动到点A（x，y）的位置，并在上一个点与当前点之前画一条直线。使用的是绝对定位。path.lineTo(float x, float y);// 新点在上一个点的基础上偏移（dx，dy）,并在上一个点与当前点之前画一条直线。使用的是相对定位(X=x+dx)。path.rLineTo(float dx, float dy);// 在第一个点和最后一个点之前画一条直线，形成闭合区域。path.close(); （二）Path矩形、椭圆、圆和弧]]></content>
       <categories>

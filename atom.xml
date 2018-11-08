@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-11-08T12:19:42.228Z</updated>
+  <updated>2018-11-08T12:23:39.579Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Android View之Color</title>
+    <title>Android View之Path</title>
     <link href="http://hawkyAndroid.github.io/2018/11/08/summary-view-path/"/>
     <id>http://hawkyAndroid.github.io/2018/11/08/summary-view-path/</id>
     <published>2018-11-08T12:23:55.000Z</published>
-    <updated>2018-11-08T12:19:42.228Z</updated>
+    <updated>2018-11-08T12:23:39.579Z</updated>
     
     <content type="html"><![CDATA[<h3 id="（一）Path线条"><a href="#（一）Path线条" class="headerlink" title="（一）Path线条"></a>（一）Path线条</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。</span></span><br><span class="line">path.moveTo(<span class="keyword">float</span> x, <span class="keyword">float</span> y);</span><br><span class="line"><span class="comment">// 新点在上一个点的基础上偏移（dx，dy），使用的是相对定位(X=x+dx)。</span></span><br><span class="line">path.rMoveTo(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy);</span><br><span class="line"><span class="comment">// 将画笔移动到点A（x，y）的位置，并在上一个点与当前点之前画一条直线。使用的是绝对定位。</span></span><br><span class="line">path.lineTo(<span class="keyword">float</span> x, <span class="keyword">float</span> y);</span><br><span class="line"><span class="comment">// 新点在上一个点的基础上偏移（dx，dy）,并在上一个点与当前点之前画一条直线。使用的是相对定位(X=x+dx)。</span></span><br><span class="line">path.rLineTo(<span class="keyword">float</span> dx, <span class="keyword">float</span> dy);</span><br><span class="line"><span class="comment">// 在第一个点和最后一个点之前画一条直线，形成闭合区域。</span></span><br><span class="line">path.close();</span><br></pre></td></tr></table></figure><h3 id="（二）Path矩形、椭圆、圆和弧"><a href="#（二）Path矩形、椭圆、圆和弧" class="headerlink" title="（二）Path矩形、椭圆、圆和弧"></a>（二）Path矩形、椭圆、圆和弧</h3>]]></content>
     
