@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="（一）View的坐标系  – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向。 1234567getTop();       //获取子View左上角距父View顶部的距离getLeft();      //获取子View左上角距父View左侧的距离getBottom();    //获取子View右下角距父View顶部的距离getRi">
+<meta name="description" content="（一）Paint的属性及使用123456789101112Paint paint = new Paint();// 创建画笔paint.setAntiAlias(true);// 抗锯齿paint.setColor(Color.GREEN);// 颜色paint.setStyle(Paint.Style.FILL);// 填充paint.setTextAlign(Paint.Align.LEFT)">
 <meta name="keywords" content="View">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android View的坐标系">
-<meta property="og:url" content="http://hawkyAndroid.github.io/2018/11/07/summary-view-01/index.html">
+<meta property="og:title" content="Android View之Paint和Canvas">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2018/11/07/summary-view-paint-canvas/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="（一）View的坐标系  – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向。 1234567getTop();       //获取子View左上角距父View顶部的距离getLeft();      //获取子View左上角距父View左侧的距离getBottom();    //获取子View右下角距父View顶部的距离getRi">
+<meta property="og:description" content="（一）Paint的属性及使用123456789101112Paint paint = new Paint();// 创建画笔paint.setAntiAlias(true);// 抗锯齿paint.setColor(Color.GREEN);// 颜色paint.setStyle(Paint.Style.FILL);// 填充paint.setTextAlign(Paint.Align.LEFT)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-07T14:01:17.637Z">
+<meta property="og:updated_time" content="2018-11-08T11:47:01.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android View的坐标系">
-<meta name="twitter:description" content="（一）View的坐标系  – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向。 1234567getTop();       //获取子View左上角距父View顶部的距离getLeft();      //获取子View左上角距父View左侧的距离getBottom();    //获取子View右下角距父View顶部的距离getRi">
+<meta name="twitter:title" content="Android View之Paint和Canvas">
+<meta name="twitter:description" content="（一）Paint的属性及使用123456789101112Paint paint = new Paint();// 创建画笔paint.setAntiAlias(true);// 抗锯齿paint.setColor(Color.GREEN);// 颜色paint.setStyle(Paint.Style.FILL);// 填充paint.setTextAlign(Paint.Align.LEFT)">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/11/07/summary-view-01/"/>
+  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/11/07/summary-view-paint-canvas/"/>
 
 
 
 
 
-  <title>Android View的坐标系 | Hawky的博客</title>
+  <title>Android View之Paint和Canvas | Hawky的博客</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/11/07/summary-view-01/">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/11/07/summary-view-paint-canvas/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hawky">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android View的坐标系</h1>
+          <h1 class="post-title" itemprop="name headline">Android View之Paint和Canvas</h1>
         
 
         <div class="post-meta">
@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T21:56:15+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T22:15:25+08:00">
                 2018-11-07
               </time>
             
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/2018/11/07/summary-view-01/" class="leancloud_visitors" data-flag-title="Android View的坐标系">
+             <span id="/2018/11/07/summary-view-paint-canvas/" class="leancloud_visitors" data-flag-title="Android View之Paint和Canvas">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,9 +412,8 @@
       
 
       
-        <h4 id="（一）View的坐标系"><a href="#（一）View的坐标系" class="headerlink" title="（一）View的坐标系"></a>（一）View的坐标系</h4><p>  – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getTop();       <span class="comment">//获取子View左上角距父View顶部的距离</span></span><br><span class="line"></span><br><span class="line">getLeft();      <span class="comment">//获取子View左上角距父View左侧的距离</span></span><br><span class="line"></span><br><span class="line">getBottom();    <span class="comment">//获取子View右下角距父View顶部的距离</span></span><br><span class="line"></span><br><span class="line">getRight();     <span class="comment">//获取子View右下角距父View左侧的距离</span></span><br></pre></td></tr></table></figure>
-<h4 id="（二）MotionEvent中-get-和-getRaw-的区别"><a href="#（二）MotionEvent中-get-和-getRaw-的区别" class="headerlink" title="（二）MotionEvent中 get 和 getRaw 的区别"></a>（二）MotionEvent中 get 和 getRaw 的区别</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">event.getX();       <span class="comment">//触摸点相对于其所在组件(自身)坐标系的坐标</span></span><br><span class="line">event.getY();</span><br><span class="line"></span><br><span class="line">event.getRawX();    <span class="comment">//触摸点相对于屏幕默认坐标系的坐标</span></span><br><span class="line">event.getRawY();</span><br></pre></td></tr></table></figure>
+        <h4 id="（一）Paint的属性及使用"><a href="#（一）Paint的属性及使用" class="headerlink" title="（一）Paint的属性及使用"></a>（一）Paint的属性及使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Paint paint = <span class="keyword">new</span> Paint();<span class="comment">// 创建画笔</span></span><br><span class="line">paint.setAntiAlias(<span class="keyword">true</span>);<span class="comment">// 抗锯齿</span></span><br><span class="line">paint.setColor(Color.GREEN);<span class="comment">// 颜色</span></span><br><span class="line">paint.setStyle(Paint.Style.FILL);<span class="comment">// 填充</span></span><br><span class="line">paint.setTextAlign(Paint.Align.LEFT);<span class="comment">// 向左对齐</span></span><br><span class="line">paint.setTextSize(<span class="number">20f</span>);<span class="comment">// 字体大小</span></span><br><span class="line">paint.setTextSkewX(-<span class="number">0.5f</span>);<span class="comment">// 倾斜程度0-1</span></span><br><span class="line">paint.setUnderlineText(<span class="keyword">true</span>);<span class="comment">// 下划线</span></span><br><span class="line">paint.setFakeBoldText(<span class="keyword">true</span>);<span class="comment">// 加粗</span></span><br><span class="line">paint.setStrokeWidth(<span class="number">20f</span>);<span class="comment">// 笔粗</span></span><br><span class="line">paint.setStrokeJoin(Paint.Join.ROUND);<span class="comment">// 拐角样式</span></span><br><span class="line">paint.setStrokeCap(Paint.Cap.ROUND);<span class="comment">// 落笔样式</span></span><br></pre></td></tr></table></figure>
+<h4 id="（二）Canvas的属性及使用"><a href="#（二）Canvas的属性及使用" class="headerlink" title="（二）Canvas的属性及使用"></a>（二）Canvas的属性及使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">Bitmap bitmap = Bitmap.createBitmap(<span class="number">400</span>, <span class="number">400</span>, Bitmap.Config.ARGB_8888);</span><br><span class="line">Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);<span class="comment">// 创建位图作为画布</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制位图</span></span><br><span class="line">canvas.drawBitmap(bitmap, left, top, <span class="keyword">null</span>);</span><br><span class="line"><span class="comment">// 绘制缩放后的位图</span></span><br><span class="line">canvas.drawBitmap(bmp, srcRect, dstRect, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用单一颜色填充整个画布</span></span><br><span class="line">canvas.drawColor(Color.RED);</span><br><span class="line">canvas.drawRGB(<span class="keyword">int</span> r, <span class="keyword">int</span> g, <span class="keyword">int</span> b);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制点(可绘制出正方形)</span></span><br><span class="line">canvas.drawPoint(x, y, paint);</span><br><span class="line"><span class="comment">// 绘制连续多个点。</span></span><br><span class="line"><span class="comment">// 该方法的参数 pts 是一个数组，从下标 0 开始每 2 个数确定一个点。多余的元素会忽略。</span></span><br><span class="line">canvas.drawPoints(pts, paint);</span><br><span class="line"><span class="comment">// 绘制连续若干个点。</span></span><br><span class="line"><span class="comment">// 从 pts 数组中的第 offset 处开始取出 count 个数字，以 2 个数为一组确实一个点。忽略多余的元素。</span></span><br><span class="line">canvas.drawPoints(pts, offset, count, paint);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制直线。在（startX, startY）和（stopX, stopY）两个点之间绘制一条直线</span></span><br><span class="line">drawLine(<span class="keyword">float</span> startX, <span class="keyword">float</span> startY, <span class="keyword">float</span> stopX, <span class="keyword">float</span> stopY, paint);</span><br><span class="line"><span class="comment">// 绘制多条直线。（每4个点绘制一条线）</span></span><br><span class="line">canvas.drawLines(<span class="keyword">float</span>[] pts, paint);</span><br><span class="line"><span class="comment">// 绘制多条直线。</span></span><br><span class="line"><span class="comment">// 从 pts 数组中的第 offset 处开始取出 count 个数字，以 4 个数为一组确实一个点。忽略多余的元素。</span></span><br><span class="line">canvas.drawLines(<span class="keyword">float</span>[] pts, <span class="keyword">int</span> offset, <span class="keyword">int</span> count, paint);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制矩形</span></span><br><span class="line">canvas.drawRect(<span class="keyword">new</span> Rect(left, top, right, bottom), paint);<span class="comment">// drawRectF</span></span><br><span class="line"><span class="comment">// 绘制圆角矩形</span></span><br><span class="line"><span class="comment">// left、top、right、bottom 构建一个矩形，rx、ry 分别是圆角处的水平半径和垂直半径。</span></span><br><span class="line">canvas.drawRoundRect(<span class="keyword">new</span> RectF(left, top, right, bottom), <span class="keyword">float</span> rx, <span class="keyword">float</span> ry, paint);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制椭圆(可绘制出圆)。参数和(外切)矩形一致</span></span><br><span class="line">canvas.drawOval(<span class="keyword">new</span> RectF(left, top, right, bottom), paint);</span><br><span class="line"><span class="comment">// 绘制圆形。其中：（cx、cy）为圆心坐标，radius 为圆的半径</span></span><br><span class="line">canvas.drawCircle(<span class="keyword">float</span> cx, <span class="keyword">float</span> cy, <span class="keyword">float</span> radius, paint);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 弧线和扇形本质上更是相似。概念：弧线是椭圆上的一段，而扇形则是将弧线的两个端点和椭圆中心点使用线条连接形成的闭合区域。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制扇形或弧线。参数 startAngle 表示起始角度，sweepAngle 表示扇形或弧线所占的角度，正数表示顺时针，负数表示逆时针。</span></span><br><span class="line"><span class="comment">// useCenter 参数询问是否要使用中心点，为true 表示扇形，为 false 表示弧线。</span></span><br><span class="line">canvas.drawArc(<span class="keyword">new</span> RectF(<span class="keyword">float</span> left, <span class="keyword">float</span> top, <span class="keyword">float</span> right, <span class="keyword">float</span> bottom), <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle, <span class="keyword">boolean</span> useCenter, paint);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制连线</span></span><br><span class="line">canvas.drawPath(path, paint);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -467,7 +466,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hawkyAndroid.github.io/2018/11/07/summary-view-01/" title="Android View的坐标系">http://hawkyAndroid.github.io/2018/11/07/summary-view-01/</a>
+    <a href="http://hawkyAndroid.github.io/2018/11/07/summary-view-paint-canvas/" title="Android View之Paint和Canvas">http://hawkyAndroid.github.io/2018/11/07/summary-view-paint-canvas/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -495,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/05/summary-view-drawing-01/" rel="next" title="Android View的绘制篇">
-                <i class="fa fa-chevron-left"></i> Android View的绘制篇
+              <a href="/2018/11/07/summary-view-coordinate_system/" rel="next" title="Android View之坐标系">
+                <i class="fa fa-chevron-left"></i> Android View之坐标系
               </a>
             
           </div>
@@ -505,8 +504,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/07/summary-view-02/" rel="prev" title="Android Paint和Canvas">
-                Android Paint和Canvas <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/08/summary-view-color/" rel="prev" title="Android View之Color">
+                Android View之Color <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -613,7 +612,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -717,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#（一）View的坐标系"><span class="nav-number">1.</span> <span class="nav-text">（一）View的坐标系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（二）MotionEvent中-get-和-getRaw-的区别"><span class="nav-number">2.</span> <span class="nav-text">（二）MotionEvent中 get 和 getRaw 的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#（一）Paint的属性及使用"><span class="nav-number">1.</span> <span class="nav-text">（一）Paint的属性及使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（二）Canvas的属性及使用"><span class="nav-number">2.</span> <span class="nav-text">（二）Canvas的属性及使用</span></a></li></ol></div>
             
 
           </div>

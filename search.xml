@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Android Paint和Canvas]]></title>
-    <url>%2F2018%2F11%2F07%2Fsummary-view-02%2F</url>
-    <content type="text"><![CDATA[（一）Paint的属性及使用123456789101112Paint paint = new Paint();// 创建画笔paint.setAntiAlias(true);// 抗锯齿paint.setColor(Color.GREEN);// 颜色paint.setStyle(Paint.Style.FILL);// 填充paint.setTextAlign(Paint.Align.LEFT);// 向左对齐paint.setTextSize(20f);// 字体大小paint.setTextSkewX(-0.5f);// 倾斜程度0-1paint.setUnderlineText(true);// 下划线paint.setFakeBoldText(true);// 加粗paint.setStrokeWidth(20f);// 笔粗paint.setStrokeJoin(Paint.Join.ROUND);// 拐角样式paint.setStrokeCap(Paint.Cap.ROUND);// 落笔样式 （二）Canvas的属性及使用]]></content>
+    <title><![CDATA[Android View之Color]]></title>
+    <url>%2F2018%2F11%2F08%2Fsummary-view-color%2F</url>
+    <content type="text"><![CDATA[1、Color模式 Color模式 解释 Alpha8 仅有透明通道(8位) RGB565 屏幕默认模式(16位) ARGB4444 四通道低精度(16位) ARGB8888 四通道高精度(32位) 说明：如ARGB4444则表示有四个通道(ARGB)，每个对应的通道均用4位来描述。 其中 A 、R 、G 、B 的取值范围均为0~255，即16进制的0x00~0xff。 A从0x00到0xff表示从透明到不透明。RGB从0x00到0xff表示颜色从浅到深。 需要注意的是：当RGB全取最小值(0或0x000000)时颜色为黑色，全取最大值(255或0xffffff)时颜色为白色。Alpha通道主要在两个图像混合的时候生效。 2、Color的使用1234567// 系统自带绿色int color = Color.GREEN;// 半透明绿色int color = Color.argb(127, 0, 255, 0); // 带有透明度的绿色int color = 0x9900FF00;]]></content>
       <categories>
         <category>View</category>
       </categories>
@@ -12,9 +12,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Android View的坐标系]]></title>
-    <url>%2F2018%2F11%2F07%2Fsummary-view-01%2F</url>
-    <content type="text"><![CDATA[（一）View的坐标系 – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点，向右为x轴增大方向，向下为y轴增大方向。 1234567getTop(); //获取子View左上角距父View顶部的距离getLeft(); //获取子View左上角距父View左侧的距离getBottom(); //获取子View右下角距父View顶部的距离getRight(); //获取子View右下角距父View左侧的距离 （二）MotionEvent中 get 和 getRaw 的区别12345event.getX(); //触摸点相对于其所在组件(自身)坐标系的坐标event.getY();event.getRawX(); //触摸点相对于屏幕默认坐标系的坐标event.getRawY();]]></content>
+    <title><![CDATA[Android View之Paint和Canvas]]></title>
+    <url>%2F2018%2F11%2F07%2Fsummary-view-paint-canvas%2F</url>
+    <content type="text"><![CDATA[（一）Paint的属性及使用123456789101112Paint paint = new Paint();// 创建画笔paint.setAntiAlias(true);// 抗锯齿paint.setColor(Color.GREEN);// 颜色paint.setStyle(Paint.Style.FILL);// 填充paint.setTextAlign(Paint.Align.LEFT);// 向左对齐paint.setTextSize(20f);// 字体大小paint.setTextSkewX(-0.5f);// 倾斜程度0-1paint.setUnderlineText(true);// 下划线paint.setFakeBoldText(true);// 加粗paint.setStrokeWidth(20f);// 笔粗paint.setStrokeJoin(Paint.Join.ROUND);// 拐角样式paint.setStrokeCap(Paint.Cap.ROUND);// 落笔样式 （二）Canvas的属性及使用1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556Bitmap bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);Canvas canvas = new Canvas(bitmap);// 创建位图作为画布// 绘制位图canvas.drawBitmap(bitmap, left, top, null);// 绘制缩放后的位图canvas.drawBitmap(bmp, srcRect, dstRect, null);// 使用单一颜色填充整个画布canvas.drawColor(Color.RED);canvas.drawRGB(int r, int g, int b);// 绘制点(可绘制出正方形)canvas.drawPoint(x, y, paint);// 绘制连续多个点。// 该方法的参数 pts 是一个数组，从下标 0 开始每 2 个数确定一个点。多余的元素会忽略。canvas.drawPoints(pts, paint);// 绘制连续若干个点。// 从 pts 数组中的第 offset 处开始取出 count 个数字，以 2 个数为一组确实一个点。忽略多余的元素。canvas.drawPoints(pts, offset, count, paint);// 绘制直线。在（startX, startY）和（stopX, stopY）两个点之间绘制一条直线drawLine(float startX, float startY, float stopX, float stopY, paint);// 绘制多条直线。（每4个点绘制一条线）canvas.drawLines(float[] pts, paint);// 绘制多条直线。// 从 pts 数组中的第 offset 处开始取出 count 个数字，以 4 个数为一组确实一个点。忽略多余的元素。canvas.drawLines(float[] pts, int offset, int count, paint);// 绘制矩形canvas.drawRect(new Rect(left, top, right, bottom), paint);// drawRectF// 绘制圆角矩形// left、top、right、bottom 构建一个矩形，rx、ry 分别是圆角处的水平半径和垂直半径。canvas.drawRoundRect(new RectF(left, top, right, bottom), float rx, float ry, paint);// 绘制椭圆(可绘制出圆)。参数和(外切)矩形一致canvas.drawOval(new RectF(left, top, right, bottom), paint);// 绘制圆形。其中：（cx、cy）为圆心坐标，radius 为圆的半径canvas.drawCircle(float cx, float cy, float radius, paint);// 弧线和扇形本质上更是相似。概念：弧线是椭圆上的一段，而扇形则是将弧线的两个端点和椭圆中心点使用线条连接形成的闭合区域。// 绘制扇形或弧线。参数 startAngle 表示起始角度，sweepAngle 表示扇形或弧线所占的角度，正数表示顺时针，负数表示逆时针。// useCenter 参数询问是否要使用中心点，为true 表示扇形，为 false 表示弧线。canvas.drawArc(new RectF(float left, float top, float right, float bottom), float startAngle, float sweepAngle, boolean useCenter, paint);// 绘制连线canvas.drawPath(path, paint);]]></content>
       <categories>
         <category>View</category>
       </categories>
@@ -23,9 +23,20 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Android View的绘制篇]]></title>
+    <title><![CDATA[Android View之坐标系]]></title>
+    <url>%2F2018%2F11%2F07%2Fsummary-view-coordinate_system%2F</url>
+    <content type="text"><![CDATA[（一）View的坐标系 – 说明： View的坐标系统是相对于父控件而言的。屏幕左上角为坐标原点：向右为x轴增大方向，向下为y轴增大方向。 1234567getTop(); //获取子View左上角距父View顶部的距离getLeft(); //获取子View左上角距父View左侧的距离getBottom(); //获取子View右下角距父View顶部的距离getRight(); //获取子View右下角距父View左侧的距离 （二）MotionEvent中 get 和 getRaw 的区别12345event.getX(); //触摸点相对于其所在组件(自身)坐标系的坐标event.getY();event.getRawX(); //触摸点相对于屏幕默认坐标系的坐标event.getRawY();]]></content>
+      <categories>
+        <category>View</category>
+      </categories>
+      <tags>
+        <tag>View</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Android View之绘制篇]]></title>
     <url>%2F2018%2F11%2F05%2Fsummary-view-drawing-01%2F</url>
-    <content type="text"><![CDATA[(一) MeasureSpec MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutParams总的wrap_content。 1.2 MeasureSpec与LayoutParams的对应关系在测量View的时候，系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，然后根据MeasureSpec确定View测量后的宽/高。 (二) View的工作流程2.1 measure：确定View的测量宽/高–最佳实践：在onLayout方法中去获取View的测量宽/高或者最终宽/高。 – 注意：View的measure过程和Activity的生命周期方法不是同步执行的。 2.2 layout：ViewGroup用来确定子元素的位置。– 注意：layout方法确定View本身的位置，而onLayout方法则会确定所有子元素的位置。 2.3 draw：将View绘制到屏幕上1、绘制背景 background.draw(canvas) 2、绘制自己(onDraw) 3、绘制children(dispatchDraw) 4、绘制装饰(onDrawScrollsBars) (三) View的注意事项1、让View支持wrap_content； 2、如果有必要，让View支持padding； 3、尽量不要在View中使用Handler(除非是发消息) 4、View如果有线程或者动画，需要及时停止，可调用View.onDetachedFromWindow。 5、View带有滑动嵌套情况时，需要处理好滑动冲突。 – 注意：直接继承View或ViewGroup的控件，padding默认不生效。]]></content>
+    <content type="text"><![CDATA[(一) MeasureSpec MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutParams中的wrap_content。 1.2 MeasureSpec与LayoutParams的对应关系在测量View的时候，系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，然后根据MeasureSpec确定View测量后的宽/高。 (二) View的工作流程2.1 measure：确定View的测量宽/高最佳实践是在onLayout方法中去获取View的测量宽/高 or 最终宽/高。注意：View的measure过程和Activity的生命周期方法不是同步执行的。 2.2 layout：ViewGroup用来确定子元素的位置。– 注意：layout方法确定View本身的位置，而onLayout方法则会确定所有子元素的位置。 2.3 draw：将View绘制到屏幕上1、绘制背景 background.draw(canvas) 2、绘制自己(onDraw) 3、绘制children(dispatchDraw) 4、绘制装饰(onDrawScrollsBars) 2.4 自定义View的一般流程 步骤(序号) 操作 作用 1 构造函数 初始化参数 2 onMeasure() 测量View的大小 3 onSizeChanged() 确定View的大小(一般用于记录Ve的当前宽高) 4 onLayout() 确定子View的布局(若无子View可不考虑) 5 onDraw() 绘制图形内容 6 提供外部接口 提供接口更新数据 (三) View的注意事项1、让View支持wrap_content； 2、如果有必要，让View支持padding； 3、尽量不要在View中使用Handler(除非是发消息) 4、View如果有线程或者动画，需要及时停止，可调用View.onDetachedFromWindow。 5、View带有滑动嵌套情况时，需要处理好滑动冲突。 – 注意：直接继承View或ViewGroup的控件，padding默认不生效。]]></content>
       <categories>
         <category>View</category>
       </categories>
@@ -34,7 +45,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Android View的滑动篇]]></title>
+    <title><![CDATA[Android View之滑动篇]]></title>
     <url>%2F2018%2F09%2F30%2Fsummary-view-sliding-01%2F</url>
     <content type="text"><![CDATA[一、View实现滑动的3种方式1、通过View本身提供的scrollTo/scrollBy方法来实现滑动； 2、通过动画给View施加平移效果来实现动画； 3、通过改变View的LayoutParams使得View重新布局从而实现滑动。]]></content>
       <categories>

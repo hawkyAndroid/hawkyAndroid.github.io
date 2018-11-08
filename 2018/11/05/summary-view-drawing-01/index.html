@@ -100,14 +100,14 @@
 <meta name="description" content="(一) MeasureSpec  MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutPara">
 <meta name="keywords" content="View">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android View的绘制篇">
+<meta property="og:title" content="Android View之绘制篇">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2018/11/05/summary-view-drawing-01/index.html">
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="(一) MeasureSpec  MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutPara">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-05T11:44:51.235Z">
+<meta property="og:updated_time" content="2018-11-08T11:40:06.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android View的绘制篇">
+<meta name="twitter:title" content="Android View之绘制篇">
 <meta name="twitter:description" content="(一) MeasureSpec  MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutPara">
 
 
@@ -144,7 +144,7 @@
 
 
 
-  <title>Android View的绘制篇 | Hawky的博客</title>
+  <title>Android View之绘制篇 | Hawky的博客</title>
   
 
 
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android View的绘制篇</h1>
+          <h1 class="post-title" itemprop="name headline">Android View之绘制篇</h1>
         
 
         <div class="post-meta">
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/2018/11/05/summary-view-drawing-01/" class="leancloud_visitors" data-flag-title="Android View的绘制篇">
+             <span id="/2018/11/05/summary-view-drawing-01/" class="leancloud_visitors" data-flag-title="Android View之绘制篇">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -415,15 +415,58 @@
         <h3 id="一-MeasureSpec"><a href="#一-MeasureSpec" class="headerlink" title="(一) MeasureSpec"></a>(一) MeasureSpec</h3><p>  MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。</p>
 <h4 id="1-1-SpecMode分为三类"><a href="#1-1-SpecMode分为三类" class="headerlink" title="1.1 SpecMode分为三类"></a>1.1 SpecMode分为三类</h4><p>1、UNSPECIFIED：父容器不限制View的大小。</p>
 <p>2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。</p>
-<p>3、AT_MOST：对应于LayoutParams总的wrap_content。</p>
+<p>3、AT_MOST：对应于LayoutParams中的wrap_content。</p>
 <h4 id="1-2-MeasureSpec与LayoutParams的对应关系"><a href="#1-2-MeasureSpec与LayoutParams的对应关系" class="headerlink" title="1.2 MeasureSpec与LayoutParams的对应关系"></a>1.2 MeasureSpec与LayoutParams的对应关系</h4><p>在测量View的时候，系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，然后根据MeasureSpec确定View测量后的宽/高。</p>
-<h3 id="二-View的工作流程"><a href="#二-View的工作流程" class="headerlink" title="(二) View的工作流程"></a>(二) View的工作流程</h3><h4 id="2-1-measure：确定View的测量宽-高"><a href="#2-1-measure：确定View的测量宽-高" class="headerlink" title="2.1 measure：确定View的测量宽/高"></a>2.1 measure：确定View的测量宽/高</h4><p>–最佳实践：在onLayout方法中去获取View的测量宽/高或者最终宽/高。</p>
-<p>– 注意：View的measure过程和Activity的生命周期方法不是同步执行的。</p>
+<h3 id="二-View的工作流程"><a href="#二-View的工作流程" class="headerlink" title="(二) View的工作流程"></a>(二) View的工作流程</h3><h4 id="2-1-measure：确定View的测量宽-高"><a href="#2-1-measure：确定View的测量宽-高" class="headerlink" title="2.1 measure：确定View的测量宽/高"></a>2.1 measure：确定View的测量宽/高</h4><p>最佳实践是在onLayout方法中去获取View的测量宽/高 or 最终宽/高。注意：View的measure过程和Activity的生命周期方法不是同步执行的。</p>
 <h4 id="2-2-layout：ViewGroup用来确定子元素的位置。"><a href="#2-2-layout：ViewGroup用来确定子元素的位置。" class="headerlink" title="2.2 layout：ViewGroup用来确定子元素的位置。"></a>2.2 layout：ViewGroup用来确定子元素的位置。</h4><p>– 注意：layout方法确定View本身的位置，而onLayout方法则会确定所有子元素的位置。</p>
-<h4 id="2-3-draw：将View绘制到屏幕上"><a href="#2-3-draw：将View绘制到屏幕上" class="headerlink" title="2.3 draw：将View绘制到屏幕上"></a>2.3 draw：将View绘制到屏幕上</h4><p>1、绘制背景 background.draw(canvas)</p>
-<p>2、绘制自己(onDraw)</p>
-<p>3、绘制children(dispatchDraw)</p>
-<p>4、绘制装饰(onDrawScrollsBars)</p>
+<h4 id="2-3-draw：将View绘制到屏幕上"><a href="#2-3-draw：将View绘制到屏幕上" class="headerlink" title="2.3 draw：将View绘制到屏幕上"></a>2.3 draw：将View绘制到屏幕上</h4><pre><code>1、绘制背景 background.draw(canvas)
+
+2、绘制自己(onDraw)
+
+3、绘制children(dispatchDraw)
+
+4、绘制装饰(onDrawScrollsBars)
+</code></pre><h4 id="2-4-自定义View的一般流程"><a href="#2-4-自定义View的一般流程" class="headerlink" title="2.4 自定义View的一般流程"></a>2.4 自定义View的一般流程</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">步骤(序号)</th>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">构造函数</td>
+<td style="text-align:center">初始化参数</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">onMeasure()</td>
+<td style="text-align:center">测量View的大小</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">onSizeChanged()</td>
+<td style="text-align:center">确定View的大小(一般用于记录Ve的当前宽高)</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">onLayout()</td>
+<td style="text-align:center">确定子View的布局(若无子View可不考虑)</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">onDraw()</td>
+<td style="text-align:center">绘制图形内容</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">提供外部接口</td>
+<td style="text-align:center">提供接口更新数据</td>
+</tr>
+</tbody>
+</table>
 <h3 id="三-View的注意事项"><a href="#三-View的注意事项" class="headerlink" title="(三) View的注意事项"></a>(三) View的注意事项</h3><p>1、让View支持wrap_content；</p>
 <p>2、如果有必要，让View支持padding；</p>
 <p>3、尽量不要在View中使用Handler(除非是发消息)</p>
@@ -482,7 +525,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hawkyAndroid.github.io/2018/11/05/summary-view-drawing-01/" title="Android View的绘制篇">http://hawkyAndroid.github.io/2018/11/05/summary-view-drawing-01/</a>
+    <a href="http://hawkyAndroid.github.io/2018/11/05/summary-view-drawing-01/" title="Android View之绘制篇">http://hawkyAndroid.github.io/2018/11/05/summary-view-drawing-01/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -510,8 +553,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/30/summary-view-sliding-01/" rel="next" title="Android View的滑动篇">
-                <i class="fa fa-chevron-left"></i> Android View的滑动篇
+              <a href="/2018/09/30/summary-view-sliding-01/" rel="next" title="Android View之滑动篇">
+                <i class="fa fa-chevron-left"></i> Android View之滑动篇
               </a>
             
           </div>
@@ -520,8 +563,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/07/summary-view-01/" rel="prev" title="Android View的坐标系">
-                Android View的坐标系 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/07/summary-view-coordinate_system/" rel="prev" title="Android View之坐标系">
+                Android View之坐标系 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -628,7 +671,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -732,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-MeasureSpec"><span class="nav-number">1.</span> <span class="nav-text">(一) MeasureSpec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-SpecMode分为三类"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 SpecMode分为三类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-MeasureSpec与LayoutParams的对应关系"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 MeasureSpec与LayoutParams的对应关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-View的工作流程"><span class="nav-number">2.</span> <span class="nav-text">(二) View的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-measure：确定View的测量宽-高"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 measure：确定View的测量宽/高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-layout：ViewGroup用来确定子元素的位置。"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 layout：ViewGroup用来确定子元素的位置。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-draw：将View绘制到屏幕上"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 draw：将View绘制到屏幕上</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-View的注意事项"><span class="nav-number">3.</span> <span class="nav-text">(三) View的注意事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-MeasureSpec"><span class="nav-number">1.</span> <span class="nav-text">(一) MeasureSpec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-SpecMode分为三类"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 SpecMode分为三类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-MeasureSpec与LayoutParams的对应关系"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 MeasureSpec与LayoutParams的对应关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-View的工作流程"><span class="nav-number">2.</span> <span class="nav-text">(二) View的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-measure：确定View的测量宽-高"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 measure：确定View的测量宽/高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-layout：ViewGroup用来确定子元素的位置。"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 layout：ViewGroup用来确定子元素的位置。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-draw：将View绘制到屏幕上"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 draw：将View绘制到屏幕上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-自定义View的一般流程"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 自定义View的一般流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-View的注意事项"><span class="nav-number">3.</span> <span class="nav-text">(三) View的注意事项</span></a></li></ol></div>
             
 
           </div>
