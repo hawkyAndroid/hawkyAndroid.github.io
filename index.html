@@ -736,7 +736,7 @@
       
         
           
-          （一）Path添加线条1234567891011// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。path.moveTo(float x, float y);// 新点在上一个点的基础上偏移（dx，dy），使用的是相对定位(X=x+dx)。path.rMoveTo(float dx, float dy);// 将画笔移动到点A（x，y）的位置，并在上一个点与当前点之前画一条直线。使用的是绝
+          （一）Path添加线条1234567891011121314151617// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。path.moveTo(float x, float y);// 与moveTo类似。区别是重置上一次操作的最后一个点(上个点成为无效点)path.setLastPoint(float dx, float dy);// 新点在上一个点的基础上偏移（dx，dy），使用的是
           ...
           <!--noindex-->
           <div class="post-button text-center">
