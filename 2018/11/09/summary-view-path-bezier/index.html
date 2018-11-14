@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="（一） 概念(Bézier curve)  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。 （二）绘制曲线  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调用quadTo(float x1, float y1, float x2, flo">
+<meta name="description" content="（一） 概念(Bézier curve)  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。其作用是实时控制曲线状态，并可以通过改变控制点的状态实时让曲线进行平滑的状态变化。 （二）绘制曲线  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调">
 <meta name="keywords" content="View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android View之贝赛尔曲线">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2018/11/09/summary-view-path-bezier/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="（一） 概念(Bézier curve)  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。 （二）绘制曲线  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调用quadTo(float x1, float y1, float x2, flo">
+<meta property="og:description" content="（一） 概念(Bézier curve)  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。其作用是实时控制曲线状态，并可以通过改变控制点的状态实时让曲线进行平滑的状态变化。 （二）绘制曲线  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-09T11:28:07.786Z">
+<meta property="og:updated_time" content="2018-11-14T11:04:56.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android View之贝赛尔曲线">
-<meta name="twitter:description" content="（一） 概念(Bézier curve)  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。 （二）绘制曲线  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调用quadTo(float x1, float y1, float x2, flo">
+<meta name="twitter:description" content="（一） 概念(Bézier curve)  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。其作用是实时控制曲线状态，并可以通过改变控制点的状态实时让曲线进行平滑的状态变化。 （二）绘制曲线  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调">
 
 
 
@@ -412,8 +412,8 @@
       
 
       
-        <h3 id="（一）-概念-Bezier-curve"><a href="#（一）-概念-Bezier-curve" class="headerlink" title="（一） 概念(Bézier curve)"></a>（一） <a href="http://www.cnblogs.com/jay-dong/archive/2012/09/26/2704188.html" target="_blank" rel="noopener">概念(Bézier curve)</a></h3><p>  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。</p>
-<h3 id="（二）绘制曲线"><a href="#（二）绘制曲线" class="headerlink" title="（二）绘制曲线"></a>（二）绘制曲线</h3><p>  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调用quadTo(float x1, float y1, float x2, float y2)方法绘制贝塞尔曲线，其中（x1，y1）是控制点，（x2，y2）是终点。</p>
+        <h3 id="（一）-概念-Bezier-curve"><a href="#（一）-概念-Bezier-curve" class="headerlink" title="（一） 概念(Bézier curve)"></a>（一） <a href="http://www.cnblogs.com/jay-dong/archive/2012/09/26/2704188.html" target="_blank" rel="noopener">概念(Bézier curve)</a></h3><p>  贝塞尔曲线是图形开发中的一个重要工具，通过三个点(起点、控制点和终点)确定一条平滑的曲线，又称贝兹曲线或贝济埃曲线。贝塞尔曲线由线段与节点组成，节点是可拖动的支点，线段像是可伸缩的皮筋。其作用是实时控制曲线状态，并可以通过改变控制点的状态实时让曲线进行平滑的状态变化。</p>
+<h3 id="（二）绘制曲线"><a href="#（二）绘制曲线" class="headerlink" title="（二）绘制曲线"></a>（二）绘制曲线</h3><p>  绘制一条二阶贝塞尔曲线，必须调用 moveTo()方法定义起点，再调用quadTo(float x1, float y1, float x2, float y2)方法绘制贝塞尔曲线，其中（x1，y1）是控制点，（x2，y2）是终点。说明：控制点的作用是确定曲线的弯曲程度。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绘制二阶贝塞尔曲线（1个控制点）</span></span><br><span class="line">Path path = <span class="keyword">new</span> Path();</span><br><span class="line">path.moveTo(x, y);<span class="comment">// 起始点(x,y)</span></span><br><span class="line">path.quadTo(x1, y1, x2, y2);<span class="comment">// 控制点(x1,y1)，终点(x2,y2)</span></span><br><span class="line">canvas.drawPath(path, paint);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制三阶贝塞尔曲线（2个控制点）</span></span><br><span class="line">Path path = <span class="keyword">new</span> Path();</span><br><span class="line">path.moveTo(x, y);<span class="comment">// 起始点(x,y)</span></span><br><span class="line">path.cubicTo(<span class="keyword">float</span> x1, <span class="keyword">float</span> y1, <span class="keyword">float</span> x2, <span class="keyword">float</span> y2, <span class="keyword">float</span> x3, <span class="keyword">float</span> y3);<span class="comment">// 控制点(x1,y1)、(x2,y2)，终点(x3,y3)</span></span><br><span class="line">canvas.drawPath(path, paint);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制弧线曲线</span></span><br><span class="line">Path path = <span class="keyword">new</span> Path();</span><br><span class="line">path.moveTo(<span class="number">100</span>, <span class="number">100</span>);<span class="comment">// 起始点(x,y)</span></span><br><span class="line"><span class="comment">// 参数 forceMoveTo 为 true 时，表示开始一个新的图形，不和上一个点进行连接，为 false 时才和上一个点连接。</span></span><br><span class="line">path.arcTo(<span class="keyword">new</span> RectF(<span class="keyword">float</span> left, <span class="keyword">float</span> top, <span class="keyword">float</span> right, <span class="keyword">float</span> bottom), <span class="keyword">float</span> startAngle, <span class="keyword">float</span> sweepAngle, <span class="keyword">boolean</span> forceMoveTo);</span><br></pre></td></tr></table></figure>
 
       
@@ -613,7 +613,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
