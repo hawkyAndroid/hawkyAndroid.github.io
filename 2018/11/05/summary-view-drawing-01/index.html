@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="(一) MeasureSpec  MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutPara">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-09T11:55:04.383Z">
+<meta property="og:updated_time" content="2018-11-15T16:18:16.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android View之绘制篇">
 <meta name="twitter:description" content="(一) MeasureSpec  MeasureSpec是一个32位int值。高2位代表SpecMode测量模式，低30位代表SpecSize相应模式下的测量规格大小。 1.1 SpecMode分为三类1、UNSPECIFIED：父容器不限制View的大小。 2、EXACTLY：对应于LayoutParams中的match_parent和具体的数值。 3、AT_MOST：对应于LayoutPara">
@@ -470,7 +470,7 @@
 <h3 id="三-View的注意事项"><a href="#三-View的注意事项" class="headerlink" title="(三) View的注意事项"></a>(三) View的注意事项</h3><p>1、让View支持wrap_content；</p>
 <p>2、如果有必要，让View支持padding；</p>
 <p>3、尽量不要在View中使用Handler(除非是发消息)</p>
-<p>4、View如果有线程或者动画，需要及时停止，可调用View.onDetachedFromWindow。</p>
+<p>4、View中如果有线程或者动画，一定要重写onDetachedFromWindow()方法进行回收资源(单独封装)。</p>
 <p>5、View带有滑动嵌套情况时，需要处理好滑动冲突。</p>
 <p>– 注意：直接继承View或ViewGroup的控件，padding默认不生效。</p>
 
@@ -671,7 +671,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
