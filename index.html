@@ -415,7 +415,7 @@
       
         
           
-          （一）最优因子概述1234567对于有n段的贝塞尔曲线来说，到控制点的最优距离(因子)是(4/3)*tan(π/(2n))。圆从坐标系来看，由4段圆弧组成，同时对应4个（数据）点。所以圆的数据点到控制点的最优距离因子为 DIS_FACTOR = (4/3)*tan(π/8)，由三角形倍角公式：tana/2 = sina/(1+cosa);可得tanπ/8 = √2 - 1;即 DIS_FACTOR
+          （一）最优因子1234567对于有n段的贝塞尔曲线来说，到控制点的最优距离(因子)是(4/3)*tan(π/(2n))。圆从坐标系来看，由4段圆弧组成，同时对应4个（数据）点。所以圆的数据点到控制点的最优距离因子为 DIS_FACTOR = (4/3)*tan(π/8)，由三角形倍角公式：tana/2 = sina/(1+cosa);可得tanπ/8 = √2 - 1;即 DIS_FACTOR =
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1058,7 +1058,8 @@
       
         
           
-          （一）Path添加线条123456789101112131415// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。path.moveTo(float x, float y);// 与moveTo类似。区别是重置上一次操作的最后一个点(上个点成为无效点)path.setLastPoint(float dx, float dy);// 新点在上一个点的基础上偏移（dx，dy），使用的是相对定位
+          （一）Path添加线条注意：Path中任何线段都是有方向性的。
+123456789101112131415// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。path.moveTo(float x, float y);// 与moveTo类似。区别是重置上一次操作的最后一个点(上个点成为无效点)path.setLastPoint(float dx, float dy);// 新点在上一个点的
           ...
           <!--noindex-->
           <div class="post-button text-center">
