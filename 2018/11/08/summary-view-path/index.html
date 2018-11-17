@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="（一）Path添加线条注意：Path中任何线段都是有方向性的。 123456789101112131415// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。path.moveTo(float x, float y);// 与moveTo类似。区别是重置上一次操作的最后一个点(上个点成为无效点)path.setLastPoint(float dx, float dy);// 新点在上一个点的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-16T15:38:32.473Z">
+<meta property="og:updated_time" content="2018-11-17T15:31:28.604Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android View之Path">
 <meta name="twitter:description" content="（一）Path添加线条注意：Path中任何线段都是有方向性的。 123456789101112131415// 将画笔移动到点A（x，y）的位置，使用的是绝对定位。path.moveTo(float x, float y);// 与moveTo类似。区别是重置上一次操作的最后一个点(上个点成为无效点)path.setLastPoint(float dx, float dy);// 新点在上一个点的">
@@ -448,11 +448,20 @@
 </tr>
 <tr>
 <td style="text-align:center">Path.Op.XOR</td>
-<td style="text-align:center">补集</td>
+<td style="text-align:center">补集(异或)</td>
 <td style="text-align:center">即图形 A 和图形 B 的所有区域减去他们的重叠区域后余下的区域</td>
 </tr>
 </tbody>
 </table>
+<h3 id="（五）Path填充类型（FillType）"><a href="#（五）Path填充类型（FillType）" class="headerlink" title="（五）Path填充类型（FillType）"></a>（五）Path填充类型（FillType）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Path有4种填充类型 **/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置Path填充模式为奇偶模式</span></span><br><span class="line">path.setFillType(Path.FillType.EVEN_ODD);</span><br><span class="line"><span class="comment">// 设置Path填充模式为反奇偶模式</span></span><br><span class="line">path.setFillType(Path.FillType.INVERSE_EVEN_ODD);</span><br><span class="line"><span class="comment">// 设置Path填充模式为(不为0)环绕数模式</span></span><br><span class="line">path.setFillType(Path.FillType.WINDING);</span><br><span class="line"><span class="comment">// 设置Path填充模式为反(不为0)环绕数模式</span></span><br><span class="line">path.setFillType(Path.FillType.INVERSE_WINDING);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取当前填充规则</span></span><br><span class="line">path.getFillType();</span><br><span class="line"><span class="comment">// 判断是否是反向(INVERSE)规则</span></span><br><span class="line">path.isInverseFillTyp();</span><br><span class="line"><span class="comment">// 切换填充规则(即原有规则与反向规则之间相互切换)</span></span><br><span class="line">path.toggleInverseFillType();</span><br></pre></td></tr></table></figure>
+<p>  使用说明：画笔Paint要设置为填充样式(Paint.Style.FILL)才有效。<br>  其中EVEN_ODD和INVERSE_EVEN_ODD、WINDING和INVERSE_WINDING互为反向填充。</p>
+<p>1&gt;、EVEN_ODD（画笔填充的是补集XOR）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Path path = <span class="keyword">new</span> Path();</span><br><span class="line">path.addCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, Path.Direction.CW);</span><br><span class="line">path.setFillType(Path.FillType.EVEN_ODD);<span class="comment">// 设置Path填充模式为奇偶模式</span></span><br><span class="line">path.addRect(<span class="keyword">new</span> RectF(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>), Path.Direction.CW);</span><br><span class="line">canvas.drawPath(path, paint);</span><br></pre></td></tr></table></figure>
+<p>2&gt;、INVERSE_EVEN_ODD（画笔填充的是交集和被矩形边界包裹的部分）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Path path = <span class="keyword">new</span> Path();</span><br><span class="line">path.addCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, Path.Direction.CW);</span><br><span class="line">path.setFillType(Path.FillType.INVERSE_EVEN_ODD);<span class="comment">// 设置Path填充模式为反奇偶模式</span></span><br><span class="line">path.addCircle(<span class="number">50</span>, <span class="number">50</span>, <span class="number">100</span>, Path.Direction.CW);</span><br><span class="line">canvas.drawPath(path, mPaint);</span><br></pre></td></tr></table></figure>
+<p>3&gt;、WINDING（画笔填充的是并集UNION）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Path path = <span class="keyword">new</span> Path();</span><br><span class="line">path.addCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, Path.Direction.CW);</span><br><span class="line">path.setFillType(Path.FillType.INVERSE_EVEN_ODD);<span class="comment">// 设置Path填充模式为环绕数模式</span></span><br><span class="line">path.addCircle(<span class="number">50</span>, <span class="number">50</span>, <span class="number">100</span>, Path.Direction.CW);</span><br><span class="line">canvas.drawPath(path, mPaint);</span><br></pre></td></tr></table></figure>
+<p>4&gt;、INVERSE_WINDING（画笔填充的是去掉并集UNION外，被矩形边界包裹的部分）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Path path = <span class="keyword">new</span> Path();</span><br><span class="line">path.addCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, Path.Direction.CW);</span><br><span class="line">path.setFillType(Path.FillType.INVERSE_EVEN_ODD);<span class="comment">// 设置Path填充模式为反环绕数模式</span></span><br><span class="line">path.addCircle(<span class="number">50</span>, <span class="number">50</span>, <span class="number">100</span>, Path.Direction.CW);</span><br><span class="line">canvas.drawPath(path, mPaint);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -651,7 +660,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -662,7 +671,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -673,7 +682,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -755,7 +764,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#（一）Path添加线条"><span class="nav-number">1.</span> <span class="nav-text">（一）Path添加线条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（二）Path添加图形"><span class="nav-number">2.</span> <span class="nav-text">（二）Path添加图形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（三）Path高级用法"><span class="nav-number">3.</span> <span class="nav-text">（三）Path高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（四）Path布尔操作（Op）"><span class="nav-number">4.</span> <span class="nav-text">（四）Path布尔操作（Op）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#（一）Path添加线条"><span class="nav-number">1.</span> <span class="nav-text">（一）Path添加线条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（二）Path添加图形"><span class="nav-number">2.</span> <span class="nav-text">（二）Path添加图形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（三）Path高级用法"><span class="nav-number">3.</span> <span class="nav-text">（三）Path高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（四）Path布尔操作（Op）"><span class="nav-number">4.</span> <span class="nav-text">（四）Path布尔操作（Op）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（五）Path填充类型（FillType）"><span class="nav-number">5.</span> <span class="nav-text">（五）Path填充类型（FillType）</span></a></li></ol></div>
             
 
           </div>
