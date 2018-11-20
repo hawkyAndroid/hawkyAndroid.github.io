@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Math," />
 
 
 
@@ -97,16 +97,18 @@
 
 
 
-<meta name="description" content="爱好爬山、旅行、摄影">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hawky的博客">
-<meta property="og:url" content="http://hawkyAndroid.github.io/archives/2018/05/index.html">
+<meta name="description" content="（一）PathMeasure的概念PathMeasure是一个用来测量Path的类。主要用来测量Path曲线的轨迹长度、截图片段、计算轨迹的坐标及角度，也可以通过不断截取重绘来模拟曲线动画的轨迹。 （二）PathMeasure的用法1234567891011121314151617181920212223242526272829303132333435363738394041// 构造。其中参数f">
+<meta name="keywords" content="Math">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android View之PathMeasure">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2018/11/20/summary-view-pathmeasure/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="爱好爬山、旅行、摄影">
+<meta property="og:description" content="（一）PathMeasure的概念PathMeasure是一个用来测量Path的类。主要用来测量Path曲线的轨迹长度、截图片段、计算轨迹的坐标及角度，也可以通过不断截取重绘来模拟曲线动画的轨迹。 （二）PathMeasure的用法1234567891011121314151617181920212223242526272829303132333435363738394041// 构造。其中参数f">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-20T14:50:33.514Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hawky的博客">
-<meta name="twitter:description" content="爱好爬山、旅行、摄影">
+<meta name="twitter:title" content="Android View之PathMeasure">
+<meta name="twitter:description" content="（一）PathMeasure的概念PathMeasure是一个用来测量Path的类。主要用来测量Path曲线的轨迹长度、截图片段、计算轨迹的坐标及角度，也可以通过不断截取重绘来模拟曲线动画的轨迹。 （二）PathMeasure的用法1234567891011121314151617181920212223242526272829303132333435363738394041// 构造。其中参数f">
 
 
 
@@ -136,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://hawkyAndroid.github.io/archives/2018/05/"/>
+  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/11/20/summary-view-pathmeasure/"/>
 
 
 
 
 
-  <title>归档 | Hawky的博客</title>
+  <title>Android View之PathMeasure | Hawky的博客</title>
   
 
 
@@ -176,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 		
     <a href="https://github.com/hawkyAndroid" target="_blank" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -296,184 +298,256 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 34 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/11/20/summary-view-pathmeasure/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hawky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26600502?s=400&u=0c7dff0c65b0eac889e835dd5b16ba70231b15b5&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hawky的博客">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">Android View之PathMeasure</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-20T19:23:55+08:00">
+                2018-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/31/summary-socket-01/" itemprop="url">
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">Socket知识点总结</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-31T22:02:23+08:00"
-              content="2018-05-31" >
-          05-31
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
+             <span id="/2018/11/20/summary-view-pathmeasure/" class="leancloud_visitors" data-flag-title="Android View之PathMeasure">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/30/summary-as-develop-2018-5-28/" itemprop="url">
-              
-                <span itemprop="name">AS使用总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-30T23:02:36+08:00"
-              content="2018-05-30" >
-          05-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/27/summary-do-something-2018-5-27/" itemprop="url">
-              
-                <span itemprop="name">为人处世</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-27T16:54:10+08:00"
-              content="2018-05-27" >
-          05-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h3 id="（一）PathMeasure的概念"><a href="#（一）PathMeasure的概念" class="headerlink" title="（一）PathMeasure的概念"></a>（一）PathMeasure的概念</h3><p>PathMeasure是一个用来测量Path的类。主要用来测量Path曲线的轨迹长度、截图片段、计算轨迹的坐标及角度，也可以通过不断截取重绘来模拟曲线动画的轨迹。</p>
+<h3 id="（二）PathMeasure的用法"><a href="#（二）PathMeasure的用法" class="headerlink" title="（二）PathMeasure的用法"></a>（二）PathMeasure的用法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造。其中参数forceClosed的值不会影响path之前的绘制，但会影响Path的测量长度。</span></span><br><span class="line"><span class="comment">// 即forceClosed为true时，pathMeasure.getLength()的值始终是Path的闭合长度。</span></span><br><span class="line">pathMeasure = PathMeasure(Path path, <span class="keyword">boolean</span> forceClosed);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取Path当前的一条曲线长度</span></span><br><span class="line">pathMeasure.getLength();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转到下一条轮廓(路径)</span></span><br><span class="line"><span class="comment">// 注意：一条Path可能由很多条曲线（轮廓）组成</span></span><br><span class="line">pathMeasure.nextContour();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 关联Path是否闭合。若关联的path有调用close()或者path本身就是闭合的，则结果始终为true。</span></span><br><span class="line"><span class="comment">// 反之以PathMeasure构造时或者setPath方法传入参数forceClosed的值为准。</span></span><br><span class="line">pathMeasure.isClosed();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 【重要方法 - 可模拟图形(动画)绘制轨迹】</span></span><br><span class="line"><span class="comment">// 截取Path的一个片段。(取值范围：0 &lt;= startD &lt; stopD &lt;= Path总长度)</span></span><br><span class="line"><span class="comment">// startD：截取的初始位置距离Path起点的路径(轨迹)长度（注意不是位移，而是轨迹长度）</span></span><br><span class="line"><span class="comment">// stopD：截取的结束位置距离Path起点的路径(轨迹)长度</span></span><br><span class="line"><span class="comment">// dstPath：将截取的Path将会添加到dstPath中。</span></span><br><span class="line"><span class="comment">// startWithMoveTo：true表示pathMeasure从path起始点截取，</span></span><br><span class="line"><span class="comment">// false 表示从截取出来的Path片段的起点移动到dstPath的最后一个点(dstPath可能由多条曲线组成)。</span></span><br><span class="line">pathMeasure.getSegment(<span class="keyword">float</span> startD, <span class="keyword">float</span> stopD, Path dstPath, <span class="keyword">boolean</span> startWithMoveTo);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 【重要方法 - 可计算轨迹点的坐标及角度】</span></span><br><span class="line"><span class="comment">// 若相应的位置和正切获取成功，则存放至pos、tan中。</span></span><br><span class="line"><span class="comment">// distance：距离Path起点的轨迹长度（0 &lt;= distance &lt;= getLength）</span></span><br><span class="line"><span class="comment">// pos：当前轨迹点的坐标位置(x,y)</span></span><br><span class="line"><span class="comment">// tan：当前点在曲线上的方向(x,y)，使用Math.atan2(tan[1], tan[0])可得到正切角的弧度值。</span></span><br><span class="line">pathMeasure.getPosTan(distance, pos, tan);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取当前位置的坐标以及趋势的矩阵。（相当于getPosTan的一次封装，效果是一样的）</span></span><br><span class="line"><span class="comment">// distance：距离Path起点的轨迹长度（0 &lt;= distance &lt;= getLength）</span></span><br><span class="line"><span class="comment">// matrix：根据flags的设置而存入不同的内容</span></span><br><span class="line"><span class="comment">// flags：只有2个取值 -- POSITION_MATRIX_FLAG(位置)  TANGENT_MATRIX_FLAG(正切)</span></span><br><span class="line">pathMeasure.getMatrix(<span class="keyword">float</span> distance, Matrix matrix, PathMeasure.POSITION_MATRIX_FLAG | PathMeasure.TANGENT_MATRIX_FLAG);</span><br></pre></td></tr></table></figure>
+<h3 id="（三）PathMeasure的实例"><a href="#（三）PathMeasure的实例" class="headerlink" title="（三）PathMeasure的实例"></a>（三）PathMeasure的实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义View -- 带箭头模拟圆的轨迹</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [*昨日重现*] lhy_ycu@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PathMeasureArrow</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Paint mPaint;</span><br><span class="line">    <span class="keyword">private</span> Path mPath;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// View的宽高</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mWidth;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mHeight;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 圆的半径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mRadius;</span><br><span class="line">    <span class="comment">// 增长因子</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> currFactor;</span><br><span class="line">    <span class="comment">// 当前轨迹点的坐标位置(x,y)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pos[];</span><br><span class="line">    <span class="comment">// 当前点的正切值（用于计算旋转角度）(x,y)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> tan[];</span><br><span class="line">    <span class="comment">// 箭头Icon</span></span><br><span class="line">    <span class="keyword">private</span> Bitmap mBitmap;</span><br><span class="line">    <span class="comment">// 矩阵（对图片进行一些操作）</span></span><br><span class="line">    <span class="keyword">private</span> Matrix mMatrix;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PathMeasureArrow</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PathMeasureArrow</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">        init(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        mPaint = <span class="keyword">new</span> Paint();</span><br><span class="line">        mPaint.setAntiAlias(<span class="keyword">true</span>);</span><br><span class="line">        mPath = <span class="keyword">new</span> Path();</span><br><span class="line">        mMatrix = <span class="keyword">new</span> Matrix();</span><br><span class="line"></span><br><span class="line">        pos = <span class="keyword">new</span> <span class="keyword">float</span>[<span class="number">2</span>];</span><br><span class="line">        tan = <span class="keyword">new</span> <span class="keyword">float</span>[<span class="number">2</span>];</span><br><span class="line">        mRadius = DensityUtils.dip2px(context, <span class="number">100</span>);</span><br><span class="line">        BitmapFactory.Options options = <span class="keyword">new</span> BitmapFactory.Options();</span><br><span class="line">        options.inSampleSize = <span class="number">6</span>;<span class="comment">// 缩小6倍</span></span><br><span class="line">        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_arrow, options);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</span><br><span class="line">        <span class="keyword">this</span>.mWidth = w;</span><br><span class="line">        <span class="keyword">this</span>.mHeight = h;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">        canvas.translate(mWidth / <span class="number">2</span>, mHeight / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        mPath.reset();</span><br><span class="line">        mPath.addCircle(<span class="number">0</span>, <span class="number">0</span>, mRadius, Path.Direction.CW);</span><br><span class="line"></span><br><span class="line">        PathMeasure pathMeasure = <span class="keyword">new</span> PathMeasure(mPath, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">float</span> distance = pathMeasure.getLength() * Math.min(currFactor, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 若相应的位置和正切获取成功，则存放至pos、tan中。</span></span><br><span class="line">        <span class="comment">// distance：距离 Path 起点的长度（0 &lt;= distance &lt;= getLength）</span></span><br><span class="line">        <span class="comment">// pos：当前轨迹点的坐标位置(x,y)</span></span><br><span class="line">        <span class="comment">// tan：当前点在曲线上的方向，使用 Math.atan2(tan[1], tan[0]) 获取到正切角的弧度。</span></span><br><span class="line">        <span class="keyword">if</span> (pathMeasure.getPosTan(distance, pos, tan)) &#123;</span><br><span class="line">            <span class="keyword">float</span> degrees = (<span class="keyword">float</span>) (Math.atan2(tan[<span class="number">1</span>], tan[<span class="number">0</span>]) * <span class="number">180</span> / Math.PI);<span class="comment">// 获取曲线方向上的角度</span></span><br><span class="line"></span><br><span class="line">            mMatrix.reset();</span><br><span class="line">            mMatrix.postRotate(degrees, mBitmap.getWidth() / <span class="number">2</span>, mBitmap.getHeight() / <span class="number">2</span>);<span class="comment">// 图标旋转的角度</span></span><br><span class="line">            mMatrix.postTranslate(pos[<span class="number">0</span>] - mBitmap.getWidth() / <span class="number">2</span>, pos[<span class="number">1</span>] - mBitmap.getHeight() / <span class="number">2</span>);<span class="comment">// 图标中心移至轨迹点</span></span><br><span class="line"></span><br><span class="line">            mPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line">            mPaint.setStrokeWidth(<span class="number">5F</span>);</span><br><span class="line">            canvas.drawPath(mPath, mPaint);</span><br><span class="line">            canvas.drawBitmap(mBitmap, mMatrix, mPaint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (currFactor &lt; <span class="number">1</span>) &#123;</span><br><span class="line">            currFactor += <span class="number">0.002</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            currFactor = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        invalidate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/09/summary-mqtt-protocol/" itemprop="url">
-              
-                <span itemprop="name">MQTT协议总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-09T22:51:10+08:00"
-              content="2018-05-09" >
-          05-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Hawky wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的微信公众号</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Hawky 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Hawky
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://hawkyAndroid.github.io/2018/11/20/summary-view-pathmeasure/" title="Android View之PathMeasure">http://hawkyAndroid.github.io/2018/11/20/summary-view-pathmeasure/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Math/" rel="tag"><i class="fa fa-tag"></i> Math</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/17/summary-view-yyfish/" rel="next" title="Android View之阴阳鱼">
+                <i class="fa fa-chevron-left"></i> Android View之阴阳鱼
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/20/summary-math-expression/" rel="prev" title="Android之数学公式">
+                Android之数学公式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        ﻿<!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=23db2a3cac8bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -481,6 +555,15 @@
 
 
           
+
+  
+	<div class="comments" id="comments">
+		 <div id="gitalk-container"></div>
+  </div>
+  
+  
+
+
 
         </div>
         
@@ -501,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -615,6 +707,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#（一）PathMeasure的概念"><span class="nav-number">1.</span> <span class="nav-text">（一）PathMeasure的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（二）PathMeasure的用法"><span class="nav-number">2.</span> <span class="nav-text">（二）PathMeasure的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（三）PathMeasure的实例"><span class="nav-number">3.</span> <span class="nav-text">（三）PathMeasure的实例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -761,6 +869,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
