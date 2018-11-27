@@ -1606,7 +1606,7 @@ C/S结构定义：即客户端/服务器结构，是软件系统体系结构作�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/05/30/summary-as-develop-2018-5-28/">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/05/30/summary-gradle-basic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hawky">
@@ -1625,7 +1625,7 @@ C/S结构定义：即客户端/服务器结构，是软件系统体系结构作�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/30/summary-as-develop-2018-5-28/" itemprop="url">AS使用总结</a></h1>
+                <a class="post-title-link" href="/2018/05/30/summary-gradle-basic/" itemprop="url">AS Gradle依赖的几种方式</a></h1>
         
 
         <div class="post-meta">
@@ -1660,8 +1660,8 @@ C/S结构定义：即客户端/服务器结构，是软件系统体系结构作�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AS总结/" itemprop="url" rel="index">
-                    <span itemprop="name">AS总结</span>
+                  <a href="/categories/Gradle/" itemprop="url" rel="index">
+                    <span itemprop="name">Gradle</span>
                   </a>
                 </span>
 
@@ -1677,7 +1677,7 @@ C/S结构定义：即客户端/服务器结构，是软件系统体系结构作�
 
           
           
-             <span id="/2018/05/30/summary-as-develop-2018-5-28/" class="leancloud_visitors" data-flag-title="AS使用总结">
+             <span id="/2018/05/30/summary-gradle-basic/" class="leancloud_visitors" data-flag-title="AS Gradle依赖的几种方式">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1710,13 +1710,13 @@ C/S结构定义：即客户端/服务器结构，是软件系统体系结构作�
       
         
           
-          android gradle依赖的几种方式implementation使用了该命令编译的依赖，它仅仅对当前的Moudle提供接口。好处： 1. 加快编译速度。2. 隐藏对外不必要的接口。
-api跟 2.x 版本的 compile完全相同。与implementation的区别是：implementation内部module使用，而api可对外提供接口。
-provided（compileOnly）只在
+          Gradle依赖的方式有以下几种（1） implementation使用了该命令编译的依赖，它仅仅对当前的Moudle提供接口。好处： 1. 加快编译速度。2. 隐藏对外不必要的接口。
+（2） api跟 2.x 版本的 compile（已废弃） 完全相同。与implementation的区别是：implementation内部module使用，而api可对外提供接口。
+（3）provided（co
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/30/summary-as-develop-2018-5-28/#more" rel="contents">
+            <a class="btn" href="/2018/05/30/summary-gradle-basic/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
