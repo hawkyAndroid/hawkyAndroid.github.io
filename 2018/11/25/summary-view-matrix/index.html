@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="（一）Matrix的概念1、矩阵的基本概念： ① Matrix是一个矩阵(接近底层)。主要作用是坐标变换(齐次坐标)、数值转换。 ② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示齐次坐标。   2、矩阵的4个变换： 平移(translate)、缩放(scale)、旋转(rotate) 和 错切(skew)。 其中每种操作在Matrix中都有3类：前乘">
+<meta name="description" content="（一）Matrix的概念1、矩阵的相关概念： ① Matrix是一个矩阵(接近底层)。主要作用是坐标变换(齐次坐标)、数值转换。 ② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示具有等比性质的齐次坐标。   2、矩阵的4个变换： 平移(translate)、缩放(scale)、旋转(rotate) 和 错切(skew)。 其中每种操作在Matrix中">
 <meta name="keywords" content="View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android View之Matrix">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2018/11/25/summary-view-matrix/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="（一）Matrix的概念1、矩阵的基本概念： ① Matrix是一个矩阵(接近底层)。主要作用是坐标变换(齐次坐标)、数值转换。 ② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示齐次坐标。   2、矩阵的4个变换： 平移(translate)、缩放(scale)、旋转(rotate) 和 错切(skew)。 其中每种操作在Matrix中都有3类：前乘">
+<meta property="og:description" content="（一）Matrix的概念1、矩阵的相关概念： ① Matrix是一个矩阵(接近底层)。主要作用是坐标变换(齐次坐标)、数值转换。 ② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示具有等比性质的齐次坐标。   2、矩阵的4个变换： 平移(translate)、缩放(scale)、旋转(rotate) 和 错切(skew)。 其中每种操作在Matrix中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-27T14:12:43.421Z">
+<meta property="og:updated_time" content="2018-11-29T15:21:31.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android View之Matrix">
-<meta name="twitter:description" content="（一）Matrix的概念1、矩阵的基本概念： ① Matrix是一个矩阵(接近底层)。主要作用是坐标变换(齐次坐标)、数值转换。 ② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示齐次坐标。   2、矩阵的4个变换： 平移(translate)、缩放(scale)、旋转(rotate) 和 错切(skew)。 其中每种操作在Matrix中都有3类：前乘">
+<meta name="twitter:description" content="（一）Matrix的概念1、矩阵的相关概念： ① Matrix是一个矩阵(接近底层)。主要作用是坐标变换(齐次坐标)、数值转换。 ② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示具有等比性质的齐次坐标。   2、矩阵的4个变换： 平移(translate)、缩放(scale)、旋转(rotate) 和 错切(skew)。 其中每种操作在Matrix中">
 
 
 
@@ -412,9 +412,9 @@
       
 
       
-        <h3 id="（一）Matrix的概念"><a href="#（一）Matrix的概念" class="headerlink" title="（一）Matrix的概念"></a>（一）Matrix的概念</h3><pre><code>1、矩阵的基本概念：
+        <h3 id="（一）Matrix的概念"><a href="#（一）Matrix的概念" class="headerlink" title="（一）Matrix的概念"></a>（一）Matrix的概念</h3><pre><code>1、矩阵的相关概念：
 ① Matrix是一个矩阵(接近底层)。主要作用是坐标变换(齐次坐标)、数值转换。
-② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示齐次坐标。
+② 仿射(矩阵)变换是线性变换后进行平移变换（也是齐次空间的线性变换），仿射变换以矩阵的形式表示具有等比性质的齐次坐标。
 
 
 2、矩阵的4个变换：
@@ -423,8 +423,9 @@
 
 注意：
 ①、为避免出错，矩阵乘法尽量使用pre或者post其中的一种。
-②、Matrix matrix = new Matrix();// 创建出来的是一个单位矩阵
+②、Matrix matrix = new Matrix();// 创建一个单位矩阵
 ③、Matrix的主要作用范围：Canvas、Path、Bitmap等。
+④、(x, y, 1) - 点；(x, y, 0) - 向量 // 最后一个参数是标志位
 
 
 3、矩阵的几个性质：
@@ -631,7 +632,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
