@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2018-11-29T15:18:11.542Z</updated>
+  <updated>2018-11-29T15:25:32.599Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Android 事件分发机制&#39;</title>
+    <title>Android 事件分发机制</title>
     <link href="http://hawkyAndroid.github.io/2018/11/29/summary-android-dispatch-event/"/>
     <id>http://hawkyAndroid.github.io/2018/11/29/summary-android-dispatch-event/</id>
     <published>2018-11-29T15:12:35.000Z</published>
-    <updated>2018-11-29T15:18:11.542Z</updated>
+    <updated>2018-11-29T15:25:32.599Z</updated>
     
     <content type="html"><![CDATA[<h3 id="（一）基本概念"><a href="#（一）基本概念" class="headerlink" title="（一）基本概念"></a>（一）基本概念</h3><p>  Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。</p>]]></content>
     
