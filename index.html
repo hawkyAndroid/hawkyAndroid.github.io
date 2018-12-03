@@ -415,9 +415,18 @@
       
         
           
-          （一）基本概念  Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。
+          （一）基本概念  ①、概述： Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。
+  ②、事件的分发、拦截、消费(响应)
 
-          
+
+
+流程
+对应方法
+Activity
+ViewGroup
+View
+
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/29/summary-android-dispatch-event/#more" rel="contents">

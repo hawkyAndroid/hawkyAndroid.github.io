@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="（一）基本概念  Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。">
+<meta name="description" content="（一）基本概念  ①、概述： Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。   ②、事件的分发、拦截、消费(响应)    流程 对应方法 Activity ViewGroup View">
 <meta name="keywords" content="Android开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 事件分发机制">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2018/11/29/summary-android-dispatch-event/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="（一）基本概念  Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。">
+<meta property="og:description" content="（一）基本概念  ①、概述： Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。   ②、事件的分发、拦截、消费(响应)    流程 对应方法 Activity ViewGroup View">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-29T15:25:32.599Z">
+<meta property="og:updated_time" content="2018-12-03T16:29:32.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 事件分发机制">
-<meta name="twitter:description" content="（一）基本概念  Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。">
+<meta name="twitter:description" content="（一）基本概念  ①、概述： Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。   ②、事件的分发、拦截、消费(响应)    流程 对应方法 Activity ViewGroup View">
 
 
 
@@ -412,7 +412,42 @@
       
 
       
-        <h3 id="（一）基本概念"><a href="#（一）基本概念" class="headerlink" title="（一）基本概念"></a>（一）基本概念</h3><p>  Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。</p>
+        <h3 id="（一）基本概念"><a href="#（一）基本概念" class="headerlink" title="（一）基本概念"></a>（一）基本概念</h3><p>  ①、概述： Android里的View都树形结构的，因此可能会出现多个View有相交或重叠的情况。当我们点击或滑动屏幕上相交或重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。</p>
+<p>  ②、事件的分发、拦截、消费(响应)</p>
+<table>
+<thead>
+<tr>
+<th>流程</th>
+<th>对应方法</th>
+<th>Activity</th>
+<th>ViewGroup</th>
+<th>View</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分发</td>
+<td>dispatchTouchEvent</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>拦截</td>
+<td>onInterceptTouchEvent</td>
+<td>不支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>消费</td>
+<td>onTouchEvent</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
