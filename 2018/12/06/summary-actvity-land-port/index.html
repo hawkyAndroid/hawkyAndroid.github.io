@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="WakeLock分类：   标记值 CPU 屏幕 键盘     PARTIAL_WAKE_LOCK 开启 关闭 关闭   SCREEN_DIM_WAKE_LOCK 开启 变暗 关闭   SCREEN_BRIGHT_WAKE_LOCK 开启 变亮 关闭   FULL_WAKE_LOCK 开启 变亮 变亮    注意：API等级17 开始，FULL_WAKE_LOCK 已被弃用，应使用FLAG_KEE">
+<meta name="description" content="（一）configChanges属性android:configChanges 属性可以设置多个值，中间使用竖线分割。 举例1：横竖屏切换时不重启Activity的生命周期(只会执行onConfigurationChanged方法)， 则需要配置 android:configChanges=&amp;quot;orientation|keyboardHidden|screenSize&amp;quot;；  举例">
 <meta name="keywords" content="Android开发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android WakeLock唤醒锁的使用">
-<meta property="og:url" content="http://hawkyAndroid.github.io/2018/09/20/summary-wakelock-usage/index.html">
+<meta property="og:title" content="Activity横竖屏切换">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2018/12/06/summary-actvity-land-port/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="WakeLock分类：   标记值 CPU 屏幕 键盘     PARTIAL_WAKE_LOCK 开启 关闭 关闭   SCREEN_DIM_WAKE_LOCK 开启 变暗 关闭   SCREEN_BRIGHT_WAKE_LOCK 开启 变亮 关闭   FULL_WAKE_LOCK 开启 变亮 变亮    注意：API等级17 开始，FULL_WAKE_LOCK 已被弃用，应使用FLAG_KEE">
+<meta property="og:description" content="（一）configChanges属性android:configChanges 属性可以设置多个值，中间使用竖线分割。 举例1：横竖屏切换时不重启Activity的生命周期(只会执行onConfigurationChanged方法)， 则需要配置 android:configChanges=&amp;quot;orientation|keyboardHidden|screenSize&amp;quot;；  举例">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-20T12:48:08.138Z">
+<meta property="og:updated_time" content="2018-12-06T17:16:32.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android WakeLock唤醒锁的使用">
-<meta name="twitter:description" content="WakeLock分类：   标记值 CPU 屏幕 键盘     PARTIAL_WAKE_LOCK 开启 关闭 关闭   SCREEN_DIM_WAKE_LOCK 开启 变暗 关闭   SCREEN_BRIGHT_WAKE_LOCK 开启 变亮 关闭   FULL_WAKE_LOCK 开启 变亮 变亮    注意：API等级17 开始，FULL_WAKE_LOCK 已被弃用，应使用FLAG_KEE">
+<meta name="twitter:title" content="Activity横竖屏切换">
+<meta name="twitter:description" content="（一）configChanges属性android:configChanges 属性可以设置多个值，中间使用竖线分割。 举例1：横竖屏切换时不重启Activity的生命周期(只会执行onConfigurationChanged方法)， 则需要配置 android:configChanges=&amp;quot;orientation|keyboardHidden|screenSize&amp;quot;；  举例">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/09/20/summary-wakelock-usage/"/>
+  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/12/06/summary-actvity-land-port/"/>
 
 
 
 
 
-  <title>Android WakeLock唤醒锁的使用 | Hawky的博客</title>
+  <title>Activity横竖屏切换 | Hawky的博客</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/09/20/summary-wakelock-usage/">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/12/06/summary-actvity-land-port/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hawky">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android WakeLock唤醒锁的使用</h1>
+          <h1 class="post-title" itemprop="name headline">Activity横竖屏切换</h1>
         
 
         <div class="post-meta">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T20:31:26+08:00">
-                2018-09-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T23:12:35+08:00">
+                2018-12-06
               </time>
             
 
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/2018/09/20/summary-wakelock-usage/" class="leancloud_visitors" data-flag-title="Android WakeLock唤醒锁的使用">
+             <span id="/2018/12/06/summary-actvity-land-port/" class="leancloud_visitors" data-flag-title="Activity横竖屏切换">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,49 +412,29 @@
       
 
       
-        <h3 id="WakeLock分类："><a href="#WakeLock分类：" class="headerlink" title="WakeLock分类："></a>WakeLock分类：</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">标记值</th>
-<th style="text-align:left">CPU</th>
-<th style="text-align:left">屏幕</th>
-<th>键盘</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">PARTIAL_WAKE_LOCK</td>
-<td style="text-align:left">开启</td>
-<td style="text-align:left">关闭</td>
-<td>关闭</td>
-</tr>
-<tr>
-<td style="text-align:left">SCREEN_DIM_WAKE_LOCK</td>
-<td style="text-align:left">开启</td>
-<td style="text-align:left">变暗</td>
-<td>关闭</td>
-</tr>
-<tr>
-<td style="text-align:left">SCREEN_BRIGHT_WAKE_LOCK</td>
-<td style="text-align:left">开启</td>
-<td style="text-align:left">变亮</td>
-<td>关闭</td>
-</tr>
-<tr>
-<td style="text-align:left">FULL_WAKE_LOCK</td>
-<td style="text-align:left">开启</td>
-<td style="text-align:left">变亮</td>
-<td>变亮</td>
-</tr>
-</tbody>
-</table>
-<p>注意：API等级17 开始，FULL_WAKE_LOCK 已被弃用，应使用FLAG_KEEP_SCREEN_ON</p>
-<h3 id="WakeLock使用时机"><a href="#WakeLock使用时机" class="headerlink" title="WakeLock使用时机"></a>WakeLock使用时机</h3><pre><code>WakeLock使用时机：如断线重连、重新登录这些关键逻辑的执行过程，一旦执行成功就应立即释放WakeLock。
+        <h3 id="（一）configChanges属性"><a href="#（一）configChanges属性" class="headerlink" title="（一）configChanges属性"></a>（一）configChanges属性</h3><p>android:configChanges 属性可以设置多个值，中间使用竖线分割。</p>
+<pre><code>举例1：横竖屏切换时不重启Activity的生命周期(只会执行onConfigurationChanged方法)，
+则需要配置 android:configChanges=&quot;orientation|keyboardHidden|screenSize&quot;；
 
-注意：
-①注意使用WakeLock最好设置超时时间，这样timeout后系统会自动release。
-②休眠的情况下如何唤醒来执行任务？用AlarmManager。如推送消息发送心跳包，获取信息等。
-</code></pre><h3 id="WakeLock使用实例"><a href="#WakeLock使用实例" class="headerlink" title="WakeLock使用实例"></a>WakeLock使用实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> Flag Value                 CPU        Screen      Keyboard</span></span><br><span class="line"><span class="comment"> PARTIAL_WAKE_LOCK            On           Off         Off</span></span><br><span class="line"><span class="comment"> SCREEN_DIM_WAKE_LOCK         On           Dim         Off</span></span><br><span class="line"><span class="comment"> SCREEN_BRIGHT_WAKE_LOCK      On           Bright      Off</span></span><br><span class="line"><span class="comment"> FULL_WAKE_LOCK               On           Bright      Bright</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MqttWakeLock</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MQTT-WakeLock"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> PowerManager.WakeLock mWakelock = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> PowerManager.<span class="function">WakeLock <span class="title">createPartialWakeLock</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        PowerManager pm = (PowerManager) context.getApplicationContext()</span><br><span class="line">                .getSystemService(Context.POWER_SERVICE);</span><br><span class="line">        <span class="keyword">if</span> (pm != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取唤醒锁</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> context 上下文</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> timeout The timeout after which to release the wake lock, in milliseconds.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">(Context context, <span class="keyword">long</span> timeout)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mWakelock == <span class="keyword">null</span>) &#123;</span><br><span class="line">            mWakelock = createPartialWakeLock(context);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mWakelock != <span class="keyword">null</span> &amp;&amp; !mWakelock.isHeld()) &#123;</span><br><span class="line">            mWakelock.acquire(timeout);<span class="comment">// timeout后系统会自动release，无需手动调用release()</span></span><br><span class="line">            Log.d(TAG, <span class="string">"[MqttWakeLock] acquire WakeLock"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 释放唤醒锁</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mWakelock != <span class="keyword">null</span> &amp;&amp; mWakelock.isHeld()) &#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"[MqttWakeLock] release WakeLock"</span>);</span><br><span class="line">            mWakelock.release();</span><br><span class="line">            mWakelock = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+举例2：禁用横竖屏（只显示竖屏），则需要配置 android:screenOrientation=&quot;portrait&quot;
+</code></pre><p>  1&gt; configChanges的属性值说明如下：</p>
+<pre><code>1.orientation 屏幕在纵向和横向间旋转
+2.keyboardHidden 键盘显示或隐藏
+3.screenSize 屏幕大小改变了
+4.fontScale 用户变更了首选的字体大小
+5.locale 用户选择了不同的语言设定
+6.keyboard 键盘类型变更
+7.touchscreen或navigation 键盘或导航方式变化(基本不用)
+</code></pre><p>2&gt; screenOrientation的属性值说明如下：</p>
+<pre><code>1.unspecified 默认值，由系统判断状态自动切换
+2.landscape 横屏
+3.portrait 竖屏
+4.user 用户当前设置的orientation值
+5.behind 下一个要显示的Activity的orientation值
+6.sensor 使用传感器的方向
+7.nosensor 不使用传感器 基本等同于unspecified
+</code></pre><h3 id="（二）onConfigurationChanged方法"><a href="#（二）onConfigurationChanged方法" class="headerlink" title="（二）onConfigurationChanged方法"></a>（二）onConfigurationChanged方法</h3><p>横竖屏切换时会先回调该方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onConfigurationChanged(newConfig);</span><br><span class="line">    String message = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? <span class="string">"屏幕设置为：横屏"</span> : <span class="string">"屏幕设置为：竖屏"</span>;</span><br><span class="line">    Toast.makeText(<span class="keyword">this</span>, message, Toast.LENGTH_LONG).show();</span><br><span class="line">    <span class="comment">// 需要重新加载资源布局、初始化组件（注意回收资源）并设置监听</span></span><br><span class="line">    <span class="keyword">if</span> (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) &#123;</span><br><span class="line">        <span class="comment">// res/layout-land/activity_main_land.xml</span></span><br><span class="line">        setContentView(R.layout.activity_main_land);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// res/layout-land/activity_main_port.xml</span></span><br><span class="line">        setContentView(R.layout.activity_main_port);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 先回收资源在初始化</span></span><br><span class="line">    initView();</span><br><span class="line">    setListener();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="（三）Activity横竖屏切换实例"><a href="#（三）Activity横竖屏切换实例" class="headerlink" title="（三）Activity横竖屏切换实例"></a>（三）Activity横竖屏切换实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [*昨日重现*] lhy_ycu@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Button button;</span><br><span class="line">    <span class="keyword">private</span> View view_1;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="comment">// 横竖屏切换分为两种(含加载相同或不同的布局)：</span></span><br><span class="line">        <span class="comment">// 1、重启生命周期。</span></span><br><span class="line">        <span class="comment">// 2、不重启生命周期：需要配置</span></span><br><span class="line">        <span class="keyword">if</span> (ScreenUtil.isScreenPortrait(<span class="keyword">this</span>)) &#123;</span><br><span class="line">            setContentView(R.layout.activity_main_port);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            setContentView(R.layout.activity_main_land);</span><br><span class="line">        &#125;</span><br><span class="line">        initView();</span><br><span class="line">        setListeners();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        recycleResources();</span><br><span class="line">        <span class="keyword">if</span> (ScreenUtil.isScreenPortrait(<span class="keyword">this</span>)) &#123;</span><br><span class="line">            view_1 = findViewById(R.id.view_1);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            button = findViewById(R.id.btn_1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setListeners</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ScreenUtil.isScreenPortrait(<span class="keyword">this</span>)) &#123;</span><br><span class="line">            view_1.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            btn_1.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">recycleResources</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        view_1 = <span class="keyword">null</span>;</span><br><span class="line">        btn_1 = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState, PersistableBundle outPersistentState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onSaveInstanceState(outState, outPersistentState);</span><br><span class="line">        outState.putString(<span class="string">"name"</span>, <span class="string">"张三"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConfigurationChanged</span><span class="params">(Configuration newConfig)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onConfigurationChanged(newConfig);</span><br><span class="line">        String message = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? <span class="string">"屏幕设置为：横屏"</span> : <span class="string">"屏幕设置为：竖屏"</span>;</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>, message, Toast.LENGTH_LONG).show();</span><br><span class="line">        <span class="comment">// 需要重新加载资源布局、初始化组件（注意回收资源）并设置监听</span></span><br><span class="line">        <span class="keyword">if</span> (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) &#123;</span><br><span class="line">            setContentView(R.layout.activity_main_land);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            setContentView(R.layout.activity_main_port);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 先回收资源在初始化</span></span><br><span class="line">        initView();</span><br><span class="line">        setListeners();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (v.getId()) &#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.view_1:</span><br><span class="line">                Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"竖屏View1被点击"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> R.id.btn_1:</span><br><span class="line">                Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"横屏按钮被点击"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -507,7 +487,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hawkyAndroid.github.io/2018/09/20/summary-wakelock-usage/" title="Android WakeLock唤醒锁的使用">http://hawkyAndroid.github.io/2018/09/20/summary-wakelock-usage/</a>
+    <a href="http://hawkyAndroid.github.io/2018/12/06/summary-actvity-land-port/" title="Activity横竖屏切换">http://hawkyAndroid.github.io/2018/12/06/summary-actvity-land-port/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -535,8 +515,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/19/summary-system-broadcast/" rel="next" title="Android系统广播实例">
-                <i class="fa fa-chevron-left"></i> Android系统广播实例
+              <a href="/2018/11/29/summary-android-dispatch-event/" rel="next" title="Android事件分发机制">
+                <i class="fa fa-chevron-left"></i> Android事件分发机制
               </a>
             
           </div>
@@ -544,10 +524,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/20/summary-question-solution/" rel="prev" title="Android常见问题及方案">
-                Android常见问题及方案 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -757,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#WakeLock分类："><span class="nav-number">1.</span> <span class="nav-text">WakeLock分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WakeLock使用时机"><span class="nav-number">2.</span> <span class="nav-text">WakeLock使用时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WakeLock使用实例"><span class="nav-number">3.</span> <span class="nav-text">WakeLock使用实例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#（一）configChanges属性"><span class="nav-number">1.</span> <span class="nav-text">（一）configChanges属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（二）onConfigurationChanged方法"><span class="nav-number">2.</span> <span class="nav-text">（二）onConfigurationChanged方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（三）Activity横竖屏切换实例"><span class="nav-number">3.</span> <span class="nav-text">（三）Activity横竖屏切换实例</span></a></li></ol></div>
             
 
           </div>
