@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="（一）基本概念①、概述： Android里的View都是树形结构的，因此可能会出现多个View重叠的情况。当我们点击或滑动屏幕上重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。需要说明的是，Android的事件分发机制是一种典型的责任链模式，可参考责任链模式详解。 ②、事件的分发、拦截、消费(响应)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T16:30:08.545Z">
+<meta property="og:updated_time" content="2018-12-11T14:25:27.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android事件分发机制">
 <meta name="twitter:description" content="（一）基本概念①、概述： Android里的View都是树形结构的，因此可能会出现多个View重叠的情况。当我们点击或滑动屏幕上重叠的部分的时候，这些View默认都可以响应。如果此时我们只想要某个View处理（响应/消费）这个事件，这时就可以用事件分发机制去解决这个问题。需要说明的是，Android的事件分发机制是一种典型的责任链模式，可参考责任链模式详解。 ②、事件的分发、拦截、消费(响应)">
@@ -448,12 +448,31 @@
 </tr>
 </tbody>
 </table>
-<p>  ③、方法说明：<br>  Android中触摸事件传递过程中最重要的是dispatchTouchEvent()、onInterceptTouchEvent()和onTouchEvent()方法。</p>
+<p>  ③、方法说明：<br>  Android中触摸事件传递过程中最重要的是dispatchTouchEvent()、onInterceptTouchEvent()和onTouchEvent()方法。<br>其中：dispatchTouchEvent 是事件分发机制中的核心，所有的事件(包括点击、长按、触摸等)调度都归它管。</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 事件分发。一般不用重写。</span></span><br><span class="line"><span class="comment">// 执行super.dispatchTouchEvent(ev)表示事件向下分发并等待事件处理(消费)结果回传。</span></span><br><span class="line"><span class="comment">// 注意：如果当前控件的onInterceptTouchEvent()为true则表示事件不再往下继续传递，</span></span><br><span class="line"><span class="comment">// 此时交由自己onTouchEvent处理(消费)并将自己处理的结果回传给自己的dispatchTouchEvent，然后回传至上层控件。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.dispatchTouchEvent(ev);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 事件拦截。返回值决定了事件的传递方向。（仅判断事件是否需要拦截即可）</span></span><br><span class="line"><span class="comment">// 返回为false时事件会传递给子控件（默认为false 不拦截）;</span></span><br><span class="line"><span class="comment">// 返回值为true时事件会传递给当前控件的onTouchEvent()处理（消费）</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 事件处理(消费)。处理的结果回传给自己的dispatchTouchEvent，然后再将结果回传至上层控件。</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>  ④、Touch触摸事件：</p>
 <pre><code>Android中的Touch事件都是从ACTION_DOWN开始的：
 单手指操作：ACTION_DOWN---ACTION_MOVE----ACTION_UP
 多手指操作：ACTION_DOWN---ACTION_POINTER_DOWN---ACTION_MOVE--ACTION_POINTER_UP---ACTION_UP.
+
+事件的调度顺序是：onTouchListener &gt; onTouchEvent &gt; onLongClickListener &gt; onClickListener
+
+需要特别指出的是：如果两个View(View1、View2)有重叠且View2(在上层)遮挡了View1的部分，则当手指点击时：
+1&gt; 仅当View1可点击时，事件将分配给View，被View2遮挡的部分仍是View1可点击的区域。
+2&gt; 仅当View2可点击时，事件将分配给View2。
+3&gt; 当View1、View2都可以点击时，事件将分配给View2，View1收不到事件。
+</code></pre><p>⑤、事件总结：</p>
+<pre><code>1、onTouchEvent包含了onClickListener和onLongClickListener事件。
+
+2、View的dispatchTouchEvent主要用于调度自身的监听器和onTouchEvent。
+
+3、给View注册OnTouchListener监听不会影响View的可点击状态，只要View是可点击的就会消费事件。
+
+4、若给ViewGroup及其ChildView同时注册了事件监听器(如：onClick)，则ChildView会被消费，ViewGroup收不到事件(无响应)。
+
+5、如果当前正在处理的事件被上层View拦截，会收到一个ACTION_CANCEL，后续事件不会再传递过来。
+
+6、为避免一次完整的事件(如：onClick包含ACTION_DOWN、ACTION_UP)分配给不同的View可能造成事件无法被正常消费，因此所有事件都应该被给同一个View消费。
 </code></pre><h3 id="（二）实例演示"><a href="#（二）实例演示" class="headerlink" title="（二）实例演示"></a>（二）实例演示</h3><pre><code>事件分发：Activity -&gt; RootView -&gt; ViewGroupA -&gt; View1
 事件回传：Activity &lt;- RootView &lt;- ViewGroupA &lt;- View1
 </code></pre><p>  MainActivity</p>
@@ -662,7 +681,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
