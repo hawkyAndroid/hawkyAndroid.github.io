@@ -419,6 +419,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[《活着》]]></title>
+    <url>%2F2018%2F01%2F18%2Fsummary-book-01%2F</url>
+    <content type="text"><![CDATA[……]]></content>
+      <categories>
+        <category>Book</category>
+      </categories>
+      <tags>
+        <tag>Book</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JNI系列(一)AS gradle3.0+ so库的生成及使用]]></title>
     <url>%2F2018%2F01%2F15%2Fsummary-jni-01%2F</url>
     <content type="text"><![CDATA[前言NDK(Native Developerment Kit)提供了一系列的工具，咱们可以用它来将c/c++代码打包成so(c/c++函数库)文件。这样做的好处是保护代码(反编译难度大)，提供程序的执行效率(c代码)，并且能够移植到其它平台上。 JNI(Java Native Interface)提供了一些API实现了Java与其它语言(如: c/c++)的通信，咱们可以通过这些API使java方法能够调用c/c++函数。 一）环境搭建下载NDK：打开File-&gt;Settings-&gt;Android SDK-&gt;SDK Tools选中CMake、LLDB及NDK后，点击Apply，软件会自动安装NDK。 二）生成so库1.创建项目JNIApis (勾选Include C++ support) 2. 新建一个JNI API文件，内容如下：123456789package com.hawky.jni;/** * @author [*昨日重现*] lhy_ycu@163.com * @since version 1.0 */public class JNIApi &#123; public static native String getStringFromC();&#125; 3. 生成.h文件： 执行命令后，可以看到生成了com_hawky_jni_JNIApi.h(接口函数)文件（目的是为了写C代码），内容如下： 4. 接下来就是实现该接口函数： 5. 修改CMakeLists.txt文件，将默认的native-lib替换成JNIApi, c源文件路径替换成src/main/jni/JNIApi.c ，然后sync一下即可。 6. rebuild一下，生成so库文件： 三）使用so库1. 新建项目JNIApiSample（为了区分so库的生成过程） 2. 在src/main 目录下新建jniLibs文件夹，并将之前生成的那些so库文件拷贝至jniLibs文件夹中，然后在build.gradle(app目录下)配置： sourceSets { main { jni.srcDirs = [] } } 3. 编写Native接口文件：1234567891011121314151617package com.hawky.jni;/** * @author [*昨日重现*] lhy_ycu@163.com * @since version 1.0 */public class JNIApi &#123; public static native String getStringFromC(); static &#123; try &#123; System.loadLibrary(&amp;quot;JNIApi&amp;quot;); &#125; catch (UnsatisfiedLinkError ule) &#123; System.out.println(&amp;quot;loadLibrary(JNIApi),&amp;quot; + ule.getMessage()); &#125; &#125;&#125; 4. 测试JNI接口：123456789public class MainActivity extends AppCompatActivity &#123; @Override protected void onCreate(Bundle savedInstanceState) &#123; super.onCreate(savedInstanceState); setContentView(R.layout.activity_main); Toast.makeText(this, &amp;quot;Java调用C代码：&amp;quot; + JNIApi.getStringFromC(), Toast.LENGTH_SHORT).show(); &#125;&#125; rebuild后运行一下可以看到手机界面弹出了“Java调用C代码：I’m String from C!”。OK，大功告成。 总结AS越来越人性化了，gradle3.0之后编写JNI代码也没那么麻烦了，咱们只需要关心具体的核心业务逻辑,专注写C，so库配置一下便会自动生成，然后供Java开发者调用。需要注意的是：JNI接口的包名要与C代码里面的包名一致。]]></content>
