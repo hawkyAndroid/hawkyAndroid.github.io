@@ -415,8 +415,11 @@
       
         
           
-          （一）ValueAnimator 概述ValueAnimator：主要用来计算在指定时间内，初始值到结束值之间过渡效果的动画。
-（二）ValueAnimator 实例123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263
+          （一）PropertyAnimation 概述补间动画(Tweened Animation)：只会改变View的显示效果，不会真正改变View的属性（比如：按钮经补间动画平移后，在平移后位置上点击是无效的）。
+
+逐帧动画(Frame-by-Frame Animation)：只是将一个完整的动画拆分成一些单独的图片，然后再将它们按顺序连贯起来进行播放。
+
+ValueAnimator：只能用于计算在指
           ...
           <!--noindex-->
           <div class="post-button text-center">
