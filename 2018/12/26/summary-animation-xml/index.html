@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="Android开发," />
+  <meta name="keywords" content="Animation," />
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="–参考书籍：《Android移动性能实战》 1. StrictMode12345678910111213141516171819// 在Applcation/Activity的onCreate方法中使用严苛模式：if (BuildConfig.DEBUG) &amp;#123;    // 严苛模式-1：使用线程策略    StrictMode.setThreadPolicy(new StrictMode">
-<meta name="keywords" content="Android开发">
+<meta name="description" content="（一） 使用XML编写动画。使用 XML 编写动画的优点是：方便重用、可读性较高。 1、  ValueAnimator 动画：res/animator/value_animator_01.xml12345678910&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;animator xmlns:android=&quot;http://schemas.andro">
+<meta name="keywords" content="Animation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android性能优化之磁盘篇">
-<meta property="og:url" content="http://hawkyAndroid.github.io/2018/08/28/summary-performance-disk/index.html">
+<meta property="og:title" content="Android Animator之XML动画">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2018/12/26/summary-animation-xml/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="–参考书籍：《Android移动性能实战》 1. StrictMode12345678910111213141516171819// 在Applcation/Activity的onCreate方法中使用严苛模式：if (BuildConfig.DEBUG) &amp;#123;    // 严苛模式-1：使用线程策略    StrictMode.setThreadPolicy(new StrictMode">
+<meta property="og:description" content="（一） 使用XML编写动画。使用 XML 编写动画的优点是：方便重用、可读性较高。 1、  ValueAnimator 动画：res/animator/value_animator_01.xml12345678910&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;animator xmlns:android=&quot;http://schemas.andro">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-30T15:45:20.638Z">
+<meta property="og:updated_time" content="2018-12-26T13:21:54.056Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android性能优化之磁盘篇">
-<meta name="twitter:description" content="–参考书籍：《Android移动性能实战》 1. StrictMode12345678910111213141516171819// 在Applcation/Activity的onCreate方法中使用严苛模式：if (BuildConfig.DEBUG) &amp;#123;    // 严苛模式-1：使用线程策略    StrictMode.setThreadPolicy(new StrictMode">
+<meta name="twitter:title" content="Android Animator之XML动画">
+<meta name="twitter:description" content="（一） 使用XML编写动画。使用 XML 编写动画的优点是：方便重用、可读性较高。 1、  ValueAnimator 动画：res/animator/value_animator_01.xml12345678910&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&amp;lt;animator xmlns:android=&quot;http://schemas.andro">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/08/28/summary-performance-disk/"/>
+  <link rel="canonical" href="http://hawkyAndroid.github.io/2018/12/26/summary-animation-xml/"/>
 
 
 
 
 
-  <title>Android性能优化之磁盘篇 | Hawky的博客</title>
+  <title>Android Animator之XML动画 | Hawky的博客</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/08/28/summary-performance-disk/">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2018/12/26/summary-animation-xml/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hawky">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android性能优化之磁盘篇</h1>
+          <h1 class="post-title" itemprop="name headline">Android Animator之XML动画</h1>
         
 
         <div class="post-meta">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T21:15:25+08:00">
-                2018-08-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T21:19:55+08:00">
+                2018-12-26
               </time>
             
 
@@ -364,8 +364,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android开发/" itemprop="url" rel="index">
-                    <span itemprop="name">Android开发</span>
+                  <a href="/categories/Animation/" itemprop="url" rel="index">
+                    <span itemprop="name">Animation</span>
                   </a>
                 </span>
 
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/2018/08/28/summary-performance-disk/" class="leancloud_visitors" data-flag-title="Android性能优化之磁盘篇">
+             <span id="/2018/12/26/summary-animation-xml/" class="leancloud_visitors" data-flag-title="Android Animator之XML动画">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,37 +412,13 @@
       
 
       
-        <p>–参考书籍：《Android移动性能实战》</p>
-<h2 id="1-StrictMode"><a href="#1-StrictMode" class="headerlink" title="1. StrictMode"></a>1. StrictMode</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在Applcation/Activity的onCreate方法中使用严苛模式：</span></span><br><span class="line"><span class="keyword">if</span> (BuildConfig.DEBUG) &#123;</span><br><span class="line">    <span class="comment">// 严苛模式-1：使用线程策略</span></span><br><span class="line">    StrictMode.setThreadPolicy(<span class="keyword">new</span> StrictMode.ThreadPolicy.Builder()</span><br><span class="line">            .detectDiskReads()</span><br><span class="line">            .detectDiskWrites()</span><br><span class="line">            .detectNetwork()</span><br><span class="line">            .penaltyLog()</span><br><span class="line">            .build());</span><br><span class="line">    <span class="comment">// 严苛模式-2：使用VM策略（可与线程策略一起使用）</span></span><br><span class="line">    StrictMode.setVmPolicy(<span class="keyword">new</span> StrictMode.VmPolicy.Builder()</span><br><span class="line">            .detectActivityLeaks()</span><br><span class="line">            .detectLeakedSqlLiteObjects()</span><br><span class="line">            .penaltyLog()</span><br><span class="line">            .build());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">---查看日志： adb logcat | grep StrictMode</span><br><span class="line">其它用法：直接提示(自定义) StrictMode.noteSlowCall(<span class="string">"slowCall timeout="</span> + timeout);</span><br></pre></td></tr></table></figure>
-<h2 id="2-文件操作"><a href="#2-文件操作" class="headerlink" title="2. 文件操作"></a>2. 文件操作</h2><ol>
-<li><p>避免冗余读/写：要尽量延迟写入(如：对于SharedPreferences，只保留最后一个apply即可)。</p>
-</li>
-<li><p>减少I/O操作次数：使用6~8KB Buffer读/写、批量更新数据库使用事务。</p>
-</li>
-<li><p>使用LruCache和DiskLruCache做内存和磁盘缓存；</p>
-</li>
-<li><p>不建议在进程间通信中使用SharedPreferences，因为高并发的读写访问可能会丢失数据。</p>
-</li>
-</ol>
-<h2 id="3-数据库操作"><a href="#3-数据库操作" class="headerlink" title="3. 数据库操作"></a>3. 数据库操作</h2><h4 id="3-1-缓存数据库连接"><a href="#3-1-缓存数据库连接" class="headerlink" title="3.1  缓存数据库连接"></a>3.1  缓存数据库连接</h4><p>数据库在打开后，先不要关闭，在应用程序退出时再关闭。</p>
-<h4 id="3-2-使用索引"><a href="#3-2-使用索引" class="headerlink" title="3.2 使用索引"></a>3.2 使用索引</h4><p>可提高查询速度，但由于要维护索引会使插入效率有所降低。</p>
-<h4 id="3-3-尽量不使用Autoincrement关键字"><a href="#3-3-尽量不使用Autoincrement关键字" class="headerlink" title="3.3  尽量不使用Autoincrement关键字"></a>3.3  尽量不使用Autoincrement关键字</h4><ol>
-<li><p>作用：会保证主键是严格单调递增的，如果行号的最大值被用过，那么插入新数据时会包SQLITE_FULL错误。</p>
-</li>
-<li><p>原理：SQLite创建一个叫sqlite_sequence的内部表来记录该表使用的最大行号，维护sqlite_sequence表带来的额外开销会导致INSERT效率降低。</p>
-</li>
-<li><p>总结：autoincrement会增加CPU、内存、磁盘空间和磁盘I/O的负担，所以尽量不要用，除非必需(如：客户端需要拿该主键和服务器校对数据，需要保证主键唯一性)</p>
-</li>
-</ol>
-<h4 id="3-4-数据库操作移到工作线程"><a href="#3-4-数据库操作移到工作线程" class="headerlink" title="3.4 数据库操作移到工作线程"></a>3.4 数据库操作移到工作线程</h4><p>  数据库及IO操作都移到工作线程(Thread)，并且设置线程优先级为THREAD_PRIORITY_BACKGROUND，这样工作线程最多能获取到10%的时间片，优先保证主线程执行。</p>
-<h2 id="4-Bitmap操作"><a href="#4-Bitmap操作" class="headerlink" title="4. Bitmap操作"></a>4. Bitmap操作</h2><h4 id="4-1-提高Bitmap解码效率"><a href="#4-1-提高Bitmap解码效率" class="headerlink" title="4.1 提高Bitmap解码效率"></a>4.1 提高Bitmap解码效率</h4><p>可考虑使用decodeStream、decodeResourceStream，并传入BufferedInputStream参数。</p>
-<h4 id="4-2-TinyPng"><a href="#4-2-TinyPng" class="headerlink" title="4.2 TinyPng"></a>4.2 TinyPng</h4><p>由于PNG是一种无损格式，JPG是有损格式。所有：小尺寸、色彩较少或者有alpha通道透明度的时候，使用PNG; 大尺寸、色彩渐变多的使用JPG。<br>—图片压缩工具：<a href="https://tinypng.com/" target="_blank" rel="noopener">TinyPng</a></p>
-<h4 id="4-3-合理选择Bitmap-Config"><a href="#4-3-合理选择Bitmap-Config" class="headerlink" title="4.3 合理选择Bitmap.Config"></a>4.3 合理选择Bitmap.Config</h4><p>Bitmap.Config用来描述图片的像素是怎么被存储的：</p>
-<pre><code>ARGB_8888: 每个像素4字节. 共32位，默认设置。
-Alpha_8: 只保存透明度，共8位，1字节。
-ARGB_4444: 共16位，2字节。
-RGB_565:共16位，2字节，只存储RGB值(推荐)。
-</code></pre><h4 id="4-4-WebP格式图片"><a href="#4-4-WebP格式图片" class="headerlink" title="4.4 WebP格式图片"></a>4.4 WebP格式图片</h4><p>WebP既支持有损压缩也支持无损压缩。体积小，但占用CPU内存是JPG格式的3倍。</p>
+        <h3 id="（一）-使用XML编写动画。"><a href="#（一）-使用XML编写动画。" class="headerlink" title="（一） 使用XML编写动画。"></a>（一） 使用XML编写动画。</h3><p>使用 XML 编写动画的优点是：方便重用、可读性较高。</p>
+<h4 id="1、-ValueAnimator-动画：res-animator-value-animator-01-xml"><a href="#1、-ValueAnimator-动画：res-animator-value-animator-01-xml" class="headerlink" title="1、  ValueAnimator 动画：res/animator/value_animator_01.xml"></a>1、  ValueAnimator 动画：res/animator/value_animator_01.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">animator</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">"2000"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:interpolator</span>=<span class="string">"@android:anim/accelerate_interpolator"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:repeatCount</span>=<span class="string">"2"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:repeatMode</span>=<span class="string">"reverse"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:startOffset</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueFrom</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueTo</span>=<span class="string">"10"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueType</span>=<span class="string">"intType"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>AnimatorInflater 加载动画并执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载属性动画</span></span><br><span class="line"> ValueAnimator animator = (ValueAnimator) AnimatorInflater.loadAnimator(<span class="keyword">this</span>, R.animator.value_animator_01);</span><br><span class="line"><span class="comment">// 添加（值）数据更新监听</span></span><br><span class="line">animator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> value = (<span class="keyword">int</span>) animation.getAnimatedValue();</span><br><span class="line">       DebugLog.e(<span class="string">"value："</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、-ObjectAnimator-动画：res-animator-object-animator-01-xml"><a href="#2、-ObjectAnimator-动画：res-animator-object-animator-01-xml" class="headerlink" title="2、  ObjectAnimator 动画：res/animator/object_animator_01.xml"></a>2、  ObjectAnimator 动画：res/animator/object_animator_01.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">"3000"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:interpolator</span>=<span class="string">"@android:interpolator/linear"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:propertyName</span>=<span class="string">"alpha"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:repeatCount</span>=<span class="string">"2"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:repeatMode</span>=<span class="string">"reverse"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:startOffset</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueFrom</span>=<span class="string">"0.1F"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueTo</span>=<span class="string">"1F"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueType</span>=<span class="string">"floatType"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>AnimatorInflater 加载动画并执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载属性动画</span></span><br><span class="line">ObjectAnimator animator = (ObjectAnimator) AnimatorInflater.loadAnimator(<span class="keyword">this</span>, R.animator.object_animator_01);</span><br><span class="line"><span class="comment">// 设置目标对象</span></span><br><span class="line">animator.setTarget(textView);</span><br><span class="line"><span class="comment">// 添加动画监听</span></span><br><span class="line">animator.addListener(<span class="keyword">new</span> AnimatorListenerAdapter() &#123;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">       DebugLog.e(<span class="string">"动画开始"</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">       DebugLog.e(<span class="string">"动画结束"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;);</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure></p>
+<h4 id="3、-ValueAnimator-组合动画：res-animator-animator-set-01-xml"><a href="#3、-ValueAnimator-组合动画：res-animator-animator-set-01-xml" class="headerlink" title="3、  ValueAnimator 组合动画：res/animator/animator_set_01.xml"></a>3、  ValueAnimator 组合动画：res/animator/animator_set_01.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:ordering</span>=<span class="string">"together"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">"3000"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:propertyName</span>=<span class="string">"alpha"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:valueFrom</span>=<span class="string">"0.1F"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:valueTo</span>=<span class="string">"1F"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:valueType</span>=<span class="string">"floatType"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span> <span class="attr">android:ordering</span>=<span class="string">"sequentially"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">"1500"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">"rotation"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueFrom</span>=<span class="string">"0F"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">"180F"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">"floatType"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">"1500"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">"rotation"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueFrom</span>=<span class="string">"180F"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">"0F"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">"floatType"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>AnimatorInflater 加载组合动画并执行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载组合属性动画</span></span><br><span class="line">Animator animator = AnimatorInflater.loadAnimator(<span class="keyword">this</span>, R.animator.animator_set_01);</span><br><span class="line"><span class="comment">// 设置目标对象</span></span><br><span class="line">animator.setTarget(textView);</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -495,7 +471,7 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hawkyAndroid.github.io/2018/08/28/summary-performance-disk/" title="Android性能优化之磁盘篇">http://hawkyAndroid.github.io/2018/08/28/summary-performance-disk/</a>
+    <a href="http://hawkyAndroid.github.io/2018/12/26/summary-animation-xml/" title="Android Animator之XML动画">http://hawkyAndroid.github.io/2018/12/26/summary-animation-xml/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -510,7 +486,7 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
       
         <div class="post-tags">
           
-            <a href="/tags/Android开发/" rel="tag"><i class="fa fa-tag"></i> Android开发</a>
+            <a href="/tags/Animation/" rel="tag"><i class="fa fa-tag"></i> Animation</a>
           
         </div>
       
@@ -523,8 +499,8 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/29/summary-develop-standard/" rel="next" title="Android开发规范总结">
-                <i class="fa fa-chevron-left"></i> Android开发规范总结
+              <a href="/2018/12/25/summary-animation-objectanimator/" rel="next" title="Android Animator之ObjectAnimator">
+                <i class="fa fa-chevron-left"></i> Android Animator之ObjectAnimator
               </a>
             
           </div>
@@ -532,10 +508,6 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/29/summary-performance-detect-tools/" rel="prev" title="Android性能优化之测试工具篇">
-                Android性能优化之测试工具篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -745,7 +717,7 @@ RGB_565:共16位，2字节，只存储RGB值(推荐)。
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-StrictMode"><span class="nav-number">1.</span> <span class="nav-text">1. StrictMode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文件操作"><span class="nav-number">2.</span> <span class="nav-text">2. 文件操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-数据库操作"><span class="nav-number">3.</span> <span class="nav-text">3. 数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-缓存数据库连接"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1  缓存数据库连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-使用索引"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2 使用索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-尽量不使用Autoincrement关键字"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.3  尽量不使用Autoincrement关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-数据库操作移到工作线程"><span class="nav-number">3.0.4.</span> <span class="nav-text">3.4 数据库操作移到工作线程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Bitmap操作"><span class="nav-number">4.</span> <span class="nav-text">4. Bitmap操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-提高Bitmap解码效率"><span class="nav-number">4.0.1.</span> <span class="nav-text">4.1 提高Bitmap解码效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-TinyPng"><span class="nav-number">4.0.2.</span> <span class="nav-text">4.2 TinyPng</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-合理选择Bitmap-Config"><span class="nav-number">4.0.3.</span> <span class="nav-text">4.3 合理选择Bitmap.Config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-WebP格式图片"><span class="nav-number">4.0.4.</span> <span class="nav-text">4.4 WebP格式图片</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#（一）-使用XML编写动画。"><span class="nav-number">1.</span> <span class="nav-text">（一） 使用XML编写动画。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-ValueAnimator-动画：res-animator-value-animator-01-xml"><span class="nav-number">1.1.</span> <span class="nav-text">1、  ValueAnimator 动画：res/animator/value_animator_01.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、-ObjectAnimator-动画：res-animator-object-animator-01-xml"><span class="nav-number">1.2.</span> <span class="nav-text">2、  ObjectAnimator 动画：res/animator/object_animator_01.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、-ValueAnimator-组合动画：res-animator-animator-set-01-xml"><span class="nav-number">1.3.</span> <span class="nav-text">3、  ValueAnimator 组合动画：res/animator/animator_set_01.xml</span></a></li></ol></li></ol></div>
             
 
           </div>
