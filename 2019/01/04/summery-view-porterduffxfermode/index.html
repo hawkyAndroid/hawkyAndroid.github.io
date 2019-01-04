@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="View," />
 
 
 
@@ -97,17 +97,20 @@
 
 
 
-<meta name="description" content="Job Skills[1] 5年Android移动开发经验。[2] 熟悉BLE、MQTT协议，有智能穿戴、智能家居开发经验。[3] 熟悉MVC、MVP、MVVM框架模式，熟悉常用设计模式。[4] 熟悉Retrofit、RxJava响应式编程，熟悉属性动画。[5] 熟悉JPush、Google FCM推送，GreenDao数据库。[6] 开源 rxpal 项目，用于处理HTTP网络请求。[7] 熟悉">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About me">
-<meta property="og:url" content="http://hawkyAndroid.github.io/about/index.html">
+<meta name="description" content="（一） Xfermode 概述Xfermode图层混合模式：主要用于处理图形图像的绘制。最常用也是最核心的就是其子类PorterDuffXfermode，而PorterDuffXfermode使用的是 PorterDuff 模式创建一个图层混合模式，PorterDuff用于(2D)数字图像的合成。 （二） PorterDuff.Mode 枚举PorterDuff.Mode 定义了18种混合模式：">
+<meta name="keywords" content="View">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android View之Xfermode">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2019/01/04/summery-view-porterduffxfermode/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="Job Skills[1] 5年Android移动开发经验。[2] 熟悉BLE、MQTT协议，有智能穿戴、智能家居开发经验。[3] 熟悉MVC、MVP、MVVM框架模式，熟悉常用设计模式。[4] 熟悉Retrofit、RxJava响应式编程，熟悉属性动画。[5] 熟悉JPush、Google FCM推送，GreenDao数据库。[6] 开源 rxpal 项目，用于处理HTTP网络请求。[7] 熟悉">
+<meta property="og:description" content="（一） Xfermode 概述Xfermode图层混合模式：主要用于处理图形图像的绘制。最常用也是最核心的就是其子类PorterDuffXfermode，而PorterDuffXfermode使用的是 PorterDuff 模式创建一个图层混合模式，PorterDuff用于(2D)数字图像的合成。 （二） PorterDuff.Mode 枚举PorterDuff.Mode 定义了18种混合模式：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-29T15:29:13.687Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2041548-d964105abf4be5d9.jpg?imageMogr2/auto-orient/">
+<meta property="og:updated_time" content="2019-01-04T12:42:55.473Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About me">
-<meta name="twitter:description" content="Job Skills[1] 5年Android移动开发经验。[2] 熟悉BLE、MQTT协议，有智能穿戴、智能家居开发经验。[3] 熟悉MVC、MVP、MVVM框架模式，熟悉常用设计模式。[4] 熟悉Retrofit、RxJava响应式编程，熟悉属性动画。[5] 熟悉JPush、Google FCM推送，GreenDao数据库。[6] 开源 rxpal 项目，用于处理HTTP网络请求。[7] 熟悉">
+<meta name="twitter:title" content="Android View之Xfermode">
+<meta name="twitter:description" content="（一） Xfermode 概述Xfermode图层混合模式：主要用于处理图形图像的绘制。最常用也是最核心的就是其子类PorterDuffXfermode，而PorterDuffXfermode使用的是 PorterDuff 模式创建一个图层混合模式，PorterDuff用于(2D)数字图像的合成。 （二） PorterDuff.Mode 枚举PorterDuff.Mode 定义了18种混合模式：">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2041548-d964105abf4be5d9.jpg?imageMogr2/auto-orient/">
 
 
 
@@ -137,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="http://hawkyAndroid.github.io/about/"/>
+  <link rel="canonical" href="http://hawkyAndroid.github.io/2019/01/04/summery-view-porterduffxfermode/"/>
 
 
 
 
 
-  <title>About me | Hawky的博客</title>
+  <title>Android View之Xfermode | Hawky的博客</title>
   
 
 
@@ -299,34 +302,359 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2019/01/04/summery-view-porterduffxfermode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hawky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26600502?s=400&u=0c7dff0c65b0eac889e835dd5b16ba70231b15b5&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hawky的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">About me</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h2 id="Job-Skills"><a href="#Job-Skills" class="headerlink" title="Job Skills"></a>Job Skills</h2><p><strong>[1]</strong> 5年Android移动开发经验。<br><strong>[2]</strong> 熟悉BLE、MQTT协议，有智能穿戴、智能家居开发经验。<br><strong>[3]</strong> 熟悉MVC、MVP、MVVM框架模式，熟悉常用设计模式。<br><strong>[4]</strong> 熟悉Retrofit、RxJava响应式编程，熟悉属性动画。<br><strong>[5]</strong> 熟悉JPush、Google FCM推送，GreenDao数据库。<br><strong>[6]</strong> 开源 <a href="https://github.com/hawkyAndroid/rxpal" target="_blank" rel="noopener">rxpal</a> 项目，用于处理HTTP网络请求。<br><strong>[7]</strong> 熟悉Android多线程，掌握NDK + JNI。<br><strong>[8]</strong> 熟悉自定义控件、性能优化处理。</p>
-
+          <h1 class="post-title" itemprop="name headline">Android View之Xfermode</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T20:18:55+08:00">
+                2019-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/View/" itemprop="url" rel="index">
+                    <span itemprop="name">View</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/04/summery-view-porterduffxfermode/" class="leancloud_visitors" data-flag-title="Android View之Xfermode">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h3 id="（一）-Xfermode-概述"><a href="#（一）-Xfermode-概述" class="headerlink" title="（一） Xfermode 概述"></a>（一） Xfermode 概述</h3><p>Xfermode图层混合模式：主要用于处理图形图像的绘制。最常用也是最核心的就是其子类PorterDuffXfermode，而PorterDuffXfermode使用的是 PorterDuff 模式创建一个图层混合模式，PorterDuff用于(2D)数字图像的合成。</p>
+<h3 id="（二）-PorterDuff-Mode-枚举"><a href="#（二）-PorterDuff-Mode-枚举" class="headerlink" title="（二） PorterDuff.Mode 枚举"></a>（二） PorterDuff.Mode 枚举</h3><p><a href="https://developer.android.com/reference/android/graphics/PorterDuff.Mode" target="_blank" rel="noopener">PorterDuff.Mode</a> 定义了18种混合模式：</p>
+<table>
+<thead>
+<tr>
+<th>PorterDuff.Mode</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADD</td>
+<td>Saturate(S + D)</td>
+</tr>
+<tr>
+<td>CLEAR</td>
+<td>[0, 0]</td>
+</tr>
+<tr>
+<td>DARKEN</td>
+<td>[Sa + Da - Sa<em>Da, Sc</em>(1 - Da) + Dc*(1 - Sa) + min(Sc, Dc)]</td>
+</tr>
+<tr>
+<td>DST</td>
+<td>[Da, Dc]</td>
+</tr>
+<tr>
+<td>DST_ATOP</td>
+<td>[Sa, Sa <em> Dc + Sc </em> (1 - Da)]</td>
+</tr>
+<tr>
+<td>DST_IN</td>
+<td>[Sa <em> Da, Sa </em> Dc]</td>
+</tr>
+<tr>
+<td>DST_OUT</td>
+<td>[Da <em> (1 - Sa), Dc </em> (1 - Sa)]</td>
+</tr>
+<tr>
+<td>DST_OVER</td>
+<td>[Sa + (1 - Sa)<em>Da, Rc = Dc + (1 - Da)</em>Sc]</td>
+</tr>
+<tr>
+<td>LIGHTEN</td>
+<td>[Sa + Da - Sa<em>Da, Sc</em>(1 - Da) + Dc*(1 - Sa) + max(Sc, Dc)]</td>
+</tr>
+<tr>
+<td>MULTIPLY</td>
+<td>[Sa <em> Da, Sc </em> Dc]</td>
+</tr>
+<tr>
+<td>OVERLAY</td>
+<td></td>
+</tr>
+<tr>
+<td>SCREEN</td>
+<td>[Sa + Da - Sa <em> Da, Sc + Dc - Sc </em> Dc]</td>
+</tr>
+<tr>
+<td>SRC</td>
+<td>[Sa, Sc]</td>
+</tr>
+<tr>
+<td>SRC_ATOP</td>
+<td>[Da, Sc <em> Da + (1 - Sa) </em> Dc]</td>
+</tr>
+<tr>
+<td>SRC_IN</td>
+<td>[Sa <em> Da, Sc </em> Da]</td>
+</tr>
+<tr>
+<td>SRC_OUT</td>
+<td>[Sa <em> (1 - Da), Sc </em> (1 - Da)]</td>
+</tr>
+<tr>
+<td>SRC_OVER</td>
+<td>[Sa + (1 - Sa)<em>Da, Rc = Sc + (1 - Sa)</em>Dc]</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td>[Sa + Da - 2 <em> Sa </em> Da, Sc <em> (1 - Da) + (1 - Sa) </em> Dc]</td>
+</tr>
+</tbody>
+</table>
+<p>其中： Sa 代表source alpha，Da 代表 Destination alpha ，Sc 代表 source color，Dc 代表 Destination color。</p>
+<pre><code>1、 SRC －［Sa , Sc］ 只保留源图像的 alpha 和 color
+2、 DST －[ Da, Dc ]  只保留目标图像的 alpha 和 color
+
+3、 SRC_OVER          在目标图片顶部绘制源图像
+4、 DST_OVER            将目标图像绘制在上方
+
+5、 SRC_IN    在两者相交的地方绘制源图像，并且绘制的效果会受到目标图像对应地方透明度的影响；
+6、 DST_IN    在两者相交的地方绘制目标图像，并且绘制的效果会受到源图像对应地方透明度的影响；
+
+7、 SRC_OUT   在不相交的地方绘制源图像，相交处根据目标alpha进行过滤，目标色完全不透明时则完全过滤，完全透明则不过滤；
+8、 DST_OUT   在不相交的地方绘制目标图像，相交处根据源图像alpha进行过滤，完全不透明处则完全过滤，完全透明则不过滤；
+
+9、SRC_ATOP   源图像和目标图像相交处绘制源图像，不相交的地方绘制目标图像，并且相交处的效果会受到源图像和目标图像alpha的影响；
+10、DST_ATOP  源图像和目标图像相交处绘制目标图像，不相交的地方绘制源图像，并且相交处的效果会受到源图像和目标图像alpha的影响；
+
+11、 XOR      在不相交的地方按原样绘制源图像和目标图像，相交的地方受到对应alpha和色值影响，按上面公式进行计算，如果都完全不透明则相交处完全不绘制；
+12、 DARKEN   该模式处理过后，会感觉效果变暗，即进行对应像素的比较，取较暗值，如果色值相同则进行混合；
+13、 LIGHTEN  如果在均完全不透明的情况下 ，色值取源色值和目标色值中的较大值，否则按上面算法进行计算；
+
+14、 MULTIPLY   正片叠底，即查看每个通道中的颜色信息，并将基色与混合色复合。结果色总是较暗的颜色。
+15、 SCREEN   滤色，滤色模式与我们所用的显示屏原理相同。
+
+16、 ADD  饱和度叠加
+17、 OVERLAY 像素是进行 Multiply （正片叠底）混合还是 Screen （屏幕）混合，取决于底层颜色，但底层颜色的高光与阴影部分的亮度细节会被保留；
+
+18、CLEAR 所有点的像素的alpha 和color 都为 0。
+</code></pre><h4 id="图像合成效果图"><a href="#图像合成效果图" class="headerlink" title="图像合成效果图"></a>图像合成效果图</h4><p><img src="https://upload-images.jianshu.io/upload_images/2041548-d964105abf4be5d9.jpg?imageMogr2/auto-orient/" alt="图像合成效果图"></p>
+<h3 id="（三）-PorterDuffXfermode-实例"><a href="#（三）-PorterDuffXfermode-实例" class="headerlink" title="（三） PorterDuffXfermode 实例"></a>（三） PorterDuffXfermode 实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   - Xfermode 图层混合模式的使用</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> [*昨日重现*] lhy_ycu@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> version 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PorterDuffXfermodeView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Paint mPaint;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 图层混合模式</span></span><br><span class="line">    <span class="keyword">private</span> Xfermode mXfermode;</span><br><span class="line">    <span class="comment">// 控件大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mWidth;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mHeight;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Bitmap mSourceBitmap;</span><br><span class="line">    <span class="keyword">private</span> Bitmap mDestBitmap;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Rect mBottomSrcRect;</span><br><span class="line">    <span class="keyword">private</span> Rect mBottomDestRect;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Rect mTopSrcRect;</span><br><span class="line">    <span class="keyword">private</span> Rect mTopDestRect;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PorterDuffXfermodeView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PorterDuffXfermodeView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">        init(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        mPaint = <span class="keyword">new</span> Paint();</span><br><span class="line">        mPaint.setAntiAlias(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        mSourceBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_src);</span><br><span class="line">        mDestBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_dest);</span><br><span class="line"></span><br><span class="line">        mXfermode = <span class="keyword">new</span> PorterDuffXfermode(PorterDuff.Mode.SRC);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</span><br><span class="line">        mWidth = w;</span><br><span class="line">        mHeight = h;</span><br><span class="line">        mBottomSrcRect = <span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, mDestBitmap.getWidth(), mDestBitmap.getHeight());</span><br><span class="line">        mBottomDestRect = <span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, mWidth, mHeight / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        mTopSrcRect = <span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, mSourceBitmap.getWidth(), mSourceBitmap.getHeight());</span><br><span class="line">        mTopDestRect = <span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, mWidth, mHeight);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">        canvas.drawColor(Color.WHITE);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里会生成了一个全新的bitmap，之后所有的绘图操作都是在这个bitmap上进行的</span></span><br><span class="line">        <span class="comment">// 目的是区分哪一步的图形,应该与合成模式的bitmap去合成 运算；</span></span><br><span class="line">        <span class="keyword">int</span> saveCount = canvas.saveLayer(<span class="number">0</span>, <span class="number">0</span>, mWidth, mHeight, mPaint, Canvas.ALL_SAVE_FLAG);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 注意：先绘制目标图（底部）</span></span><br><span class="line">        canvas.drawBitmap(mDestBitmap, mBottomSrcRect, mBottomDestRect, mPaint);</span><br><span class="line">        <span class="comment">// 设置转换模式</span></span><br><span class="line">        mPaint.setXfermode(mXfermode);</span><br><span class="line">        <span class="comment">// 绘制源图 （顶部）</span></span><br><span class="line">        canvas.drawBitmap(mSourceBitmap, mTopSrcRect, mTopDestRect, mPaint);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 清除转换模式</span></span><br><span class="line">        mPaint.setXfermode(<span class="keyword">null</span>);</span><br><span class="line">        canvas.restoreToCount(saveCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Hawky wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的微信公众号</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Hawky 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Hawky
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://hawkyAndroid.github.io/2019/01/04/summery-view-porterduffxfermode/" title="Android View之Xfermode">http://hawkyAndroid.github.io/2019/01/04/summery-view-porterduffxfermode/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/View/" rel="tag"><i class="fa fa-tag"></i> View</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/03/summary-view-fanprogress/" rel="next" title="Android View之扇形进度动画">
+                <i class="fa fa-chevron-left"></i> Android View之扇形进度动画
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        ﻿<!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=23db2a3cac8bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
   </div>
 
 
@@ -497,7 +825,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Job-Skills"><span class="nav-number">1.</span> <span class="nav-text">Job Skills</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#（一）-Xfermode-概述"><span class="nav-number">1.</span> <span class="nav-text">（一） Xfermode 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（二）-PorterDuff-Mode-枚举"><span class="nav-number">2.</span> <span class="nav-text">（二） PorterDuff.Mode 枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图像合成效果图"><span class="nav-number">2.1.</span> <span class="nav-text">图像合成效果图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（三）-PorterDuffXfermode-实例"><span class="nav-number">3.</span> <span class="nav-text">（三） PorterDuffXfermode 实例</span></a></li></ol></div>
             
 
           </div>
