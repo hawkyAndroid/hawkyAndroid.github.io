@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[网络安全之OSI七层模型]]></title>
+    <url>%2F2019%2F05%2F24%2Fsummary-network-security-01%2F</url>
+    <content type="text"><![CDATA[OSI七层模型物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如：HUB、水晶头、线缆。 数据链路层：如：MAC。 网络层：寻址和路由。如：IP、ICMP(ping)、ARP(IP-&gt;mac)、路由器。 传输层： 会话层： 表示层：]]></content>
+      <categories>
+        <category>Security</category>
+      </categories>
+      <tags>
+        <tag>Security</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[股票投资建议]]></title>
     <url>%2F2019%2F05%2F21%2Fsummary-stock-investment%2F</url>
     <content type="text"><![CDATA[投资要素投资者要在金融市场获利，有以下5个先决要素： 知识：学以致用、不断总结。 耐心：耐心等待入市良机和平仓机会。 胆识：在适当的时间果断地做出买卖决定。 健康：保持足够精力、头脑保持清醒、不带负面情绪。 资本：不过度投机、注意止损。 炒股规则建议1、每次入市买卖，应该设定止损，以不超过本钱的1/10为宜。止损一旦设置要坚决执行，不可随意撤消。 2、顺势而为。只在市场活跃时参与买卖，如果无法把握市场的趋势，就不要入市。 3、不要频繁交易，不要透支买股票。 4、只要对走势有怀疑，就应立即平仓出局。 5、买卖中获利颇丰时可将部分利润提取，已备不时之需，保持健康稳定的操作心态。 6、不轻言加码、切忌抱着只能赢不能输的心态。 7、不轻信他人言论、凡是先详细研究，不要盲目入市和平仓。]]></content>
