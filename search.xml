@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[网络安全之OSI七层模型]]></title>
     <url>%2F2019%2F05%2F24%2Fsummary-network-security-01%2F</url>
-    <content type="text"><![CDATA[OSI七层模型物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如：HUB、水晶头、线缆。 数据链路层：如：MAC。 网络层：寻址和路由。如：IP、ICMP(ping)、ARP(IP-&gt;mac)、路由器。 传输层： 会话层： 表示层：]]></content>
+    <content type="text"><![CDATA[OSI七层模型OSI：Open System Interconnection(开放系统互联) 物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如：HUB、水晶头、线缆。 数据链路层：如：MAC。 网络层：寻址和路由。如：IP、ICMP(ping)、ARP(IP-&gt;mac)、路由器。 传输层： 会话层： 表示层： 应用层：]]></content>
       <categories>
         <category>Security</category>
       </categories>

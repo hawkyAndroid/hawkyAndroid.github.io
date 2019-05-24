@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hawkyAndroid.github.io/"/>
-  <updated>2019-05-24T14:51:07.112Z</updated>
+  <updated>2019-05-24T15:01:15.565Z</updated>
   <id>http://hawkyAndroid.github.io/</id>
   
   <author>
@@ -21,15 +21,16 @@
     <link href="http://hawkyAndroid.github.io/2019/05/24/summary-network-security-01/"/>
     <id>http://hawkyAndroid.github.io/2019/05/24/summary-network-security-01/</id>
     <published>2019-05-24T14:43:07.000Z</published>
-    <updated>2019-05-24T14:51:07.112Z</updated>
+    <updated>2019-05-24T15:01:15.565Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如：HUB、水晶头、线缆。</p><p>数据链路层：如：MAC。</p><p>网络层：寻址和路由。如：IP、ICMP(ping)、ARP(IP-&gt;mac)、路由器。</p><p>传输层：</p><p>会话层：</p><p>表示层：</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>OSI：Open System Interconnection(开放系统互联)</p><pre><code>物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如：HUB、水晶头、线缆。数据链路层：如：MAC。网络层：寻址和路由。如：IP、ICMP(ping)、ARP(IP-&gt;mac)、路由器。传输层：会话层：表示层：应用层：</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;OSI七层模型&quot;&gt;&lt;a href=&quot;#OSI七层模型&quot; class=&quot;headerlink&quot; title=&quot;OSI七层模型&quot;&gt;&lt;/a&gt;OSI七层模型&lt;/h3&gt;&lt;p&gt;物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如
+        &lt;h3 id=&quot;OSI七层模型&quot;&gt;&lt;a href=&quot;#OSI七层模型&quot; class=&quot;headerlink&quot; title=&quot;OSI七层模型&quot;&gt;&lt;/a&gt;OSI七层模型&lt;/h3&gt;&lt;p&gt;OSI：Open System Interconnection(开放系统互联)&lt;/p&gt;
+&lt;pre&gt;&lt;
       
     
     </summary>
