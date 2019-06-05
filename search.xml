@@ -25,7 +25,7 @@
   <entry>
     <title><![CDATA[网络安全之OSI七层模型]]></title>
     <url>%2F2019%2F05%2F24%2Fsummary-network-security-01%2F</url>
-    <content type="text"><![CDATA[OSI七层模型OSI：Open System Interconnection(开放系统互联) 物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如：HUB、水晶头、线缆。 数据链路层：如：MAC。 网络层：寻址和路由。如：IP、ICMP(ping)、ARP(IP-&gt;mac)、路由器。 传输层：控制主机之间传输的数据流。如：TCP、UDP。 TCP：包头标记SYN、FIN、ACK。 UDP：面向不可靠链接，发送不管。 知名端口&lt;1024 会话层： 表示层： 应用层：是最难保护的一层。如：SMTP(简单邮件传输协议)、FTP、TELNET、HTTP、SNMP]]></content>
+    <content type="text"><![CDATA[OSI七层模型OSI：Open System Interconnection(开放系统互联) 物理层：由传输在线缆上的电子信号组成，威胁是搭线窃听和监听，保护措施是加密、数据标签、流量填充等。如：HUB、水晶头、线缆。 数据链路层：如：MAC。 网络层：寻址和路由。如：IP、ICMP(ping)、ARP(IP-&gt;mac)、路由器。 传输层：控制主机之间传输的数据流。如：TCP、UDP。 TCP：包头标记SYN、FIN、ACK。 UDP：面向不可靠链接，发送不管。 知名端口&lt;1024 会话层： 表示层： 应用层：是最难保护的一层。如：SMTP(简单邮件传输协议)、FTP、TELNET、HTTP、SNMP。 SMTP：简单邮件传输协议。威胁是邮件炸弹、病毒、匿名邮件、木马，保护措施是认证、附件病毒扫描、用户安全意识教育。 FTP：文件传输协议。威胁是明文传输，黑客恶意传输非法使用等，保护措施是只允许匿名登录、单独的服务器分区、禁止执行程序。 TELNET：威胁是恶意程序。 HTTP：威胁是明文传输。 SNMP：威胁是明文传输、信息泄露。 DNS：威胁是DNS欺骗/中毒、区域文件被盗，保护措施是防火墙过滤所有的区域文件传输、仅仅允许受新人的主机或者指定主机的区域文件传输。]]></content>
       <categories>
         <category>Security</category>
       </categories>
