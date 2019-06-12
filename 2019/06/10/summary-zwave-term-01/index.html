@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="Z-Wave使用低于1Ghz的频率，避免了2.4 GHz和5 GHz频段的拥挤。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(广播、多播、单播)-&amp;gt;Z-Wave无线模组-&amp;gt; 串口转USB(二进制数据) 专业术语射频：用来收发无线(空中)数据包">
+<meta name="description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
 <meta name="keywords" content="ZWave">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Z-Wave系列之术语篇">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2019/06/10/summary-zwave-term-01/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="Z-Wave使用低于1Ghz的频率，避免了2.4 GHz和5 GHz频段的拥挤。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(广播、多播、单播)-&amp;gt;Z-Wave无线模组-&amp;gt; 串口转USB(二进制数据) 专业术语射频：用来收发无线(空中)数据包">
+<meta property="og:description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-11T15:06:43.192Z">
+<meta property="og:updated_time" content="2019-06-12T14:50:29.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Z-Wave系列之术语篇">
-<meta name="twitter:description" content="Z-Wave使用低于1Ghz的频率，避免了2.4 GHz和5 GHz频段的拥挤。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(广播、多播、单播)-&amp;gt;Z-Wave无线模组-&amp;gt; 串口转USB(二进制数据) 专业术语射频：用来收发无线(空中)数据包">
+<meta name="twitter:description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
 
 
 
@@ -417,8 +417,12 @@
       
 
       
-        <p>Z-Wave使用低于1Ghz的频率，避免了2.4 GHz和5 GHz频段的拥挤。</p>
-<h3 id="串口工具"><a href="#串口工具" class="headerlink" title="串口工具"></a>串口工具</h3><p>PC Controller：设备(控制)操作工具 类似网关<br>USB转串口(二进制数据)-&gt; Z-Wave无线模组-&gt;RF(广播、多播、单播)</p>
+        <pre><code>Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。
+
+Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。
+
+Z-Wave最多支持232个节点。
+</code></pre><h3 id="串口工具"><a href="#串口工具" class="headerlink" title="串口工具"></a>串口工具</h3><p>PC Controller：设备(控制)操作工具 类似网关<br>USB转串口(二进制数据)-&gt; Z-Wave无线模组-&gt;RF(广播、多播、单播)</p>
 <p>Zniffer：抓包工具<br>RF(广播、多播、单播)-&gt;Z-Wave无线模组-&gt; 串口转USB(二进制数据)</p>
 <h3 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h3><p>射频：用来收发无线(空中)数据包。</p>
 <p>串口：用来收发有线数据包。是指数据一位一位地顺序传送，<br>其特点是通信线路简单，只要一对传输线就可以实现双向通信。</p>
@@ -426,7 +430,8 @@
 <p>COM口：电脑上的异步串行通信接口(已被USB取代)。</p>
 <p>UART：Universal Asynchronous Receiver/Transmitter 通用异步收发传输器。</p>
 <p>USART：Universal Synchronous/Asynchronous Receiver/Transmitter 通用同步异步收发传输器。<br>（同步通信和异步通信的区别是：时钟线的有无。同步通信有时钟线，收发双方通过统一的时钟来确定何时进行数据的传输，如I2C和SPI。异步通信没有时钟线，只能在数据的头和尾加入标志位来区分不同的数据帧，接收数据之前也要预先知道波特率的大小，传输效率比同步通信要低）</p>
-<p>Smart Start：网关添加DSK（可通过扫描DSK二维码或Configuration Report得到）后，若含该DSK的子设备处于出网状态（出厂模式，而且子设备会一直发Smart Start），那么子设备即将入网（相当于处于入网模式，该模式下的入网比传统入网所需时间更长）</p>
+<p>Smart Start：网关添加DSK（可通过扫描DSK二维码或Configuration Report得到）后，若含该DSK(Device Specific Key)的子设备处于出网状态（出厂模式，而且子设备会一直发Smart Start），那么子设备即将入网（相当于处于入网模式，该模式下的入网比传统入网所需时间更长）</p>
+<p>【注意】Z-Wave 500系列 外置flash，单品OTA升级后可能会出现Product ID不对，此时单品需要重新入网。</p>
 
       
     </div>
