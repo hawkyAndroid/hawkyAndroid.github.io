@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
+<meta name="description" content="关联组（Association Group）是指设备包含具有关联特征的功能列表，其中每个功能分为1组，该组可以设置多个节点进行关联（  Association）。  【注意】每个Z-Wave子设备至少含有一个名为LifeLine的关联组，而且必须含有1号（网关）节点，否则设备无法通过网关进行操作。">
 <meta name="keywords" content="ZWave">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Z-Wave系列之术语篇">
-<meta property="og:url" content="http://hawkyAndroid.github.io/2019/06/10/summary-zwave-term-01/index.html">
+<meta property="og:title" content="Z-Wave指令篇之Association Group">
+<meta property="og:url" content="http://hawkyAndroid.github.io/2019/06/13/summary-zwave-association-group/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
+<meta property="og:description" content="关联组（Association Group）是指设备包含具有关联特征的功能列表，其中每个功能分为1组，该组可以设置多个节点进行关联（  Association）。  【注意】每个Z-Wave子设备至少含有一个名为LifeLine的关联组，而且必须含有1号（网关）节点，否则设备无法通过网关进行操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-12T14:50:29.956Z">
+<meta property="og:updated_time" content="2019-06-13T14:48:58.298Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Z-Wave系列之术语篇">
-<meta name="twitter:description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
+<meta name="twitter:title" content="Z-Wave指令篇之Association Group">
+<meta name="twitter:description" content="关联组（Association Group）是指设备包含具有关联特征的功能列表，其中每个功能分为1组，该组可以设置多个节点进行关联（  Association）。  【注意】每个Z-Wave子设备至少含有一个名为LifeLine的关联组，而且必须含有1号（网关）节点，否则设备无法通过网关进行操作。">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://hawkyAndroid.github.io/2019/06/10/summary-zwave-term-01/"/>
+  <link rel="canonical" href="http://hawkyAndroid.github.io/2019/06/13/summary-zwave-association-group/"/>
 
 
 
 
 
-  <title>Z-Wave系列之术语篇 | Hawky的博客</title>
+  <title>Z-Wave指令篇之Association Group | Hawky的博客</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2019/06/10/summary-zwave-term-01/">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2019/06/13/summary-zwave-association-group/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hawky">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Z-Wave系列之术语篇</h1>
+          <h1 class="post-title" itemprop="name headline">Z-Wave指令篇之Association Group</h1>
         
 
         <div class="post-meta">
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T21:40:07+08:00">
-                2019-06-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-13T22:29:07+08:00">
+                2019-06-13
               </time>
             
 
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/2019/06/10/summary-zwave-term-01/" class="leancloud_visitors" data-flag-title="Z-Wave系列之术语篇">
+             <span id="/2019/06/13/summary-zwave-association-group/" class="leancloud_visitors" data-flag-title="Z-Wave指令篇之Association Group">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -417,22 +417,10 @@
       
 
       
-        <pre><code>Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。
+        <pre><code>关联组（Association Group）是指设备包含具有关联特征的功能列表，其中每个功能分为1组，该组可以设置多个节点进行关联（  Association）。
 
-Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。
-
-Z-Wave最多支持232个节点。
-</code></pre><h3 id="串口工具"><a href="#串口工具" class="headerlink" title="串口工具"></a>串口工具</h3><p>PC Controller：设备(控制)操作工具 类似网关<br>USB转串口(二进制数据)-&gt; Z-Wave无线模组-&gt;RF(广播、多播、单播)</p>
-<p>Zniffer：抓包工具<br>RF(广播、多播、单播)-&gt;Z-Wave无线模组-&gt; 串口转USB(二进制数据)</p>
-<h3 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h3><p>射频：用来收发无线(空中)数据包。</p>
-<p>串口：用来收发有线数据包。是指数据一位一位地顺序传送，<br>其特点是通信线路简单，只要一对传输线就可以实现双向通信。</p>
-<p>USB：Universal Serial Bus 通用串行总线。</p>
-<p>COM口：电脑上的异步串行通信接口(已被USB取代)。</p>
-<p>UART：Universal Asynchronous Receiver/Transmitter 通用异步收发传输器。</p>
-<p>USART：Universal Synchronous/Asynchronous Receiver/Transmitter 通用同步异步收发传输器。<br>（同步通信和异步通信的区别是：时钟线的有无。同步通信有时钟线，收发双方通过统一的时钟来确定何时进行数据的传输，如I2C和SPI。异步通信没有时钟线，只能在数据的头和尾加入标志位来区分不同的数据帧，接收数据之前也要预先知道波特率的大小，传输效率比同步通信要低）</p>
-<p>Smart Start：网关添加DSK（可通过扫描DSK二维码或Configuration Report得到）后，若含该DSK(Device Specific Key)的子设备处于出网状态（出厂模式，而且子设备会一直发Smart Start），那么子设备即将入网（相当于处于入网模式，该模式下的入网比传统入网所需时间更长）</p>
-<p>【注意】Z-Wave 500系列 外置flash，单品OTA升级后可能会出现Product ID不对，此时单品需要重新入网。</p>
-
+【注意】每个Z-Wave子设备至少含有一个名为LifeLine的关联组，而且必须含有1号（网关）节点，否则设备无法通过网关进行操作。
+</code></pre>
       
     </div>
     
@@ -484,7 +472,7 @@ Z-Wave最多支持232个节点。
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hawkyAndroid.github.io/2019/06/10/summary-zwave-term-01/" title="Z-Wave系列之术语篇">http://hawkyAndroid.github.io/2019/06/10/summary-zwave-term-01/</a>
+    <a href="http://hawkyAndroid.github.io/2019/06/13/summary-zwave-association-group/" title="Z-Wave指令篇之Association Group">http://hawkyAndroid.github.io/2019/06/13/summary-zwave-association-group/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -512,8 +500,8 @@ Z-Wave最多支持232个节点。
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/04/summary-webview-js-01/" rel="next" title="WebView与JS相互调用">
-                <i class="fa fa-chevron-left"></i> WebView与JS相互调用
+              <a href="/2019/06/10/summary-zwave-term/" rel="next" title="Z-Wave系列之术语篇">
+                <i class="fa fa-chevron-left"></i> Z-Wave系列之术语篇
               </a>
             
           </div>
@@ -597,17 +585,8 @@ Z-Wave最多支持232个节点。
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -626,7 +605,7 @@ Z-Wave最多支持232个节点。
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -720,22 +699,6 @@ Z-Wave最多支持232个节点。
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#串口工具"><span class="nav-number">1.</span> <span class="nav-text">串口工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专业术语"><span class="nav-number">2.</span> <span class="nav-text">专业术语</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
