@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2019/06/13/summary-zwave-association-group/">
+    <link itemprop="mainEntityOfPage" href="http://hawkyAndroid.github.io/2019/06/13/summary-zwave-command-class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hawky">
@@ -330,7 +330,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/13/summary-zwave-association-group/" itemprop="url">Z-Wave指令篇之Association Group</a></h1>
+                <a class="post-title-link" href="/2019/06/13/summary-zwave-command-class/" itemprop="url">Z-Wave系列之指令篇</a></h1>
         
 
         <div class="post-meta">
@@ -382,7 +382,7 @@
 
           
           
-             <span id="/2019/06/13/summary-zwave-association-group/" class="leancloud_visitors" data-flag-title="Z-Wave指令篇之Association Group">
+             <span id="/2019/06/13/summary-zwave-command-class/" class="leancloud_visitors" data-flag-title="Z-Wave系列之指令篇">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -417,14 +417,15 @@
       
         
           
-          关联组（Association Group）是指设备包含具有关联特征的功能列表，其中每个功能分为1组，该组可以设置多个节点进行关联（  Association）。
-
-【注意】每个Z-Wave子设备至少含有一个名为LifeLine的关联组，而且必须含有1号（网关）节点，否则设备无法通过网关进行操作。
+           Z-Wave Zniffer 抓包数据说明：
+Hex Data：F14221BE 01 410F0E 08 20 01 00 1626
+HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum
+【周末】 post z-wave command
 
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/06/13/summary-zwave-association-group/#more" rel="contents">
+            <a class="btn" href="/2019/06/13/summary-zwave-command-class/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
