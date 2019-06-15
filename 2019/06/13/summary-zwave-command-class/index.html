@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="Z-Wave Zniffer 抓包数据说明： Hex Data：F14221BE 01 410F0E 08 20 01 00 1626 HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum 【周末】 post z-wave command">
+<meta name="description" content="Z-Wave Zniffer 抓包数据说明： Hex Data：F14221BE 01 410F0E 08 20 01 00 1626 HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum  注意：每个Z-Wave子设备都含有Basic（GET、SET、REPORT）指令功">
 <meta name="keywords" content="ZWave">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Z-Wave系列之指令篇">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2019/06/13/summary-zwave-command-class/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="Z-Wave Zniffer 抓包数据说明： Hex Data：F14221BE 01 410F0E 08 20 01 00 1626 HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum 【周末】 post z-wave command">
+<meta property="og:description" content="Z-Wave Zniffer 抓包数据说明： Hex Data：F14221BE 01 410F0E 08 20 01 00 1626 HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum  注意：每个Z-Wave子设备都含有Basic（GET、SET、REPORT）指令功">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-15T10:58:44.586Z">
+<meta property="og:updated_time" content="2019-06-15T12:58:20.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Z-Wave系列之指令篇">
-<meta name="twitter:description" content="Z-Wave Zniffer 抓包数据说明： Hex Data：F14221BE 01 410F0E 08 20 01 00 1626 HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum 【周末】 post z-wave command">
+<meta name="twitter:description" content="Z-Wave Zniffer 抓包数据说明： Hex Data：F14221BE 01 410F0E 08 20 01 00 1626 HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum  注意：每个Z-Wave子设备都含有Basic（GET、SET、REPORT）指令功">
 
 
 
@@ -420,8 +420,161 @@
         <p> Z-Wave Zniffer 抓包数据说明：</p>
 <pre><code>Hex Data：F14221BE 01 410F0E 08 20 01 00 1626
 HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| checkSum
-</code></pre><p>【周末】 post z-wave command</p>
+</code></pre><p> 注意：每个Z-Wave子设备都含有Basic（GET、SET、REPORT）指令功能。</p>
+<h3 id="Z-Wave指令说明"><a href="#Z-Wave指令说明" class="headerlink" title="Z-Wave指令说明"></a>Z-Wave指令说明</h3><h4 id="（一）Association"><a href="#（一）Association" class="headerlink" title="（一）Association"></a>（一）Association</h4><p>1) Association Report</p>
+<pre><code>Hex Data：F1 42 21 BE 0C 41 0A 11 01 85 03 01 05 00 01 A5 BA
 
+F1 42 21 BE - HomeId
+0C -        Src Node
+41 0A 11    -
+01 -        Dst Node
+85 -        COMMAND_CLASS_ASSOCIATION（Command Class）
+03 -        ASSOCIATION_REPORT（Command）
+01 -        Grouping ID（关联组ID）
+05 -        Max Nodes Supported（该关联组最大的关联节点数）
+00 -        Reports to Follow
+01 -        NodeID （关联的节点号）
+A5 BA    -  checkSum（校验码）
+</code></pre><p>2）Association Groupings Report</p>
+<pre><code>F1 42 21 BE 0C 41 0C 0E 01 85 06 01 A2 0F
+
+F1 42 21 BE - HomeId
+0C -        Src Node
+41 0A 11    -
+01 -        Dst Node
+85 -        COMMAND_CLASS_ASSOCIATION（Command Class）      
+06 -        ASSOCIATION_GROUPINGS_REPORT（Command）
+01 -        Supported Groupings（支持的关联组数）
+A2 0F    -  checkSum（校验码）
+</code></pre><p>3）Association Specific Group Report</p>
+<pre><code>F1 42 21 BE 07 41 0C 0E 01 85 0C 02 AB 08
+
+F1 42 21 BE - HomeId
+07 -        Src Node
+41 0C 0E    -
+01 -        Dst Node
+85 -        COMMAND_CLASS_ASSOCIATION（Command Class）      
+0C -        ASSOCIATION_GROUPINGS_REPORT（Command）
+02 -        Group（指定的关联组）
+AB 08    -  checkSum（校验码）
+</code></pre><h4 id="（二）Association-Group"><a href="#（二）Association-Group" class="headerlink" title="（二）Association Group"></a>（二）Association Group</h4><p>1）Association Group Name Group Report</p>
+<pre><code>F1 42 21 BE 07 41 03 17 01 59 02 01 08 4C 69 66 65 6C 69 6E 65 06 78
+
+F1 42 21 BE - HomeId
+07 -        Src Node
+41 03 17    -
+01 -        Dst Node
+59 -        COMMAND_CLASS_ASSOCIATION_GRP_INFO（Command Class）      
+02 -        ASSOCIATION_GROUP_NAME_REPORT（Command）
+01 -        Grouping ID（关联组ID）
+08 -        Length of Name（关联组名字长度）
+4C 69 66 65 6C 69 6E 65 - Lifeline（Hex Ascii-&gt; String）
+06 78    -  checkSum（校验码）
+</code></pre><p>2）Association Group Command List Report</p>
+<pre><code>F1 42 21 BE 07 41 07 13 01 59 06 01 04 5A 01 20 03 0A 5E
+
+F1 42 21 BE - HomeId
+07 -        Src Node
+41 03 17    -
+01 -        Dst Node
+59 -        COMMAND_CLASS_ASSOCIATION_GRP_INFO（Command Class）      
+06 -        ASSOCIATION_GROUP_COMMAND_LIST_REPORT（Command）
+01 -        Grouping ID（关联组ID）
+04 -        List Length（支持的命令类长度）
+5A 01 20 03
+-- 5A 01（COMMAND_CLASS_DEVICE_RESET_LOCALLY | DEVICE_RESET_LOCALLY_NOTIFICATION）
+-- 20 03（COMMAND_CLASS_BASIC | BASIC_REPORT）
+0A 5E    -  checkSum（校验码）
+</code></pre><h4 id="（三）Basic"><a href="#（三）Basic" class="headerlink" title="（三）Basic"></a>（三）Basic</h4><p>1）Basic Report</p>
+<pre><code>F1 42 21 BE 07 41 07 10 01 20 03 00 00 00 20 6D
+
+F1 42 21 BE - HomeId
+07 -        Src Node
+41 07 10    -
+01 -        Dst Node
+20 -        COMMAND_CLASS_BASIC（Command Class）      
+03 -        BASIC_REPORT（Command）
+00 -        Current Value
+00 -        Target Value
+00 -        Duration
+20 6D    -  checkSum（校验码）
+</code></pre><h4 id="（四）-Configuration"><a href="#（四）-Configuration" class="headerlink" title="（四） Configuration"></a>（四） Configuration</h4><p>1）Configuration Report</p>
+<pre><code>F1 42 21 BE 0C 41 0E 1F 01 70 06 XX 10 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX 31 BC
+
+F1 42 21 BE - HomeId
+0C -        Src Node
+41 0E 1F    -
+01 -        Dst Node
+70 -        COMMAND_CLASS_CONFIGURATION（Command Class）      
+06 -        CONFIGURATION_REPORT（Command）
+XX -        配置参数（规格说明书定义的）
+10 -        参数值的长度 16bytes
+XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX：参数值
+31 BC    -  checkSum（校验码）
+</code></pre><h4 id="（五）-Firmware-Update-Md"><a href="#（五）-Firmware-Update-Md" class="headerlink" title="（五） Firmware Update Md"></a>（五） Firmware Update Md</h4><p>1）Firmware Md Report</p>
+<pre><code>F1 42 21 BE 0C 41 0F 17 01 7A 02 XX XX 01 16 3C D0 FF 00 00 28 6A 7F
+
+F1 42 21 BE - HomeId
+0C -        Src Node
+41 0F 17    -
+01 -        Dst Node
+7A -        COMMAND_CLASS_FIRMWARE_UPDATE_MD （Command Class）      
+02 -        FIRMWARE_MD_REPORT （Command）
+XX XX -     Manufacturer ID（厂商ID）
+01 16 -     Firmware 0 ID
+3C D0 -     Firmware 0 Checksum
+FF -        Firmware Upgradable
+00 -        Number of Firmware Targets
+00 28 -     Max Fragment Size
+6A 7F    -  checkSum（校验码）
+</code></pre><h4 id="（六）-Manufacturer-Specific"><a href="#（六）-Manufacturer-Specific" class="headerlink" title="（六） Manufacturer Specific"></a>（六） Manufacturer Specific</h4><p>1）Manufacturer Specific Report</p>
+<pre><code>F1 42 21 BE 0C 41 03 13 01 72 05 XX XX 01 01 XX XX 80 3E
+
+F1 42 21 BE - HomeId
+0C -        Src Node
+41 03 13    -
+01 -        Dst Node
+72 -        COMMAND_CLASS_MANUFACTURER_SPECIFIC （Command Class）      
+05 -        MANUFACTURER_SPECIFIC_REPORT （Command）
+XX XX -     Manufacturer ID （厂商ID）
+01 01 -     Product Type ID （产品类型，其中第二个字节 01:
+EU=0x00，US=0x01，ANZ=0x02，HK=0x03，IN=0x09，JP=0x0A，
+RU=0x1A，IL=0x1B，KR=0x1C，CN=0x1D）
+XX XX -     Product ID （产品ID）
+80 3E    -  checkSum（校验码）
+</code></pre><h4 id="（七）-Version"><a href="#（七）-Version" class="headerlink" title="（七） Version"></a>（七） Version</h4><p>1）Version Report</p>
+<pre><code>F1 42 21 BE 0C 41 07 14 01 86 12 03 06 02 01 03 01 00 EC 6F
+
+F1 42 21 BE - HomeId
+0C -        Src Node
+41 07 14    -
+01 -        Dst Node
+86 -        COMMAND_CLASS_VERSION （Command Class）      
+12 -        VERSION_REPORT （Command）
+03 -        Z-Wave Library Type
+06 -        Z-Wave Protocol Version
+02 -        Z-Wave Protocol Sub Version
+01 -        Firmware 0 Version
+03 -        Firmware 0 Sub Version
+01 -        Hardware Version
+00 -        Number of firmware targets
+EC 6F    -  checkSum（校验码）
+</code></pre><h4 id="（八）-Z-Wave-Info"><a href="#（八）-Z-Wave-Info" class="headerlink" title="（八） Z-Wave+Info"></a>（八） Z-Wave+Info</h4><p>1）Z-Wave+ Info Report</p>
+<pre><code>F1 42 21 BE 0C 41 08 14 01 5E 02 01 05 00 07 00 07 00 66 BD
+
+F1 42 21 BE - HomeId
+0C -        Src Node
+41 08 14    -
+01 -        Dst Node
+5E -        COMMAND_CLASS_ZWAVEPLUS_INFO （Command Class）      
+02 -        ZWAVEPLUS_INFO_REPORT （Command）
+01 -        Z-Wave+ Version
+05 -        Role Type：ROLE+TYPE_SLAVE_ALWAYS_ON=0x05
+00 -        Node Type：NODE_TYPE_ZWAVEPLUS_NODE=0x00
+07 00 -     Installer Icon Type
+07 00 -     User Icon Type
+66 BD    -  checkSum（校验码）
+</code></pre>
       
     </div>
     
@@ -586,8 +739,17 @@ HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| 
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -700,6 +862,22 @@ HomeId | src node | xxxxxx | dst node | Command Class | Command | Value/Params| 
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Z-Wave指令说明"><span class="nav-number">1.</span> <span class="nav-text">Z-Wave指令说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（一）Association"><span class="nav-number">1.1.</span> <span class="nav-text">（一）Association</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（二）Association-Group"><span class="nav-number">1.2.</span> <span class="nav-text">（二）Association Group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（三）Basic"><span class="nav-number">1.3.</span> <span class="nav-text">（三）Basic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（四）-Configuration"><span class="nav-number">1.4.</span> <span class="nav-text">（四） Configuration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（五）-Firmware-Update-Md"><span class="nav-number">1.5.</span> <span class="nav-text">（五） Firmware Update Md</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（六）-Manufacturer-Specific"><span class="nav-number">1.6.</span> <span class="nav-text">（六） Manufacturer Specific</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（七）-Version"><span class="nav-number">1.7.</span> <span class="nav-text">（七） Version</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（八）-Z-Wave-Info"><span class="nav-number">1.8.</span> <span class="nav-text">（八） Z-Wave+Info</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
