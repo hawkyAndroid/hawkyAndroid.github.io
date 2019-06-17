@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Hawky的博客">
 <meta property="og:description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-15T10:56:01.108Z">
+<meta property="og:updated_time" content="2019-06-17T11:43:07.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Z-Wave系列之术语篇">
 <meta name="twitter:description" content="Z-Wave使用低于1Ghz的频段，避免了2.4 GHz和5 GHz频段的拥挤。  Z-Wave使用消息确认和Mesh网络提供安全可靠的双向通信，确保互操作性的100%。  Z-Wave最多支持232个节点。 串口工具PC Controller：设备(控制)操作工具 类似网关USB转串口(二进制数据)-&amp;gt; Z-Wave无线模组-&amp;gt;RF(广播、多播、单播) Zniffer：抓包工具RF(">
@@ -435,11 +435,11 @@ Z-Wave最多支持232个节点。
 <p>Smart Start：网关添加DSK（可通过扫描DSK二维码或Configuration Report得到）后，若含该DSK(Device Specific Key)的子设备处于出网状态（出厂模式，而且子设备会一直发Smart Start），那么子设备即将入网（相当于处于入网模式，该模式下的入网比传统入网所需时间更长）。</p>
 <p>Reset：重置网关。网关里面所有子节点设备将全部移除、恢复所有配置为默认值、清除Association节点、HomeId也会更新。注意：这里移除后的子设备必须先出网才能重新入网。</p>
 <p>Device Reset (Locally Notification)：子设备重置上报给网关，网关需要发NOP指令确认子设备已经出网，此时子设备处于出网状态。</p>
+<p>Learn Mode：学习模式需要先把待学习的A网关Reset（出厂设置）后再进行的操作。开启学习模式后，A网关处于学习状态，学习成功后成为主网关B的子(网关)设备。子网关A此时成为控制器，拥有添加&amp;删除子设备功能（节点号仍是由主网关B分配）。但子网关A仅作为主网关B的中转功能，不作为存储设备（不存储数据）。</p>
+<p>Power Level：PowerLevel CC用于通过降低功率来确定链路边界，直到链路开始丢失帧。这可用于确定网络的整体运行状况。此命令类仅用于安装或测试情况。（Powerlevel CC is used to determine the link margin by lowering the power until the link starts to lose frames. This can be used to determine the overall health of the network. This Command Class is only used in an installation or test situation.）</p>
+<p>Supervision：Supervision 命令类允许发送节点请求来自接收节点的应用程序级传递确认。Safety 和 security 相关的应用程序，如门锁，可能需要通过 Supervision 命令类立即确认命令。此外，可以通过使用 Supervision 命令类来降低延迟攻击的风险。（The Supervision Command Class allows a sending node to request application-level delivery confirmation from a receiving node. Safety and security related applications like door locks may require immediate command confirmations via the Supervision Command Class. Further, the risk of a delay attack can be mitigated through the use of the Supervision Command Class.）</p>
+<p>Wake Up：仅用于睡眠设备，设置睡眠唤醒时间间隔。</p>
 <p>Z-Wave Plus：Plus是Z-Wave（经典）规格的加强版，目前新版必须支持Plus规格才能过认证。</p>
-<p>Power Level：</p>
-<p>Learn Mode：</p>
-<p>Wake Up：</p>
-<p>Supervision：</p>
 <p>【注意】Z-Wave 500系列 外置flash，单品OTA（Over the Air）升级后可能会出现Product ID不对，此时单品需要重新入网。</p>
 
       
