@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="蓝牙：基于2.4GHz ISM频段的无线通信协议，其市场定位是个体和民用。 BLE Hopping跳频技术：为了增加容量，增大抗干扰能力，连接不会长期使用一个固定的Physical Channel，而是在多个Channel（如37个）之间随机但有规律的切换。 (一) BLE的协议框架注意：至下而上  【BLE Application(Profiles)】 &amp;gt;&amp;gt; Thermomter、B">
+<meta name="description" content="蓝牙：基于2.4GHz ISM频段的无线通信协议，其市场定位是个体和民用。 BLE Hopping跳频技术：为了增加容量，增大抗干扰能力，连接不会长期使用一个固定的Physical Channel，而是在多个Channel（如37个）之间随机但有规律的切换。 Mesh：是一种新型的无线网络架构，蓝牙Mesh组网内每台设备均通过低功耗蓝牙无线连接进行通信，而这些设备被称之为节点。每个节点都能发送和接">
 <meta name="keywords" content="BLE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BLE协议总结">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2019/06/02/summary-ble-protocol/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="蓝牙：基于2.4GHz ISM频段的无线通信协议，其市场定位是个体和民用。 BLE Hopping跳频技术：为了增加容量，增大抗干扰能力，连接不会长期使用一个固定的Physical Channel，而是在多个Channel（如37个）之间随机但有规律的切换。 (一) BLE的协议框架注意：至下而上  【BLE Application(Profiles)】 &amp;gt;&amp;gt; Thermomter、B">
+<meta property="og:description" content="蓝牙：基于2.4GHz ISM频段的无线通信协议，其市场定位是个体和民用。 BLE Hopping跳频技术：为了增加容量，增大抗干扰能力，连接不会长期使用一个固定的Physical Channel，而是在多个Channel（如37个）之间随机但有规律的切换。 Mesh：是一种新型的无线网络架构，蓝牙Mesh组网内每台设备均通过低功耗蓝牙无线连接进行通信，而这些设备被称之为节点。每个节点都能发送和接">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-03T14:24:08.957Z">
+<meta property="og:updated_time" content="2019-06-24T14:19:52.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BLE协议总结">
-<meta name="twitter:description" content="蓝牙：基于2.4GHz ISM频段的无线通信协议，其市场定位是个体和民用。 BLE Hopping跳频技术：为了增加容量，增大抗干扰能力，连接不会长期使用一个固定的Physical Channel，而是在多个Channel（如37个）之间随机但有规律的切换。 (一) BLE的协议框架注意：至下而上  【BLE Application(Profiles)】 &amp;gt;&amp;gt; Thermomter、B">
+<meta name="twitter:description" content="蓝牙：基于2.4GHz ISM频段的无线通信协议，其市场定位是个体和民用。 BLE Hopping跳频技术：为了增加容量，增大抗干扰能力，连接不会长期使用一个固定的Physical Channel，而是在多个Channel（如37个）之间随机但有规律的切换。 Mesh：是一种新型的无线网络架构，蓝牙Mesh组网内每台设备均通过低功耗蓝牙无线连接进行通信，而这些设备被称之为节点。每个节点都能发送和接">
 
 
 
@@ -419,6 +419,7 @@
       
         <p>蓝牙：基于2.4GHz ISM频段的无线通信协议，其市场定位是个体和民用。</p>
 <p>BLE Hopping跳频技术：为了增加容量，增大抗干扰能力，连接不会长期使用一个<br>固定的Physical Channel，而是在多个Channel（如37个）之间随机但有规律的切换。</p>
+<p>Mesh：是一种新型的无线网络架构，蓝牙Mesh组网内每台设备均通过低功耗蓝牙无线连接进行通信，而这些设备被称之为节点。每个节点都能发送和接收消息，消息能够在节点之间被中继，从而让消息传输至比无线电波正常传输距离更远的位置。归结成一句话：蓝牙Mesh组网 就是一种在同一个网络内任意蓝牙设备都进行数据交互的技术。这样的话，APP只要能发现组网内的任何一台设备，就能由设备发现组网内的其他Mesh设备，并和任何一台设备建立连接并控制。</p>
 <h3 id="一-BLE的协议框架"><a href="#一-BLE的协议框架" class="headerlink" title="(一) BLE的协议框架"></a>(一) BLE的协议框架</h3><pre><code>注意：至下而上
 
 【BLE Application(Profiles)】 &gt;&gt;
