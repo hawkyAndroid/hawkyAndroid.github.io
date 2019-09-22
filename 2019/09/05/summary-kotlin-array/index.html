@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="Kotlin数组使用指定的大小和init函数声明数组构造函数，其中 init函数用于返回带有索引的数组元素。12345678Array(size: Int, init: (Int) -&amp;gt; T)  举例说明：var myArray1 = arrayOf(1, &quot;Hello&quot;, 4.0, 2, 10, 32)// 不指定数据类型（必须初始化数组元素）var myArray2 = intArray">
+<meta name="description" content="Kotlin数组Kotlin中的数组本质上是可读写的，大小固定。 1）Array构造：使用指定的大小和init函数声明数组构造函数。12345// Array(size: Int) &amp;#123;init: (Int) -&amp;gt; T&amp;#125;val array = Array&amp;lt;Int&amp;gt;(3) &amp;#123; i -&amp;gt; i * i &amp;#125;for (item in array)">
 <meta name="keywords" content="Kotlin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin之数组(带完善)">
+<meta property="og:title" content="Kotlin之数组">
 <meta property="og:url" content="http://hawkyAndroid.github.io/2019/09/05/summary-kotlin-array/index.html">
 <meta property="og:site_name" content="Hawky的博客">
-<meta property="og:description" content="Kotlin数组使用指定的大小和init函数声明数组构造函数，其中 init函数用于返回带有索引的数组元素。12345678Array(size: Int, init: (Int) -&amp;gt; T)  举例说明：var myArray1 = arrayOf(1, &quot;Hello&quot;, 4.0, 2, 10, 32)// 不指定数据类型（必须初始化数组元素）var myArray2 = intArray">
+<meta property="og:description" content="Kotlin数组Kotlin中的数组本质上是可读写的，大小固定。 1）Array构造：使用指定的大小和init函数声明数组构造函数。12345// Array(size: Int) &amp;#123;init: (Int) -&amp;gt; T&amp;#125;val array = Array&amp;lt;Int&amp;gt;(3) &amp;#123; i -&amp;gt; i * i &amp;#125;for (item in array)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-08T09:46:48.427Z">
+<meta property="og:updated_time" content="2019-09-22T16:26:03.730Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin之数组(带完善)">
-<meta name="twitter:description" content="Kotlin数组使用指定的大小和init函数声明数组构造函数，其中 init函数用于返回带有索引的数组元素。12345678Array(size: Int, init: (Int) -&amp;gt; T)  举例说明：var myArray1 = arrayOf(1, &quot;Hello&quot;, 4.0, 2, 10, 32)// 不指定数据类型（必须初始化数组元素）var myArray2 = intArray">
+<meta name="twitter:title" content="Kotlin之数组">
+<meta name="twitter:description" content="Kotlin数组Kotlin中的数组本质上是可读写的，大小固定。 1）Array构造：使用指定的大小和init函数声明数组构造函数。12345// Array(size: Int) &amp;#123;init: (Int) -&amp;gt; T&amp;#125;val array = Array&amp;lt;Int&amp;gt;(3) &amp;#123; i -&amp;gt; i * i &amp;#125;for (item in array)">
 
 
 
@@ -144,7 +144,7 @@
 
 
 
-  <title>Kotlin之数组(带完善) | Hawky的博客</title>
+  <title>Kotlin之数组 | Hawky的博客</title>
   
 
 
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin之数组(带完善)</h1>
+          <h1 class="post-title" itemprop="name headline">Kotlin之数组</h1>
         
 
         <div class="post-meta">
@@ -381,7 +381,7 @@
 
           
           
-             <span id="/2019/09/05/summary-kotlin-array/" class="leancloud_visitors" data-flag-title="Kotlin之数组(带完善)">
+             <span id="/2019/09/05/summary-kotlin-array/" class="leancloud_visitors" data-flag-title="Kotlin之数组">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -417,8 +417,12 @@
       
 
       
-        <h2 id="Kotlin数组"><a href="#Kotlin数组" class="headerlink" title="Kotlin数组"></a>Kotlin数组</h2><p>使用指定的大小和init函数声明数组构造函数，其中 init函数用于返回带有索引的数组元素。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Array(size: Int, init: (Int) -&gt; T)  </span><br><span class="line">举例说明：</span><br><span class="line">var myArray1 = arrayOf(<span class="number">1</span>, <span class="string">"Hello"</span>, <span class="number">4.0</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">32</span>)<span class="comment">// 不指定数据类型（必须初始化数组元素）</span></span><br><span class="line">var myArray2 = intArrayOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">32</span>)<span class="comment">// 指定数据类型</span></span><br><span class="line">myArray1.set(<span class="number">0</span>,<span class="number">5</span>)<span class="comment">// 修改值</span></span><br><span class="line">myArray1[<span class="number">0</span>] = <span class="number">5</span><span class="comment">// 修改值</span></span><br><span class="line">val array = Array(<span class="number">5</span>) &#123; <span class="number">0</span> &#125;<span class="comment">// 0,0,0,0,0（必须初始化数组大小和元素）</span></span><br><span class="line">val array = Array(<span class="number">5</span>) &#123; i -&gt; i * i &#125;<span class="comment">// 0,1,4,9,16</span></span><br></pre></td></tr></table></figure></p>
-<p>【注意】Kotlin中的数组大小不变，元素可读写。</p>
+        <h2 id="Kotlin数组"><a href="#Kotlin数组" class="headerlink" title="Kotlin数组"></a>Kotlin数组</h2><p>Kotlin中的数组本质上是可读写的，大小固定。</p>
+<h4 id="1）Array构造：使用指定的大小和init函数声明数组构造函数。"><a href="#1）Array构造：使用指定的大小和init函数声明数组构造函数。" class="headerlink" title="1）Array构造：使用指定的大小和init函数声明数组构造函数。"></a>1）Array构造：使用指定的大小和init函数声明数组构造函数。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Array(size: Int) &#123;init: (Int) -&gt; T&#125;</span></span><br><span class="line">val array = Array&lt;Int&gt;(<span class="number">3</span>) &#123; i -&gt; i * i &#125;</span><br><span class="line"><span class="keyword">for</span> (item in array) &#123;</span><br><span class="line">    println(<span class="string">"item = $item"</span>)<span class="comment">// 0 1 4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2）-arrayOf-：这样初始化的array修改时只能修改为包含的类型。"><a href="#2）-arrayOf-：这样初始化的array修改时只能修改为包含的类型。" class="headerlink" title="2） arrayOf()：这样初始化的array修改时只能修改为包含的类型。"></a>2） arrayOf()：这样初始化的array修改时只能修改为包含的类型。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">val array = arrayOf(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>)</span><br><span class="line"><span class="keyword">for</span> (item in array) &#123;</span><br><span class="line">    println(<span class="string">"item = $item"</span>)<span class="comment">// 10 20 30</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3）arrayOf：这样初始化的array可以修改为任意类型。"><a href="#3）arrayOf：这样初始化的array可以修改为任意类型。" class="headerlink" title="3）arrayOf：这样初始化的array可以修改为任意类型。"></a>3）arrayOf<any>：这样初始化的array可以修改为任意类型。</any></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">val array = arrayOf&lt;Any&gt;(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>)</span><br><span class="line">array[<span class="number">0</span>] = <span class="string">"aa"</span></span><br><span class="line"><span class="keyword">for</span> (item in array) &#123;</span><br><span class="line">   println(<span class="string">"item = $item"</span>)<span class="comment">// aa 20 30</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4）intArrayOf：初始化为指定类型，并且只能修改为指定类型。"><a href="#4）intArrayOf：初始化为指定类型，并且只能修改为指定类型。" class="headerlink" title="4）intArrayOf：初始化为指定类型，并且只能修改为指定类型。"></a>4）intArrayOf：初始化为指定类型，并且只能修改为指定类型。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等价于 val array = arrayOf&lt;Int&gt;(10, 20, 30)</span></span><br><span class="line">val array = intArrayOf(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>)</span><br><span class="line">array.set(<span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line">array[<span class="number">1</span>] = <span class="number">200</span></span><br><span class="line"><span class="keyword">for</span> (index in array.indices) &#123;</span><br><span class="line">    println(<span class="string">"item = $&#123;array[index]&#125;"</span>)<span class="comment">// 100 200 30</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="【注意】arrayOf-“”-与arrayOf-的区别"><a href="#【注意】arrayOf-“”-与arrayOf-的区别" class="headerlink" title="【注意】arrayOf(“”)与arrayOf()的区别"></a>【注意】arrayOf(“”)与arrayOf<string>()的区别</string></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">val array1 = arrayOf(<span class="string">""</span>)</span><br><span class="line">val array2 = arrayOf&lt;String&gt;()</span><br><span class="line">println(<span class="string">"array1.size =$&#123;array1.size&#125;"</span>)<span class="comment">// 1</span></span><br><span class="line">println(<span class="string">"array2.size =$&#123;array2.size&#125;"</span>)<span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -471,7 +475,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://hawkyAndroid.github.io/2019/09/05/summary-kotlin-array/" title="Kotlin之数组(带完善)">http://hawkyAndroid.github.io/2019/09/05/summary-kotlin-array/</a>
+    <a href="http://hawkyAndroid.github.io/2019/09/05/summary-kotlin-array/" title="Kotlin之数组">http://hawkyAndroid.github.io/2019/09/05/summary-kotlin-array/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -721,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin数组"><span class="nav-number">1.</span> <span class="nav-text">Kotlin数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin数组"><span class="nav-number">1.</span> <span class="nav-text">Kotlin数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）Array构造：使用指定的大小和init函数声明数组构造函数。"><span class="nav-number">1.0.1.</span> <span class="nav-text">1）Array构造：使用指定的大小和init函数声明数组构造函数。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）-arrayOf-：这样初始化的array修改时只能修改为包含的类型。"><span class="nav-number">1.0.2.</span> <span class="nav-text">2） arrayOf()：这样初始化的array修改时只能修改为包含的类型。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）arrayOf：这样初始化的array可以修改为任意类型。"><span class="nav-number">1.0.3.</span> <span class="nav-text">3）arrayOf：这样初始化的array可以修改为任意类型。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）intArrayOf：初始化为指定类型，并且只能修改为指定类型。"><span class="nav-number">1.0.4.</span> <span class="nav-text">4）intArrayOf：初始化为指定类型，并且只能修改为指定类型。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#【注意】arrayOf-“”-与arrayOf-的区别"><span class="nav-number">1.0.5.</span> <span class="nav-text">【注意】arrayOf(“”)与arrayOf()的区别</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

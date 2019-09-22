@@ -12,9 +12,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Kotlin之数组(带完善)]]></title>
+    <title><![CDATA[Kotlin之数组]]></title>
     <url>%2F2019%2F09%2F05%2Fsummary-kotlin-array%2F</url>
-    <content type="text"><![CDATA[Kotlin数组使用指定的大小和init函数声明数组构造函数，其中 init函数用于返回带有索引的数组元素。12345678Array(size: Int, init: (Int) -&gt; T) 举例说明：var myArray1 = arrayOf(1, "Hello", 4.0, 2, 10, 32)// 不指定数据类型（必须初始化数组元素）var myArray2 = intArrayOf(1, 2, 10, 32)// 指定数据类型myArray1.set(0,5)// 修改值myArray1[0] = 5// 修改值val array = Array(5) &#123; 0 &#125;// 0,0,0,0,0（必须初始化数组大小和元素）val array = Array(5) &#123; i -&gt; i * i &#125;// 0,1,4,9,16 【注意】Kotlin中的数组大小不变，元素可读写。]]></content>
+    <content type="text"><![CDATA[Kotlin数组Kotlin中的数组本质上是可读写的，大小固定。 1）Array构造：使用指定的大小和init函数声明数组构造函数。12345// Array(size: Int) &#123;init: (Int) -&gt; T&#125;val array = Array&lt;Int&gt;(3) &#123; i -&gt; i * i &#125;for (item in array) &#123; println("item = $item")// 0 1 4&#125; 2） arrayOf()：这样初始化的array修改时只能修改为包含的类型。1234val array = arrayOf(10, 20, 30)for (item in array) &#123; println("item = $item")// 10 20 30&#125; 3）arrayOf：这样初始化的array可以修改为任意类型。12345val array = arrayOf&lt;Any&gt;(10, 20, 30)array[0] = "aa"for (item in array) &#123; println("item = $item")// aa 20 30&#125; 4）intArrayOf：初始化为指定类型，并且只能修改为指定类型。1234567// 等价于 val array = arrayOf&lt;Int&gt;(10, 20, 30)val array = intArrayOf(10, 20, 30)array.set(0, 100)array[1] = 200for (index in array.indices) &#123; println("item = $&#123;array[index]&#125;")// 100 200 30&#125; 【注意】arrayOf(“”)与arrayOf()的区别1234val array1 = arrayOf("")val array2 = arrayOf&lt;String&gt;()println("array1.size =$&#123;array1.size&#125;")// 1println("array2.size =$&#123;array2.size&#125;")// 0]]></content>
       <categories>
         <category>Kotlin</category>
       </categories>

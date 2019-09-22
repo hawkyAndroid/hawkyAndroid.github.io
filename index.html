@@ -518,7 +518,7 @@ HashSet类
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/05/summary-kotlin-array/" itemprop="url">Kotlin之数组(带完善)</a></h1>
+                <a class="post-title-link" href="/2019/09/05/summary-kotlin-array/" itemprop="url">Kotlin之数组</a></h1>
         
 
         <div class="post-meta">
@@ -570,7 +570,7 @@ HashSet类
 
           
           
-             <span id="/2019/09/05/summary-kotlin-array/" class="leancloud_visitors" data-flag-title="Kotlin之数组(带完善)">
+             <span id="/2019/09/05/summary-kotlin-array/" class="leancloud_visitors" data-flag-title="Kotlin之数组">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -605,7 +605,8 @@ HashSet类
       
         
           
-          Kotlin数组使用指定的大小和init函数声明数组构造函数，其中 init函数用于返回带有索引的数组元素。12345678Array(size: Int, init: (Int) -&gt; T)  举例说明：var myArray1 = arrayOf(1, "Hello", 4.0, 2, 10, 32)// 不指定数据类型（必须初始化数组元素）var myArray2 = intArray
+          Kotlin数组Kotlin中的数组本质上是可读写的，大小固定。
+1）Array构造：使用指定的大小和init函数声明数组构造函数。12345// Array(size: Int) &#123;init: (Int) -&gt; T&#125;val array = Array&lt;Int&gt;(3) &#123; i -&gt; i * i &#125;for (item in array)
           ...
           <!--noindex-->
           <div class="post-button text-center">
